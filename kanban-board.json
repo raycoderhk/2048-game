@@ -1,0 +1,356 @@
+{
+  "meta": {
+    "created": "2026-02-26T07:45:00Z",
+    "updated": "2026-02-27T11:00:00Z",
+    "version": "1.1"
+  },
+  "columns": {
+    "backlog": {
+      "name": "📋 Backlog",
+      "description": "未來可能做的項目",
+      "order": 1
+    },
+    "todo": {
+      "name": "📝 To Do",
+      "description": "計劃要做的項目",
+      "order": 2
+    },
+    "in_progress": {
+      "name": "🔄 In Progress",
+      "description": "進行中的項目",
+      "order": 3
+    },
+    "blocked": {
+      "name": "🚧 Blocked",
+      "description": "被阻擋的項目",
+      "order": 4
+    },
+    "done": {
+      "name": "✅ Done",
+      "description": "已完成的項目",
+      "order": 5
+    }
+  },
+  "projects": [
+    {
+      "id": "proj-001",
+      "title": "阿里雲 Coding Plan 設置",
+      "description": "配置阿里雲 Coding Plan API，切換從 DeepSeek 到 Qwen 模型",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T07:40:00Z",
+      "completed": "2026-02-26T07:40:00Z",
+      "tags": ["setup", "api", "configuration"],
+      "notes": [
+        "2026-02-26: 成功配置阿里雲 Coding Plan API",
+        "使用模型：qwen3.5-plus",
+        "端點：https://coding.dashscope.aliyuncs.com/v1"
+      ]
+    },
+    {
+      "id": "proj-002",
+      "title": "Multi-Agent Team 配置",
+      "description": "設置 4 個 agent (Jarvis, Coding, Research, Admin) 及 sub-agent 系統",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T08:20:00Z",
+      "completed": "2026-02-26T08:20:00Z",
+      "tags": ["multi-agent", "configuration", "openclaw"],
+      "notes": [
+        "2026-02-26: 完成 4 個 agent 配置",
+        "agents: main, coding, research, admin",
+        "sub-agent spawn 在當前環境受限"
+      ]
+    },
+    {
+      "id": "proj-003",
+      "title": "Kanban Board GUI 開發",
+      "description": "創建 Kanban Board Web GUI，包含完整版、離線版、和 Zeabur 部署版",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T10:55:00Z",
+      "completed": "2026-02-26T10:55:00Z",
+      "tags": ["gui", "web", "kanban", "zeabur"],
+      "notes": [
+        "2026-02-26: 創建 3 個版本 (完整版、離線版、Zeabur 版)",
+        "2026-02-26 10:55: ✅ Zeabur 部署完成",
+        "Public URL: https://kanban-board.zeabur.app:8080"
+      ]
+    },
+    {
+      "id": "proj-004",
+      "title": "Discord 多頻道設置",
+      "description": "配置 Discord 多頻道，讓不同 agent 輸出到不同頻道",
+      "status": "in_progress",
+      "priority": "medium",
+      "created": "2026-02-26",
+      "updated": "2026-02-27T08:00:00Z",
+      "tags": ["discord", "channels", "integration"],
+      "notes": [
+        "2026-02-26: 完成所有配置文件和文檔",
+        "2026-02-27: ✅ Discord bot 和頻道已創建",
+        "2026-02-27: ✅ 多頻道配置完成",
+        "下一步：配置 channel IDs 到 openclaw.json"
+      ]
+    },
+    {
+      "id": "proj-005",
+      "title": "Anna Archive 下載工具",
+      "description": "創建 Anna Archive 自動下載工具（完整版和快速版）",
+      "status": "done",
+      "priority": "medium",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T08:40:00Z",
+      "completed": "2026-02-26T08:40:00Z",
+      "tags": ["tool", "python", "download"],
+      "notes": [
+        "2026-02-26: 創建 2 個版本 (完整版、快速版)",
+        "需要安裝 requests 模塊",
+        "注意版權問題"
+      ]
+    },
+    {
+      "id": "proj-006",
+      "title": "2026 財政預算案研究",
+      "description": "研究並整理 2026 年香港財政預算案的各方反應和官方回應",
+      "status": "done",
+      "priority": "medium",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T08:30:00Z",
+      "completed": "2026-02-26T08:30:00Z",
+      "tags": ["research", "hong kong", "budget"],
+      "notes": [
+        "2026-02-26: 完成研究報告",
+        "來源：香港 01、立法會會議記錄",
+        "主要爭議：長者醫療券、醫管局撥款"
+      ]
+    },
+    {
+      "id": "proj-007",
+      "title": "阿里雲 vs DeepSeek 對比研究",
+      "description": "詳細對比阿里雲 Coding Plan 和 DeepSeek API 的價格、性能、性價比",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T08:25:00Z",
+      "completed": "2026-02-26T08:25:00Z",
+      "tags": ["research", "comparison", "api", "pricing"],
+      "notes": [
+        "2026-02-26: 完成對比報告",
+        "結論：阿里雲 Pro 年省 ¥2,400-4,800（重度用戶）",
+        "性價比高 70-85%"
+      ]
+    },
+    {
+      "id": "proj-008",
+      "title": "Kanban Zeabur 部署",
+      "description": "將 Kanban Board 部署為獨立 Zeabur 服務，以便從 Windows 訪問",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T10:55:00Z",
+      "completed": "2026-02-26T10:55:00Z",
+      "tags": ["deployment", "zeabur", "kanban"],
+      "notes": [
+        "2026-02-26 10:50: GitHub repo created (raycoderhk/kanban-board)",
+        "2026-02-26 10:51: Code pushed to GitHub",
+        "2026-02-26 10:51: Zeabur deployment started",
+        "2026-02-26 10:55: ✅ Deployed to Zeabur",
+        "Public URL: https://kanban-board.zeabur.app:8080"
+      ]
+    },
+    {
+      "id": "proj-009",
+      "title": "Sub-agent 功能測試",
+      "description": "測試 sub-agent spawn 功能，驗證多 agent 協作",
+      "status": "blocked",
+      "priority": "low",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T08:41:00Z",
+      "tags": ["testing", "sub-agent", "debug"],
+      "notes": [
+        "2026-02-26: 測試失敗",
+        "原因：sessions_spawn 在當前環境受限",
+        "需要調整 Gateway 安全策略"
+      ]
+    },
+    {
+      "id": "proj-010",
+      "title": "電影電視推薦系統",
+      "description": "基於用戶個人資料創建電影和電視劇推薦系統 Web GUI",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T12:10:00Z",
+      "completed": "2026-02-26T12:10:00Z",
+      "tags": ["web", "gui", "recommendation", "vercel", "family"],
+      "notes": [
+        "2026-02-26 12:10: ✅ 創建完成",
+        "特色：雙語 (EN/ZH), 家庭為本, 個人化推薦",
+        "包含：15 個推薦內容 (電影、電視劇、紀錄片)",
+        "部署：準備好部署到 Vercel",
+        "文件：/home/node/.openclaw/workspace/movie-recommender/"
+      ]
+    },
+    {
+      "id": "proj-011",
+      "title": "Vercel/Supabase 遷移",
+      "description": "將 Kanban 和 Movie Recommender 從 Zeabur 遷移到 Vercel + Supabase (免費層)",
+      "status": "todo",
+      "priority": "medium",
+      "created": "2026-02-26",
+      "updated": "2026-02-26T12:10:00Z",
+      "tags": ["migration", "vercel", "supabase", "deployment"],
+      "notes": [
+        "2026-02-26: 用戶要求添加",
+        "用戶在 Vercel/Supabase 有免費層項目經驗",
+        "目標：避免 Zeabur 費用，使用更穩定的免費服務"
+      ]
+    },
+    {
+      "id": "proj-012",
+      "title": "配置 Web Search API",
+      "description": "解決 web_search 工具無法使用問題，配置 Brave Search API 或替代方案",
+      "status": "in_progress",
+      "priority": "urgent",
+      "created": "2026-02-26",
+      "updated": "2026-02-27T11:00:00Z",
+      "tags": ["api", "configuration", "web-search", "brave", "urgent"],
+      "notes": [
+        "2026-02-26: 用戶發現 web_search 無法使用",
+        "問題：缺少 Brave Search API 密钥",
+        "錯誤訊息：missing_brave_api_key",
+        "影響：無法搜尋新聞、文章連結、即時資訊",
+        "解決方案：1) 配置 Brave API 2) 改用 web_fetch 3) 找免費替代",
+        "2026-02-27 11:00: ⚠️ 用戶提高優先級為 urgent",
+        "下一步：申請 Brave API 密钥 (5 分鐘，免費 2,000 次/月)"
+      ]
+    },
+    {
+      "id": "proj-013",
+      "title": "Polymarket CLI 開發",
+      "description": "創建 Polymarket 預測市場 CLI 工具，Karpathy 風格的 Agent-first 設計",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-02-26",
+      "updated": "2026-02-27T00:05:00Z",
+      "completed": "2026-02-27T00:05:00Z",
+      "tags": ["cli", "polymarket", "karpathy", "agent-first", "terminal"],
+      "notes": [
+        "2026-02-27 00:00: 開始開發",
+        "2026-02-27 00:03: ✅ 核心功能完成",
+        "2026-02-27 00:04: ✅ Dashboard 完成",
+        "2026-02-27 00:05: ✅ 測試通過",
+        "功能：top, search, dashboard, watchlist",
+        "位置：/home/node/.openclaw/workspace/clis/polymarket/",
+        "使用：python3 polymarket.py top"
+      ]
+    },
+    {
+      "id": "proj-013",
+      "title": "OpenClaw Status CLI",
+      "description": "創建 OpenClaw 狀態監控 CLI 工具，顯示 Gateway、Agents、API 用量、成本等信息",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-02-27",
+      "updated": "2026-02-27T00:10:00Z",
+      "completed": "2026-02-27T00:10:00Z",
+      "tags": ["cli", "monitoring", "status", "karpathy-inspired"],
+      "notes": [
+        "2026-02-27 00:10: ✅ 創建完成",
+        "特色：Terminal Dashboard、無外部依賴",
+        "功能：Gateway 狀態、Agent 狀態、API 用量、成本追蹤、Kanban 整合",
+        "位置：/home/node/.openclaw/workspace/clis/oc-status/",
+        "使用：python3 oc-status.py [status|agents|usage|cost|help]"
+      ]
+    },
+    {
+      "id": "proj-014",
+      "title": "🏓 Pickleball Mastery Goal",
+      "description": "成為匹克球強手及教練 - 系統化訓練、比賽、認證追蹤",
+      "status": "in_progress",
+      "priority": "high",
+      "created": "2026-02-27",
+      "updated": "2026-02-27T01:00:00Z",
+      "tags": ["goal", "sports", "pickleball", "coaching", "personal-development"],
+      "notes": [
+        "2026-02-27: 目標設定",
+        "階段 1: 提升個人技術 (3-6 個月)",
+        "階段 2: 參加比賽 (6-12 個月)",
+        "階段 3: 教練認證 (12-18 個月)",
+        "階段 4: 開設教練服務 (18-24 個月)",
+        "每週訓練：Clubhouse + 其他場地",
+        "家庭參與：太太、仔、女一起參與"
+      ]
+    },
+    {
+      "id": "proj-015",
+      "title": "🚀 Mission Control Dashboard",
+      "description": "Next.js 生產力儀表板，包含事件、任務、朋友、目標追蹤、數據分析",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-02-27",
+      "updated": "2026-02-27T07:35:00Z",
+      "completed": "2026-02-27T07:35:00Z",
+      "tags": ["dashboard", "nextjs", "zeabur", "analytics", "productivity"],
+      "notes": [
+        "2026-02-27 05:30: 開始開發",
+        "2026-02-27 06:00: ✅ 核心功能完成",
+        "2026-02-27 06:15: ✅ Goal Tracker 完成",
+        "2026-02-27 07:00: ✅ Analytics Dashboard 完成",
+        "2026-02-27 07:30: ✅ 實時數據集成 (webhook + API)",
+        "2026-02-27 07:35: ✅ 部署到 Zeabur",
+        "功能：7 個 widget (事件、任務、朋友、目標、數據分析、快速統計、對話提示)",
+        "URL: https://misson-dashboard.zeabur.app/",
+        "GitHub: https://github.com/raycoderhk/mission-control"
+      ]
+    },
+    {
+      "id": "proj-016",
+      "title": "👥 Discord Friends Network",
+      "description": "為每個朋友創建 Discord 頻道，追蹤對話主題和聚會",
+      "status": "done",
+      "priority": "medium",
+      "created": "2026-02-27",
+      "updated": "2026-02-27T06:10:00Z",
+      "completed": "2026-02-27T06:10:00Z",
+      "tags": ["discord", "friends", "social", "networking"],
+      "notes": [
+        "2026-02-27 06:07: ✅ 創建 Friends 分類",
+        "2026-02-27 06:08: ✅ 創建 #elton 頻道",
+        "2026-02-27 06:08: ✅ 創建 #pulley 頻道",
+        "2026-02-27 06:09: ✅ 創建 #sheng 頻道",
+        "2026-02-27 06:09: ✅ 創建 #heidi 頻道",
+        "2026-02-27 06:10: ✅ 個人資料和對話主題已發布",
+        "頻道：4 個 (Elton, Pulley, Sheng, Heidi)",
+        "分類：Friends (ID: 1476798227868286999)"
+      ]
+    },
+    {
+      "id": "proj-017",
+      "title": "📝 Technical Blog Documentation",
+      "description": "撰寫技術部落格文章，記錄部署經驗和故障排除",
+      "status": "done",
+      "priority": "medium",
+      "created": "2026-02-27",
+      "updated": "2026-02-27T06:12:00Z",
+      "completed": "2026-02-27T06:12:00Z",
+      "tags": ["documentation", "blog", "technical-writing", "knowledge-base"],
+      "notes": [
+        "2026-02-27 06:12: ✅ Mission Control Zeabur 部署故障排除指南",
+        "主題：Combined Variables (All 3 in One!) Server Action 錯誤",
+        "內容：問題分析、故障排除方法、解決方案、預防指南",
+        "位置：/home/node/.openclaw/workspace/blog/mission-control-zeabur-deployment.md",
+        "價值：幫助未來避免相同問題，縮短調試時間"
+      ]
+    }
+  ],
+  "settings": {
+    "archiveDoneAfterDays": 30,
+    "defaultPriority": "medium",
+    "priorities": ["low", "medium", "high", "urgent"]
+  }
+}
