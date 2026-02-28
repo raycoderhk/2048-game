@@ -1,0 +1,30 @@
+{
+  "$schema": "https://zeabur.com/schema/project.json",
+  "name": "gameworld",
+  "description": "Classic mini-games collection - 6 games hub",
+  "services": [
+    {
+      "name": "gameworld-web",
+      "type": "static",
+      "source": {
+        "provider": "github",
+        "repo": "raycoderhk/2048-game",
+        "branch": "main",
+        "rootDirectory": "games/2048-game"
+      },
+      "domains": [
+        {
+          "domain": "gameworld.zeabur.app",
+          "primary": true
+        }
+      ],
+      "settings": {
+        "port": 8080,
+        "buildCommand": "",
+        "startCommand": "",
+        "outputDirectory": ""
+      },
+      "env": {}
+    }
+  ]
+}

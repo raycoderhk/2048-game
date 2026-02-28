@@ -1,0 +1,30 @@
+name: 🚀 Deploy to Zeabur - Gameworld
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'games/2048-game/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy Gameworld to Zeabur
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to Zeabur
+        uses: zeabur/action@v1
+        with:
+          zeabur-api-key: ${{ secrets.ZEABUR_API_KEY }}
+          project-id: ${{ secrets.ZEABUR_GAMEWORLD_PROJECT_ID }}
+          service-id: ${{ secrets.ZEABUR_GAMEWORLD_SERVICE_ID }}
+          environment: production
+        
+      - name: Deployment Complete
+        run: |
+          echo "✅ Gameworld deployed successfully!"
+          echo "🌐 URL: https://gameworld.zeabur.app"
