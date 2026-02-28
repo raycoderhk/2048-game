@@ -1,0 +1,28 @@
+# Node modules
+node_modules/
+
+# Python virtual environments
+**/venv/
+**/ocr_venv/
+*.pyc
+__pycache__/
+
+# Large binaries
+*.so
+*.dll
+*.dylib
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Exclude everything except games folder
+*
+!games/
