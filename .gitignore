@@ -23,6 +23,16 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Exclude everything except games folder
-*
-!games/
+# Memory (keep recent)
+memory/2026-02-*.md
+
+# Kanban/Mission Control (separate repos)
+kanban-zeabur/
+mission-control/
+movie-recommender/
+
+# Skills (separate)
+skills/
+
+# Old games folder (using root now)
+games/

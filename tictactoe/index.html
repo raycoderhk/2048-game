@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❌⭕ 井字過三關 | Tic Tac Toe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            font-size: 1.5em;
+            color: #666;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+
+        .status.winner {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            animation: pulse 0.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 15px;
+            font-size: 3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cell:hover:not(.taken) {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .cell.taken {
+            cursor: not-allowed;
+        }
+
+        .cell.x {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .cell.o {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(56, 239, 125, 0.4);
+        }
+
+        .btn-back {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-back:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            background: white;
+            color: #667eea;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .mode-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .scoreboard {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .instructions {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 500px) {
+            .cell {
+                font-size: 2.5em;
+            }
+
+            .title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1 class="title">❌⭕ 井字過三關</h1>
+        </div>
+
+        <div class="mode-selector">
+            <button class="mode-btn active" onclick="setMode('pvp')">👥 雙人對戰</button>
+            <button class="mode-btn" onclick="setMode('ai')">🤖 挑戰 AI</button>
+        </div>
+
+        <div class="scoreboard">
+            <div class="score-item">
+                <div class="score-label">❌ 玩家 X</div>
+                <div class="score-value" id="scoreX">0</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">🤝 和局</div>
+                <div class="score-value" id="scoreDraw">0</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">⭕ 玩家 O</div>
+                <div class="score-value" id="scoreO">0</div>
+            </div>
+        </div>
+
+        <div class="status" id="status">❌ 玩家 X 的回合</div>
+
+        <div class="board" id="board">
+            <button class="cell" data-index="0"></button>
+            <button class="cell" data-index="1"></button>
+            <button class="cell" data-index="2"></button>
+            <button class="cell" data-index="3"></button>
+            <button class="cell" data-index="4"></button>
+            <button class="cell" data-index="5"></button>
+            <button class="cell" data-index="6"></button>
+            <button class="cell" data-index="7"></button>
+            <button class="cell" data-index="8"></button>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-restart" onclick="restartGame()">🔄 重新開始</button>
+            <button class="btn btn-back" onclick="window.location.href='/'">🏠 返回首頁</button>
+        </div>
+
+        <div class="instructions">
+            <strong>🎮 遊戲說明：</strong> 三子連成一線（橫、直、斜）就贏！
+        </div>
+    </div>
+
+    <script>
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameActive = true;
+        let gameMode = 'pvp'; // 'pvp' or 'ai'
+        let scores = { X: 0, O: 0, draw: 0 };
+
+        const winningConditions = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+            [0, 4, 8], [2, 4, 6] // Diagonals
+        ];
+
+        const cells = document.querySelectorAll('.cell');
+        const statusDisplay = document.getElementById('status');
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', handleCellClick);
+        });
+
+        function setMode(mode) {
+            gameMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            scores = { X: 0, O: 0, draw: 0 };
+            updateScoreboard();
+            restartGame();
+        }
+
+        function handleCellClick(e) {
+            const clickedCell = e.target;
+            const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
+
+            if (board[clickedCellIndex] !== '' || !gameActive) {
+                return;
+            }
+
+            handleCellPlayed(clickedCell, clickedCellIndex);
+            handleResultValidation();
+
+            if (gameActive && gameMode === 'ai' && currentPlayer === 'O') {
+                setTimeout(aiMove, 500);
+            }
+        }
+
+        function handleCellPlayed(cell, index) {
+            board[index] = currentPlayer;
+            cell.textContent = currentPlayer;
+            cell.classList.add('taken', currentPlayer.toLowerCase());
+        }
+
+        function handleResultValidation() {
+            let roundWon = false;
+            let winningLine = [];
+
+            for (let i = 0; i < winningConditions.length; i++) {
+                const [a, b, c] = winningConditions[i];
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    roundWon = true;
+                    winningLine = [a, b, c];
+                    break;
+                }
+            }
+
+            if (roundWon) {
+                statusDisplay.textContent = `🎉 玩家 ${currentPlayer} 贏咗！`;
+                statusDisplay.classList.add('winner');
+                gameActive = false;
+                scores[currentPlayer]++;
+                updateScoreboard();
+                highlightWinningCells(winningLine);
+                return;
+            }
+
+            if (!board.includes('')) {
+                statusDisplay.textContent = '🤝 和局！';
+                scores.draw++;
+                updateScoreboard();
+                gameActive = false;
+                return;
+            }
+
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            statusDisplay.textContent = `${currentPlayer === 'X' ? '❌' : '⭕'} 玩家 ${currentPlayer} 的回合`;
+        }
+
+        function highlightWinningCells(line) {
+            line.forEach(index => {
+                cells[index].style.transform = 'scale(1.1)';
+            });
+        }
+
+        function updateScoreboard() {
+            document.getElementById('scoreX').textContent = scores.X;
+            document.getElementById('scoreO').textContent = scores.O;
+            document.getElementById('scoreDraw').textContent = scores.draw;
+        }
+
+        function aiMove() {
+            if (!gameActive) return;
+
+            // Try to win
+            let move = findBestMove('O');
+            if (move === -1) {
+                // Block player
+                move = findBestMove('X');
+            }
+            if (move === -1) {
+                // Take center
+                if (board[4] === '') move = 4;
+            }
+            if (move === -1) {
+                // Take random
+                const available = board.map((val, idx) => val === '' ? idx : null).filter(val => val !== null);
+                move = available[Math.floor(Math.random() * available.length)];
+            }
+
+            const cell = document.querySelector(`[data-index="${move}"]`);
+            handleCellPlayed(cell, move);
+            handleResultValidation();
+        }
+
+        function findBestMove(player) {
+            for (let condition of winningConditions) {
+                const [a, b, c] = condition;
+                const values = [board[a], board[b], board[c]];
+                const playerCount = values.filter(v => v === player).length;
+                const emptyCount = values.filter(v => v === '').length;
+                
+                if (playerCount === 2 && emptyCount === 1) {
+                    if (board[a] === '') return a;
+                    if (board[b] === '') return b;
+                    if (board[c] === '') return c;
+                }
+            }
+            return -1;
+        }
+
+        function restartGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            currentPlayer = 'X';
+            statusDisplay.textContent = '❌ 玩家 X 的回合';
+            statusDisplay.classList.remove('winner');
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.classList.remove('taken', 'x', 'o');
+                cell.style.transform = '';
+            });
+        }
+    </script>
+</body>
+</html>
