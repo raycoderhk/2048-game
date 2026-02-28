@@ -351,11 +351,11 @@
       "id": "proj-018",
       "title": "🍎 AI 營養師 App (Nutritionist AI)",
       "description": "手機 App 影相分析食物營養成份 + 飲食記錄功能",
-      "status": "todo",
+      "status": "in_progress",
       "priority": "high",
       "created": "2026-03-01",
-      "updated": "2026-03-01T09:30:00Z",
-      "tags": ["mobile-app", "ai", "nutrition", "qwen-vl", "health"],
+      "updated": "2026-03-01T11:00:00Z",
+      "tags": ["mobile-app", "ai", "nutrition", "qwen-vl", "health", "perplexity"],
       "notes": [
         "2026-03-01: 可行性研究完成",
         "技術棧：React Native + Node.js + Supabase + Qwen-VL API",
@@ -363,7 +363,26 @@
         "MVP 時程：1-2 個月",
         "成本估算：每用戶每月 $5-15 HKD (API 成本)",
         "商業模式：Free / Pro ($49/月) / Family ($99/月)",
-        "下一步：1) 申請 Qwen-VL API 測試 2) 開發 MVP 原型 3) 測試準確率"
+        "2026-03-01 11:00: 測試 Perplexity Pro 瀏覽器自動化",
+        "下一步：1) 測試 Perplexity 自動化 2) 申請 Qwen-VL API 測試 3) 開發 MVP 原型"
+      ]
+    },
+    {
+      "id": "proj-019",
+      "title": "🔍 Perplexity Pro 圖片識別集成",
+      "description": "利用現有 Perplexity Pro 賬戶，通過瀏覽器自動化實現食物圖片識別",
+      "status": "in_progress",
+      "priority": "high",
+      "created": "2026-03-01",
+      "updated": "2026-03-01T11:00:00Z",
+      "tags": ["perplexity", "browser-automation", "image-recognition", "nutrition"],
+      "notes": [
+        "2026-03-01: 用戶提出使用 Perplexity Pro",
+        "優勢：已有 Pro 賬戶、無需額外費用、識別準確（GPT-4V/Claude）",
+        "流程：圖片 → Perplexity Web → 瀏覽器自動化 → 提取答案",
+        "限制：需手動連接瀏覽器、速度較慢（10-30 秒/次）",
+        "文檔：/workspace/nutritionist-app/PERPLEXITY_AUTOMATION.md",
+        "下一步：1) 用戶連接 Chrome 擴展 2) 測試自動化流程 3) 驗證可行性"
       ]
     }
   ],
