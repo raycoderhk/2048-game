@@ -444,12 +444,16 @@
         };
 
         function startQuiz() {
-            quizState.selected = [];
-            quizState.score = 0;
-            quizState.currentQuestion = 0;
+            // Full reset of quiz state
+            quizState = {
+                currentQuestion: 0,
+                score: 0,
+                selected: [],
+                questions: []
+            };
             
             // Select 3 random questions
-            quizState.questions = questions.sort(() => Math.random() - 0.5).slice(0, 3);
+            quizState.questions = [...questions].sort(() => Math.random() - 0.5).slice(0, 3);
             
             document.getElementById('gameArea').classList.add('active');
             showQuestion();
@@ -462,6 +466,9 @@
             }
 
             const q = quizState.questions[quizState.currentQuestion];
+            
+            // Reset quiz state for new question
+            quizState.selected = [];
             
             document.getElementById('gameContent').innerHTML = `
                 <div style="padding: 20px;">
