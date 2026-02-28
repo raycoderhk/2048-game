@@ -1,0 +1,305 @@
+{
+  "check_time": "2026-02-25T13:11:37.492092",
+  "total_lines": 127,
+  "checks_performed": 42,
+  "needs_verification": 42,
+  "detailed_checks": {
+    "天氣數據": [
+      {
+        "line": "溫度：22°C",
+        "line_number": 6,
+        "type": "measurement",
+        "needs_verification": true
+      },
+      {
+        "line": "濕度：75%",
+        "line_number": 7,
+        "type": "measurement",
+        "needs_verification": true
+      }
+    ],
+    "財政數字": [
+      {
+        "line": "政府公佈新一份財政預算案",
+        "line_number": 27,
+        "type": "statement",
+        "keyword": "政府公佈",
+        "needs_verification": true
+      },
+      {
+        "line": "• 生果金加至每月$1,600",
+        "line_number": 29,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "• 生果金加至每月$1,600",
+        "line_number": 29,
+        "type": "statement",
+        "keyword": "加至",
+        "needs_verification": true
+      },
+      {
+        "line": "• 醫療券增至$3,000",
+        "line_number": 30,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "• 醫療券增至$3,000",
+        "line_number": 30,
+        "type": "statement",
+        "keyword": "增至",
+        "needs_verification": true
+      },
+      {
+        "line": "• 電費補貼每戶$1,000",
+        "line_number": 31,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "🏠 樓市最新數據",
+        "line_number": 33,
+        "type": "statement",
+        "keyword": "最新",
+        "needs_verification": true
+      },
+      {
+        "line": "平均呎價約$13,500",
+        "line_number": 35,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "平均呎價約$13,500",
+        "line_number": 35,
+        "type": "statement",
+        "keyword": "約",
+        "needs_verification": true
+      },
+      {
+        "line": "平均呎價約$13,500",
+        "line_number": 35,
+        "type": "statement",
+        "keyword": "平均",
+        "needs_verification": true
+      },
+      {
+        "line": "較上月下跌約2%",
+        "line_number": 36,
+        "type": "measurement",
+        "needs_verification": true
+      },
+      {
+        "line": "較上月下跌約2%",
+        "line_number": 36,
+        "type": "statement",
+        "keyword": "約",
+        "needs_verification": true
+      },
+      {
+        "line": "租金回報率約2.8%",
+        "line_number": 37,
+        "type": "measurement",
+        "needs_verification": true
+      },
+      {
+        "line": "租金回報率約2.8%",
+        "line_number": 37,
+        "type": "statement",
+        "keyword": "約",
+        "needs_verification": true
+      },
+      {
+        "line": "每月超過$200車費可獲補貼",
+        "line_number": 41,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "補貼上限維持$400",
+        "line_number": 42,
+        "type": "monetary_value",
+        "needs_verification": true
+      }
+    ],
+    "樓市數據": [],
+    "文化活動": [
+      {
+        "line": "展期至今年6月30日",
+        "line_number": 52,
+        "type": "date",
+        "needs_verification": true
+      },
+      {
+        "line": "展期至今年6月30日",
+        "line_number": 52,
+        "type": "statement",
+        "keyword": "展期",
+        "needs_verification": true
+      },
+      {
+        "line": "🎫 門票資訊：",
+        "line_number": 54,
+        "type": "statement",
+        "keyword": "門票",
+        "needs_verification": true
+      },
+      {
+        "line": "長者優惠票$60",
+        "line_number": 55,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "每日開放時間10:00-18:00",
+        "line_number": 57,
+        "type": "date",
+        "needs_verification": true
+      },
+      {
+        "line": "政府撥款$5,000萬保育",
+        "line_number": 61,
+        "type": "monetary_value",
+        "needs_verification": true
+      }
+    ],
+    "科技產品": [
+      {
+        "line": "最新手機加入長者模式",
+        "line_number": 68,
+        "type": "statement",
+        "keyword": "最新",
+        "needs_verification": true
+      },
+      {
+        "line": "價錢約$3,000起",
+        "line_number": 71,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "價錢約$3,000起",
+        "line_number": 71,
+        "type": "statement",
+        "keyword": "約",
+        "needs_verification": true
+      },
+      {
+        "line": "價錢約$3,000起",
+        "line_number": 71,
+        "type": "statement",
+        "keyword": "價錢",
+        "needs_verification": true
+      },
+      {
+        "line": "平均價錢$2,500",
+        "line_number": 75,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "平均價錢$2,500",
+        "line_number": 75,
+        "type": "statement",
+        "keyword": "平均",
+        "needs_verification": true
+      },
+      {
+        "line": "平均價錢$2,500",
+        "line_number": 75,
+        "type": "statement",
+        "keyword": "價錢",
+        "needs_verification": true
+      },
+      {
+        "line": "💡 馬雲最新動向",
+        "line_number": 79,
+        "type": "statement",
+        "keyword": "最新",
+        "needs_verification": true
+      },
+      {
+        "line": "最近投資農業科技",
+        "line_number": 81,
+        "type": "statement",
+        "keyword": "投資",
+        "needs_verification": true
+      },
+      {
+        "line": "預計創造過萬職位",
+        "line_number": 83,
+        "type": "statement",
+        "keyword": "預計",
+        "needs_verification": true
+      }
+    ],
+    "娛樂資訊": [
+      {
+        "line": "下載量超過50萬次",
+        "line_number": 92,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "最新巡迴演唱會門票",
+        "line_number": 96,
+        "type": "statement",
+        "keyword": "門票",
+        "needs_verification": true
+      },
+      {
+        "line": "最新巡迴演唱會門票",
+        "line_number": 96,
+        "type": "statement",
+        "keyword": "最新",
+        "needs_verification": true
+      },
+      {
+        "line": "平均價錢約$800-$1,500",
+        "line_number": 97,
+        "type": "monetary_value",
+        "needs_verification": true
+      },
+      {
+        "line": "平均價錢約$800-$1,500",
+        "line_number": 97,
+        "type": "statement",
+        "keyword": "約",
+        "needs_verification": true
+      },
+      {
+        "line": "平均價錢約$800-$1,500",
+        "line_number": 97,
+        "type": "statement",
+        "keyword": "平均",
+        "needs_verification": true
+      },
+      {
+        "line": "平均價錢約$800-$1,500",
+        "line_number": 97,
+        "type": "statement",
+        "keyword": "價錢",
+        "needs_verification": true
+      }
+    ],
+    "健康建議": [
+      {
+        "line": "每日散步30分鐘",
+        "line_number": 104,
+        "type": "date",
+        "needs_verification": true
+      }
+    ]
+  },
+  "accuracy_assessment": {
+    "weather": "需要驗證實際數據",
+    "financial": "需要驗證政策細節",
+    "property": "需要驗證市場數據",
+    "cultural": "需要驗證活動詳情",
+    "technology": "需要驗證產品資訊",
+    "entertainment": "需要驗證播放資訊",
+    "health": "基本準確"
+  }
+}

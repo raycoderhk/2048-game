@@ -1,0 +1,47 @@
+🔧 技能監控檢查 - Wed Feb 25 12:48:09 UTC 2026
+================================
+開始技能狀態檢查...
+🔧 技能狀態檢查報告
+============================================================
+檢查時間: 2026-02-25 12:48:10
+============================================================
+
+1. 基本工具:
+----------------------------------------
+✅ Python 3: Python 3.11.2
+✅ pip3: pip 23.0.1 from /usr/lib/python3/dist-packages/pip (python 3.11)
+✅ Tesseract OCR: tesseract 5.3.0
+✅ curl: curl 7.88.1 (x86_64-pc-linux-gnu) libcurl/7.88.1 OpenSSL/3.0.18 zlib/1.2.13 brotli/1.0.9 zstd/1.5.4 libidn2/2.3.3 libpsl/0.21.2 (+libidn2/2.3.3) libssh2/1.10.0 nghttp2/1.52.0 librtmp/2.3 OpenLDAP/2.5.13
+
+2. 技能目錄:
+----------------------------------------
+✅ 目錄: /home/node/.openclaw/workspace/skills
+✅ smart_ocr: OK
+
+3. smart_ocr 技能:
+----------------------------------------
+✅ ocr_tool.py: /home/node/.openclaw/workspace/skills/smart_ocr/ocr_tool.py
+✅ run_ocr.sh: /home/node/.openclaw/workspace/skills/smart_ocr/run_ocr.sh
+✅ tesseract_tool.py: /home/node/.openclaw/workspace/skills/smart_ocr/tesseract_tool.py
+✅ run_tesseract.sh: /home/node/.openclaw/workspace/skills/smart_ocr/run_tesseract.sh
+✅ ocr_venv/bin/python3: /home/node/.openclaw/workspace/skills/smart_ocr/ocr_venv/bin/python3
+✅ Python環境: 所有依賴正常
+
+4. 網絡連接:
+----------------------------------------
+✅ Yahoo Finance API: 200 OK
+✅ 網絡連接: Ping成功
+
+📊 檢查總結:
+----------------------------------------
+總檢查項目: 14
+成功: 14 (100.0%)
+警告: 0
+錯誤: 0
+
+🎉 所有檢查通過！系統狀態良好。
+
+📁 詳細報告已保存至: /home/node/.openclaw/workspace/memory/skill_checks/skill_check_20260225_124810.json
+
+檢查完成時間: Wed Feb 25 12:48:10 UTC 2026
+退出碼: 0

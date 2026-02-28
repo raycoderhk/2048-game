@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Kanban Board - Standalone</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header { text-align: center; color: white; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        .column {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-height: 400px;
+        }
+        .column-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e0e0e0;
+        }
+        .column-title { font-size: 1.3em; font-weight: 600; color: #333; }
+        .column-count {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .column.backlog .column-header { border-bottom-color: #95a5a6; }
+        .column.todo .column-header { border-bottom-color: #3498db; }
+        .column.in_progress .column-header { border-bottom-color: #f39c12; }
+        .column.blocked .column-header { border-bottom-color: #e74c3c; }
+        .column.done .column-header { border-bottom-color: #27ae60; }
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+        .project-card.priority-low { border-left-color: #27ae60; }
+        .project-card.priority-medium { border-left-color: #f1c40f; }
+        .project-card.priority-high { border-left-color: #e67e22; }
+        .project-card.priority-urgent { border-left-color: #e74c3c; }
+        .project-title { font-size: 1.1em; font-weight: 600; color: #333; margin-bottom: 8px; }
+        .project-description { color: #666; font-size: 0.9em; margin-bottom: 10px; line-height: 1.4; }
+        .project-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .tag { background: #f0f0f0; color: #666; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; }
+        .priority-badge { padding: 3px 10px; border-radius: 12px; font-size: 0.8em; font-weight: 600; color: white; }
+        .priority-badge.low { background: #27ae60; }
+        .priority-badge.medium { background: #f1c40f; }
+        .priority-badge.high { background: #e67e22; }
+        .priority-badge.urgent { background: #e74c3c; }
+        .empty-column { text-align: center; color: #999; padding: 40px 20px; font-style: italic; }
+        .controls { max-width: 1800px; margin: 20px auto; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+        .btn { padding: 12px 24px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer; font-weight: 600; }
+        .btn-add { background: #27ae60; color: white; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3); }
+        .btn-add:hover { background: #229954; }
+        .btn-export { background: #3498db; color: white; }
+        .btn-import { background: #9b59b6; color: white; }
+        .stats {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1800px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .stat-card { text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px; }
+        .stat-number { font-size: 2em; font-weight: 700; color: #667eea; }
+        .stat-label { color: #666; font-size: 0.9em; margin-top: 5px; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content { background: white; border-radius: 12px; padding: 30px; max-width: 500px; width: 90%; }
+        .modal-title { font-size: 1.5em; font-weight: 600; margin-bottom: 20px; color: #333; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 1em;
+        }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .form-actions { display: flex; gap: 10px; justify-content: flex-end; }
+        .btn-cancel { background: #95a5a6; color: white; padding: 10px 20px; }
+        .last-updated { text-align: center; color: white; margin-top: 20px; opacity: 0.9; }
+        .file-input { display: none; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Kanban Board</h1>
+        <p>OpenClaw 項目管理系統 (離線版)</p>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-add" onclick="showAddModal()">➕ 添加新項目</button>
+        <button class="btn btn-export" onclick="exportData()">💾 導出數據</button>
+        <button class="btn btn-import" onclick="document.getElementById('fileInput').click()">📂 導入數據</button>
+        <input type="file" id="fileInput" class="file-input" accept=".json" onchange="importData(event)">
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="board" id="board"></div>
+
+    <div class="last-updated" id="lastUpdated"></div>
+
+    <!-- Add Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <h2 class="modal-title">➕ 添加新項目</h2>
+            <form id="addForm" onsubmit="addProject(event)">
+                <div class="form-group">
+                    <label>標題 *</label>
+                    <input type="text" id="projectTitle" required placeholder="例如：創建網站">
+                </div>
+                <div class="form-group">
+                    <label>描述</label>
+                    <textarea id="projectDescription" placeholder="項目詳細描述..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>優先級</label>
+                    <select id="projectPriority">
+                        <option value="low">🟢 低</option>
+                        <option value="medium" selected>🟡 中</option>
+                        <option value="high">🟠 高</option>
+                        <option value="urgent">🔴 緊急</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>初始狀態</label>
+                    <select id="projectStatus">
+                        <option value="backlog">📋 Backlog</option>
+                        <option value="todo" selected>📝 To Do</option>
+                        <option value="in_progress">🔄 In Progress</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-cancel" onclick="hideAddModal()">取消</button>
+                    <button type="submit" class="btn btn-add">添加</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 內置數據 - 離線使用
+        let boardData = {
+            "meta": {
+                "created": "2026-02-26T07:45:00Z",
+                "updated": "2026-02-26T07:45:00Z",
+                "version": "1.0"
+            },
+            "columns": {
+                "backlog": {"name": "📋 Backlog", "order": 1},
+                "todo": {"name": "📝 To Do", "order": 2},
+                "in_progress": {"name": "🔄 In Progress", "order": 3},
+                "blocked": {"name": "🚧 Blocked", "order": 4},
+                "done": {"name": "✅ Done", "order": 5}
+            },
+            "projects": [
+                {
+                    "id": "proj-001",
+                    "title": "阿里雲 Coding Plan 設置",
+                    "description": "配置阿里雲 Coding Plan API，切換從 DeepSeek 到 Qwen 模型",
+                    "status": "done",
+                    "priority": "high",
+                    "created": "2026-02-26",
+                    "updated": "2026-02-26T07:40:00Z",
+                    "completed": "2026-02-26T07:40:00Z",
+                    "tags": ["setup", "api", "configuration"],
+                    "notes": []
+                }
+            ],
+            "settings": {
+                "archiveDoneAfterDays": 30,
+                "defaultPriority": "medium"
+            }
+        };
+
+        // 保存到 localStorage
+        function saveToLocal() {
+            localStorage.setItem('kanban-board', JSON.stringify(boardData));
+            boardData.meta.updated = new Date().toISOString();
+        }
+
+        // 從 localStorage 加載
+        function loadFromLocal() {
+            const saved = localStorage.getItem('kanban-board');
+            if (saved) {
+                boardData = JSON.parse(saved);
+            }
+        }
+
+        // 頁面加載
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFromLocal();
+            renderBoard();
+            renderStats();
+            updateLastUpdated();
+        });
+
+        function renderBoard() {
+            const board = document.getElementById('board');
+            const columns = ['backlog', 'todo', 'in_progress', 'blocked', 'done'];
+            const columnNames = {
+                'backlog': '📋 Backlog',
+                'todo': '📝 To Do',
+                'in_progress': '🔄 In Progress',
+                'blocked': '🚧 Blocked',
+                'done': '✅ Done'
+            };
+
+            let html = '';
+            columns.forEach(colId => {
+                const projects = boardData.projects.filter(p => p.status === colId);
+                const col = boardData.columns[colId] || { name: colId };
+                
+                html += `
+                    <div class="column ${colId}">
+                        <div class="column-header">
+                            <span class="column-title">${col.name}</span>
+                            <span class="column-count">${projects.length}</span>
+                        </div>
+                        <div class="column-content">
+                            ${projects.length === 0 ? 
+                                '<div class="empty-column">暫無項目</div>' : 
+                                projects.map(p => renderProjectCard(p)).join('')
+                            }
+                        </div>
+                    </div>
+                `;
+            });
+
+            board.innerHTML = html;
+        }
+
+        function renderProjectCard(project) {
+            const priorityNames = {'low': '低', 'medium': '中', 'high': '高', 'urgent': '緊急'};
+            const tags = project.tags && project.tags.length > 0 ?
+                project.tags.map(t => `<span class="tag">#${t}</span>`).join('') : '';
+
+            let actions = '';
+            if (project.status !== 'done') {
+                actions += `<button class="btn" style="background:#27ae60;color:white;padding:6px 12px;margin:4px;" onclick="moveProject('${project.id}', 'done')">✅ 完成</button>`;
+            }
+            if (project.status !== 'in_progress' && project.status !== 'done') {
+                actions += `<button class="btn" style="background:#3498db;color:white;padding:6px 12px;margin:4px;" onclick="moveProject('${project.id}', 'in_progress')">▶️ 開始</button>`;
+            }
+            if (project.status !== 'backlog' && project.status !== 'done') {
+                actions += `<button class="btn" style="background:#95a5a6;color:white;padding:6px 12px;margin:4px;" onclick="moveProject('${project.id}', 'backlog')">⏪ 暫緩</button>`;
+            }
+
+            return `
+                <div class="project-card priority-${project.priority}">
+                    <div class="project-title">${project.title}</div>
+                    ${project.description ? `<div class="project-description">${project.description}</div>` : ''}
+                    <div class="project-meta">
+                        <span class="priority-badge ${project.priority}">${priorityNames[project.priority]}</span>
+                        ${tags}
+                    </div>
+                    ${actions ? `<div style="margin-top:12px;padding-top:12px;border-top:1px solid #e0e0e0;">${actions}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderStats() {
+            const stats = document.getElementById('stats');
+            const columns = ['backlog', 'todo', 'in_progress', 'blocked', 'done'];
+            const columnNames = ['Backlog', 'To Do', '進行中', '阻擋', '完成'];
+            
+            let html = '';
+            columns.forEach((col, i) => {
+                const count = boardData.projects.filter(p => p.status === col).length;
+                html += `
+                    <div class="stat-card">
+                        <div class="stat-number">${count}</div>
+                        <div class="stat-label">${columnNames[i]}</div>
+                    </div>
+                `;
+            });
+
+            const total = boardData.projects.length;
+            html += `
+                <div class="stat-card">
+                    <div class="stat-number">${total}</div>
+                    <div class="stat-label">總項目</div>
+                </div>
+            `;
+
+            stats.innerHTML = html;
+        }
+
+        function updateLastUpdated() {
+            const date = new Date(boardData.meta.updated);
+            const formatted = date.toLocaleString('zh-HK');
+            document.getElementById('lastUpdated').textContent = `最後更新：${formatted}`;
+        }
+
+        function showAddModal() {
+            document.getElementById('addModal').classList.add('active');
+        }
+
+        function hideAddModal() {
+            document.getElementById('addModal').classList.remove('active');
+            document.getElementById('addForm').reset();
+        }
+
+        function addProject(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('projectTitle').value;
+            const description = document.getElementById('projectDescription').value;
+            const priority = document.getElementById('projectPriority').value;
+            const status = document.getElementById('projectStatus').value;
+
+            const project = {
+                id: `proj-${String(boardData.projects.length + 1).padStart(3, '0')}`,
+                title: title,
+                description: description,
+                status: status,
+                priority: priority,
+                created: new Date().toISOString().split('T')[0],
+                updated: new Date().toISOString(),
+                tags: [],
+                notes: []
+            };
+
+            boardData.projects.push(project);
+            saveToLocal();
+            renderBoard();
+            renderStats();
+            hideAddModal();
+            alert('✅ 項目已添加！');
+        }
+
+        function moveProject(projectId, newStatus) {
+            for (let project of boardData.projects) {
+                if (project.id === projectId) {
+                    project.status = newStatus;
+                    project.updated = new Date().toISOString();
+                    if (newStatus === 'done') {
+                        project.completed = new Date().toISOString();
+                    }
+                    saveToLocal();
+                    renderBoard();
+                    renderStats();
+                    return;
+                }
+            }
+        }
+
+        function exportData() {
+            const dataStr = JSON.stringify(boardData, null, 2);
+            const blob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `kanban-board-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    boardData = JSON.parse(e.target.result);
+                    saveToLocal();
+                    renderBoard();
+                    renderStats();
+                    alert('✅ 數據已導入！');
+                } catch (err) {
+                    alert('❌ 無效的 JSON 文件');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+{
+  "COMMENT_1": "OpenClaw Configuration with Discord Multi-Channel Support",
+  "COMMENT_2": "Replace YOUR_* placeholders with actual values",
+  "COMMENT_3": "Channel IDs: Right-click channel → Copy ID (enable Developer Mode first)",
+  
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "deepseek": {
+        "baseUrl": "https://api.deepseek.com/v1",
+        "apiKey": "${DEEPSEEK_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "deepseek-chat",
+            "name": "DeepSeek Chat"
+          },
+          {
+            "id": "deepseek-reasoner",
+            "name": "DeepSeek Reasoner"
+          }
+        ]
+      },
+      "aliyun": {
+        "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
+        "apiKey": "${ALIYUN_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "qwen3.5-plus",
+            "name": "Qwen 3.5 Plus"
+          },
+          {
+            "id": "qwen3-coder-plus",
+            "name": "Qwen 3 Coder Plus"
+          },
+          {
+            "id": "qwen3-max-2026-01-23",
+            "name": "Qwen 3 Max"
+          },
+          {
+            "id": "qwen-turbo",
+            "name": "Qwen Turbo"
+          }
+        ]
+      }
+    }
+  },
+  
+  "agents": {
+    "list": [
+      {
+        "id": "main",
+        "name": "Jarvis",
+        "default": true,
+        "workspace": "~/.openclaw/workspace",
+        "model": "aliyun/qwen3.5-plus",
+        "groupChat": {
+          "mentionPatterns": ["@jarvis", "@Jarvis", "@主 agent"]
+        }
+      },
+      {
+        "id": "coding",
+        "name": "Coding Agent",
+        "workspace": "~/.openclaw/agents/coding/workspace",
+        "agentDir": "~/.openclaw/agents/coding/agent",
+        "model": "aliyun/qwen3-coder-plus",
+        "subagents": {
+          "allowAgents": ["*"]
+        },
+        "groupChat": {
+          "mentionPatterns": ["@coding", "@coder", "@dev", "@開發"]
+        }
+      },
+      {
+        "id": "research",
+        "name": "Research Agent",
+        "workspace": "~/.openclaw/agents/research/workspace",
+        "agentDir": "~/.openclaw/agents/research/agent",
+        "model": "aliyun/qwen3.5-plus",
+        "subagents": {
+          "allowAgents": ["*"]
+        },
+        "groupChat": {
+          "mentionPatterns": ["@research", "@search", "@study", "@研究"]
+        }
+      },
+      {
+        "id": "admin",
+        "name": "Admin Agent",
+        "workspace": "~/.openclaw/agents/admin/workspace",
+        "agentDir": "~/.openclaw/agents/admin/agent",
+        "model": "aliyun/qwen-turbo",
+        "subagents": {
+          "allowAgents": ["*"]
+        },
+        "groupChat": {
+          "mentionPatterns": ["@admin", "@schedule", "@reminder", "@日程"]
+        }
+      }
+    ],
+    "defaults": {
+      "model": {
+        "primary": "aliyun/qwen3.5-plus"
+      },
+      "models": {
+        "deepseek/deepseek-chat": {},
+        "deepseek/deepseek-reasoner": {},
+        "aliyun/qwen3.5-plus": {},
+        "aliyun/qwen3-coder-plus": {},
+        "aliyun/qwen3-max-2026-01-23": {},
+        "aliyun/qwen-turbo": {}
+      },
+      "heartbeat": {
+        "target": "discord",
+        "channel": "YOUR_SCHEDULE_REMINDERS_CHANNEL_ID"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxSpawnDepth": 2,
+        "maxChildrenPerAgent": 5,
+        "maxConcurrent": 8,
+        "model": "aliyun/qwen-turbo",
+        "archiveAfterMinutes": 60,
+        "announceChannel": "YOUR_SUBAGENT_LOGS_CHANNEL_ID"
+      }
+    }
+  },
+  
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "discord",
+        "accountId": "default",
+        "peer": {
+          "kind": "channel",
+          "id": "YOUR_GENERAL_CHAT_CHANNEL_ID"
+        }
+      }
+    },
+    {
+      "agentId": "coding",
+      "match": {
+        "channel": "discord",
+        "accountId": "default",
+        "peer": {
+          "kind": "channel",
+          "id": "YOUR_CODING_PROJECTS_CHANNEL_ID"
+        }
+      }
+    },
+    {
+      "agentId": "research",
+      "match": {
+        "channel": "discord",
+        "accountId": "default",
+        "peer": {
+          "kind": "channel",
+          "id": "YOUR_RESEARCH_REPORTS_CHANNEL_ID"
+        }
+      }
+    },
+    {
+      "agentId": "admin",
+      "match": {
+        "channel": "discord",
+        "accountId": "default",
+        "peer": {
+          "kind": "channel",
+          "id": "YOUR_SCHEDULE_REMINDERS_CHANNEL_ID"
+        }
+      }
+    },
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "telegram",
+        "accountId": "default"
+      }
+    }
+  ],
+  
+  "channels": {
+    "discord": {
+      "accounts": {
+        "default": {
+          "token": "YOUR_DISCORD_BOT_TOKEN_HERE",
+          "dmPolicy": "pairing",
+          "groupPolicy": "allowlist",
+          "streamMode": "partial"
+        }
+      }
+    },
+    "telegram": {
+      "dmPolicy": "pairing",
+      "botToken": "8232446525:AAFL780qsojMhAmetS7gS6OeOFoOMzo3MRo",
+      "groupPolicy": "allowlist",
+      "streamMode": "partial"
+    }
+  },
+  
+  "tools": {
+    "subagents": {
+      "tools": {
+        "deny": ["cron"]
+      }
+    }
+  },
+  
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true
+  },
+  
+  "gateway": {
+    "controlUi": {
+      "allowInsecureAuth": true
+    }
+  },
+  
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      },
+      "discord": {
+        "enabled": true
+      }
+    }
+  },
+  
+  "meta": {
+    "lastTouchedVersion": "2026.2.19"
+  }
+}

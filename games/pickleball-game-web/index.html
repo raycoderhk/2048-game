@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏓 Pickleball Master 匹克球挑戰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .status-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .status-item .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .status-item .value {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .menu-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .menu-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .menu-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .game-area {
+            display: none;
+        }
+
+        .game-area.active {
+            display: block;
+        }
+
+        .question {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .option-btn.correct {
+            background: #48bb78;
+            border-color: #48bb78;
+            color: white;
+        }
+
+        .option-btn.wrong {
+            background: #f56565;
+            border-color: #f56565;
+            color: white;
+        }
+
+        .feedback {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .feedback.correct {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .feedback.wrong {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .reflex-area {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .reflex-target {
+            font-size: 5em;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .reflex-target.show {
+            display: block;
+            animation: pop 0.2s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+
+        .welcome-screen {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .welcome-screen h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .welcome-screen p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            margin: 20px 0;
+        }
+
+        .input-group input {
+            padding: 15px;
+            font-size: 1.2em;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .back-btn {
+            background: #718096;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏓 Pickleball Master</h1>
+            <p>匹克球挑戰遊戲</p>
+        </div>
+
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="card welcome-screen">
+            <h2>歡迎來到匹克球挑戰遊戲！🎉</h2>
+            <p>目標：成為匹克球大師！通過各種挑戰提升你的等級。</p>
+            
+            <div class="input-group">
+                <input type="text" id="playerName" placeholder="請輸入你的名字" maxlength="20">
+            </div>
+            
+            <button class="btn" onclick="startGame()">開始遊戲 🚀</button>
+        </div>
+
+        <!-- Main Game Screen -->
+        <div id="gameScreen" class="card hidden">
+            <div class="status-bar">
+                <div class="status-item">
+                    <div class="label">玩家</div>
+                    <div class="value" id="playerNameDisplay">-</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">等級</div>
+                    <div class="value">Lv.<span id="levelDisplay">1</span></div>
+                    <div class="level-badge" id="titleDisplay">🌱 新手</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">積分</div>
+                    <div class="value" id="scoreDisplay">0</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">連勝</div>
+                    <div class="value" id="streakDisplay">0</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                <button class="menu-btn" onclick="startQuiz()">📝 知識挑戰</button>
+                <button class="menu-btn" onclick="startReflex()">⚡ 反應挑戰</button>
+                <button class="menu-btn" onclick="startServe()">🎯 發球挑戰</button>
+                <button class="menu-btn" onclick="showProgress()">📊 查看進度</button>
+            </div>
+
+            <div id="gameArea" class="game-area">
+                <button class="btn back-btn" onclick="backToMenu()">← 返回選單</button>
+                <div id="gameContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let gameState = {
+            playerName: '',
+            score: 0,
+            level: 1,
+            streak: 0,
+            gamesPlayed: 0,
+            title: '🌱 新手'
+        };
+
+        // Questions Database
+        const questions = [
+            { q: "匹克球嘅英文係咩？", options: ["A) Tennis", "B) Pickleball", "C) Badminton", "D) Squash"], answer: 1, points: 10 },
+            { q: "一個標準匹克球場有幾呎長？", options: ["A) 20 呎", "B) 30 呎", "C) 44 呎", "D) 60 呎"], answer: 2, points: 15 },
+            { q: "匹克球比賽通常係幾分制？", options: ["A) 11 分", "B) 15 分", "C) 21 分", "D) 25 分"], answer: 0, points: 10 },
+            { q: "\"Kitchen\" 在匹克球中指的是什麼？", options: ["A) 休息區", "B) 發球區", "C) 非截擊區", "D) 觀眾區"], answer: 2, points: 15 },
+            { q: "匹克球拍通常用咩材料做？", options: ["A) 木", "B) 金屬", "C) 複合材料", "D) 塑料"], answer: 2, points: 10 },
+            { q: "雙打比賽有幾多人參與？", options: ["A) 2 人", "B) 3 人", "C) 4 人", "D) 6 人"], answer: 2, points: 5 },
+            { q: "發球時要打過幾多個區？", options: ["A) 1 個", "B) 2 個", "C) 3 個", "D) 4 個"], answer: 0, points: 10 },
+            { q: "匹克球起源於哪個國家？", options: ["A) 英國", "B) 美國", "C) 中國", "D) 澳洲"], answer: 1, points: 10 }
+        ];
+
+        // Level System
+        const levels = [
+            { level: 1, title: "🌱 新手", minScore: 0 },
+            { level: 2, title: "🎾 初學者", minScore: 20 },
+            { level: 3, title: "🎯 中級玩家", minScore: 40 },
+            { level: 4, title: "⭐ 高級玩家", minScore: 70 },
+            { level: 5, title: "🏆 匹克球大師", minScore: 100 }
+        ];
+
+        // Update Level
+        function updateLevel() {
+            for (let i = levels.length - 1; i >= 0; i--) {
+                if (gameState.score >= levels[i].minScore) {
+                    gameState.level = levels[i].level;
+                    gameState.title = levels[i].title;
+                    break;
+                }
+            }
+            updateStatus();
+        }
+
+        // Update Status Display
+        function updateStatus() {
+            document.getElementById('playerNameDisplay').textContent = gameState.playerName;
+            document.getElementById('levelDisplay').textContent = gameState.level;
+            document.getElementById('titleDisplay').textContent = gameState.title;
+            document.getElementById('scoreDisplay').textContent = gameState.score;
+            document.getElementById('streakDisplay').textContent = gameState.streak;
+        }
+
+        // Start Game
+        function startGame() {
+            const name = document.getElementById('playerName').value.trim() || '匹克球手';
+            gameState.playerName = name;
+            
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+            updateStatus();
+        }
+
+        // Back to Menu
+        function backToMenu() {
+            document.getElementById('gameArea').classList.remove('active');
+            document.getElementById('gameContent').innerHTML = '';
+        }
+
+        // Show Progress
+        function showProgress() {
+            document.getElementById('gameArea').classList.add('active');
+            document.getElementById('gameContent').innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">📊 你的進度</h2>
+                    <div class="status-bar" style="margin-bottom: 30px;">
+                        <div class="status-item">
+                            <div class="label">等級</div>
+                            <div class="value">Lv.${gameState.level}</div>
+                            <div class="level-badge">${gameState.title}</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="label">積分</div>
+                            <div class="value">${gameState.score}</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="label">遊戲次數</div>
+                            <div class="value">${gameState.gamesPlayed}</div>
+                        </div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                        <h3 style="margin-bottom: 15px;">🎯 下一目標</h3>
+                        <p>再得 <strong style="color: #667eea;">${Math.max(0, levels[gameState.level]?.minScore - gameState.score || 0)}</strong> 分就可以升級！</p>
+                        <div class="progress-bar" style="margin-top: 15px;">
+                            <div class="progress-fill" style="width: ${Math.min(100, (gameState.score / 100) * 100)}%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="backToMenu()">繼續挑戰 🚀</button>
+                </div>
+            `;
+        }
+
+        // Quiz Game
+        let quizState = {
+            currentQuestion: 0,
+            score: 0,
+            selected: []
+        };
+
+        function startQuiz() {
+            quizState.selected = [];
+            quizState.score = 0;
+            quizState.currentQuestion = 0;
+            
+            // Select 3 random questions
+            quizState.questions = questions.sort(() => Math.random() - 0.5).slice(0, 3);
+            
+            document.getElementById('gameArea').classList.add('active');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (quizState.currentQuestion >= quizState.questions.length) {
+                endQuiz();
+                return;
+            }
+
+            const q = quizState.questions[quizState.currentQuestion];
+            
+            document.getElementById('gameContent').innerHTML = `
+                <div style="padding: 20px;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${((quizState.currentQuestion + 1) / quizState.questions.length) * 100}%;"></div>
+                    </div>
+                    <p style="margin-bottom: 10px; color: #718096;">問題 ${quizState.currentQuestion + 1}/${quizState.questions.length}</p>
+                    <div class="question">${q.q}</div>
+                    <div class="options">
+                        ${q.options.map((opt, i) => `
+                            <button class="option-btn" onclick="selectAnswer(${i})">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div id="feedback"></div>
+                </div>
+            `;
+        }
+
+        function selectAnswer(index) {
+            const q = quizState.questions[quizState.currentQuestion];
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if (index === q.answer) {
+                buttons[index].classList.add('correct');
+                const points = q.points + (gameState.streak >= 3 ? 5 : 0);
+                gameState.score += points;
+                gameState.streak++;
+                quizState.score++;
+                
+                document.getElementById('feedback').innerHTML = `
+                    <div class="feedback correct">
+                        ✅ 正確！${points} 分 ${gameState.streak >= 3 ? '(🔥 連勝獎勵 +5!)' : ''}
+                    </div>
+                `;
+            } else {
+                buttons[index].classList.add('wrong');
+                buttons[q.answer].classList.add('correct');
+                gameState.streak = 0;
+                
+                document.getElementById('feedback').innerHTML = `
+                    <div class="feedback wrong">
+                        ❌ 錯誤！正確答案係 ${q.options[q.answer]}
+                    </div>
+                `;
+            }
+
+            updateStatus();
+            
+            setTimeout(() => {
+                quizState.currentQuestion++;
+                showQuestion();
+            }, 2000);
+        }
+
+        function endQuiz() {
+            gameState.gamesPlayed++;
+            updateLevel();
+            
+            document.getElementById('gameContent').innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">📊 本輪成績</h2>
+                    <div style="font-size: 3em; margin: 20px 0;">
+                        ${quizState.score}/${quizState.questions.length}
+                    </div>
+                    <p style="color: #718096; margin-bottom: 30px;">
+                        ${quizState.score === quizState.questions.length ? '🏆 完美！' : quizState.score >= 2 ? '👍 不錯！' : '💪 繼續練習！'}
+                    </p>
+                    <button class="btn" onclick="backToMenu()">返回選單</button>
+                </div>
+            `;
+        }
+
+        // Reflex Game
+        let reflexState = {
+            waiting: false,
+            startTime: 0,
+            timeout: null
+        };
+
+        function startReflex() {
+            document.getElementById('gameArea').classList.add('active');
+            document.getElementById('gameContent').innerHTML = `
+                <div class="reflex-area">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">⚡ 反應挑戰</h2>
+                    <p style="margin-bottom: 20px;">當見到「🏓」時，立即按下面個按鈕！</p>
+                    <div id="reflexTarget" class="reflex-target">🏓</div>
+                    <button id="reflexBtn" class="btn" onclick="reflexClick()" style="font-size: 1.5em; padding: 30px 60px;">
+                        準備好未？按我開始！
+                    </button>
+                    <div id="reflexResult" style="margin-top: 30px; font-size: 1.5em;"></div>
+                </div>
+            `;
+        }
+
+        function reflexClick() {
+            const btn = document.getElementById('reflexBtn');
+            const target = document.getElementById('reflexTarget');
+            const result = document.getElementById('reflexResult');
+
+            if (!reflexState.waiting && !reflexState.startTime) {
+                // Start game
+                btn.disabled = true;
+                btn.textContent = '等待中...';
+                reflexState.waiting = true;
+                
+                const delay = Math.random() * 3000 + 2000;
+                reflexState.timeout = setTimeout(() => {
+                    reflexState.waiting = false;
+                    reflexState.startTime = Date.now();
+                    target.classList.add('show');
+                    btn.disabled = false;
+                    btn.textContent = '按我！🏓';
+                }, delay);
+            } else if (reflexState.waiting) {
+                // Too early
+                clearTimeout(reflexState.timeout);
+                reflexState.waiting = false;
+                btn.disabled = false;
+                btn.textContent = '太快啦！再試一次 🏓';
+            } else {
+                // Calculate reaction time
+                const reaction = (Date.now() - reflexState.startTime) / 1000;
+                let points, msg, color;
+                
+                if (reaction < 0.2) {
+                    points = 30; msg = '🏆 世界級反應！'; color = '#48bb78';
+                } else if (reaction < 0.3) {
+                    points = 20; msg = '⭐ 非常好！'; color = '#4299e1';
+                } else if (reaction < 0.4) {
+                    points = 15; msg = '👍 不錯！'; color = '#ed8936';
+                } else if (reaction < 0.5) {
+                    points = 10; msg = '🙂 平均'; color = '#ecc94b';
+                } else {
+                    points = 5; msg = '💪 繼續練習！'; color = '#f56565';
+                }
+                
+                gameState.score += points;
+                gameState.gamesPlayed++;
+                updateLevel();
+                
+                result.innerHTML = `
+                    <div style="color: ${color};">
+                        <div style="font-size: 2em; margin-bottom: 10px;">${reaction.toFixed(3)} 秒</div>
+                        <div>${msg}</div>
+                        <div style="font-size: 1.2em; margin-top: 10px;">+${points} 分！</div>
+                    </div>
+                    <button class="btn" onclick="startReflex()" style="margin-top: 20px;">再玩一次 🔄</button>
+                    <button class="btn back-btn" onclick="backToMenu()" style="margin-top: 20px;">返回選單</button>
+                `;
+                
+                target.classList.remove('show');
+                btn.style.display = 'none';
+                reflexState.startTime = 0;
+            }
+        }
+
+        // Serve Game
+        let serveState = {
+            attempt: 0,
+            successful: 0
+        };
+
+        function startServe() {
+            serveState.attempt = 0;
+            serveState.successful = 0;
+            
+            document.getElementById('gameArea').classList.add('active');
+            nextServe();
+        }
+
+        function nextServe() {
+            if (serveState.attempt >= 5) {
+                endServe();
+                return;
+            }
+
+            serveState.attempt++;
+            
+            document.getElementById('gameContent').innerHTML = `
+                <div class="reflex-area">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">🎯 發球挑戰</h2>
+                    <p style="margin-bottom: 20px;">發球 ${serveState.attempt}/5</p>
+                    <p style="margin-bottom: 30px; color: #718096;">喺啱嘅時機按按鈕發球！</p>
+                    
+                    <div style="width: 200px; height: 200px; margin: 0 auto 30px; position: relative; background: #f8f9fa; border-radius: 50%; border: 5px solid #667eea;">
+                        <div id="serveTarget" style="position: absolute; width: 40px; height: 40px; background: #f56565; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                    </div>
+                    
+                    <button id="serveBtn" class="btn" onclick="serveClick()" style="font-size: 1.3em; padding: 25px 50px;">
+                        發球！🏓
+                    </button>
+                    
+                    <div id="serveResult" style="margin-top: 30px; font-size: 1.3em;"></div>
+                </div>
+            `;
+
+            // Animate target
+            const target = document.getElementById('serveTarget');
+            let position = 50;
+            let direction = 1;
+            let speed = 2;
+            
+            window.serveAnimation = setInterval(() => {
+                position += direction * speed;
+                if (position > 80 || position < 20) direction *= -1;
+                target.style.left = position + '%';
+            }, 16);
+        }
+
+        function serveClick() {
+            clearInterval(window.serveAnimation);
+            
+            const target = document.getElementById('serveTarget');
+            const result = document.getElementById('serveResult');
+            const btn = document.getElementById('serveBtn');
+            
+            const targetPos = parseFloat(target.style.left);
+            const success = targetPos > 40 && targetPos < 60;
+            
+            if (success) {
+                serveState.successful++;
+                result.innerHTML = '<div style="color: #48bb78; font-size: 1.5em;">✅ 好球！入區！</div>';
+            } else {
+                result.innerHTML = '<div style="color: #f56565; font-size: 1.5em;">❌ 出界！</div>';
+            }
+            
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                nextServe();
+            }, 1500);
+        }
+
+        function endServe() {
+            const accuracy = (serveState.successful / 5) * 100;
+            const points = Math.floor(accuracy * 0.5);
+            
+            gameState.score += points;
+            gameState.gamesPlayed++;
+            updateLevel();
+            
+            document.getElementById('gameContent').innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">📊 發球成績</h2>
+                    <div style="font-size: 3em; margin: 20px 0;">
+                        ${serveState.successful}/5
+                    </div>
+                    <p style="color: #718096; margin-bottom: 10px;">準確度：${accuracy.toFixed(0)}%</p>
+                    <p style="color: #718096; margin-bottom: 30px;">+${points} 分！</p>
+                    <button class="btn" onclick="startServe()">再玩一次 🔄</button>
+                    <button class="btn back-btn" onclick="backToMenu()" style="margin-left: 10px;">返回選單</button>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

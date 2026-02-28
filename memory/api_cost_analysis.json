@@ -1,0 +1,50 @@
+{
+  "analysis_date": "2026-02-25T14:14:28.244794",
+  "usage_stats": {
+    "input_tokens": 5700,
+    "output_tokens": 256,
+    "model": "deepseek/deepseek-chat",
+    "analysis_time": "2026-02-25T14:14:28.244794"
+  },
+  "pricing_model": {
+    "input_per_1k": 0.00014,
+    "output_per_1k": 0.00028,
+    "currency": "USD"
+  },
+  "cost_calculation": {
+    "input_cost_usd": 0.000798,
+    "output_cost_usd": 7.167999999999999e-05,
+    "total_cost_usd": 0.00086968,
+    "total_cost_hkd": 0.006783503999999999,
+    "exchange_rate": 7.8
+  },
+  "monthly_projection": {
+    "input_tokens": 171000,
+    "output_tokens": 7680,
+    "total_cost_usd": 0.0260904,
+    "total_cost_hkd": 0.20350511999999998
+  },
+  "tasks_completed": [
+    {
+      "task": "OCR技能安裝和測試",
+      "estimated_tokens": 2000
+    },
+    {
+      "task": "股票投資分析",
+      "estimated_tokens": 1500
+    },
+    {
+      "task": "晨報系統開發",
+      "estimated_tokens": 1200
+    },
+    {
+      "task": "事實核查系統",
+      "estimated_tokens": 1000
+    }
+  ],
+  "efficiency_analysis": {
+    "estimated_tokens": 5700,
+    "actual_tokens": 5956,
+    "efficiency_percentage": 95.70181329751512
+  }
+}

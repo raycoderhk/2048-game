@@ -1,0 +1,15 @@
+[Unit]
+Description=OpenClaw Skills Monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/home/node/.openclaw/workspace
+ExecStart=/bin/bash /home/node/.openclaw/workspace/skills_monitor.sh
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

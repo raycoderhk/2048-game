@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-02-25T12:46:36.211844",
+  "basic_tools": [
+    {
+      "tool": "Python 3",
+      "status": "✅",
+      "version": "Python 3.11.2"
+    },
+    {
+      "tool": "pip3",
+      "status": "✅",
+      "version": "pip 23.0.1 from /usr/lib/python3/dist-packages/pip (python 3.11)"
+    },
+    {
+      "tool": "Tesseract OCR",
+      "status": "✅",
+      "version": "tesseract 5.3.0"
+    },
+    {
+      "tool": "curl",
+      "status": "✅",
+      "version": "curl 7.88.1 (x86_64-pc-linux-gnu) libcurl/7.88.1 OpenSSL/3.0.18 zlib/1.2.13 brotli/1.0.9 zstd/1.5.4 libidn2/2.3.3 libpsl/0.21.2 (+libidn2/2.3.3) libssh2/1.10.0 nghttp2/1.52.0 librtmp/2.3 OpenLDAP/2.5.13"
+    }
+  ],
+  "skills": [
+    {
+      "skill": "目錄",
+      "status": "✅",
+      "path": "/home/node/.openclaw/workspace/skills"
+    },
+    {
+      "skill": "smart_ocr",
+      "status": "✅"
+    }
+  ],
+  "smart_ocr": [
+    {
+      "component": "ocr_tool.py",
+      "status": "✅",
+      "path": "/home/node/.openclaw/workspace/skills/smart_ocr/ocr_tool.py"
+    },
+    {
+      "component": "run_ocr.sh",
+      "status": "✅",
+      "path": "/home/node/.openclaw/workspace/skills/smart_ocr/run_ocr.sh"
+    },
+    {
+      "component": "tesseract_tool.py",
+      "status": "✅",
+      "path": "/home/node/.openclaw/workspace/skills/smart_ocr/tesseract_tool.py"
+    },
+    {
+      "component": "run_tesseract.sh",
+      "status": "✅",
+      "path": "/home/node/.openclaw/workspace/skills/smart_ocr/run_tesseract.sh"
+    },
+    {
+      "component": "ocr_venv/bin/python3",
+      "status": "✅",
+      "path": "/home/node/.openclaw/workspace/skills/smart_ocr/ocr_venv/bin/python3"
+    },
+    {
+      "component": "Python環境",
+      "status": "✅",
+      "details": "所有依賴正常"
+    }
+  ],
+  "network": [
+    {
+      "service": "Yahoo Finance API",
+      "status": "✅",
+      "response": "200 OK"
+    },
+    {
+      "service": "網絡連接",
+      "status": "❌",
+      "error": "[Errno 2] No such file or directory: 'ping'"
+    }
+  ],
+  "summary": {
+    "total_checks": 14,
+    "success": 13,
+    "warnings": 0,
+    "errors": 1,
+    "success_rate": 92.85714285714286
+  }
+}
