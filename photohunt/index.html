@@ -128,7 +128,7 @@
             position: absolute;
             width: 40px;
             height: 40px;
-            background: rgba(46, 213, 115, 0.8);
+            background: rgba(46, 213, 115, 0.9);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -138,6 +138,18 @@
             font-size: 1.5em;
             font-weight: bold;
             animation: pop 0.3s ease-out;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .found-marker::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(46, 213, 115, 0.5);
+            border-radius: 50%;
+            animation: pulse-ring 1.5s ease-out infinite;
         }
 
         @keyframes pop {
@@ -149,6 +161,17 @@
             }
             100% {
                 transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
             }
         }
 
@@ -373,7 +396,8 @@
             <h3>🎯 遊戲說明</h3>
             <ul>
                 <li>兩張圖片之間有 <strong>5 個差異</strong></li>
-                <li>點擊你認為不同的地方</li>
+                <li>點擊右邊圖片中你認為不同的地方</li>
+                <li>找到差異後，✅ 標記會顯示在兩張圖片上</li>
                 <li>找對全部差異即可獲勝！</li>
                 <li>尽量减少錯誤點擊</li>
             </ul>
@@ -667,14 +691,28 @@
         }
 
         function showFoundMarker(x, y, index) {
-            const wrapper = document.getElementById('image2Wrapper');
+            // Show marker on BOTH images
+            const wrapper1 = document.getElementById('image1Wrapper');
+            const wrapper2 = document.getElementById('image2Wrapper');
+            
+            // Create markers for both images
+            createMarker(wrapper1, x, y, index);
+            createMarker(wrapper2, x, y, index);
+        }
+
+        function createMarker(wrapper, x, y, index) {
+            // Check if marker already exists for this difference
+            const existingMarker = wrapper.querySelector(`.found-marker[data-index="${index}"]`);
+            if (existingMarker) return; // Don't create duplicate
+            
             const marker = document.createElement('div');
             marker.className = 'found-marker';
+            marker.setAttribute('data-index', index);
             marker.textContent = '✓';
             marker.style.left = (x / 500 * 100) + '%';
             marker.style.top = (y / 400 * 100) + '%';
             wrapper.appendChild(marker);
-            setTimeout(() => marker.remove(), 2000);
+            // Marker stays permanently - no timeout to remove it
         }
 
         function updateStats() {
@@ -720,6 +758,9 @@
             // Clear canvases
             ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
             ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+            // Clear all found markers from both images
+            document.querySelectorAll('.found-marker').forEach(marker => marker.remove());
 
             // Draw scenes
             drawScene(ctx1, false);
