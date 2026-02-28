@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📸 Photo Hunt | 找不同遊戲</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .title {
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            opacity: 0.9;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .images-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .image-wrapper {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-wrapper canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            cursor: crosshair;
+        }
+
+        .image-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .click-indicator {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #ff4757;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .found-marker {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(46, 213, 115, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            animation: pop 0.3s ease-out;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(56, 239, 125, 0.4);
+        }
+
+        .btn-back {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-back:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .instructions {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            color: #666;
+        }
+
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin: 5px 0;
+        }
+
+        .message {
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .message.success {
+            background: rgba(46, 213, 115, 0.2);
+            color: #2ed573;
+        }
+
+        .message.error {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+        }
+
+        .message.info {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal h2 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .modal p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .modal-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .modal-stat {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .modal-stat-value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .modal-stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .images-container {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: 1.8em;
+            }
+
+            .game-container {
+                padding: 20px;
+            }
+
+            .modal-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1 class="title">📸 Photo Hunt</h1>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">差異</div>
+                    <div class="stat-value"><span id="foundCount">0</span>/<span id="totalDifferences">5</span></div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">時間</div>
+                    <div class="stat-value" id="timer">00:00</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">錯誤</div>
+                    <div class="stat-value" id="mistakes">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="messageArea"></div>
+
+        <div class="images-container">
+            <div class="image-wrapper" id="image1Wrapper">
+                <div class="image-label">原圖</div>
+                <canvas id="canvas1" width="500" height="400"></canvas>
+            </div>
+            <div class="image-wrapper" id="image2Wrapper">
+                <div class="image-label">找不同</div>
+                <canvas id="canvas2" width="500" height="400"></canvas>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-start" id="startBtn" onclick="startGame()">🎮 開始遊戲</button>
+            <button class="btn btn-back" onclick="window.location.href='/'">🏠 返回首頁</button>
+        </div>
+
+        <div class="instructions">
+            <h3>🎯 遊戲說明</h3>
+            <ul>
+                <li>兩張圖片之間有 <strong>5 個差異</strong></li>
+                <li>點擊你認為不同的地方</li>
+                <li>找對全部差異即可獲勝！</li>
+                <li>尽量减少錯誤點擊</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">🎉 恭喜!</h2>
+            <p id="modalMessage">你成功找出所有差異!</p>
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="modalTime">00:00</div>
+                    <div class="modal-stat-label">用時</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="modalMistakes">0</div>
+                    <div class="modal-stat-label">錯誤</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="modalScore">100</div>
+                    <div class="modal-stat-label">得分</div>
+                </div>
+            </div>
+            <button class="btn btn-start" onclick="startGame()">🔄 再玩一次</button>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let gameState = {
+            started: false,
+            found: [],
+            mistakes: 0,
+            startTime: null,
+            timerInterval: null,
+            totalDifferences: 5
+        };
+
+        // Difference definitions (x, y, radius, description)
+        const differences = [
+            { x: 100, y: 100, radius: 30, description: "太陽顏色" },
+            { x: 250, y: 200, radius: 25, description: "樹木高度" },
+            { x: 400, y: 150, radius: 35, description: "雲朵形狀" },
+            { x: 150, y: 300, radius: 30, description: "花朵顏色" },
+            { x: 350, y: 350, radius: 28, description: "石頭位置" }
+        ];
+
+        // Canvas setup
+        const canvas1 = document.getElementById('canvas1');
+        const canvas2 = document.getElementById('canvas2');
+        const ctx1 = canvas1.getContext('2d');
+        const ctx2 = canvas2.getContext('2d');
+
+        // Responsive canvas
+        function resizeCanvas() {
+            const wrapper = document.getElementById('image1Wrapper');
+            const width = wrapper.clientWidth;
+            const scale = width / 500;
+            
+            canvas1.style.width = width + 'px';
+            canvas1.style.height = (400 * scale) + 'px';
+            canvas2.style.width = width + 'px';
+            canvas2.style.height = (400 * scale) + 'px';
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Draw scene function
+        function drawScene(ctx, isModified = false) {
+            // Sky gradient
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, 200);
+            skyGradient.addColorStop(0, '#87CEEB');
+            skyGradient.addColorStop(1, '#E0F6FF');
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, 500, 200);
+
+            // Ground
+            const groundGradient = ctx.createLinearGradient(0, 200, 0, 400);
+            groundGradient.addColorStop(0, '#90EE90');
+            groundGradient.addColorStop(1, '#228B22');
+            ctx.fillStyle = groundGradient;
+            ctx.fillRect(0, 200, 500, 200);
+
+            // Sun (DIFFERENCE 1: color)
+            ctx.beginPath();
+            ctx.arc(100, 100, 40, 0, Math.PI * 2);
+            if (isModified) {
+                ctx.fillStyle = '#FF6B6B'; // Red sun
+            } else {
+                ctx.fillStyle = '#FFD93D'; // Yellow sun
+            }
+            ctx.fill();
+            
+            // Sun rays
+            ctx.strokeStyle = isModified ? '#FF6B6B' : '#FFD93D';
+            ctx.lineWidth = 3;
+            for (let i = 0; i < 8; i++) {
+                const angle = (i / 8) * Math.PI * 2;
+                ctx.beginPath();
+                ctx.moveTo(100 + Math.cos(angle) * 45, 100 + Math.sin(angle) * 45);
+                ctx.lineTo(100 + Math.cos(angle) * 55, 100 + Math.sin(angle) * 55);
+                ctx.stroke();
+            }
+
+            // Clouds (DIFFERENCE 3: shape)
+            drawCloud(ctx, 400, 80, isModified);
+            drawCloud(ctx, 300, 120, false);
+
+            // Tree (DIFFERENCE 2: height)
+            drawTree(ctx, 250, 200, isModified);
+
+            // Flowers (DIFFERENCE 4: color)
+            drawFlower(ctx, 150, 300, isModified ? '#FF69B4' : '#FF6B6B');
+            drawFlower(ctx, 200, 320, '#FFD93D');
+            drawFlower(ctx, 180, 350, '#9B59B6');
+
+            // House
+            drawHouse(ctx, 350, 250);
+
+            // Stones (DIFFERENCE 5: position)
+            if (isModified) {
+                drawStone(ctx, 350, 350);
+                drawStone(ctx, 380, 360);
+            } else {
+                drawStone(ctx, 340, 340);
+                drawStone(ctx, 370, 350);
+            }
+
+            // Bird
+            drawBird(ctx, 200, 60);
+            drawBird(ctx, 230, 80);
+        }
+
+        function drawCloud(ctx, x, y, isModified) {
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            if (isModified) {
+                // Different shape
+                ctx.arc(x, y, 25, 0, Math.PI * 2);
+                ctx.arc(x + 30, y - 10, 20, 0, Math.PI * 2);
+                ctx.arc(x + 50, y, 25, 0, Math.PI * 2);
+            } else {
+                ctx.arc(x, y, 30, 0, Math.PI * 2);
+                ctx.arc(x + 35, y - 5, 25, 0, Math.PI * 2);
+                ctx.arc(x + 60, y, 30, 0, Math.PI * 2);
+            }
+            ctx.fill();
+        }
+
+        function drawTree(ctx, x, y, isModified) {
+            // Trunk
+            ctx.fillStyle = '#8B4513';
+            const height = isModified ? 80 : 100;
+            ctx.fillRect(x - 15, y - height, 30, height);
+
+            // Leaves
+            ctx.fillStyle = '#228B22';
+            ctx.beginPath();
+            ctx.arc(x, y - height - 30, 50, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x - 30, y - height, 40, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x + 30, y - height, 40, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawFlower(ctx, x, y, color) {
+            // Stem
+            ctx.strokeStyle = '#228B22';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x, y + 30);
+            ctx.stroke();
+
+            // Petals
+            ctx.fillStyle = color;
+            for (let i = 0; i < 5; i++) {
+                const angle = (i / 5) * Math.PI * 2;
+                ctx.beginPath();
+                ctx.arc(x + Math.cos(angle) * 10, y + Math.sin(angle) * 10, 8, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Center
+            ctx.fillStyle = '#FFD93D';
+            ctx.beginPath();
+            ctx.arc(x, y, 10, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawHouse(ctx, x, y) {
+            // Walls
+            ctx.fillStyle = '#F5DEB3';
+            ctx.fillRect(x, y, 100, 80);
+
+            // Roof
+            ctx.fillStyle = '#CD5C5C';
+            ctx.beginPath();
+            ctx.moveTo(x - 10, y);
+            ctx.lineTo(x + 50, y - 50);
+            ctx.lineTo(x + 110, y);
+            ctx.fill();
+
+            // Door
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(x + 40, y + 40, 20, 40);
+
+            // Window
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(x + 15, y + 20, 20, 20);
+            ctx.fillRect(x + 65, y + 20, 20, 20);
+        }
+
+        function drawStone(ctx, x, y) {
+            ctx.fillStyle = '#808080';
+            ctx.beginPath();
+            ctx.ellipse(x, y, 20, 15, 0, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawBird(ctx, x, y) {
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x - 10, y);
+            ctx.quadraticCurveTo(x, y - 10, x + 10, y);
+            ctx.quadraticCurveTo(x, y + 5, x - 10, y);
+            ctx.stroke();
+        }
+
+        // Click handler
+        function handleClick(e, isCanvas2) {
+            if (!gameState.started) return;
+
+            const canvas = isCanvas2 ? canvas2 : canvas1;
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+
+            // Only allow clicking on canvas2
+            if (!isCanvas2) {
+                showMessage('請在右邊的圖片點擊找出差異！', 'error');
+                return;
+            }
+
+            // Check if clicked near a difference
+            let foundNew = false;
+            differences.forEach((diff, index) => {
+                if (gameState.found.includes(index)) return;
+
+                const distance = Math.sqrt(Math.pow(x - diff.x, 2) + Math.pow(y - diff.y, 2));
+                if (distance < diff.radius + 20) {
+                    // Found a difference!
+                    gameState.found.push(index);
+                    foundNew = true;
+                    showFoundMarker(x, y, index);
+                    updateStats();
+                    showMessage(`🎯 找到差異：${diff.description}`, 'success');
+
+                    if (gameState.found.length === gameState.totalDifferences) {
+                        endGame();
+                    }
+                }
+            });
+
+            if (!foundNew) {
+                gameState.mistakes++;
+                showClickIndicator(x, y);
+                updateStats();
+                showMessage('❌ 這裡沒有差異，再試試！', 'error');
+            }
+        }
+
+        function showClickIndicator(x, y) {
+            const wrapper = document.getElementById('image2Wrapper');
+            const indicator = document.createElement('div');
+            indicator.className = 'click-indicator';
+            indicator.style.left = (x / 500 * 100) + '%';
+            indicator.style.top = (y / 400 * 100) + '%';
+            wrapper.appendChild(indicator);
+            setTimeout(() => indicator.remove(), 500);
+        }
+
+        function showFoundMarker(x, y, index) {
+            const wrapper = document.getElementById('image2Wrapper');
+            const marker = document.createElement('div');
+            marker.className = 'found-marker';
+            marker.textContent = '✓';
+            marker.style.left = (x / 500 * 100) + '%';
+            marker.style.top = (y / 400 * 100) + '%';
+            wrapper.appendChild(marker);
+            setTimeout(() => marker.remove(), 2000);
+        }
+
+        function updateStats() {
+            document.getElementById('foundCount').textContent = gameState.found.length;
+            document.getElementById('mistakes').textContent = gameState.mistakes;
+        }
+
+        function startTimer() {
+            gameState.startTime = Date.now();
+            gameState.timerInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
+                const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+                const seconds = (elapsed % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+            }
+        }
+
+        function showMessage(text, type) {
+            const messageArea = document.getElementById('messageArea');
+            messageArea.innerHTML = `<div class="message ${type}">${text}</div>`;
+            setTimeout(() => {
+                messageArea.innerHTML = '';
+            }, 3000);
+        }
+
+        function startGame() {
+            // Reset game state
+            gameState = {
+                started: true,
+                found: [],
+                mistakes: 0,
+                startTime: null,
+                timerInterval: null,
+                totalDifferences: 5
+            };
+
+            // Clear canvases
+            ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+            // Draw scenes
+            drawScene(ctx1, false);
+            drawScene(ctx2, true);
+
+            // Update UI
+            document.getElementById('foundCount').textContent = '0';
+            document.getElementById('totalDifferences').textContent = gameState.totalDifferences;
+            document.getElementById('mistakes').textContent = '0';
+            document.getElementById('timer').textContent = '00:00';
+            document.getElementById('startBtn').textContent = '🔄 重新開始';
+
+            // Hide modal
+            document.getElementById('gameOverModal').classList.remove('show');
+
+            // Start timer
+            startTimer();
+
+            showMessage('遊戲開始！找出兩張圖片之間的 5 個差異', 'info');
+        }
+
+        function endGame() {
+            stopTimer();
+            gameState.started = false;
+
+            const elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+            const seconds = (elapsed % 60).toString().padStart(2, '0');
+            const timeStr = `${minutes}:${seconds}`;
+
+            // Calculate score
+            const baseScore = 1000;
+            const timePenalty = elapsed * 2;
+            const mistakePenalty = gameState.mistakes * 50;
+            const score = Math.max(0, baseScore - timePenalty - mistakePenalty);
+
+            // Show modal
+            document.getElementById('modalTime').textContent = timeStr;
+            document.getElementById('modalMistakes').textContent = gameState.mistakes;
+            document.getElementById('modalScore').textContent = score;
+            document.getElementById('gameOverModal').classList.add('show');
+        }
+
+        // Event listeners
+        canvas2.addEventListener('click', (e) => handleClick(e, true));
+        canvas1.addEventListener('click', (e) => handleClick(e, false));
+
+        // Initial draw
+        drawScene(ctx1, false);
+        drawScene(ctx2, true);
+    </script>
+</body>
+</html>
