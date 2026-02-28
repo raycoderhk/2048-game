@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 遊戲世界 | GameWorld</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .title {
+            font-size: 4em;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .game-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .game-desc {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .game-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .tag.new {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .tag.hot {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2em;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5em;
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+            }
+
+            .game-icon {
+                font-size: 4em;
+            }
+
+            .game-name {
+                font-size: 1.5em;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎮 遊戲世界</h1>
+            <p class="subtitle">GameWorld - 經典小遊戲集合</p>
+        </div>
+
+        <div class="games-grid">
+            <!-- 2048 -->
+            <a href="2048/index.html" class="game-card">
+                <div class="game-icon">🔢</div>
+                <h2 class="game-name">2048</h2>
+                <p class="game-desc">合併數字到 2048！經典益智遊戲，考驗你嘅策略同規劃能力。</p>
+                <div class="game-tags">
+                    <span class="tag hot">🔥 熱門</span>
+                    <span class="tag">益智</span>
+                    <span class="tag">單人</span>
+                </div>
+            </a>
+
+            <!-- Snake -->
+            <a href="snake/index.html" class="game-card">
+                <div class="game-icon">🐍</div>
+                <h2 class="game-name">貪食蛇</h2>
+                <p class="game-desc">經典 Snake 遊戲！食蘋果變長，唔好撞到自己同牆壁。</p>
+                <div class="game-tags">
+                    <span class="tag new">✨ 新</span>
+                    <span class="tag">街機</span>
+                    <span class="tag">單人</span>
+                </div>
+            </a>
+
+            <!-- Tic Tac Toe -->
+            <a href="tictactoe/index.html" class="game-card">
+                <div class="game-icon">❌⭕</div>
+                <h2 class="game-name">井字過三關</h2>
+                <p class="game-desc">經典 Tic Tac Toe！同朋友或者 AI 對戰，三子連成一線就贏。</p>
+                <div class="game-tags">
+                    <span class="tag new">✨ 新</span>
+                    <span class="tag">益智</span>
+                    <span class="tag">雙人</span>
+                </div>
+            </a>
+
+            <!-- Breakout -->
+            <a href="breakout/index.html" class="game-card">
+                <div class="game-icon">🧱</div>
+                <h2 class="game-name">打磚塊</h2>
+                <p class="game-desc">經典 Breakout！控制擋板反彈個波，打爛所有磚塊。</p>
+                <div class="game-tags">
+                    <span class="tag new">✨ 新</span>
+                    <span class="tag">街機</span>
+                    <span class="tag">單人</span>
+                </div>
+            </a>
+
+            <!-- Memory Game -->
+            <a href="memory/index.html" class="game-card">
+                <div class="game-icon">🎨</div>
+                <h2 class="game-name">記憶配對</h2>
+                <p class="game-desc">Memory Match！翻開卡片配對相同圖案，考驗你嘅記憶力。</p>
+                <div class="game-tags">
+                    <span class="tag new">✨ 新</span>
+                    <span class="tag">益智</span>
+                    <span class="tag">單人</span>
+                </div>
+            </a>
+
+            <!-- Pickleball -->
+            <a href="https://misson-dashboard.zeabur.app/pickleball" class="game-card" target="_blank">
+                <div class="game-icon">🏓</div>
+                <h2 class="game-name">匹克球大師</h2>
+                <p class="game-desc">Pickleball Master Pro！物理引擎 + AI 對手，專業級匹克球遊戲！</p>
+                <div class="game-tags">
+                    <span class="tag hot">🏆 專業</span>
+                    <span class="tag">運動</span>
+                    <span class="tag">單人</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>🎮 遊戲世界 © 2026 | Made with ❤️ by Jarvis</p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/raycoderhk/2048-game" target="_blank">GitHub Repo</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
