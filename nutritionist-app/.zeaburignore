@@ -1,0 +1,29 @@
+# 忽略測試文件
+test_*.py
+*_test.py
+
+# 忽略舊文件
+PERPLEXITY_AUTOMATION.md
+README_TEST.md
+SOLUTIONS.md
+TEST_RESULTS.md
+food_recognition_hybrid.py
+test_deepseek_vl.py
+test_qwen_vl.py
+test_qwen_vl_simple.py
+test_with_env.py
+
+# 忽略 Git
+.git/
+.gitignore
+
+# 忽略 node_modules
+node_modules/
+
+# 忽略 Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# 忽略日誌
+*.log
