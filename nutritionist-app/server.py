@@ -42,11 +42,45 @@ load_env()
 # 初始化數據庫
 db.init_db()
 
+# ============ 圖片壓縮 ============
+def compress_image_base64(image_base64, max_size=800, quality=80):
+    """壓縮圖片以減少 API 請求大小和時間"""
+    try:
+        import base64
+        from PIL import Image
+        import io
+        
+        if ',' in image_base64:
+            image_base64 = image_base64.split(',')[1]
+        
+        image_data = base64.b64decode(image_base64)
+        img = Image.open(io.BytesIO(image_data))
+        
+        # 轉換為 RGB (移除 alpha channel)
+        if img.mode in ('RGBA', 'LA', 'P'):
+            img = img.convert('RGB')
+        
+        # 縮放圖片
+        img.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
+        
+        # 壓縮並重新編碼
+        output = io.BytesIO()
+        img.save(output, format='JPEG', quality=quality, optimize=True)
+        
+        compressed_base64 = base64.b64encode(output.getvalue()).decode('utf-8')
+        return compressed_base64
+    except Exception as e:
+        print(f"圖片壓縮失敗：{e}")
+        return image_base64  # 返回原圖
+
 # ============ AI 分析 ============
 def analyze_food_minimax(image_base64):
-    """使用 MiniMax-01 識別食物並分析營養"""
+    """使用 Qwen-VL 識別食物並分析營養"""
     if not OPENROUTER_API_KEY:
         return {"success": False, "error": "OPENROUTER_API_KEY 未設置"}
+    
+    # 壓縮圖片
+    image_base64 = compress_image_base64(image_base64)
     
     if ',' in image_base64:
         image_base64 = image_base64.split(',')[1]
