@@ -95,8 +95,9 @@ def analyze_food_minimax(image_base64):
         "X-Title": "Nutritionist App 3.0"
     }
     
+    # 使用 Qwen-VL (更快) 代替 MiniMax-01
     payload = {
-        "model": "minimax/minimax-01",
+        "model": "qwen/qvq-72b-preview",
         "max_tokens": 2048,
         "messages": [
             {
@@ -120,7 +121,8 @@ def analyze_food_minimax(image_base64):
             method="POST"
         )
         
-        with urllib.request.urlopen(req, timeout=90) as response:
+        # 縮短超時至 45 秒
+        with urllib.request.urlopen(req, timeout=45) as response:
             result = json.loads(response.read().decode("utf-8"))
         
         content = result["choices"][0]["message"]["content"]
@@ -130,6 +132,10 @@ def analyze_food_minimax(image_base64):
             return {"success": True, "data": json.loads(content[start:end])}
         return {"success": False, "error": "JSON 解析失敗"}
             
+    except urllib.error.URLError as e:
+        if "timed out" in str(e).lower():
+            return {"success": False, "error": "AI 分析超時，請重試或縮小圖片"}
+        return {"success": False, "error": f"網絡錯誤：{e}"}
     except Exception as e:
         return {"success": False, "error": str(e)}
 
