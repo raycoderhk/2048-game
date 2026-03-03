@@ -75,7 +75,7 @@ def compress_image_base64(image_base64, max_size=800, quality=80):
 
 # ============ AI 分析 ============
 def analyze_food_minimax(image_base64):
-    """使用 Qwen-VL 識別食物並分析營養"""
+    """使用 MiniMax-01 識別食物並分析營養"""
     if not OPENROUTER_API_KEY:
         return {"success": False, "error": "OPENROUTER_API_KEY 未設置"}
     
@@ -129,9 +129,8 @@ def analyze_food_minimax(image_base64):
         "X-Title": "Nutritionist App 3.0"
     }
     
-    # 使用 Qwen-VL (更快) 代替 MiniMax-01
     payload = {
-        "model": "qwen/qvq-72b-preview",
+        "model": "minimax/minimax-01",
         "max_tokens": 2048,
         "messages": [
             {
@@ -155,8 +154,8 @@ def analyze_food_minimax(image_base64):
             method="POST"
         )
         
-        # 縮短超時至 45 秒
-        with urllib.request.urlopen(req, timeout=45) as response:
+        # MiniMax-01 需要較長時間，設置 90 秒超時
+        with urllib.request.urlopen(req, timeout=90) as response:
             result = json.loads(response.read().decode("utf-8"))
         
         content = result["choices"][0]["message"]["content"]
