@@ -50,10 +50,17 @@ def init_auth_db():
     ''')
     
     # 為 users 表添加 phone 欄位（如果不存在）
-    try:
-        cursor.execute('ALTER TABLE users ADD COLUMN phone TEXT UNIQUE')
-    except sqlite3.OperationalError:
-        pass  # 欄位已存在
+    # 先檢查欄位是否存在
+    cursor.execute("PRAGMA table_info(users)")
+    columns = [row[1] for row in cursor.fetchall()]
+    
+    if 'phone' not in columns:
+        print("🔧 Adding phone column to users table...")
+        try:
+            cursor.execute('ALTER TABLE users ADD COLUMN phone TEXT UNIQUE')
+            print("✅ phone column added")
+        except sqlite3.OperationalError as e:
+            print(f"⚠️ Could not add phone column: {e}")
     
     conn.commit()
     conn.close()
@@ -227,6 +234,15 @@ def get_or_create_user_by_phone(phone: str, name: Optional[str] = None) -> Dict:
     """根據電話號碼獲取或創建用戶"""
     conn = get_db()
     cursor = conn.cursor()
+    
+    # 確保 phone 欄位存在
+    cursor.execute("PRAGMA table_info(users)")
+    columns = [row[1] for row in cursor.fetchall()]
+    
+    if 'phone' not in columns:
+        print("🔧 Adding phone column on-demand...")
+        cursor.execute('ALTER TABLE users ADD COLUMN phone TEXT UNIQUE')
+        conn.commit()
     
     # 嘗試查找現有用戶
     cursor.execute('SELECT * FROM users WHERE phone = ?', (phone,))
