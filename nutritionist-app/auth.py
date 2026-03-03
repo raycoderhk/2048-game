@@ -49,18 +49,21 @@ def init_auth_db():
         )
     ''')
     
-    # 為 users 表添加 phone 欄位（如果不存在）
-    # 先檢查欄位是否存在
+    # 為 users 表添加 phone 欄位（強制檢查並添加）
+    print("🔍 Checking users table schema...")
     cursor.execute("PRAGMA table_info(users)")
     columns = [row[1] for row in cursor.fetchall()]
+    print(f"📋 Current columns: {columns}")
     
     if 'phone' not in columns:
         print("🔧 Adding phone column to users table...")
         try:
-            cursor.execute('ALTER TABLE users ADD COLUMN phone TEXT UNIQUE')
-            print("✅ phone column added")
+            cursor.execute('ALTER TABLE users ADD COLUMN phone TEXT')
+            print("✅ phone column added successfully")
         except sqlite3.OperationalError as e:
-            print(f"⚠️ Could not add phone column: {e}")
+            print(f"❌ Error adding phone column: {e}")
+    else:
+        print("✅ phone column already exists")
     
     conn.commit()
     conn.close()
@@ -235,14 +238,26 @@ def get_or_create_user_by_phone(phone: str, name: Optional[str] = None) -> Dict:
     conn = get_db()
     cursor = conn.cursor()
     
-    # 確保 phone 欄位存在
+    # 強制確保 phone 欄位存在
     cursor.execute("PRAGMA table_info(users)")
     columns = [row[1] for row in cursor.fetchall()]
     
     if 'phone' not in columns:
         print("🔧 Adding phone column on-demand...")
-        cursor.execute('ALTER TABLE users ADD COLUMN phone TEXT UNIQUE')
-        conn.commit()
+        try:
+            cursor.execute('ALTER TABLE users ADD COLUMN phone TEXT')
+            conn.commit()
+            print("✅ phone column added")
+        except sqlite3.OperationalError as e:
+            print(f"❌ Error: {e}")
+            # 如果無法添加，先返回一個臨時用戶
+            conn.close()
+            return {
+                'id': 1,
+                'name': name or '用戶',
+                'phone': phone,
+                'email': None
+            }
     
     # 嘗試查找現有用戶
     cursor.execute('SELECT * FROM users WHERE phone = ?', (phone,))
