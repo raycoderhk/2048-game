@@ -880,6 +880,8 @@
             `;
         }
         
+        let isSaving = false; // Prevent double-save
+        
         async function saveMeal(analysis) {
             const mealType = document.getElementById('mealType').value;
             const foods = analysis.foods || [];
@@ -911,28 +913,53 @@
                 
                 if (!result.success) {
                     console.error('❌ Save failed:', result.error);
+                    alert('儲存失敗：' + result.error);
                 }
+                
+                return result;
             } catch (error) {
                 console.error('❌ Save error:', error);
+                alert('錯誤：' + error.message);
+                return { success: false, error: error.message };
             }
         }
         
         async function saveMealAndRedirect() {
-            // Wait for save to complete
-            await saveMeal(currentAnalysis);
+            // Prevent double-click
+            if (isSaving) {
+                console.log('⚠️ Already saving, ignoring duplicate click');
+                return;
+            }
             
-            // Show success message
-            alert('✅ 餐食已儲存！');
+            isSaving = true;
+            const saveBtn = event.target;
+            const originalText = saveBtn.textContent;
+            saveBtn.disabled = true;
+            saveBtn.textContent = '⏳ 儲存中...';
             
-            showSection('dashboard');
-            loadDashboard();
-            
-            // Reset
-            document.getElementById('analysisResult').style.display = 'none';
-            document.getElementById('preview').style.display = 'none';
-            document.getElementById('fileInput').value = '';
-            selectedFile = null;
-            currentAnalysis = null;
+            try {
+                // Wait for save to complete
+                const result = await saveMeal(currentAnalysis);
+                
+                if (result && result.success) {
+                    // Show success message
+                    alert('✅ 餐食已儲存！');
+                    
+                    showSection('dashboard');
+                    loadDashboard();
+                    
+                    // Reset
+                    document.getElementById('analysisResult').style.display = 'none';
+                    document.getElementById('preview').style.display = 'none';
+                    document.getElementById('fileInput').value = '';
+                    selectedFile = null;
+                    currentAnalysis = null;
+                }
+            } finally {
+                isSaving = false;
+                saveBtn.disabled = false;
+                saveBtn.textContent = originalText;
+            }
         }
         
         // Dashboard
