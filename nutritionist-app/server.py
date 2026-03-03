@@ -23,6 +23,26 @@ app = Flask(__name__, static_folder='.')
 # 初始化認證系統
 auth_module.init_auth_db()
 
+# ============ 錯誤處理 ============
+@app.errorhandler(Exception)
+def handle_exception(e):
+    """全局錯誤處理 - 返回 JSON 而非 HTML"""
+    import traceback
+    print(f"❌ Global error: {e}")
+    traceback.print_exc()
+    return jsonify({
+        "success": False,
+        "error": f"伺服器錯誤：{str(e)}"
+    }), 500
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"success": False, "error": "找不到資源"}), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return jsonify({"success": False, "error": "伺服器內部錯誤"}), 500
+
 # ============ 配置 ============
 PORT = int(os.environ.get("PORT", 8080))
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
@@ -219,36 +239,47 @@ def send_otp():
 @app.route('/api/auth/verify-otp', methods=['POST'])
 def verify_otp():
     """驗證 OTP 並登入"""
-    data = request.get_json()
-    if not data or not data.get('phone') or not data.get('otp'):
-        return jsonify({"success": False, "error": "缺少電話號碼或 OTP"}), 400
-    
-    phone = data['phone']
-    otp = data['otp']
-    name = data.get('name')
-    
-    # 驗證 OTP
-    verify_result = auth_module.verify_otp(phone, otp)
-    if not verify_result['success']:
-        return jsonify(verify_result), 400
-    
-    # 獲取或創建用戶
-    user = auth_module.get_or_create_user_by_phone(phone, name)
-    
-    # 創建會話
-    token = auth_module.create_session(user['id'])
-    
-    return jsonify({
-        "success": True,
-        "message": "登入成功",
-        "token": token,
-        "user": {
-            "id": user['id'],
-            "name": user['name'],
-            "phone": user['phone'],
-            "email": user.get('email')
-        }
-    })
+    try:
+        data = request.get_json()
+        if not data or not data.get('phone') or not data.get('otp'):
+            return jsonify({"success": False, "error": "缺少電話號碼或 OTP"}), 400
+        
+        phone = data['phone']
+        otp = data['otp']
+        name = data.get('name')
+        
+        print(f"🔐 Verifying OTP for {phone}: {otp}")
+        
+        # 驗證 OTP
+        verify_result = auth_module.verify_otp(phone, otp)
+        print(f"📋 OTP result: {verify_result}")
+        
+        if not verify_result['success']:
+            return jsonify(verify_result), 400
+        
+        # 獲取或創建用戶
+        user = auth_module.get_or_create_user_by_phone(phone, name)
+        print(f"👤 User: {user}")
+        
+        # 創建會話
+        token = auth_module.create_session(user['id'])
+        
+        return jsonify({
+            "success": True,
+            "message": "登入成功",
+            "token": token,
+            "user": {
+                "id": user['id'],
+                "name": user['name'],
+                "phone": user['phone'],
+                "email": user.get('email')
+            }
+        })
+    except Exception as e:
+        print(f"❌ verify_otp error: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"success": False, "error": f"伺服器錯誤：{str(e)}"}), 500
 
 @app.route('/api/auth/me', methods=['GET'])
 def get_current_user():
