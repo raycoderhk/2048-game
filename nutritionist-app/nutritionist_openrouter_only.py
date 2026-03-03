@@ -19,6 +19,23 @@ import os
 import sys
 from datetime import datetime
 
+# ============ 自動載入 .env ============
+def load_env(env_file='.env'):
+    """自動載入 .env 文件"""
+    env_path = os.path.join(os.path.dirname(__file__), env_file)
+    if os.path.exists(env_path):
+        with open(env_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith('#'):
+                    continue
+                if '=' in line:
+                    key, value = line.split('=', 1)
+                    os.environ[key.strip()] = value.strip()
+
+# 載入環境變量
+load_env()
+
 # ============ 配置 ============
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
