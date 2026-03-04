@@ -1,0 +1,45 @@
+{
+  "_comment": "Zeabur 部署配置模板",
+  "_version": "1.0",
+  "_date": "2026-03-04",
+  
+  "service": {
+    "name": "openclaw-handbook",
+    "region": "asia-hongkong",
+    "plan": "free",
+    
+    "build": {
+      "provider": "nodejs",
+      "nodeVersion": "20",
+      "command": "npm install && npm run build"
+    },
+    
+    "deploy": {
+      "autoDeploy": true,
+      "branch": "main"
+    },
+    
+    "environment": {
+      "NODE_ENV": "production",
+      "PORT": "3000",
+      
+      "_comment": "添加你的環境變數",
+      "API_KEY": "your-api-key-here",
+      "DATABASE_URL": "your-database-url-here"
+    },
+    
+    "domains": {
+      "primary": "your-project.zeabur.app",
+      "custom": []
+    }
+  },
+  
+  "_instructions": {
+    "step1": "登入 Zeabur: https://zeabur.com/",
+    "step2": "點擊 'Add New' → 'Deploy from GitHub'",
+    "step3": "選擇你的 Repo",
+    "step4": "添加環境變數",
+    "step5": "點擊 'Deploy'",
+    "step6": "獲取 Public URL"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "_comment": "Discord 頻道配置模板",
+  "_version": "1.0",
+  "_date": "2026-03-04",
+  
+  "discord": {
+    "enabled": true,
+    "botToken": "YOUR_BOT_TOKEN_HERE",
+    
+    "allowFrom": [
+      "your-discord-user-id"
+    ],
+    
+    "groups": {
+      "*": {
+        "requireMention": true,
+        "allowCommands": ["status", "help", "kanban"]
+      }
+    },
+    
+    "channels": {
+      "general": {
+        "id": "1477966938683736125",
+        "agents": ["main"],
+        "topics": ["general", "questions"]
+      },
+      
+      "kanban-updates": {
+        "id": "1477967311473344675",
+        "agents": ["admin"],
+        "topics": ["project-updates"],
+        "autoPost": true
+      },
+      
+      "openclaw-knowledge": {
+        "id": "1477966938683736125",
+        "agents": ["main", "research"],
+        "topics": ["openclaw", "skills", "tutorial"]
+      },
+      
+      "friends": {
+        "elton": {
+          "agents": ["main"],
+          "topics": ["elton", "meetup"]
+        },
+        "pulley": {
+          "agents": ["main"],
+          "topics": ["pulley", "pickleball"]
+        },
+        "sheng": {
+          "agents": ["main"],
+          "topics": ["sheng", "dinner"]
+        }
+      },
+      
+      "family": {
+        "agents": ["admin"],
+        "topics": ["family", "schedule", "events"]
+      }
+    }
+  },
+  
+  "_instructions": {
+    "step1": "創建 Discord Bot: https://discord.com/developers/applications",
+    "step2": "複製 Bot Token",
+    "step3": "替換 YOUR_BOT_TOKEN_HERE",
+    "step4": "獲取你的 Discord User ID",
+    "step5": "替換 your-discord-user-id",
+    "step6": "複製頻道 IDs 從你的 Discord 服務器"
+  }
+}
