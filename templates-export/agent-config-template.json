@@ -1,0 +1,96 @@
+{
+  "_comment": "OpenClaw Agent 配置模板",
+  "_version": "1.0",
+  "_date": "2026-03-04",
+  
+  "defaults": {
+    "model": {
+      "primary": "aliyun/qwen3.5-plus"
+    },
+    "models": {
+      "aliyun/qwen3.5-plus": {
+        "_usage": "主要模型 - 平衡性能同成本",
+        "_price": "¥0.004/1K input, ¥0.012/1K output"
+      },
+      "aliyun/qwen3.5-turbo": {
+        "_usage": "簡單任務 - 成本低",
+        "_price": "¥0.002/1K input, ¥0.006/1K output"
+      },
+      "aliyun/qwen3-coder-plus": {
+        "_usage": "編碼任務 - 代碼能力強"
+      }
+    },
+    "heartbeat": {
+      "target": "discord",
+      "_comment": "Heartbeat 目標渠道"
+    },
+    "maxConcurrent": 4,
+    "subagents": {
+      "maxConcurrent": 8,
+      "maxSpawnDepth": 2
+    }
+  },
+  
+  "agents": {
+    "main": {
+      "_role": "主要助手 - 日常對話、一般任務",
+      "model": "aliyun/qwen3.5-plus",
+      "tools": ["message", "browser", "memory"],
+      "sessions": "per-sender"
+    },
+    "coding": {
+      "_role": "編碼助手 - 開發任務",
+      "model": "aliyun/qwen3.5-plus",
+      "tools": ["read", "write", "exec", "github"],
+      "sessions": "per-workspace"
+    },
+    "research": {
+      "_role": "研究助手 - 資料搜集",
+      "model": "aliyun/qwen3.5-plus",
+      "tools": ["web_search", "web_fetch", "tavily"],
+      "sessions": "per-task"
+    },
+    "admin": {
+      "_role": "行政助手 - 日程郵件",
+      "model": "aliyun/qwen3.5-turbo",
+      "tools": ["message", "himalaya", "gog"],
+      "sessions": "per-sender"
+    }
+  },
+  
+  "routing": {
+    "autoRoute": true,
+    "rules": [
+      {
+        "name": "coding-tasks",
+        "priority": 1,
+        "match": {
+          "keywords": ["code", "program", "script", "debug", "fix", "build"]
+        },
+        "agent": "coding"
+      },
+      {
+        "name": "research-tasks",
+        "priority": 2,
+        "match": {
+          "keywords": ["search", "find", "research", "compare", "analyze"]
+        },
+        "agent": "research"
+      },
+      {
+        "name": "admin-tasks",
+        "priority": 3,
+        "match": {
+          "keywords": ["email", "calendar", "schedule", "meeting", "remind"]
+        },
+        "agent": "admin"
+      },
+      {
+        "name": "default",
+        "priority": 999,
+        "match": { "all": true },
+        "agent": "main"
+      }
+    ]
+  }
+}
