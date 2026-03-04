@@ -592,6 +592,42 @@
         "  4. 運行測試並記錄結果",
         "  5. 生成對比報告"
       ]
+    },
+    {
+      "id": "proj-025",
+      "title": "🧠 改善技能記憶 - Tavily Search 優先使用",
+      "description": "修復 AI 助手忘記使用 Tavily Search 技能的問題 - 添加技能清單到 AGENTS.md 或創建技能提示文件",
+      "status": "todo",
+      "priority": "high",
+      "created": "2026-03-04",
+      "updated": "2026-03-04T15:05:00Z",
+      "tags": ["openclaw", "skills", "memory", "tavily", "improvement"],
+      "notes": [
+        "2026-03-04: 用戶提出問題 - AI 助手忘記使用 Tavily Search 技能，錯誤使用 Brave Search",
+        "🎯 **問題：**",
+        "  - AI 助手未正確記住可用技能",
+        "  - 預設使用 web_search (Brave) 而非 Tavily",
+        "  - Brave API 無效，導致搜尋失敗",
+        "📋 **解決方案：**",
+        "  1. 在 AGENTS.md 添加「可用技能清單」章節",
+        "  2. 創建 SKILLS_CHECKLIST.md 提示文件",
+        "  3. 在 HEARTBEAT.md 添加技能檢查提醒",
+        "  4. 更新 TOOLS.md 記錄 Tavily 配置",
+        "🛠️ **實施步驟：**",
+        "  1. 列出所有已安裝技能 (tavily-search, gmail, healthcheck, etc.)",
+        "  2. 為每個技能添加使用場景說明",
+        "  3. 添加「搜尋任務 → 優先使用 Tavily」提示",
+        "  4. 測試確認 AI 正確選擇技能",
+        "📍 **相關文件：**",
+        "  - /home/node/.openclaw/skills/tavily-search/",
+        "  - /home/node/.openclaw/workspace/AGENTS.md",
+        "  - /home/node/.openclaw/workspace/TOOLS.md",
+        "🎯 **Next Steps:**",
+        "  1. 審查 AGENTS.md 當前結構",
+        "  2. 添加「可用技能」章節",
+        "  3. 創建技能使用指南",
+        "  4. 測試搜尋任務確認修復"
+      ]
     }
   ],
   "settings": {
