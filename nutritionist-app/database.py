@@ -78,6 +78,28 @@ def init_db():
             total_fat_g REAL,
             total_fiber_g REAL,
             meal_count INTEGER,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    # 模型測試結果表 (阿里雲模型測試器)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS model_test_results (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            test_data TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    # 管理員會話表 (密碼保護)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS admin_sessions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            token TEXT UNIQUE NOT NULL,
+            expires_at TIMESTAMP NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
             water_intake_ml INTEGER DEFAULT 0,
             exercise_minutes INTEGER DEFAULT 0,
             notes TEXT,
