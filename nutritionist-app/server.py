@@ -182,7 +182,7 @@ def analyze_food_minimax(image_base64):
     
     try:
         req = urllib.request.Request(
-            DASHSCOPE_API_URL,
+            OPENROUTER_API_URL,
             data=json.dumps(payload).encode("utf-8"),
             headers=headers,
             method="POST"
