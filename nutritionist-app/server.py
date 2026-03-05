@@ -214,6 +214,12 @@ def index():
 
 @app.route('/test')
 def test():
+    return jsonify({"status": "ok", "message": "營養師 API 運行中"})
+
+@app.route('/model-tester')
+def model_tester_page():
+    """阿里雲模型測試器頁面"""
+    return send_from_directory('.', 'model-tester.html')
     """Simple test endpoint to verify server is responding"""
     return jsonify({
         "status": "ok",
