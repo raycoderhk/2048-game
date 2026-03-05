@@ -1,7 +1,7 @@
 {
   "meta": {
     "created": "2026-02-26T07:45:00Z",
-    "updated": "2026-03-05T10:55:40.952673Z",
+    "updated": "2026-03-05T12:56:46.959816Z",
     "version": "1.4"
   },
   "columns": {
@@ -1073,6 +1073,83 @@
         "  - model-tester/.env",
         "  - nutritionist-app/.env",
         "✅ Old key (...19c4) has been replaced"
+      ]
+    },
+    {
+      "id": "proj-034",
+      "title": "🚨 URGENT [Email] Fwd: OpenRouter Security Alert: API Key Exposed",
+      "description": "Automatically created from email - raycoder <raycoderhk@gmail.com>",
+      "status": "todo",
+      "priority": "urgent",
+      "created": "2026-03-05",
+      "updated": "2026-03-05T12:56:46.959802Z",
+      "tags": [
+        "email",
+        "auto-added",
+        "security"
+      ],
+      "notes": [
+        "📧 Email ID: 20",
+        "📬 From: raycoder <raycoderhk@gmail.com>",
+        "📅 Date: Thu, 5 Mar 2026 20:55:38 +0800",
+        "🔗 Message-ID: <4DE65F14-F712-45F0-85B9-BE0C5C1292B0@gmail.com>",
+        "",
+        "📝 Summary:",
+        ""
+      ]
+    },
+    {
+      "id": "proj-035",
+      "title": "📅 Google Calendar 集成 (gog CLI)",
+      "description": "設置 gog Google Workspace CLI，實現日曆自動同步、提醒、事件管理",
+      "status": "todo",
+      "priority": "medium",
+      "created": "2026-03-05",
+      "updated": "2026-03-05T16:00:00Z",
+      "tags": [
+        "google",
+        "calendar",
+        "gog",
+        "integration",
+        "automation"
+      ],
+      "notes": [
+        "2026-03-05: 用戶提出需求 - 添加到 Kanban",
+        "",
+        "🎯 **目標：**",
+        "- 自動同步 Google Calendar 事件",
+        "- Heartbeat 時檢查即將到來的活動",
+        "- 自動提醒（<2 小時）",
+        "- 從郵件/Kanban 自動創建事件",
+        "",
+        "🛠️ **技術方案：**",
+        "- 使用 gog CLI (Google Workspace CLI)",
+        "- 技能位置：/app/skills/gog/",
+        "- 支持：Calendar, Gmail, Drive, Contacts",
+        "",
+        "📋 **設置步驟：**",
+        "1. [ ] 安裝 gog CLI: `brew install steipete/tap/gogcli`",
+        "2. [ ] Google Cloud Console 創建項目",
+        "3. [ ] 啟用 Google Calendar API",
+        "4. [ ] 創建 OAuth 2.0 憑證",
+        "5. [ ] 配置 gog: `gog auth credentials client_secret.json`",
+        "6. [ ] 授權賬戶：`gog auth add raycoderhk@gmail.com --services calendar,gmail`",
+        "7. [ ] 測試：`gog calendar events primary --from 2026-03-05 --to 2026-03-12`",
+        "",
+        "💡 **Heartbeat 集成：**",
+        "- 檢查未來 24-48 小時事件",
+        "- 睡眠時間 (23:00-08:00 HKT) 減少通知",
+        "- 緊急事件 (<2 小時) 立即通知",
+        "",
+        "📊 **預期效益：**",
+        "- ✅ 自動日曆提醒（替換手動 HEARTBEAT.md）",
+        "- ✅ 衝突檢測",
+        "- ✅ 語音/聊天創建事件",
+        "- ✅ 郵件自動轉事件",
+        "",
+        "⏱️ **預計時間：** 30-60 分鐘",
+        "",
+        "📅 **計劃開始：** 2026-03-06 (聽日)"
       ]
     }
   ],
