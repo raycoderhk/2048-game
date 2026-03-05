@@ -42,10 +42,9 @@ def server_error(e):
 
 # ============ 配置 ============
 PORT = int(os.environ.get("PORT", 8080))
-# 使用阿里雲 DashScope API (Coding Plan)
-ALIYUN_API_KEY = os.environ.get("ALIYUN_API_KEY", "")
-# Aliyun DashScope 兼容 OpenAI 格式的 endpoint
-DASHSCOPE_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+# 使用 OpenRouter API (MiniMax-01)
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # 自動載入 .env 文件
 def load_env():
@@ -109,9 +108,9 @@ def compress_image_base64(image_base64, max_size=800, quality=80):
 
 # ============ AI 分析 ============
 def analyze_food_minimax(image_base64):
-    """使用阿里雲 Qwen3.5-Plus 識別食物並分析營養"""
-    if not ALIYUN_API_KEY:
-        return {"success": False, "error": "ALIYUN_API_KEY 未設置"}
+    """使用 OpenRouter MiniMax-01 識別食物並分析營養"""
+    if not OPENROUTER_API_KEY:
+        return {"success": False, "error": "OPENROUTER_API_KEY 未設置"}
     
     # 壓縮圖片
     image_base64 = compress_image_base64(image_base64)
@@ -157,14 +156,15 @@ def analyze_food_minimax(image_base64):
 只返回 JSON，不要其他文字。"""
 
     headers = {
-        "Authorization": f"Bearer {ALIYUN_API_KEY}",
-        "Content-Type": "application/json"
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://github.com/raycoderhk/2048-game",
+        "X-Title": "Nutritionist App 3.0"
     }
     
-    # 使用 Qwen3.5-Plus (Coding Plan Lite 支持的視覺模型)
-    # Aliyun DashScope 模型名稱格式
+    # 使用 MiniMax-01 (OpenRouter)
     payload = {
-        "model": "qwen-plus",  # Aliyun 官方模型名稱
+        "model": "minimax/minimax-01",
         "max_tokens": 2048,
         "messages": [
             {
@@ -502,10 +502,9 @@ def add_progress():
 def health():
     return jsonify({
         "status": "ok",
-        "aliyun_configured": bool(ALIYUN_API_KEY),
         "openrouter_configured": bool(OPENROUTER_API_KEY),
-        "model": "qwen3.5-plus",
-        "provider": "Aliyun DashScope (Coding Plan Lite)",
+        "model": "minimax/minimax-01",
+        "provider": "OpenRouter",
         "version": "3.0 - Personal Nutrition Advisor",
         "database": "SQLite initialized"
     })
@@ -530,7 +529,6 @@ if __name__ == '__main__':
     print("🥗 營養師 App 3.0 - Personal Nutrition Advisor")
     print("=" * 60)
     print(f"🌐 服務地址：http://localhost:{PORT}")
-    print(f"🔑 Aliyun API: {'✅' if ALIYUN_API_KEY else '❌'}")
     print(f"🔑 OpenRouter API: {'✅' if OPENROUTER_API_KEY else '❌'}")
     print(f"📊 模型：minimax/minimax-01")
     print(f"💾 數據庫：SQLite (nutrition.db)")
