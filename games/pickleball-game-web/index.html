@@ -433,8 +433,13 @@
     </div>
 
     <script>
-        // LocalStorage Key
-        const SAVE_KEY = 'pickleball_coach_save_v1';
+        // LocalStorage Key Prefix
+        const SAVE_PREFIX = 'pickleball_save_';
+
+        // Get Save Key for current player
+        function getSaveKey(playerName) {
+            return SAVE_PREFIX + playerName.toLowerCase().trim();
+        }
 
         // Game State
         let gameState = {
@@ -451,14 +456,15 @@
             }
         };
 
-        // Load Saved Game
-        function loadGame() {
+        // Load Saved Game for specific player
+        function loadGame(playerName) {
             try {
-                const saved = localStorage.getItem(SAVE_KEY);
+                const saveKey = getSaveKey(playerName);
+                const saved = localStorage.getItem(saveKey);
                 if (saved) {
                     const loaded = JSON.parse(saved);
                     gameState = { ...gameState, ...loaded };
-                    console.log('✅ 已載入存档', gameState);
+                    console.log('✅ 已載入存档 [' + playerName + ']', gameState);
                     return true;
                 }
             } catch (e) {
@@ -467,20 +473,22 @@
             return false;
         }
 
-        // Save Game
+        // Save Game for current player
         function saveGame() {
             try {
-                localStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
-                console.log('✅ 已保存', gameState);
+                const saveKey = getSaveKey(gameState.playerName);
+                localStorage.setItem(saveKey, JSON.stringify(gameState));
+                console.log('✅ 已保存 [' + gameState.playerName + ']', gameState);
             } catch (e) {
                 console.error('❌ 保存失敗:', e);
             }
         }
 
-        // Reset Progress
+        // Reset Progress for current player
         function resetProgress() {
             if (confirm('⚠️ 確定要重置所有進度嗎？\n\n這將清除：\n- 玩家名字\n- 等級和積分\n- 所有統計數據\n\n此操作無法復原！')) {
-                localStorage.removeItem(SAVE_KEY);
+                const saveKey = getSaveKey(gameState.playerName);
+                localStorage.removeItem(saveKey);
                 gameState = {
                     playerName: '',
                     score: 0,
@@ -596,35 +604,51 @@
         // Start Game
         function startGame() {
             const name = document.getElementById('playerName').value.trim() || '匹克球手';
-            gameState.playerName = name;
+            const normalizedName = name.toLowerCase().trim();
+            
+            // Save last played name for convenience
+            sessionStorage.setItem('pickleball_last_name', name);
+            
+            // Load or initialize player data
+            const hasSave = loadGame(normalizedName);
+            
+            // If this is a new player, reset gameState
+            if (!hasSave) {
+                gameState = {
+                    playerName: name,
+                    score: 0,
+                    level: 1,
+                    streak: 0,
+                    gamesPlayed: 0,
+                    title: '🌱 新手',
+                    quizStats: {
+                        total: 0,
+                        correct: 0,
+                        bestScore: 0
+                    }
+                };
+            } else {
+                gameState.playerName = name;
+            }
             
             document.getElementById('welcomeScreen').classList.add('hidden');
             document.getElementById('gameScreen').classList.remove('hidden');
             updateStatus();
             saveGame();
+            
+            // Show welcome message
+            const welcomeMsg = hasSave ? 
+                `👋 歡迎回來，${name}！` : 
+                `🎉 歡迎，${name}！新遊戲開始！`;
+            console.log(welcomeMsg, gameState);
         }
 
-        // Initialize Game on Load
+        // Initialize Game on Load - show last player's name
         function initGame() {
-            const hasSave = loadGame();
-            if (hasSave && gameState.playerName) {
-                // Show welcome back message
-                const welcomeScreen = document.getElementById('welcomeScreen');
-                const inputGroup = welcomeScreen.querySelector('.input-group');
-                const startBtn = welcomeScreen.querySelector('button.btn');
-                
-                // Pre-fill name
-                document.getElementById('playerName').value = gameState.playerName;
-                
-                // Add welcome back message
-                const welcomeMsg = document.createElement('p');
-                welcomeMsg.style.color = '#48bb78';
-                welcomeMsg.style.fontWeight = 'bold';
-                welcomeMsg.style.marginTop = '15px';
-                welcomeMsg.innerHTML = `👋 歡迎回來，${gameState.playerName}！\n<br>Lv.${gameState.level} ${gameState.title} | ${gameState.score} 分`;
-                inputGroup.parentNode.insertBefore(welcomeMsg, startBtn);
-                
-                console.log('👋 歡迎回來:', gameState.playerName);
+            // Get last played name from sessionStorage (temporary, just for convenience)
+            const lastName = sessionStorage.getItem('pickleball_last_name');
+            if (lastName) {
+                document.getElementById('playerName').value = lastName;
             }
         }
 
