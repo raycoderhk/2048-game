@@ -509,6 +509,109 @@ def health():
         "database": "SQLite initialized"
     })
 
+# ============ 阿里雲模型測試器 (管理員專用) ============
+import model_tester as mt
+
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
+
+@app.route('/api/admin/login', methods=['POST'])
+def admin_login():
+    """管理員登錄"""
+    data = request.get_json()
+    password = data.get('password', '')
+    
+    # 簡單密碼驗證（生產環境應使用 hash）
+    if password == ADMIN_PASSWORD:
+        import secrets
+        from datetime import datetime, timedelta
+        
+        token = secrets.token_urlsafe(32)
+        expires_at = (datetime.now() + timedelta(hours=24)).isoformat()
+        
+        # 儲存會話
+        conn = db.get_db()
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO admin_sessions (token, expires_at)
+            VALUES (?, ?)
+        ''', (token, expires_at))
+        conn.commit()
+        conn.close()
+        
+        return jsonify({
+            "success": True,
+            "token": token,
+            "expires_in": "24 小時"
+        })
+    else:
+        return jsonify({
+            "success": False,
+            "error": "密碼錯誤"
+        }), 401
+
+def verify_admin_session(token):
+    """驗證管理員會話"""
+    if not token:
+        return False
+    
+    conn = db.get_db()
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT id FROM admin_sessions 
+        WHERE token = ? AND expires_at > CURRENT_TIMESTAMP
+    ''', (token,))
+    
+    row = cursor.fetchone()
+    conn.close()
+    
+    return row is not None
+
+@app.route('/api/model-test/run', methods=['POST'])
+def run_model_test():
+    """運行模型測試（需要管理員認證）"""
+    token = request.headers.get('Authorization', '').replace('Bearer ', '')
+    
+    if not verify_admin_session(token):
+        return jsonify({
+            "success": False,
+            "error": "需要管理員認證"
+        }), 401
+    
+    # 運行測試
+    try:
+        results = mt.run_full_test_suite()
+        
+        # 保存到數據庫
+        mt.save_test_results_to_db(db, results)
+        
+        return jsonify({
+            "success": True,
+            "results": results
+        })
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/model-test/results', methods=['GET'])
+def get_model_test_results():
+    """獲取測試結果（需要管理員認證）"""
+    token = request.headers.get('Authorization', '').replace('Bearer ', '')
+    
+    if not verify_admin_session(token):
+        return jsonify({
+            "success": False,
+            "error": "需要管理員認證"
+        }), 401
+    
+    results = mt.get_tester_results_from_db(db)
+    
+    return jsonify({
+        "success": True,
+        "results": results
+    })
+
 @app.route('/api/reset', methods=['POST'])
 def reset_data():
     """重置用戶數據（測試用）"""

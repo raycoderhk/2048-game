@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-03-05T03:39:00Z",
-  "lastUpdated": "2026-03-05T02:08:07Z",
-  "projectCount": 31,
+  "lastChecked": "2026-03-05T09:09:00Z",
+  "lastUpdated": "2026-03-05T12:00:00Z",
+  "projectCount": 32,
   "completedProjects": 13,
-  "inProgressProjects": 7,
+  "inProgressProjects": 8,
   "todoProjects": 8,
   "backlogProjects": 3,
-  "lastChange": "proj-029 added (Kanban Board Enhancements), proj-026/027/009 moved to backlog",
-  "notes": "New project: proj-029 Kanban Board Enhancements Phase 1 (in_progress, high). Security items (proj-026 OpenRouter, proj-027 HuggingFace) moved to backlog with low priority. proj-009 (Sub-agent testing) also moved to backlog.",
+  "lastChange": "proj-032 added (Deploy Firecrawl on Zeabur + OpenClaw Integration)",
+  "notes": "New project: proj-032 Firecrawl deployment (in_progress, high). Currently blocked on PostgreSQL deployment on Zeabur.",
   "sleepTimeCheck": false,
   "urgentAlert": false
 }
