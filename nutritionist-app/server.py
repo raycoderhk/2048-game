@@ -43,7 +43,7 @@ def server_error(e):
 # ============ 配置 ============
 PORT = int(os.environ.get("PORT", 8080))
 # 使用阿里雲 DashScope API (Coding Plan)
-DASHSCOPE_API_KEY = os.environ.get("DASHSCOPE_API_KEY", "")
+ALIYUN_API_KEY = os.environ.get("ALIYUN_API_KEY", "")
 DASHSCOPE_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 
 # 自動載入 .env 文件
@@ -108,9 +108,9 @@ def compress_image_base64(image_base64, max_size=800, quality=80):
 
 # ============ AI 分析 ============
 def analyze_food_minimax(image_base64):
-    """使用阿里雲 Qwen-VL 識別食物並分析營養"""
-    if not DASHSCOPE_API_KEY:
-        return {"success": False, "error": "DASHSCOPE_API_KEY 未設置"}
+    """使用阿里雲 Qwen3.5-Plus 識別食物並分析營養"""
+    if not ALIYUN_API_KEY:
+        return {"success": False, "error": "ALIYUN_API_KEY 未設置"}
     
     # 壓縮圖片
     image_base64 = compress_image_base64(image_base64)
@@ -156,7 +156,7 @@ def analyze_food_minimax(image_base64):
 只返回 JSON，不要其他文字。"""
 
     headers = {
-        "Authorization": f"Bearer {DASHSCOPE_API_KEY}",
+        "Authorization": f"Bearer {ALIYUN_API_KEY}",
         "Content-Type": "application/json"
     }
     
@@ -500,7 +500,8 @@ def add_progress():
 def health():
     return jsonify({
         "status": "ok",
-        "dashscope_configured": bool(DASHSCOPE_API_KEY),
+        "aliyun_configured": bool(ALIYUN_API_KEY),
+        "openrouter_configured": bool(OPENROUTER_API_KEY),
         "model": "qwen3.5-plus",
         "provider": "Aliyun DashScope (Coding Plan Lite)",
         "version": "3.0 - Personal Nutrition Advisor",
@@ -527,6 +528,7 @@ if __name__ == '__main__':
     print("🥗 營養師 App 3.0 - Personal Nutrition Advisor")
     print("=" * 60)
     print(f"🌐 服務地址：http://localhost:{PORT}")
+    print(f"🔑 Aliyun API: {'✅' if ALIYUN_API_KEY else '❌'}")
     print(f"🔑 OpenRouter API: {'✅' if OPENROUTER_API_KEY else '❌'}")
     print(f"📊 模型：minimax/minimax-01")
     print(f"💾 數據庫：SQLite (nutrition.db)")
