@@ -1,7 +1,7 @@
 {
   "meta": {
     "created": "2026-02-26T07:45:00Z",
-    "updated": "2026-03-05T12:56:46.959816Z",
+    "updated": "2026-03-06T06:16:12.779416Z",
     "version": "1.4"
   },
   "columns": {
@@ -1422,6 +1422,34 @@
       ],
       "estimatedEffort": "4-8 hours (excluding verification wait time)",
       "estimatedCost": "$2-5/month (free tier: 1,000 conversations)"
+    },
+    {
+      "id": "proj-038",
+      "title": "【Bug】營養師 App 雙重記錄問題",
+      "description": "用户上传餐食照片後，系統自動保存一次，click 按鈕又保存一次，導致每餐有 2 條記錄",
+      "status": "done",
+      "priority": "high",
+      "created": "2026-03-06",
+      "updated": "2026-03-06T06:16:12.779379Z",
+      "completed": "2026-03-06T06:16:12.779409Z",
+      "tags": [
+        "bug",
+        "nutrition-app",
+        "database"
+      ],
+      "rootCause": "analyzeImage() 函數在分析完成後自動調用 saveMeal()，然後用戶 click「儲存並返回首頁」按鈕時又保存多次",
+      "fix": "刪除 line 822 的自動保存代碼，改為只在用戶 click 按鈕時保存",
+      "notes": [
+        "2026-03-06: 發現問題 - 每餐有 2 條記錄",
+        "2026-03-06: 多次修復失敗（加 isSaving flag 無用）",
+        "2026-03-06: 發現根本原因 - auto-save after analysis",
+        "2026-03-06: 刪除自動保存代碼，問題解決"
+      ],
+      "lessons": [
+        "要睇晒成個 code flow 先好落手 fix",
+        "唔好只係加 band-aid fixes",
+        "Check 所有 saveMeal() 調用位置"
+      ]
     }
   ],
   "settings": {
