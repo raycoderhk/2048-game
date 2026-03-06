@@ -819,7 +819,7 @@
                 if (result.success) {
                     currentAnalysis = result.data;
                     displayAnalysisResult();
-                    saveMeal(currentAnalysis);
+                    // DON'T auto-save - wait for user to click save button
                 } else {
                     alert('分析失敗：' + result.error);
                 }
