@@ -41,7 +41,11 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T07:40:00Z",
       "completed": "2026-02-26T07:40:00Z",
-      "tags": ["setup", "api", "configuration"],
+      "tags": [
+        "setup",
+        "api",
+        "configuration"
+      ],
       "notes": [
         "2026-02-26: 成功配置阿里雲 Coding Plan API",
         "使用模型：qwen3.5-plus",
@@ -55,13 +59,27 @@
       "status": "done",
       "priority": "high",
       "created": "2026-02-26",
-      "updated": "2026-02-26T08:20:00Z",
+      "updated": "2026-03-07T09:06:44.197453",
       "completed": "2026-02-26T08:20:00Z",
-      "tags": ["multi-agent", "configuration", "openclaw"],
+      "tags": [
+        "multi-agent",
+        "configuration",
+        "openclaw"
+      ],
       "notes": [
         "2026-02-26: 完成 4 個 agent 配置",
         "agents: main, coding, research, admin",
-        "sub-agent spawn 在當前環境受限"
+        "sub-agent spawn 在當前環境受限",
+        "🔗 Commit: f9d798b - test: Auto-sync test commit"
+      ],
+      "commits": [
+        {
+          "hash": "f9d798b",
+          "message": "test: Auto-sync test commit",
+          "url": "https://github.com/raycoderhk/2048-game/commit/f9d798b",
+          "date": "2026-03-07",
+          "added_at": "2026-03-07T09:06:44.197429"
+        }
       ]
     },
     {
@@ -73,7 +91,12 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T10:55:00Z",
       "completed": "2026-02-26T10:55:00Z",
-      "tags": ["gui", "web", "kanban", "zeabur"],
+      "tags": [
+        "gui",
+        "web",
+        "kanban",
+        "zeabur"
+      ],
       "notes": [
         "2026-02-26: 創建 3 個版本 (完整版、離線版、Zeabur 版)",
         "2026-02-26 10:55: ✅ Zeabur 部署完成",
@@ -88,7 +111,11 @@
       "priority": "medium",
       "created": "2026-02-26",
       "updated": "2026-02-27T08:00:00Z",
-      "tags": ["discord", "channels", "integration"],
+      "tags": [
+        "discord",
+        "channels",
+        "integration"
+      ],
       "notes": [
         "2026-02-26: 完成所有配置文件和文檔",
         "2026-02-27: ✅ Discord bot 和頻道已創建",
@@ -105,7 +132,11 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T08:40:00Z",
       "completed": "2026-02-26T08:40:00Z",
-      "tags": ["tool", "python", "download"],
+      "tags": [
+        "tool",
+        "python",
+        "download"
+      ],
       "notes": [
         "2026-02-26: 創建 2 個版本 (完整版、快速版)",
         "需要安裝 requests 模塊",
@@ -121,7 +152,11 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T08:30:00Z",
       "completed": "2026-02-26T08:30:00Z",
-      "tags": ["research", "hong kong", "budget"],
+      "tags": [
+        "research",
+        "hong kong",
+        "budget"
+      ],
       "notes": [
         "2026-02-26: 完成研究報告",
         "來源：香港 01、立法會會議記錄",
@@ -137,7 +172,12 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T08:25:00Z",
       "completed": "2026-02-26T08:25:00Z",
-      "tags": ["research", "comparison", "api", "pricing"],
+      "tags": [
+        "research",
+        "comparison",
+        "api",
+        "pricing"
+      ],
       "notes": [
         "2026-02-26: 完成對比報告",
         "結論：阿里雲 Pro 年省 ¥2,400-4,800（重度用戶）",
@@ -153,7 +193,11 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T10:55:00Z",
       "completed": "2026-02-26T10:55:00Z",
-      "tags": ["deployment", "zeabur", "kanban"],
+      "tags": [
+        "deployment",
+        "zeabur",
+        "kanban"
+      ],
       "notes": [
         "2026-02-26 10:50: GitHub repo created (raycoderhk/kanban-board)",
         "2026-02-26 10:51: Code pushed to GitHub",
@@ -170,7 +214,11 @@
       "priority": "low",
       "created": "2026-02-26",
       "updated": "2026-02-26T08:41:00Z",
-      "tags": ["testing", "sub-agent", "debug"],
+      "tags": [
+        "testing",
+        "sub-agent",
+        "debug"
+      ],
       "notes": [
         "2026-02-26: 測試失敗",
         "原因：sessions_spawn 在當前環境受限",
@@ -186,7 +234,13 @@
       "created": "2026-02-26",
       "updated": "2026-02-26T12:10:00Z",
       "completed": "2026-02-26T12:10:00Z",
-      "tags": ["web", "gui", "recommendation", "vercel", "family"],
+      "tags": [
+        "web",
+        "gui",
+        "recommendation",
+        "vercel",
+        "family"
+      ],
       "notes": [
         "2026-02-26 12:10: ✅ 創建完成",
         "特色：雙語 (EN/ZH), 家庭為本, 個人化推薦",
@@ -203,7 +257,12 @@
       "priority": "medium",
       "created": "2026-02-26",
       "updated": "2026-02-26T12:10:00Z",
-      "tags": ["migration", "vercel", "supabase", "deployment"],
+      "tags": [
+        "migration",
+        "vercel",
+        "supabase",
+        "deployment"
+      ],
       "notes": [
         "2026-02-26: 用戶要求添加",
         "用戶在 Vercel/Supabase 有免費層項目經驗",
@@ -218,7 +277,13 @@
       "priority": "urgent",
       "created": "2026-02-26",
       "updated": "2026-02-27T11:00:00Z",
-      "tags": ["api", "configuration", "web-search", "brave", "urgent"],
+      "tags": [
+        "api",
+        "configuration",
+        "web-search",
+        "brave",
+        "urgent"
+      ],
       "notes": [
         "2026-02-26: 用戶發現 web_search 無法使用",
         "問題：缺少 Brave Search API 密钥",
@@ -238,7 +303,13 @@
       "created": "2026-02-26",
       "updated": "2026-02-27T00:05:00Z",
       "completed": "2026-02-27T00:05:00Z",
-      "tags": ["cli", "polymarket", "karpathy", "agent-first", "terminal"],
+      "tags": [
+        "cli",
+        "polymarket",
+        "karpathy",
+        "agent-first",
+        "terminal"
+      ],
       "notes": [
         "2026-02-27 00:00: 開始開發",
         "2026-02-27 00:03: ✅ 核心功能完成",
@@ -258,7 +329,12 @@
       "created": "2026-02-27",
       "updated": "2026-02-27T00:10:00Z",
       "completed": "2026-02-27T00:10:00Z",
-      "tags": ["cli", "monitoring", "status", "karpathy-inspired"],
+      "tags": [
+        "cli",
+        "monitoring",
+        "status",
+        "karpathy-inspired"
+      ],
       "notes": [
         "2026-02-27 00:10: ✅ 創建完成",
         "特色：Terminal Dashboard、無外部依賴",
@@ -275,7 +351,13 @@
       "priority": "high",
       "created": "2026-02-27",
       "updated": "2026-02-27T01:00:00Z",
-      "tags": ["goal", "sports", "pickleball", "coaching", "personal-development"],
+      "tags": [
+        "goal",
+        "sports",
+        "pickleball",
+        "coaching",
+        "personal-development"
+      ],
       "notes": [
         "2026-02-27: 目標設定",
         "階段 1: 提升個人技術 (3-6 個月)",
@@ -295,7 +377,13 @@
       "created": "2026-02-27",
       "updated": "2026-02-27T07:35:00Z",
       "completed": "2026-02-27T07:35:00Z",
-      "tags": ["dashboard", "nextjs", "zeabur", "analytics", "productivity"],
+      "tags": [
+        "dashboard",
+        "nextjs",
+        "zeabur",
+        "analytics",
+        "productivity"
+      ],
       "notes": [
         "2026-02-27 05:30: 開始開發",
         "2026-02-27 06:00: ✅ 核心功能完成",
@@ -317,7 +405,12 @@
       "created": "2026-02-27",
       "updated": "2026-02-27T06:10:00Z",
       "completed": "2026-02-27T06:10:00Z",
-      "tags": ["discord", "friends", "social", "networking"],
+      "tags": [
+        "discord",
+        "friends",
+        "social",
+        "networking"
+      ],
       "notes": [
         "2026-02-27 06:07: ✅ 創建 Friends 分類",
         "2026-02-27 06:08: ✅ 創建 #elton 頻道",
@@ -338,7 +431,12 @@
       "created": "2026-02-27",
       "updated": "2026-02-27T06:12:00Z",
       "completed": "2026-02-27T06:12:00Z",
-      "tags": ["documentation", "blog", "technical-writing", "knowledge-base"],
+      "tags": [
+        "documentation",
+        "blog",
+        "technical-writing",
+        "knowledge-base"
+      ],
       "notes": [
         "2026-02-27 06:12: ✅ Mission Control Zeabur 部署故障排除指南",
         "主題：Combined Variables (All 3 in One!) Server Action 錯誤",
@@ -355,7 +453,14 @@
       "priority": "high",
       "created": "2026-03-01",
       "updated": "2026-03-01T11:00:00Z",
-      "tags": ["mobile-app", "ai", "nutrition", "qwen-vl", "health", "perplexity"],
+      "tags": [
+        "mobile-app",
+        "ai",
+        "nutrition",
+        "qwen-vl",
+        "health",
+        "perplexity"
+      ],
       "notes": [
         "2026-03-01: 可行性研究完成",
         "技術棧：React Native + Node.js + Supabase + Qwen-VL API",
@@ -375,7 +480,12 @@
       "priority": "high",
       "created": "2026-03-01",
       "updated": "2026-03-01T11:00:00Z",
-      "tags": ["perplexity", "browser-automation", "image-recognition", "nutrition"],
+      "tags": [
+        "perplexity",
+        "browser-automation",
+        "image-recognition",
+        "nutrition"
+      ],
       "notes": [
         "2026-03-01: 用戶提出使用 Perplexity Pro",
         "優勢：已有 Pro 賬戶、無需額外費用、識別準確（GPT-4V/Claude）",
@@ -389,6 +499,11 @@
   "settings": {
     "archiveDoneAfterDays": 30,
     "defaultPriority": "medium",
-    "priorities": ["low", "medium", "high", "urgent"]
+    "priorities": [
+      "low",
+      "medium",
+      "high",
+      "urgent"
+    ]
   }
 }
