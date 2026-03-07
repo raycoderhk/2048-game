@@ -1,0 +1,99 @@
+{
+  "_comment": "OpenClaw 配置模板 (去敏感化版本)",
+  "_version": "1.0",
+  "_date": "2026-03-05",
+  "_note": "此文件可以安全分享/commit 到 Git，所有 secrets 已用 ${ENV_VAR} 引用",
+  
+  "meta": {
+    "lastTouchedVersion": "2026.2.19",
+    "lastTouchedAt": "2026-03-05T00:00:00.000Z"
+  },
+  
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "aliyun": {
+        "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
+        "apiKey": "${ALIYUN_API_KEY}",
+        "api": "openai-completions",
+        "_env_required": "ALIYUN_API_KEY",
+        "_env_source": "https://bailian.console.aliyun.com/"
+      },
+      "deepseek": {
+        "baseUrl": "https://api.deepseek.com/v1",
+        "apiKey": "${DEEPSEEK_API_KEY}",
+        "api": "openai-completions",
+        "_env_required": "DEEPSEEK_API_KEY"
+      },
+      "openrouter": {
+        "baseUrl": "https://openrouter.ai/api/v1",
+        "apiKey": "${OPENROUTER_API_KEY}",
+        "api": "openai-completions",
+        "_env_required": "OPENROUTER_API_KEY"
+      }
+    }
+  },
+  
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "aliyun/qwen3.5-plus"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8,
+        "maxSpawnDepth": 2
+      }
+    }
+  },
+  
+  "channels": {
+    "telegram": {
+      "dmPolicy": "pairing",
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "groupPolicy": "allowlist",
+      "_env_required": "TELEGRAM_BOT_TOKEN"
+    },
+    "discord": {
+      "groupPolicy": "allowlist",
+      "accounts": {
+        "default": {
+          "token": "${DISCORD_BOT_TOKEN}",
+          "groupPolicy": "allowlist",
+          "dmPolicy": "allowlist",
+          "_env_required": "DISCORD_BOT_TOKEN"
+        }
+      }
+    }
+  },
+  
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "token": "${GATEWAY_AUTH_TOKEN}"
+    },
+    "controlUi": {
+      "allowInsecureAuth": true
+    },
+    "_env_required": "GATEWAY_AUTH_TOKEN"
+  },
+  
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      },
+      "discord": {
+        "enabled": true
+      }
+    }
+  },
+  
+  "_setup_instructions": {
+    "step1": "複製此文件為 openclaw.json",
+    "step2": "創建 ~/.openclaw/.env 文件",
+    "step3": "在 .env 中填充所有 ${ENV_VAR} 變數",
+    "step4": "確保 .env 加入 .gitignore",
+    "step5": "運行 openclaw gateway start"
+  }
+}
