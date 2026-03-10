@@ -77,10 +77,30 @@ def extract_email_address(from_addr):
     email_match = re.search(r'<([^>]+)>', from_addr)
     return email_match.group(1) if email_match else from_addr
 
-def is_trusted_sender(from_addr):
-    """🔒 LAYER 1: Check if sender is in whitelist (STRICT MODE)"""
+def is_trusted_sender(from_addr, msg=None):
+    """🔒 LAYER 1: Check if sender is in whitelist (STRICT MODE)
+    
+    TRUST if:
+    1. From: header is in whitelist (direct email from user), OR
+    2. X-Forwarded-For: header contains user's email (forwarded by user)
+    """
     sender_email = extract_email_address(from_addr)
-    return sender_email in TRUSTED_SENDERS
+    
+    # Check 1: Direct email from trusted sender
+    if sender_email in TRUSTED_SENDERS:
+        return True
+    
+    # Check 2: Email forwarded BY trusted sender (check X-Forwarded-For header)
+    if msg:
+        x_forwarded_for = msg.get('X-Forwarded-For', '')
+        if x_forwarded_for:
+            # X-Forwarded-For contains the forwarding path
+            # e.g., "raycoderhk@gmail.com raycoderhk.openclaw@gmail.com"
+            for trusted in TRUSTED_SENDERS:
+                if trusted in x_forwarded_for:
+                    return True
+    
+    return False
 
 def can_send_email_to(to_addr):
     """🔒 SECURITY: Check if we're allowed to send/reply to this email"""
@@ -314,7 +334,7 @@ def check_emails():
         body = get_email_body(msg)
         
         # 🔒 SECURITY CHECK - LAYER 1: Verify sender
-        trusted = is_trusted_sender(from_addr)
+        trusted = is_trusted_sender(from_addr, msg)  # Pass msg to check forwarding headers
         sender_email = extract_email_address(from_addr)
         
         # 🔒 SECURITY CHECK - LAYER 2: Check for sensitive requests
@@ -421,7 +441,7 @@ def get_trusted_senders_summary():
 
 def get_security_mode_summary():
     """🔒 Get security mode description"""
-    return f"STRICT MODE - Only trust {TRUSTED_SENDERS[0]}"
+    return f"STRICT MODE - Trust {TRUSTED_SENDERS[0]} (direct or forwarded)"
 
 def format_discord_message(result, include_status=False, only_on_new=False):
     """Format Discord message with color coding"""
