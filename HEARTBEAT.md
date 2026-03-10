@@ -28,8 +28,13 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • 11:00-13:00 HKT - 匹克球 @ Pickleland
 • 午餐 - 匹克球朋友 (after pickleball)
 
+**3 月 13 日 (星期五)** 📚
+• 女兒歷史科測驗 (Uniform Test) - 開始溫習
+• 午餐 - 朋友 Chris (Reschedule to next week)
+
 **3 月 14 日 (星期六)** ✅ 已報名成功
 • **08:45-16:30 伊利沙伯中學 PTA 新春親子旅行** (已中籤)
+• 女兒歷史科測驗 (Uniform Test) - 考試日
   - 集合：08:45 (待定地點)
   - 解散：16:30
   - 團費：$90/人 (已資助)

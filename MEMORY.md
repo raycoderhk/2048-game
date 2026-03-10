@@ -177,7 +177,7 @@ async function getOrCreateUser(email, name, googleId, image) {
 **March 7 (Sat):** Son's school parent day (time TBD)  
 **March 8 (Sun):** School field trip (HKUST + Yim Tin Tsai)  
 **March 10 (Tue):** Pickleball @ Tsuen Wan Pickledise (19:00-21:00)  
-**March 13 (Fri):** Lunch with Chris (TBD)  
+**March 13 (Fri):** 📚 Daughter's History Uniform Test (Revision starts Mar 10)  
 **March 14 (Sat):** ✅ Queen Elizabeth School PTA Trip (daughter selected) + Clan Association Dinner
   - Trip: 08:45-16:30, $90/person (subsidized)
   - Itinerary: Dragon fruit farm → Kimchi workshop → Abalone lunch (Flow Shan) → Mural Village  
