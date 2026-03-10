@@ -27,7 +27,25 @@ EMAIL_STATE_FILE = f"{MEMORY_DIR}/email-last-checked.json"
 # 🔒 SECURITY: Trusted Senders Whitelist (LAYER 1)
 # Only these emails are automatically trusted
 TRUSTED_SENDERS = [
-    'raycoderhk@gmail.com',  # User's confirmed email
+    # User's confirmed emails
+    'raycoderhk@gmail.com',      # Primary confirmed email
+    'raymondcuhk@gmail.com',     # User's other email
+    
+    # Gmail Forwarding System
+    'forwarding-noreply@google.com',  # Gmail forwarding confirmations
+    
+    # GitHub (common forwarded notifications)
+    'noreply@github.com',
+    'notifications@github.com',
+    
+    # Deployment Platforms
+    'no-reply@zeabur.com',
+    'no-reply@vercel.com',
+    'no-reply@railway.app',
+    
+    # Supabase
+    'no-reply@supabase.com',
+    'no-reply@supabase.co',
 ]
 
 # 🔒 SECURITY: Sensitive Keywords (LAYER 2)
@@ -253,22 +271,46 @@ def check_emails():
     state = load_email_state()
     last_email_id = state.get('lastEmailId')
     
-    # Search for unread emails
-    status, messages = mail.search(None, "UNSEEN")
+    # 🔒 SECURITY FIX: Check ALL recent emails, not just UNSEEN
+    # Forwarded emails arrive as "Seen" so we need to check by date
+    from datetime import datetime, timedelta
+    
+    # Calculate 30 minutes ago in Gmail INTERNALDATE format
+    thirty_min_ago = datetime.utcnow() - timedelta(minutes=35)  # Buffer
+    since_date = thirty_min_ago.strftime("%d-%b-%Y")
+    
+    # Search for emails received in last 35 minutes (includes seen and unseen)
+    status, messages = mail.search(None, f'(SINCE "{since_date}")')
     email_ids = messages[0].split()
     
-    if not email_ids:
+    # Also get truly unseen emails (in case any)
+    status, unseen = mail.search(None, "UNSEEN")
+    unseen_ids = unseen[0].split()
+    
+    # Combine both lists (remove duplicates)
+    all_email_ids = list(set(email_ids + unseen_ids))
+    all_email_ids.sort(key=lambda x: int(x))  # Sort by email ID
+    
+    if not all_email_ids:
         print("✅ No new emails")
         mail.close()
         mail.logout()
         return {'new_emails': [], 'urgent_count': 0}
     
-    print(f"📧 Found {len(email_ids)} unread email(s)")
+    print(f"📧 Found {len(all_email_ids)} email(s) in last 35 mins")
+    print(f"   - {len(email_ids)} recent emails")
+    print(f"   - {len(unseen_ids)} unread emails")
     
     new_emails = []
     urgent_count = 0
+    processed_count = 0
     
-    for eid in email_ids:
+    for eid in all_email_ids:
+        # Skip already processed emails
+        eid_str = eid.decode() if isinstance(eid, bytes) else str(eid)
+        if last_email_id and eid_str <= last_email_id:
+            continue
+        
         status, msg_data = mail.fetch(eid, "(RFC822)")
         msg = email.message_from_bytes(msg_data[0][1])
         
@@ -307,6 +349,7 @@ def check_emails():
         
         # ✅ Safe to process - trusted sender, non-sensitive
         log_audit(from_addr, subject, trusted, sensitive, 'processed')
+        processed_count += 1
         
         # Classify email
         priority, category, needs_action = classify_email(subject, body, from_addr)
@@ -334,14 +377,15 @@ def check_emails():
         if priority == 'urgent':
             urgent_count += 1
         
-        # Mark as read
+        # Mark as read (already read for forwarded, mark for unseen)
         mail.store(eid, '+FLAGS', '\\Seen')
     
     # Update state
-    if email_ids:
+    if all_email_ids:
         state['lastChecked'] = datetime.utcnow().isoformat() + 'Z'
-        state['lastEmailId'] = email_ids[-1].decode()
-        state['totalChecked'] = state.get('totalChecked', 0) + len(email_ids)
+        state['lastEmailId'] = all_email_ids[-1].decode()
+        state['totalChecked'] = state.get('totalChecked', 0) + len(new_emails)
+        state['totalProcessed'] = state.get('totalProcessed', 0) + processed_count
         save_email_state(state)
     
     mail.close()
@@ -350,6 +394,7 @@ def check_emails():
     return {
         'new_emails': new_emails,
         'urgent_count': urgent_count,
+        'processed_count': processed_count,
         'check_time': get_hkt_time().strftime('%Y-%m-%d %H:%M:%S HKT')
     }
 
@@ -373,15 +418,24 @@ def get_audit_summary():
     except:
         return {'total': 0, 'blocked': 0, 'processed': 0, 'sensitive': 0}
 
+def get_trusted_senders_summary():
+    """📋 Get summary of trusted senders"""
+    if len(TRUSTED_SENDERS) <= 3:
+        return ', '.join(TRUSTED_SENDERS)
+    else:
+        # Show first 3 + count
+        return f"{TRUSTED_SENDERS[0]} +{len(TRUSTED_SENDERS)-1} more"
+
 def format_discord_message(result, include_status=False):
     """Format Discord message with color coding"""
     audit = get_audit_summary()
+    trusted_summary = get_trusted_senders_summary()
     
     if not result['new_emails']:
         message = "📬 **Email Check** - No new emails\n\n"
         if include_status:
             message += "### 🔒 Security Status\n"
-            message += f"- ✅ Trusted: raycoderhk@gmail.com\n"
+            message += f"- ✅ Trusted: {trusted_summary}\n"
             message += f"- 🛡️ Audit Log: {audit['total']} entries\n"
             message += f"- 🚫 Blocked: {audit['blocked']} emails\n"
             message += f"- ✅ Processed: {audit['processed']} emails\n\n"
