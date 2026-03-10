@@ -25,28 +25,14 @@ MEMORY_DIR = "/home/node/.openclaw/workspace/memory"
 EMAIL_STATE_FILE = f"{MEMORY_DIR}/email-last-checked.json"
 
 # 🔒 SECURITY: Trusted Senders Whitelist (LAYER 1)
-# Only these emails are automatically trusted
+# STRICT SECURITY MODE: Only trust emails forwarded by raycoderhk@gmail.com
 TRUSTED_SENDERS = [
-    # User's confirmed emails
-    'raycoderhk@gmail.com',      # Primary confirmed email
-    'raymondcuhk@gmail.com',     # User's other email
-    
-    # Gmail Forwarding System
-    'forwarding-noreply@google.com',  # Gmail forwarding confirmations
-    
-    # GitHub (common forwarded notifications)
-    'noreply@github.com',
-    'notifications@github.com',
-    
-    # Deployment Platforms
-    'no-reply@zeabur.com',
-    'no-reply@vercel.com',
-    'no-reply@railway.app',
-    
-    # Supabase
-    'no-reply@supabase.com',
-    'no-reply@supabase.co',
+    'raycoderhk@gmail.com',  # User's ONLY confirmed email - STRICT MODE
 ]
+
+# 🔒 SECURITY: Reply/Send Restrictions
+# Only allow sending/replying emails TO this address
+ALLOWED_REPLY_TO = ['raycoderhk@gmail.com']
 
 # 🔒 SECURITY: Sensitive Keywords (LAYER 2)
 # Emails with these keywords require identity verification
@@ -92,9 +78,16 @@ def extract_email_address(from_addr):
     return email_match.group(1) if email_match else from_addr
 
 def is_trusted_sender(from_addr):
-    """🔒 LAYER 1: Check if sender is in whitelist"""
+    """🔒 LAYER 1: Check if sender is in whitelist (STRICT MODE)"""
     sender_email = extract_email_address(from_addr)
     return sender_email in TRUSTED_SENDERS
+
+def can_send_email_to(to_addr):
+    """🔒 SECURITY: Check if we're allowed to send/reply to this email"""
+    import re
+    email_match = re.search(r'<([^>]+)>', to_addr)
+    recipient_email = email_match.group(1) if email_match else to_addr
+    return recipient_email in ALLOWED_REPLY_TO
 
 def is_sensitive_request(body):
     """🔒 LAYER 2: Check if email contains sensitive keywords"""
@@ -426,19 +419,24 @@ def get_trusted_senders_summary():
         # Show first 3 + count
         return f"{TRUSTED_SENDERS[0]} +{len(TRUSTED_SENDERS)-1} more"
 
+def get_security_mode_summary():
+    """🔒 Get security mode description"""
+    return f"STRICT MODE - Only trust {TRUSTED_SENDERS[0]}"
+
 def format_discord_message(result, include_status=False):
     """Format Discord message with color coding"""
     audit = get_audit_summary()
-    trusted_summary = get_trusted_senders_summary()
+    security_mode = get_security_mode_summary()
     
     if not result['new_emails']:
         message = "📬 **Email Check** - No new emails\n\n"
         if include_status:
-            message += "### 🔒 Security Status\n"
-            message += f"- ✅ Trusted: {trusted_summary}\n"
+            message += "### 🔒 Security Status (STRICT MODE)\n"
+            message += f"- ✅ Trusted: {security_mode}\n"
             message += f"- 🛡️ Audit Log: {audit['total']} entries\n"
             message += f"- 🚫 Blocked: {audit['blocked']} emails\n"
-            message += f"- ✅ Processed: {audit['processed']} emails\n\n"
+            message += f"- ✅ Processed: {audit['processed']} emails\n"
+            message += f"- 📧 Reply allowed: Only to {ALLOWED_REPLY_TO[0]}\n\n"
         message += "Next check: 30 minutes"
         return message
     
