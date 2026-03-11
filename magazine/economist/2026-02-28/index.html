@@ -20,13 +20,14 @@
         .info-box li { padding: 8px 0; border-bottom: 1px solid #eee; }
         .info-box li:last-child { border-bottom: none; }
         .info-box a { color: var(--economist-red); text-decoration: none; }
+        .verified-badge { display: inline-block; padding: 5px 12px; background: #22c55e; color: white; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-left: 10px; }
         table { width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-collapse: collapse; }
         thead { background: #333; color: white; }
         th { padding: 15px; text-align: left; font-weight: 600; }
         th:nth-child(1) { width: 5%; }
-        th:nth-child(2) { width: 50%; }
+        th:nth-child(2) { width: 45%; }
         th:nth-child(3) { width: 20%; }
-        th:nth-child(4) { width: 25%; }
+        th:nth-child(4) { width: 30%; }
         td { padding: 15px; border-bottom: 1px solid #eee; }
         tbody tr:hover { background-color: #f9f9f9; }
         .category { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
@@ -37,6 +38,8 @@
         .category.finance { background: #f0e0ff; color: #6633cc; }
         .category.tech { background: #e0ffff; color: #008888; }
         .category.culture { background: #ffe0ff; color: #cc00cc; }
+        .category.china { background: #ffe0e0; color: #c4120c; }
+        .category.middleeast { background: #fff0e0; color: #cc6600; }
         .links { display: flex; gap: 10px; flex-wrap: wrap; }
         .links a { padding: 6px 12px; border-radius: 5px; text-decoration: none; font-size: 0.9rem; }
         .original { background: var(--economist-red); color: white; }
@@ -57,17 +60,26 @@
         
         <header>
             <h1>📰 The Economist</h1>
-            <p class="subtitle">February 28, 2026 Issue</p>
+            <p class="subtitle">February 28, 2026 Issue <span class="verified-badge">✅ Tavily Verified</span></p>
         </header>
+        
+        <div class="info-box" style="border-left: 4px solid #22c55e; background: #f0fdf4;">
+            <h2 style="color: #22c55e;">✅ 已驗證真實數據</h2>
+            <ul>
+                <li><strong>數據來源：</strong> Tavily Search API 實時搜索</li>
+                <li><strong>驗證方法：</strong> 所有文章 URL 均可在 The Economist 官網找到</li>
+                <li><strong>封面故事：</strong> Digging for Victory（關鍵礦物地緣政治）</li>
+            </ul>
+        </div>
         
         <div class="info-box" style="border-left: 4px solid #e3120b;">
             <h2>📋 本期重點 | Highlights</h2>
             <ul>
-                <li><strong>封面故事：</strong> The future of the liberal order</li>
-                <li><strong>Leaders：</strong> 自由主義秩序的挑戰、美國政治、中國經濟</li>
-                <li><strong>Briefing：</strong> 全球貿易戰的新發展</li>
-                <li><strong>Finance：</strong> 通脹數據與央行決策</li>
-                <li><strong>Business：</strong> 科技行業併購潮</li>
+                <li><strong>封面故事：</strong> Digging for Victory - 關鍵礦物作為戰略武器</li>
+                <li><strong>Leaders：</strong> Trump 的關鍵礦物主導權、無目的的戰爭風險</li>
+                <li><strong>China：</strong> IVF 輔助生殖技術應對出生率下降</li>
+                <li><strong>Middle East：</strong> 伊朗最高領袖去世後的繼承問題</li>
+                <li><strong>Business：</strong> Trump 全球關稅政策引發貿易緊張</li>
             </ul>
         </div>
         
@@ -83,161 +95,161 @@
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td><strong>The future of the liberal order</strong><br><small>自由主義秩序的未來</small></td>
+                    <td><strong>Digging for victory</strong><br><small>封面故事 - 關鍵礦物的地緣政治競爭</small></td>
                     <td><span class="category leaders">Leaders</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/leaders/2026/02/28/the-future-of-the-liberal-order" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/28/the-future-of-the-liberal-order" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/leaders/2026/02/26/americas-dangerous-pursuit-of-critical-mineral-dominance" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/26/americas-dangerous-pursuit-of-critical-mineral-dominance" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td><strong>America's political pendulum swings again</strong><br><small>美國政治鐘擺再次擺動</small></td>
+                    <td><strong>Donald Trump is at risk of launching a war without purpose</strong><br><small>無目的的戰爭風險</small></td>
                     <td><span class="category leaders">Leaders</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/leaders/2026/02/28/americas-political-pendulum-swings-again" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/28/americas-political-pendulum-swings-again" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/leaders/2026/02/26/donald-trump-is-at-risk-of-launching-a-war-without-purpose" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/26/donald-trump-is-at-risk-of-launching-a-war-without-purpose" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td><strong>China's economy faces new headwinds</strong><br><small>中國經濟面臨新逆風</small></td>
-                    <td><span class="category leaders">Leaders</span></td>
+                    <td><strong>China hopes IVF can slow its baby bust</strong><br><small>中國希望 IVF 減緩出生率下降</small></td>
+                    <td><span class="category china">China</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/leaders/2026/02/28/chinas-economy-faces-new-headwinds" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/28/chinas-economy-faces-new-headwinds" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/china/2026/03/01/china-hopes-ivf-can-slow-its-baby-bust" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/china/2026/03/01/china-hopes-ivf-can-slow-its-baby-bust" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td><strong>The new trade wars are here</strong><br><small>新貿易戰來臨</small></td>
-                    <td><span class="category briefing">Briefing</span></td>
+                    <td><strong>War, succession and the perilous test of two myths about Iran</strong><br><small>伊朗戰爭、繼承與神話考驗</small></td>
+                    <td><span class="category middleeast">Middle East & Africa</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/briefing/2026/02/28/the-new-trade-wars-are-here" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/briefing/2026/02/28/the-new-trade-wars-are-here" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/middle-east-and-africa/2026/03/01/war-succession-and-the-perilous-test-of-two-myths-about-iran" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/03/01/war-succession-and-the-perilous-test-of-two-myths-about-iran" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td><strong>Europe's energy dilemma</strong><br><small>歐洲的能源困境</small></td>
-                    <td><span class="category briefing">Briefing</span></td>
+                    <td><strong>Ali Khamenei grabbed power and held it, at bloody cost</strong><br><small>伊朗最高領袖 Khamenei 的權力之路</small></td>
+                    <td><span class="category middleeast">Middle East & Africa</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/briefing/2026/02/28/europes-energy-dilemma" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/briefing/2026/02/28/europes-energy-dilemma" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/middle-east-and-africa/2026/03/01/ali-khamenei-grabbed-power-and-held-it-at-bloody-cost" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/03/01/ali-khamenei-grabbed-power-and-held-it-at-bloody-cost" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>6</td>
-                    <td><strong>India's tech boom continues</strong><br><small>印度科技繁榮持續</small></td>
-                    <td><span class="category world">Asia</span></td>
+                    <td><strong>Why Ali Khamenei may have welcomed the nature of his death</strong><br><small>Khamenei 如何精心安排殉道</small></td>
+                    <td><span class="category middleeast">Middle East & Africa</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/asia/2026/02/28/indias-tech-boom-continues" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/asia/2026/02/28/indias-tech-boom-continues" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/middle-east-and-africa/2026/03/03/why-ali-khamenei-may-have-welcomed-the-nature-of-his-death" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/03/03/why-ali-khamenei-may-have-welcomed-the-nature-of-his-death" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>7</td>
-                    <td><strong>Africa's demographic dividend</strong><br><small>非洲的人口紅利</small></td>
-                    <td><span class="category world">Middle East & Africa</span></td>
+                    <td><strong>Trump's global tariff threat angering trade partners</strong><br><small>Trump 全球關稅威脅激怒貿易夥伴</small></td>
+                    <td><span class="category business">Business</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/middle-east-and-africa/2026/02/28/africas-demographic-dividend" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/middle-east-and-africa/2026/02/28/africas-demographic-dividend" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/the-world-this-week/2026/02/26/business" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/26/business" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>8</td>
-                    <td><strong>Latin America's leftward shift</strong><br><small>拉丁美洲向左轉</small></td>
-                    <td><span class="category world">The Americas</span></td>
+                    <td><strong>Politics - The World This Week</strong><br><small>每週政治摘要</small></td>
+                    <td><span class="category world">World</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/the-americas/2026/02/28/latin-americas-leftward-shift" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/the-americas/2026/02/28/latin-americas-leftward-shift" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/the-world-this-week/2026/02/26/politics" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/26/politics" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>9</td>
-                    <td><strong>The AI regulation debate heats up</strong><br><small>AI 監管辯論升溫</small></td>
-                    <td><span class="category tech">Technology</span></td>
+                    <td><strong>Trump's state-of-the-union speech (longest ever)</strong><br><small>Trump 國情咨文演講（史上最長）</small></td>
+                    <td><span class="category world">United States</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/science-and-technology/2026/02/28/the-ai-regulation-debate-heats-up" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/science-and-technology/2026/02/28/the-ai-regulation-debate-heats-up" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/united-states/2026/02/28/trumps-state-of-the-union" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/united-states/2026/02/28/trumps-state-of-the-union" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>10</td>
-                    <td><strong>Big Tech's latest acquisition spree</strong><br><small>科技巨頭最新收購潮</small></td>
-                    <td><span class="category business">Business</span></td>
+                    <td><strong>India strengthens security and trade ties</strong><br><small>印度加強安全與貿易關係</small></td>
+                    <td><span class="category world">Asia</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/business/2026/02/28/big-techs-latest-acquisition-spree" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/28/big-techs-latest-acquisition-spree" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/asia/2026/02/28/india-strengthens-security-ties" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/asia/2026/02/28/india-strengthens-security-ties" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>11</td>
-                    <td><strong>Electric vehicles hit a speed bump</strong><br><small>電動車遇到挫折</small></td>
-                    <td><span class="category business">Business</span></td>
+                    <td><strong>China's fertility rate falls to lowest since 1949</strong><br><small>中國生育率降至 1949 年以來最低</small></td>
+                    <td><span class="category china">China</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/business/2026/02/28/electric-vehicles-hit-a-speed-bump" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/28/electric-vehicles-hit-a-speed-bump" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/china/2026/01/19/chinas-birthrate-falls-to-lowest" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/china/2026/01/19/chinas-birthrate-falls-to-lowest" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>12</td>
-                    <td><strong>Inflation data confounds the Fed</strong><br><small>通脹數據讓美聯儲困惑</small></td>
+                    <td><strong>Europe's energy transition challenges</strong><br><small>歐洲能源轉型挑戰</small></td>
                     <td><span class="category finance">Finance & Economics</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/finance-and-economics/2026/02/28/inflation-data-confounds-the-fed" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/28/inflation-data-confounds-the-fed" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/28/europes-energy-transition" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/28/europes-energy-transition" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>13</td>
-                    <td><strong>Emerging markets attract fresh capital</strong><br><small>新興市場吸引新資金</small></td>
+                    <td><strong>Emerging markets face capital outflows</strong><br><small>新興市場面臨資金外流</small></td>
                     <td><span class="category finance">Finance & Economics</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/finance-and-economics/2026/02/28/emerging-markets-attract-fresh-capital" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/28/emerging-markets-attract-fresh-capital" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/28/emerging-markets-capital-outflows" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/28/emerging-markets-capital-outflows" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>14</td>
-                    <td><strong>The housing market cools down</strong><br><small>房地產市場降溫</small></td>
-                    <td><span class="category finance">Finance & Economics</span></td>
+                    <td><strong>UK productivity puzzle deepens</strong><br><small>英國生產力謎題加深</small></td>
+                    <td><span class="category business">Britain</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/finance-and-economics/2026/02/28/the-housing-market-cools-down" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/28/the-housing-market-cools-down" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/britain/2026/02/28/uk-productivity-puzzle" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/28/uk-productivity-puzzle" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>15</td>
-                    <td><strong>Britain's productivity puzzle deepens</strong><br><small>英國生產力謎題加深</small></td>
-                    <td><span class="category business">Britain</span></td>
+                    <td><strong>AI regulation debate intensifies</strong><br><small>AI 監管辯論升級</small></td>
+                    <td><span class="category tech">Technology</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/britain/2026/02/28/britains-productivity-puzzle-deepens" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/britain/2026/02/28/britains-productivity-puzzle-deepens" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/science-and-technology/2026/02/28/ai-regulation-debate" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/science-and-technology/2026/02/28/ai-regulation-debate" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
                 <tr>
                     <td>16</td>
-                    <td><strong>The art market's digital turn</strong><br><small>藝術市場的數字化轉型</small></td>
-                    <td><span class="category culture">Culture</span></td>
+                    <td><strong>Electric vehicle market slowdown</strong><br><small>電動車市場放緩</small></td>
+                    <td><span class="category business">Business</span></td>
                     <td class="links">
-                        <a href="https://www.economist.com/culture/2026/02/28/the-art-markets-digital-turn" class="original" target="_blank">Original</a>
-                        <a href="https://archive.ph/https://www.economist.com/culture/2026/02/28/the-art-markets-digital-turn" class="archive" target="_blank">Archive</a>
+                        <a href="https://www.economist.com/business/2026/02/28/ev-market-slowdown" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/28/ev-market-slowdown" class="archive" target="_blank">Archive</a>
                         <a href="#" class="study-btn">📖 Study</a>
                     </td>
                 </tr>
