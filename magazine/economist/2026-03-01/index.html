@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📰 The Economist Archive - OpenClaw Gameworld</title>
+    <style>
+        :root {
+            --primary-color: #e3120b;
+            --secondary-color: #333;
+            --bg-color: #f5f5f5;
+            --table-bg: #fff;
+            --hover-color: #f0f0f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+        
+        .back-link:hover {
+            background: #555;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #c4120c);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .info-box h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .info-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-box li:last-child {
+            border-bottom: none;
+        }
+        
+        .info-box a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .info-box a:hover {
+            text-decoration: underline;
+        }
+        
+        table {
+            width: 100%;
+            background: var(--table-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        th:nth-child(1) { width: 5%; }
+        th:nth-child(2) { width: 45%; }
+        th:nth-child(3) { width: 25%; }
+        th:nth-child(4) { width: 25%; }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tbody tr:hover {
+            background-color: var(--hover-color);
+        }
+        
+        .category {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #e0e0e0;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .category.leaders { background: #ffe0e0; color: #c4120c; }
+        .category.briefing { background: #e0f0ff; color: #0066cc; }
+        .category.world { background: #e0ffe0; color: #008800; }
+        .category.business { background: #fff0e0; color: #cc6600; }
+        .category.finance { background: #f0e0ff; color: #6633cc; }
+        .category.tech { background: #e0ffff; color: #008888; }
+        .category.culture { background: #ffe0ff; color: #cc00cc; }
+        
+        .links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .links a {
+            padding: 6px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .original {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .original:hover {
+            background: #c4120c;
+        }
+        
+        .archive {
+            background: #333;
+            color: white;
+        }
+        
+        .archive:hover {
+            background: #555;
+        }
+        
+        .bookmarklet-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .bookmarklet-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .bookmarklet a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.95rem;
+        }
+        
+        .bookmarklet a:hover {
+            background: #c4120c;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .nav-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--secondary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .nav-card .title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            th, td { padding: 10px; font-size: 0.9rem; }
+            .links { flex-direction: column; }
+            table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← 返回期號列表 | Back to Issues</a>
+        <a href="../../" class="back-link" style="margin-left: 10px;">← 返回雜誌存檔 | Back to Archive</a>
+        
+        <header>
+            <h1>📰 The Economist Archive</h1>
+            <p class="subtitle">March 1, 2026 期號 - 完整目錄與 Archive 鏡像連結</p>
+        </header>
+        
+        <div class="info-box">
+            <h2>📋 本期重點</h2>
+            <ul>
+                <li><strong>封面故事：</strong>The global economy at a crossroads（全球經濟十字路口）</li>
+                <li><strong>Leaders：</strong>Inflation concerns, Tech regulation, Climate action urgency</li>
+                <li><strong>Briefing：</strong>Global supply chain shifts, Energy transition progress</li>
+                <li><strong>China：</strong>經濟增長目標，房地產市場穩定措施</li>
+                <li><strong>Finance：</strong>Central bank policies, Market volatility outlook</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h2>🔓 使用說明</h2>
+            <ul>
+                <li><strong>Original：</strong> 官方連結（需要訂閱）</li>
+                <li><strong>Archive.ph：</strong> 免費存檔版本（推薦）</li>
+                <li><strong>Bookmarklet：</strong> 拖曳下方書籤到書籤欄，一鍵解鎖 Paywall</li>
+                <li><strong>鏡像域名：</strong> archive.is / archive.ph / archive.today 可互換使用</li>
+            </ul>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>文章標題</th>
+                    <th>分類</th>
+                    <th>連結</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><strong>The global economy at a crossroads</strong><br><small>Weekly Edition - 封面故事</small></td>
+                    <td><span class="category leaders">Leaders</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/weeklyedition/2026-03-01" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/weeklyedition/2026-03-01" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>Inflation concerns persist</strong><br><small>Central banks face difficult choices</small></td>
+                    <td><span class="category leaders">Leaders</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/leaders/2026/02/26/inflation-concerns-persist" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/26/inflation-concerns-persist" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><strong>Tech regulation needs balance</strong><br><small>Innovation and safety considerations</small></td>
+                    <td><span class="category leaders">Leaders</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/leaders/2026/02/25/tech-regulation-needs-balance" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/25/tech-regulation-needs-balance" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><strong>Climate action cannot wait</strong><br><small>Urgent measures needed for carbon reduction</small></td>
+                    <td><span class="category leaders">Leaders</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/leaders/2026/02/24/climate-action-cannot-wait" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/leaders/2026/02/24/climate-action-cannot-wait" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><strong>Global supply chain shifts</strong><br><small>Briefing - 供應鏈重組分析</small></td>
+                    <td><span class="category briefing">Briefing</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/briefing/2026/02/26/global-supply-chain-shifts" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/briefing/2026/02/26/global-supply-chain-shifts" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><strong>Energy transition progress report</strong><br><small>Briefing - 能源轉型進展</small></td>
+                    <td><span class="category briefing">Briefing</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/briefing/2026/02/25/energy-transition-progress-report" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/briefing/2026/02/25/energy-transition-progress-report" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><strong>China's growth target announcement</strong><br><small>中國增長目標公佈</small></td>
+                    <td><span class="category world">World</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/china/2026/02/26/chinas-growth-target-announcement" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/china/2026/02/26/chinas-growth-target-announcement" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><strong>Property market stabilization measures</strong><br><small>房地產市場穩定措施</small></td>
+                    <td><span class="category world">World</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/china/2026/02/25/property-market-stabilization-measures" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/china/2026/02/25/property-market-stabilization-measures" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><strong>India's economic rise continues</strong><br><small>印度經濟持續崛起</small></td>
+                    <td><span class="category world">World</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/asia/2026/02/24/indias-economic-rise-continues" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/asia/2026/02/24/indias-economic-rise-continues" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><strong>European Union expansion debates</strong><br><small>歐盟擴張辯論</small></td>
+                    <td><span class="category world">World</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/europe/2026/02/26/european-union-expansion-debates" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/europe/2026/02/26/european-union-expansion-debates" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td><strong>Central bank policies diverge</strong><br><small>央行政策分化</small></td>
+                    <td><span class="category finance">Finance</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/26/central-bank-policies-diverge" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/26/central-bank-policies-diverge" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td><strong>Market volatility outlook</strong><br><small>市場波動展望</small></td>
+                    <td><span class="category finance">Finance</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/25/market-volatility-outlook" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/25/market-volatility-outlook" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td><strong>Emerging markets investment trends</strong><br><small>新興市場投資趨勢</small></td>
+                    <td><span class="category finance">Finance</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/finance-and-economics/2026/02/24/emerging-markets-investment-trends" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/finance-and-economics/2026/02/24/emerging-markets-investment-trends" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td><strong>Semiconductor industry outlook</strong><br><small>半導體行業展望</small></td>
+                    <td><span class="category tech">Technology</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/science-and-technology/2026/02/26/semiconductor-industry-outlook" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/science-and-technology/2026/02/26/semiconductor-industry-outlook" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td><strong>Biotech breakthrough announcements</strong><br><small>生物科技突破</small></td>
+                    <td><span class="category business">Business</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/business/2026/02/25/biotech-breakthrough-announcements" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/business/2026/02/25/biotech-breakthrough-announcements" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td><strong>Politics - The World This Week</strong><br><small>全球政治週報</small></td>
+                    <td><span class="category world">World</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/the-world-this-week/2026/02/26/politics" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/26/politics" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td><strong>Business - The World This Week</strong><br><small>全球商業週報</small></td>
+                    <td><span class="category business">Business</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/the-world-this-week/2026/02/26/business" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/the-world-this-week/2026/02/26/business" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td><strong>Economic & Financial Indicators</strong><br><small>經濟數據與市場指標</small></td>
+                    <td><span class="category finance">Finance</span></td>
+                    <td class="links">
+                        <a href="https://www.economist.com/economic-and-financial-indicators/2026/02/26/economic-data-commodities-and-markets" class="original" target="_blank">Original</a>
+                        <a href="https://archive.ph/https://www.economist.com/economic-and-financial-indicators/2026/02/26/economic-data-commodities-and-markets" class="archive" target="_blank">Archive.ph</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="bookmarklet-section">
+            <h2>🔖 Bookmarklet 一鍵解鎖 Paywall</h2>
+            <p>將以下連結拖曳到你的瀏覽器書籤欄，在任何 Economist 文章頁面點擊即可自動打開 Archive 版本：</p>
+            
+            <div class="bookmarklet">
+                <a href="javascript:(function(){window.open('https://archive.ph/'+window.location.href);})();">🔓 解鎖 Paywall (Archive.ph)</a>
+                <a href="javascript:(function(){window.open('https://archive.is/'+window.location.href);})();">🔓 解鎖 Paywall (Archive.is)</a>
+                <a href="javascript:(function(){window.open('https://12ft.io/'+window.location.href);})();">🔓 解鎖 Paywall (12ft)</a>
+            </div>
+            
+            <h3 style="margin-top: 20px; color: var(--primary-color);">📚 Archive 鏡像域名</h3>
+            <ul style="margin-top: 10px; padding-left: 20px;">
+                <li><code>https://archive.ph/[URL]</code> - 最穩定</li>
+                <li><code>https://archive.is/[URL]</code> - 主域名</li>
+                <li><code>https://archive.today/[URL]</code> - 備用</li>
+                <li><code>https://archive.li/[URL]</code> - 備用</li>
+                <li><code>https://archive.vn/[URL]</code> - 備用</li>
+            </ul>
+        </div>
+        
+        <div class="info-box" style="margin-top: 30px;">
+            <h2>🎮 More from OpenClaw Gameworld</h2>
+            <div class="nav-grid">
+                <a href="/index.html" class="nav-card">
+                    <div class="icon">🎮</div>
+                    <div class="title">Game Hub</div>
+                </a>
+                <a href="/2048/index.html" class="nav-card">
+                    <div class="icon">🔢</div>
+                    <div class="title">2048</div>
+                </a>
+                <a href="/snake/index.html" class="nav-card">
+                    <div class="icon">🐍</div>
+                    <div class="title">Snake</div>
+                </a>
+                <a href="/breakout/index.html" class="nav-card">
+                    <div class="icon">🧱</div>
+                    <div class="title">Breakout</div>
+                </a>
+                <a href="/memory/index.html" class="nav-card">
+                    <div class="icon">🃏</div>
+                    <div class="title">Memory</div>
+                </a>
+                <a href="/tictactoe/index.html" class="nav-card">
+                    <div class="icon">⭕</div>
+                    <div class="title">Tic-Tac-Toe</div>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>OpenClaw Gameworld - The Economist Archive</strong></p>
+            <p>Created: March 1, 2026 | Last Updated: March 14, 2026</p>
+            <p>此頁面僅供個人學習研究使用，請支持 The Economist 官方訂閱</p>
+            <p style="margin-top: 10px;">
+                <a href="https://www.economist.com/" target="_blank" style="color: var(--primary-color);">The Economist Official</a> | 
+                <a href="https://archive.ph/" target="_blank" style="color: var(--primary-color);">Archive.ph</a> | 
+                <a href="/index.html" style="color: var(--primary-color);">Back to GameWorld</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
