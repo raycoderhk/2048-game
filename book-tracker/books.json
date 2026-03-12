@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "created": "2026-03-10T10:30:00Z",
+    "updated": "2026-03-10T10:30:00Z",
+    "version": "1.0"
+  },
+  "collection": [
+    {
+      "id": "book-001",
+      "title": "The Economist",
+      "subtitle": "March 7-13, 2026 Issue",
+      "author": "The Economist Editorial Team",
+      "type": "magazine",
+      "status": "reading",
+      "coverImage": "/home/node/.openclaw/media/inbound/04594a5a-f5de-4687-8d1b-f630516ab397.jpg",
+      "coverImageBase64": null,
+      "description": "Weekly news magazine covering current affairs, business, finance, and culture",
+      "topics": ["AI Risk", "Anthropic", "Geopolitics", "Middle East"],
+      "rating": null,
+      "startDate": "2026-03-10",
+      "finishDate": null,
+      "notes": [
+        {
+          "date": "2026-03-10",
+          "content": "Cover story: A WAR WITHOUT A STRATEGY. Feature on Anthropic AI risk - US government labeling it national security threat."
+        }
+      ],
+      "highlights": [],
+      "addedAt": "2026-03-10T10:30:00Z"
+    },
+    {
+      "id": "book-002",
+      "title": "宇宙的邊界到底在哪裡？",
+      "subtitle": "Beyond the Edge of the Universe",
+      "author": "Unknown",
+      "type": "book",
+      "status": "want-to-read",
+      "coverImage": "/home/node/.openclaw/media/inbound/6a9f09d7-70ad-476d-93c4-ea931601777a.jpg",
+      "coverImageBase64": null,
+      "description": "天文學科普書 - 從星座到重力波，揭開天文學如何影響文明、時間與人生觀",
+      "topics": ["Astronomy", "Cosmology", "Black Holes", "Science"],
+      "rating": null,
+      "startDate": null,
+      "finishDate": null,
+      "notes": [
+        {
+          "date": "2026-03-10",
+          "content": "Key insight: 黑洞不是終點，而是我們與星空之間的開端 (Black holes are not the end, but the beginning of our connection with the stars)"
+        }
+      ],
+      "highlights": [],
+      "purchaseLink": "https://www.books.com.tw/products/0011039472",
+      "addedAt": "2026-03-10T10:30:00Z"
+    },
+    {
+      "id": "book-003",
+      "title": "AI 时代，说故事",
+      "subtitle": "The Perfect Story: How to Tell Stories that Inform, Influence, and Inspire",
+      "author": "Karen Eber",
+      "type": "book",
+      "status": "want-to-read",
+      "coverImage": "/home/node/.openclaw/media/inbound/19e07d42-cbbd-4eb7-9a42-da8b76112506.jpg",
+      "coverImageBase64": null,
+      "description": "故事教练、TED 讲者分享說故事技巧 - AI 時代的關鍵生存力",
+      "topics": ["Communication", "Storytelling", "Leadership", "AI Era"],
+      "rating": null,
+      "startDate": null,
+      "finishDate": null,
+      "notes": [
+        {
+          "date": "2026-03-10",
+          "content": "Goodreads: 3.90/5 stars. Endorsed by Adam Grant, Daniel Pink, Susan Cain, Malcolm Gladwell, James Clear. Focus: storytelling as survival skill in AI era."
+        }
+      ],
+      "highlights": [],
+      "purchaseLink": "https://www.goodreads.com/book/show/123266593-the-perfect-story",
+      "addedAt": "2026-03-10T10:30:00Z"
+    },
+    {
+      "id": "book-004",
+      "title": "藝術有什麼 － 天價與無價之間",
+      "subtitle": "What is Art - Between Sky-High Prices and Priceless",
+      "author": "伍常",
+      "type": "book",
+      "status": "want-to-read",
+      "coverImage": "/home/node/.openclaw/media/inbound/da87f625-e59a-43b3-8483-9cd31588ea7f.jpg",
+      "coverImageBase64": null,
+      "description": "探討藝術的真正價值，啟發讀者獨立思考藝術與市場的關係",
+      "topics": ["Art", "Philosophy", "Market", "Culture"],
+      "rating": null,
+      "startDate": null,
+      "finishDate": null,
+      "notes": [
+        {
+          "date": "2026-03-10",
+          "content": "誠品書店暢銷榜。Endorsed by 潘源良 (HK lyricist). Explores creator's inner struggles and pursuit of pure art."
+        }
+      ],
+      "highlights": [],
+      "addedAt": "2026-03-10T10:30:00Z"
+    },
+    {
+      "id": "book-005",
+      "title": "天地與音樂的多重變奏",
+      "subtitle": "Metamorphosis of Heaven, Earth & Music",
+      "author": "柯英嘉 (Inge Kloepfer) / 意公子",
+      "type": "book",
+      "status": "want-to-read",
+      "coverImage": "/home/node/.openclaw/media/inbound/09a4b8f6-13c4-4800-b466-ba013fe85cc3.jpg",
+      "coverImageBase64": null,
+      "description": "音樂家周善祥 Kit Armstrong 的傳記 - 從神童到成熟藝術家的成長歷程",
+      "topics": ["Music", "Biography", "Classical", "Piano"],
+      "rating": null,
+      "startDate": null,
+      "finishDate": null,
+      "notes": [
+        {
+          "date": "2026-03-10",
+          "content": "Biography of Kit Armstrong (周善祥). Features his mastery of Liszt's rhythmic variations. Deep Taiwan connections."
+        }
+      ],
+      "highlights": [],
+      "purchaseLink": "https://www.books.com.tw/products/0011040588",
+      "addedAt": "2026-03-10T10:30:00Z"
+    }
+  ],
+  "settings": {
+    "statuses": ["want-to-read", "reading", "completed", "dnf"],
+    "types": ["book", "magazine", "article", "ebook", "audiobook"],
+    "ratings": [1, 2, 3, 4, 5],
+    "defaultStatus": "want-to-read"
+  }
+}

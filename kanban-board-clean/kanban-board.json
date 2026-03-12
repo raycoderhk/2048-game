@@ -29,6 +29,11 @@
       "name": "✅ Done",
       "description": "已完成的項目",
       "order": 5
+    },
+    "books": {
+      "name": "📚 Books",
+      "description": "閱讀中的書籍追蹤",
+      "order": 6
     }
   },
   "projects": [
@@ -641,6 +646,104 @@
         "  - Email received: 11 Mar 2026 07:38 HKT",
         "  - Action: Kanban task created"
       ]
+    },
+    {
+      "id": "book-001",
+      "title": "📰 The Economist (Mar 7-13, 2026)",
+      "description": "Weekly magazine - Cover: A WAR WITHOUT A STRATEGY, Feature: ANTHROPIC AND THE REAL RISK OF AI",
+      "status": "books",
+      "priority": "medium",
+      "created": "2026-03-10",
+      "updated": "2026-03-10T10:30:00Z",
+      "tags": ["magazine", "AI", "current-affairs", "anthropic"],
+      "coverImage": "/home/node/.openclaw/media/inbound/04594a5a-f5de-4687-8d1b-f630516ab397.jpg",
+      "notes": [
+        "2026-03-10: Added to collection - Cover story on Anthropic AI risk, US government labeling it national security threat"
+      ],
+      "metadata": {
+        "type": "magazine",
+        "author": "The Economist Editorial Team",
+        "topics": ["AI Risk", "Anthropic", "Geopolitics", "Middle East"]
+      }
+    },
+    {
+      "id": "book-002",
+      "title": "🌌 宇宙的邊界到底在哪裡？",
+      "description": "天文學科普書 - 從星座到重力波，揭開天文學如何影響文明、時間與人生觀",
+      "status": "books",
+      "priority": "medium",
+      "created": "2026-03-10",
+      "updated": "2026-03-10T10:30:00Z",
+      "tags": ["book", "astronomy", "science", "cosmology"],
+      "coverImage": "/home/node/.openclaw/media/inbound/6a9f09d7-70ad-476d-93c4-ea931601777a.jpg",
+      "notes": [
+        "2026-03-10: Added - Key insight: 黑洞不是終點，而是我們與星空之間的開端"
+      ],
+      "metadata": {
+        "type": "book",
+        "author": "Unknown",
+        "topics": ["Astronomy", "Cosmology", "Black Holes", "Science"],
+        "purchaseLink": "https://www.books.com.tw/products/0011039472"
+      }
+    },
+    {
+      "id": "book-003",
+      "title": "📖 AI 时代，说故事 (The Perfect Story)",
+      "description": "TED 讲者 Karen Eber 分享說故事技巧 - AI 時代的關鍵生存力",
+      "status": "books",
+      "priority": "high",
+      "created": "2026-03-10",
+      "updated": "2026-03-10T10:30:00Z",
+      "tags": ["book", "communication", "storytelling", "leadership", "ai"],
+      "coverImage": "/home/node/.openclaw/media/inbound/19e07d42-cbbd-4eb7-9a42-da8b76112506.jpg",
+      "notes": [
+        "2026-03-10: Added - Goodreads 3.90/5, endorsed by Adam Grant, Daniel Pink, Malcolm Gladwell"
+      ],
+      "metadata": {
+        "type": "book",
+        "author": "Karen Eber",
+        "topics": ["Communication", "Storytelling", "Leadership", "AI Era"],
+        "purchaseLink": "https://www.goodreads.com/book/show/123266593-the-perfect-story"
+      }
+    },
+    {
+      "id": "book-004",
+      "title": "🎨 藝術有什麼 － 天價與無價之間",
+      "description": "伍常著 - 探討藝術的真正價值，誠品書店暢銷榜",
+      "status": "books",
+      "priority": "medium",
+      "created": "2026-03-10",
+      "updated": "2026-03-10T10:30:00Z",
+      "tags": ["book", "art", "philosophy", "culture"],
+      "coverImage": "/home/node/.openclaw/media/inbound/da87f625-e59a-43b3-8483-9cd31588ea7f.jpg",
+      "notes": [
+        "2026-03-10: Added - Eslite bestseller, endorsed by 潘源良 (HK lyricist)"
+      ],
+      "metadata": {
+        "type": "book",
+        "author": "伍常",
+        "topics": ["Art", "Philosophy", "Market", "Culture"]
+      }
+    },
+    {
+      "id": "book-005",
+      "title": "🎹 天地與音樂的多重變奏",
+      "description": "音樂家周善祥 Kit Armstrong 傳記 - 從神童到成熟藝術家的成長歷程",
+      "status": "books",
+      "priority": "medium",
+      "created": "2026-03-10",
+      "updated": "2026-03-10T10:30:00Z",
+      "tags": ["book", "music", "biography", "classical"],
+      "coverImage": "/home/node/.openclaw/media/inbound/09a4b8f6-13c4-4800-b466-ba013fe85cc3.jpg",
+      "notes": [
+        "2026-03-10: Added - Biography of Kit Armstrong, features his mastery of Liszt's rhythmic variations"
+      ],
+      "metadata": {
+        "type": "book",
+        "author": "柯英嘉 (Inge Kloepfer) / 意公子",
+        "topics": ["Music", "Biography", "Classical", "Piano"],
+        "purchaseLink": "https://www.books.com.tw/products/0011040588"
+      }
     }
   ],
   "settings": {
