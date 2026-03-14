@@ -34,8 +34,17 @@
         .quiz-options label { display: block; padding: 12px 15px; background: #f9f9f9; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
         .quiz-options label:hover { background: #fffbf0; }
         .quiz-options input[type="radio"] { margin-right: 10px; }
+        .quiz-options label.correct { background: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .quiz-options label.incorrect { background: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
         .submit-btn { background: linear-gradient(135deg, #ffcc00, #ff9900); color: #333; border: none; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 153, 0, 0.4); }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; }
+        .feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .explanation { margin-top: 10px; font-size: 0.95em; line-height: 1.6; }
+        .explanation strong { color: #ff9900; }
         .result { margin-top: 20px; padding: 20px; border-radius: 5px; font-weight: bold; }
         .result.correct { background: #d4edda; color: #155724; }
         .result.incorrect { background: #f8d7da; color: #721c24; }
@@ -196,107 +205,177 @@
             <p style="margin-bottom: 20px; color: #666;">Choose the correct answer for each question. | 為每道題選擇正確答案。</p>
             
             <form id="quizForm">
-                <div class="quiz-question">
+                <div class="quiz-question" id="q1-container">
                     <p><strong>1. What does "excavate" mean?</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q1" value="a"> A) To build a new structure 建造新建築</label></li>
-                        <li><label><input type="radio" name="q1" value="b"> B) To dig carefully to uncover remains 小心挖掘以發現遺跡</label></li>
-                        <li><label><input type="radio" name="q1" value="c"> C) To paint a wall 粉刷牆壁</label></li>
-                        <li><label><input type="radio" name="q1" value="d"> D) To sail across the ocean 橫渡海洋</label></li>
+                        <li><label id="q1-a"><input type="radio" name="q1" value="a" onclick="checkAnswer('q1', 'b')"> A) To build a new structure 建造新建築</label></li>
+                        <li><label id="q1-b"><input type="radio" name="q1" value="b" onclick="checkAnswer('q1', 'b')"> B) To dig carefully to uncover remains 小心挖掘以發現遺跡</label></li>
+                        <li><label id="q1-c"><input type="radio" name="q1" value="c" onclick="checkAnswer('q1', 'b')"> C) To paint a wall 粉刷牆壁</label></li>
+                        <li><label id="q1-d"><input type="radio" name="q1" value="d" onclick="checkAnswer('q1', 'b')"> D) To sail across the ocean 橫渡海洋</label></li>
                     </ul>
+                    <div id="q1-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Excavate" means to dig carefully, especially to uncover archaeological remains. In the article, archaeologist Michael Nielsen was excavating a Viking site in Greenland.<br>
+                            <strong>「Excavate」意思是小心挖掘，特別係為了發掘考古遺址。文章中，考古學家 Michael Nielsen 喺格陵蘭發掘維京遺址。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q2-container">
                     <p><strong>2. A "midden" is:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q2" value="a"> A) A type of Viking ship 一種維京船</label></li>
-                        <li><label><input type="radio" name="q2" value="b"> B) A religious ceremony 宗教儀式</label></li>
-                        <li><label><input type="radio" name="q2" value="c"> C) A trash heap or refuse pile 垃圾堆</label></li>
-                        <li><label><input type="radio" name="q2" value="d"> D) A farming tool 農具</label></li>
+                        <li><label id="q2-a"><input type="radio" name="q2" value="a" onclick="checkAnswer('q2', 'c')"> A) A type of Viking ship 一種維京船</label></li>
+                        <li><label id="q2-b"><input type="radio" name="q2" value="b" onclick="checkAnswer('q2', 'c')"> B) A religious ceremony 宗教儀式</label></li>
+                        <li><label id="q2-c"><input type="radio" name="q2" value="c" onclick="checkAnswer('q2', 'c')"> C) A trash heap or refuse pile 垃圾堆</label></li>
+                        <li><label id="q2-d"><input type="radio" name="q2" value="d" onclick="checkAnswer('q2', 'c')"> D) A farming tool 農具</label></li>
                     </ul>
+                    <div id="q2-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            A "midden" is an ancient trash heap where archaeologists often find artifacts. The wooden horse was found in a midden, raising questions about why it was discarded.<br>
+                            <strong>「Midden」係古代垃圾堆，考古學家常喺度發現文物。木馬喺垃圾堆中發現，引發點解佢被丟棄嘅疑問。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q3-container">
                     <p><strong>3. What is a "fjord"?</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q3" value="a"> A) A long, narrow inlet with steep sides created by glaciers 冰川形成的狹長海灣</label></li>
-                        <li><label><input type="radio" name="q3" value="b"> B) A type of Viking weapon 一種維京武器</label></li>
-                        <li><label><input type="radio" name="q3" value="c"> C) A traditional Norse meal 傳統諾爾斯餐</label></li>
-                        <li><label><input type="radio" name="q3" value="d"> D) A type of ancient house 一種古代房屋</label></li>
+                        <li><label id="q3-a"><input type="radio" name="q3" value="a" onclick="checkAnswer('q3', 'a')"> A) A long, narrow inlet with steep sides created by glaciers 冰川形成的狹長海灣</label></li>
+                        <li><label id="q3-b"><input type="radio" name="q3" value="b" onclick="checkAnswer('q3', 'a')"> B) A type of Viking weapon 一種維京武器</label></li>
+                        <li><label id="q3-c"><input type="radio" name="q3" value="c" onclick="checkAnswer('q3', 'a')"> C) A traditional Norse meal 傳統諾爾斯餐</label></li>
+                        <li><label id="q3-d"><input type="radio" name="q3" value="d" onclick="checkAnswer('q3', 'a')"> D) A type of ancient house 一種古代房屋</label></li>
                     </ul>
+                    <div id="q3-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            A "fjord" is a long, narrow sea inlet with steep cliffs, formed by glacial erosion. The Norse settlers lived in the serpentine fjords of southwestern Greenland.<br>
+                            <strong>「Fjord」係狹長嘅海灣，兩側係陡峭懸崖，由冰川侵蝕形成。諾爾斯定居者喺格陵蘭西南部蜿蜒嘅峽灣居住。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q4-container">
                     <p><strong>4. If a species is "extinct," it means:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q4" value="a"> A) It is very rare 非常稀有</label></li>
-                        <li><label><input type="radio" name="q4" value="b"> B) It is migrating 正在遷徙</label></li>
-                        <li><label><input type="radio" name="q4" value="c"> C) It no longer exists 不再存在</label></li>
-                        <li><label><input type="radio" name="q4" value="d"> D) It is hibernating 正在冬眠</label></li>
+                        <li><label id="q4-a"><input type="radio" name="q4" value="a" onclick="checkAnswer('q4', 'c')"> A) It is very rare 非常稀有</label></li>
+                        <li><label id="q4-b"><input type="radio" name="q4" value="b" onclick="checkAnswer('q4', 'c')"> B) It is migrating 正在遷徙</label></li>
+                        <li><label id="q4-c"><input type="radio" name="q4" value="c" onclick="checkAnswer('q4', 'c')"> C) It no longer exists 不再存在</label></li>
+                        <li><label id="q4-d"><input type="radio" name="q4" value="d" onclick="checkAnswer('q4', 'c')"> D) It is hibernating 正在冬眠</label></li>
                     </ul>
+                    <div id="q4-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Extinct" means a species has completely died out. Archaeologist Thomas McGovern suggests the Norse Greenlanders all went extinct—they didn't escape.<br>
+                            <strong>「Extinct」意思係物種完全滅絕。考古學家 Thomas McGovern 認為格陵蘭嘅諾爾斯人都滅絕了——佢哋冇逃脫。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q5-container">
                     <p><strong>5. "Relics" are:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q5" value="a"> A) Modern inventions 現代發明</label></li>
-                        <li><label><input type="radio" name="q5" value="b"> B) Objects surviving from an earlier time 從早期倖存下來的物品</label></li>
-                        <li><label><input type="radio" name="q5" value="c"> C) Types of food 食物種類</label></li>
-                        <li><label><input type="radio" name="q5" value="d"> D) Religious leaders 宗教領袖</label></li>
+                        <li><label id="q5-a"><input type="radio" name="q5" value="a" onclick="checkAnswer('q5', 'b')"> A) Modern inventions 現代發明</label></li>
+                        <li><label id="q5-b"><input type="radio" name="q5" value="b" onclick="checkAnswer('q5', 'b')"> B) Objects surviving from an earlier time 從早期倖存下來的物品</label></li>
+                        <li><label id="q5-c"><input type="radio" name="q5" value="c" onclick="checkAnswer('q5', 'b')"> C) Types of food 食物種類</label></li>
+                        <li><label id="q5-d"><input type="radio" name="q5" value="d" onclick="checkAnswer('q5', 'b')"> D) Religious leaders 宗教領袖</label></li>
                     </ul>
+                    <div id="q5-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Relics" are objects from the past, especially those with historical significance. The stone ruins were relics of the Norse people who didn't survive.<br>
+                            <strong>「Relics」係過去嘅物品，特別係有歷史意義嘅。石頭廢墟係未能倖存嘅諾爾斯人嘅遺物。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q6-container">
                     <p><strong>6. Erik the Red was an:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q6" value="a"> A) King 國王</label></li>
-                        <li><label><input type="radio" name="q6" value="b"> B) Merchant 商人</label></li>
-                        <li><label><input type="radio" name="q6" value="c"> C) Outlaw 逃犯</label></li>
-                        <li><label><input type="radio" name="q6" value="d"> D) Farmer 農民</label></li>
+                        <li><label id="q6-a"><input type="radio" name="q6" value="a" onclick="checkAnswer('q6', 'c')"> A) King 國王</label></li>
+                        <li><label id="q6-b"><input type="radio" name="q6" value="b" onclick="checkAnswer('q6', 'c')"> B) Merchant 商人</label></li>
+                        <li><label id="q6-c"><input type="radio" name="q6" value="c" onclick="checkAnswer('q6', 'c')"> C) Outlaw 逃犯</label></li>
+                        <li><label id="q6-d"><input type="radio" name="q6" value="d" onclick="checkAnswer('q6', 'c')"> D) Farmer 農民</label></li>
                     </ul>
+                    <div id="q6-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            Erik the Red was an outlaw—a convicted murderer exiled from Iceland. He "discovered" Greenland while serving his exile sentence.<br>
+                            <strong>紅髮埃里克係逃犯——因謀殺罪被流放冰島。佢喺服流放刑期間「發現」了格陵蘭。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q7-container">
                     <p><strong>7. "Exile" means:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q7" value="a"> A) Being honored 被榮譽</label></li>
-                        <li><label><input type="radio" name="q7" value="b"> B) Being barred from one's native country 被禁止返回祖國</label></li>
-                        <li><label><input type="radio" name="q7" value="c"> C) Being promoted 被晉升</label></li>
-                        <li><label><input type="radio" name="q7" value="d"> D) Being wealthy 變得富有</label></li>
+                        <li><label id="q7-a"><input type="radio" name="q7" value="a" onclick="checkAnswer('q7', 'b')"> A) Being honored 被榮譽</label></li>
+                        <li><label id="q7-b"><input type="radio" name="q7" value="b" onclick="checkAnswer('q7', 'b')"> B) Being barred from one's native country 被禁止返回祖國</label></li>
+                        <li><label id="q7-c"><input type="radio" name="q7" value="c" onclick="checkAnswer('q7', 'b')"> C) Being promoted 被晉升</label></li>
+                        <li><label id="q7-d"><input type="radio" name="q7" value="d" onclick="checkAnswer('q7', 'b')"> D) Being wealthy 變得富有</label></li>
                     </ul>
+                    <div id="q7-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Exile" is punishment where someone is barred from their homeland. Erik the Red discovered Greenland during his exile from Iceland for murder.<br>
+                            <strong>「Exile」係一種懲罰，禁止某人返回家園。紅髮埃里克喺因謀殺被流放冰島期間發現了格陵蘭。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q8-container">
                     <p><strong>8. An "apocalypse" is:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q8" value="a"> A) A celebration 慶祝活動</label></li>
-                        <li><label><input type="radio" name="q8" value="b"> B) A peaceful event 和平事件</label></li>
-                        <li><label><input type="radio" name="q8" value="c"> C) A catastrophic event causing destruction 造成破壞的災難性事件</label></li>
-                        <li><label><input type="radio" name="q8" value="d"> D) A scientific discovery 科學發現</label></li>
+                        <li><label id="q8-a"><input type="radio" name="q8" value="a" onclick="checkAnswer('q8', 'c')"> A) A celebration 慶祝活動</label></li>
+                        <li><label id="q8-b"><input type="radio" name="q8" value="b" onclick="checkAnswer('q8', 'c')"> B) A peaceful event 和平事件</label></li>
+                        <li><label id="q8-c"><input type="radio" name="q8" value="c" onclick="checkAnswer('q8', 'c')"> C) A catastrophic event causing destruction 造成破壞的災難性事件</label></li>
+                        <li><label id="q8-d"><input type="radio" name="q8" value="d" onclick="checkAnswer('q8', 'c')"> D) A scientific discovery 科學發現</label></li>
                     </ul>
+                    <div id="q8-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Apocalypse" means a catastrophic final event. If the Greenlanders died in an apocalypse (plague or war), Europeans apparently didn't notice.<br>
+                            <strong>「Apocalypse」意思係災難性嘅最終事件。如果格陵蘭人死於大災難（瘟疫或戰爭），歐洲人顯然冇注意到。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q9-container">
                     <p><strong>9. A "compelling" theory is:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q9" value="a"> A) Boring and uninteresting 無聊無趣</label></li>
-                        <li><label><input type="radio" name="q9" value="b"> B) Powerfully convincing 令人信服的</label></li>
-                        <li><label><input type="radio" name="q9" value="c"> C) Easy to forget 容易忘記</label></li>
-                        <li><label><input type="radio" name="q9" value="d"> D) Very old 非常古老</label></li>
+                        <li><label id="q9-a"><input type="radio" name="q9" value="a" onclick="checkAnswer('q9', 'b')"> A) Boring and uninteresting 無聊無趣</label></li>
+                        <li><label id="q9-b"><input type="radio" name="q9" value="b" onclick="checkAnswer('q9', 'b')"> B) Powerfully convincing 令人信服的</label></li>
+                        <li><label id="q9-c"><input type="radio" name="q9" value="c" onclick="checkAnswer('q9', 'b')"> C) Easy to forget 容易忘記</label></li>
+                        <li><label id="q9-d"><input type="radio" name="q9" value="d" onclick="checkAnswer('q9', 'b')"> D) Very old 非常古老</label></li>
                     </ul>
+                    <div id="q9-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Compelling" means powerfully convincing or irresistible. Archaeologists are assembling a compelling new theory linking the Norse fate to climate change.<br>
+                            <strong>「Compelling」意思係令人信服或無法抗拒嘅。考古學家正在匯集一個令人信服嘅新理論，將諾爾斯人嘅命運與氣候變化聯繫起來。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q10-container">
                     <p><strong>10. "Heathland" refers to:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q10" value="a"> A) An area of open uncultivated land with low shrubs 長有低矮灌木的開闊荒地</label></li>
-                        <li><label><input type="radio" name="q10" value="b"> B) A type of forest 一種森林</label></li>
-                        <li><label><input type="radio" name="q10" value="c"> C) A mountain range 山脈</label></li>
-                        <li><label><input type="radio" name="q10" value="d"> D) A coastal area 沿海地區</label></li>
+                        <li><label id="q10-a"><input type="radio" name="q10" value="a" onclick="checkAnswer('q10', 'a')"> A) An area of open uncultivated land with low shrubs 長有低矮灌木的開闊荒地</label></li>
+                        <li><label id="q10-b"><input type="radio" name="q10" value="b" onclick="checkAnswer('q10', 'a')"> B) A type of forest 一種森林</label></li>
+                        <li><label id="q10-c"><input type="radio" name="q10" value="c" onclick="checkAnswer('q10', 'a')"> C) A mountain range 山脈</label></li>
+                        <li><label id="q10-d"><input type="radio" name="q10" value="d" onclick="checkAnswer('q10', 'a')"> D) A coastal area 沿海地區</label></li>
                     </ul>
+                    <div id="q10-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Heathland" is open, uncultivated land with low shrubs like heather. The Norse carried their culture from the fjords and heathlands of Scandinavia to Greenland.<br>
+                            <strong>「Heathland」係開闊、未開墾嘅土地，生長著低矮灌木（如石楠）。諾爾斯人將他們嘅文化從斯堪嘅納維亞嘅峽灣同荒野帶到了格陵蘭。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Answers | 提交答案</button>
+                <button type="button" class="submit-btn" onclick="checkQuiz()">Submit All Answers | 提交所有答案</button>
             </form>
 
             <div id="result" class="result" style="display: none;"></div>
@@ -314,22 +393,72 @@
     </div>
 
     <script>
-        function checkQuiz() {
-            const answers = {
-                q1: 'b', q2: 'c', q3: 'a', q4: 'c', q5: 'b',
-                q6: 'c', q7: 'b', q8: 'c', q9: 'b', q10: 'a'
-            };
+        const answers = {
+            q1: 'b', q2: 'c', q3: 'a', q4: 'c', q5: 'b',
+            q6: 'c', q7: 'b', q8: 'c', q9: 'b', q10: 'a'
+        };
+        
+        let score = 0;
+        let answeredQuestions = new Set();
+        
+        function checkAnswer(question, correctAnswer) {
+            // Prevent multiple answers for same question
+            if (answeredQuestions.has(question)) {
+                return;
+            }
+            answeredQuestions.add(question);
             
-            let score = 0;
-            let total = Object.keys(answers).length;
-            const form = document.getElementById('quizForm');
-            const formData = new FormData(form);
+            const formData = new FormData(document.getElementById('quizForm'));
+            const userAnswer = formData.get(question);
             
-            for (let [question, correctAnswer] of Object.entries(answers)) {
-                const userAnswer = formData.get(question);
-                if (userAnswer === correctAnswer) {
-                    score++;
+            // Disable all options for this question
+            const options = document.querySelectorAll(`input[name="${question}"]`);
+            options.forEach(opt => {
+                opt.disabled = true;
+                const label = document.getElementById(`${question}-${opt.value}`);
+                if (opt.value === correctAnswer) {
+                    label.classList.add('correct');
+                } else if (opt.value === userAnswer && userAnswer !== correctAnswer) {
+                    label.classList.add('incorrect');
                 }
+            });
+            
+            // Show feedback
+            const feedbackDiv = document.getElementById(`${question}-feedback`);
+            feedbackDiv.classList.add('show');
+            
+            if (userAnswer === correctAnswer) {
+                feedbackDiv.classList.add('correct');
+                feedbackDiv.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 5px;">✅ Correct! 正確！</div>
+                    <div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>
+                `;
+                score++;
+            } else {
+                feedbackDiv.classList.add('incorrect');
+                const correctText = correctAnswer.toUpperCase();
+                feedbackDiv.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 5px;">❌ Incorrect. Correct answer: ${correctText} 錯誤。正確答案：${correctText}</div>
+                    <div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>
+                `;
+            }
+            
+            // Update score display
+            updateScoreDisplay();
+        }
+        
+        function updateScoreDisplay() {
+            // Optional: Show running score
+            // console.log(`Current score: ${score}/${answeredQuestions.size}`);
+        }
+        
+        function checkQuiz() {
+            const total = Object.keys(answers).length;
+            const answered = answeredQuestions.size;
+            
+            if (answered < total) {
+                alert(`You have answered ${answered} out of ${total} questions. Please answer all questions first! | 你已回答 ${answered} 題，共 ${total} 題。請先回答所有問題！`);
+                return;
             }
             
             const resultDiv = document.getElementById('result');

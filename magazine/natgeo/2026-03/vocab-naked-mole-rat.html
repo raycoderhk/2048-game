@@ -34,8 +34,17 @@
         .quiz-options label { display: block; padding: 12px 15px; background: #f9f9f9; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
         .quiz-options label:hover { background: #fffbf0; }
         .quiz-options input[type="radio"] { margin-right: 10px; }
+        .quiz-options label.correct { background: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .quiz-options label.incorrect { background: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
         .submit-btn { background: linear-gradient(135deg, #ffcc00, #ff9900); color: #333; border: none; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 153, 0, 0.4); }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; }
+        .feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .explanation { margin-top: 10px; font-size: 0.95em; line-height: 1.6; }
+        .explanation strong { color: #ff9900; }
         .result { margin-top: 20px; padding: 20px; border-radius: 5px; font-weight: bold; }
         .result.correct { background: #d4edda; color: #155724; }
         .result.incorrect { background: #f8d7da; color: #721c24; }
@@ -195,107 +204,177 @@
             <p style="margin-bottom: 20px; color: #666;">Choose the correct answer for each question. | 為每道題選擇正確答案。</p>
             
             <form id="quizForm">
-                <div class="quiz-question">
+                <div class="quiz-question" id="q1-container">
                     <p><strong>1. "Longevity" refers to:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q1" value="a"> A) Short life 短命</label></li>
-                        <li><label><input type="radio" name="q1" value="b"> B) Long life; the length of time one lives 長壽；壽命</label></li>
-                        <li><label><input type="radio" name="q1" value="c"> C) Intelligence 智力</label></li>
-                        <li><label><input type="radio" name="q1" value="d"> D) Strength 力量</label></li>
+                        <li><label id="q1-a"><input type="radio" name="q1" value="a" onclick="checkAnswer('q1', 'b')"> A) Short life 短命</label></li>
+                        <li><label id="q1-b"><input type="radio" name="q1" value="b" onclick="checkAnswer('q1', 'b')"> B) Long life; the length of time one lives 長壽；壽命</label></li>
+                        <li><label id="q1-c"><input type="radio" name="q1" value="c" onclick="checkAnswer('q1', 'b')"> C) Intelligence 智力</label></li>
+                        <li><label id="q1-d"><input type="radio" name="q1" value="d" onclick="checkAnswer('q1', 'b')"> D) Strength 力量</label></li>
                     </ul>
+                    <div id="q1-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Longevity" means long life or the length of time someone lives. The article discusses humanity's obsession with longevity and the $44 billion industry around it.<br>
+                            <strong>「Longevity」意思係長壽或壽命。文章討論人類對長壽嘅痴迷同圍繞佢嘅 440 億美元產業。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q2-container">
                     <p><strong>2. "Eusocial" animals:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q2" value="a"> A) Live alone 獨居</label></li>
-                        <li><label><input type="radio" name="q2" value="b"> B) Live in organized colonies with labor division 生活在有勞動分工的群體中</label></li>
-                        <li><label><input type="radio" name="q2" value="c"> C) Migrate seasonally 季節性遷徙</label></li>
-                        <li><label><input type="radio" name="q2" value="d"> D) Hibernate in winter 冬季冬眠</label></li>
+                        <li><label id="q2-a"><input type="radio" name="q2" value="a" onclick="checkAnswer('q2', 'b')"> A) Live alone 獨居</label></li>
+                        <li><label id="q2-b"><input type="radio" name="q2" value="b" onclick="checkAnswer('q2', 'b')"> B) Live in organized colonies with labor division 生活在有勞動分工的群體中</label></li>
+                        <li><label id="q2-c"><input type="radio" name="q2" value="c" onclick="checkAnswer('q2', 'b')"> C) Migrate seasonally 季節性遷徙</label></li>
+                        <li><label id="q2-d"><input type="radio" name="q2" value="d" onclick="checkAnswer('q2', 'b')"> D) Hibernate in winter 冬季冬眠</label></li>
                     </ul>
+                    <div id="q2-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Eusocial" means living in highly organized colonies with division of labor. Naked mole rats were the first known eusocial mammal, with queens and workers.<br>
+                            <strong>「Eusocial」意思係生活在高度組織化嘅群落中，有勞動分工。裸鼴鼠係已知第一種真社會性哺乳動物，有蟻后同工人。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q3-container">
                     <p><strong>3. "Diminishment" means:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q3" value="a"> A) Increase 增加</label></li>
-                        <li><label><input type="radio" name="q3" value="b"> B) Reduction or becoming less 減少或變少</label></li>
-                        <li><label><input type="radio" name="q3" value="c"> C) Improvement 改善</label></li>
-                        <li><label><input type="radio" name="q3" value="d"> D) Stability 穩定</label></li>
+                        <li><label id="q3-a"><input type="radio" name="q3" value="a" onclick="checkAnswer('q3', 'b')"> A) Increase 增加</label></li>
+                        <li><label id="q3-b"><input type="radio" name="q3" value="b" onclick="checkAnswer('q3', 'b')"> B) Reduction or becoming less 減少或變少</label></li>
+                        <li><label id="q3-c"><input type="radio" name="q3" value="c" onclick="checkAnswer('q3', 'b')"> C) Improvement 改善</label></li>
+                        <li><label id="q3-d"><input type="radio" name="q3" value="d" onclick="checkAnswer('q3', 'b')"> D) Stability 穩定</label></li>
                     </ul>
+                    <div id="q3-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Diminishment" means reduction or becoming less. The oldest naked mole rat showed no diminishment of muscle mass, bone density, or metabolism even at nearly 40.<br>
+                            <strong>「Diminishment」意思係減少或變少。最老嘅裸鼴鼠即使接近 40 歲，都冇顯示肌肉質量、骨密度或新陳代謝嘅減少。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q4-container">
                     <p><strong>4. "Vascular" relates to:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q4" value="a"> A) Bones 骨骼</label></li>
-                        <li><label><input type="radio" name="q4" value="b"> B) Muscles 肌肉</label></li>
-                        <li><label><input type="radio" name="q4" value="c"> C) Blood vessels 血管</label></li>
-                        <li><label><input type="radio" name="q4" value="d"> D) Nerves 神經</label></li>
+                        <li><label id="q4-a"><input type="radio" name="q4" value="a" onclick="checkAnswer('q4', 'c')"> A) Bones 骨骼</label></li>
+                        <li><label id="q4-b"><input type="radio" name="q4" value="b" onclick="checkAnswer('q4', 'c')"> B) Muscles 肌肉</label></li>
+                        <li><label id="q4-c"><input type="radio" name="q4" value="c" onclick="checkAnswer('q4', 'c')"> C) Blood vessels 血管</label></li>
+                        <li><label id="q4-d"><input type="radio" name="q4" value="d" onclick="checkAnswer('q4', 'c')"> D) Nerves 神經</label></li>
                     </ul>
+                    <div id="q4-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Vascular" relates to blood vessels that carry blood throughout the body. The naked mole rat's vascular function stayed strong even at advanced age.<br>
+                            <strong>「Vascular」同血管有關，血管將血液輸送到全身。裸鼴鼠嘅血管功能即使喺高齡仍然強勁。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q5-container">
                     <p><strong>5. "Neurodegeneration" is:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q5" value="a"> A) Growth of new neurons 新神經元生長</label></li>
-                        <li><label><input type="radio" name="q5" value="b"> B) Progressive loss of neuron function 神經元功能逐漸喪失</label></li>
-                        <li><label><input type="radio" name="q5" value="c"> C) Brain surgery 腦部手術</label></li>
-                        <li><label><input type="radio" name="q5" value="d"> D) Memory improvement 記憶力改善</label></li>
+                        <li><label id="q5-a"><input type="radio" name="q5" value="a" onclick="checkAnswer('q5', 'b')"> A) Growth of new neurons 新神經元生長</label></li>
+                        <li><label id="q5-b"><input type="radio" name="q5" value="b" onclick="checkAnswer('q5', 'b')"> B) Progressive loss of neuron function 神經元功能逐漸喪失</label></li>
+                        <li><label id="q5-c"><input type="radio" name="q5" value="c" onclick="checkAnswer('q5', 'b')"> C) Brain surgery 腦部手術</label></li>
+                        <li><label id="q5-d"><input type="radio" name="q5" value="d" onclick="checkAnswer('q5', 'b')"> D) Memory improvement 記憶力改善</label></li>
                     </ul>
+                    <div id="q5-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Neurodegeneration" is the progressive loss of neuron structure or function, seen in diseases like Alzheimer's. Naked mole rats show no signs of neurodegeneration.<br>
+                            <strong>「Neurodegeneration」係神經元結構或功能嘅逐漸喪失，見於阿爾茨海默病等疾病。裸鼴鼠冇顯示神經退化嘅跡象。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q6-container">
                     <p><strong>6. An "anesthetic" is used to:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q6" value="a"> A) Cause pain 引起疼痛</label></li>
-                        <li><label><input type="radio" name="q6" value="b"> B) Cause insensitivity to pain 引起對疼痛不敏感</label></li>
-                        <li><label><input type="radio" name="q6" value="c"> C) Increase energy 增加能量</label></li>
-                        <li><label><input type="radio" name="q6" value="d"> D) Improve vision 改善視力</label></li>
+                        <li><label id="q6-a"><input type="radio" name="q6" value="a" onclick="checkAnswer('q6', 'b')"> A) Cause pain 引起疼痛</label></li>
+                        <li><label id="q6-b"><input type="radio" name="q6" value="b" onclick="checkAnswer('q6', 'b')"> B) Cause insensitivity to pain 引起對疼痛不敏感</label></li>
+                        <li><label id="q6-c"><input type="radio" name="q6" value="c" onclick="checkAnswer('q6', 'b')"> C) Increase energy 增加能量</label></li>
+                        <li><label id="q6-d"><input type="radio" name="q6" value="d" onclick="checkAnswer('q6', 'b')"> D) Improve vision 改善視力</label></li>
                     </ul>
+                    <div id="q6-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            An "anesthetic" causes loss of sensation or pain. Naked mole rats can survive 18 minutes without oxygen, making anesthetics ineffective on them.<br>
+                            <strong>「Anesthetic」引起感覺或疼痛喪失。裸鼴鼠可以喺無氧情況下生存 18 分鐘，使麻醉劑對佢哋無效。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q7-container">
                     <p><strong>7. "Menopause" is:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q7" value="a"> A) When menstruation stops permanently 月經永久停止</label></li>
-                        <li><label><input type="radio" name="q7" value="b"> B) When puberty begins 青春期開始</label></li>
-                        <li><label><input type="radio" name="q7" value="c"> C) A type of disease 一種疾病</label></li>
-                        <li><label><input type="radio" name="q7" value="d"> D) A reproductive organ 生殖器官</label></li>
+                        <li><label id="q7-a"><input type="radio" name="q7" value="a" onclick="checkAnswer('q7', 'a')"> A) When menstruation stops permanently 月經永久停止</label></li>
+                        <li><label id="q7-b"><input type="radio" name="q7" value="b" onclick="checkAnswer('q7', 'a')"> B) When puberty begins 青春期開始</label></li>
+                        <li><label id="q7-c"><input type="radio" name="q7" value="c" onclick="checkAnswer('q7', 'a')"> C) A type of disease 一種疾病</label></li>
+                        <li><label id="q7-d"><input type="radio" name="q7" value="d" onclick="checkAnswer('q7', 'a')"> D) A reproductive organ 生殖器官</label></li>
                     </ul>
+                    <div id="q7-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Menopause" is when menstruation permanently stops. Female naked mole rats never go through menopause—they breed until death.<br>
+                            <strong>「Menopause」係月經永久停止。雌性裸鼴鼠從不經歷更年期——佢哋持續繁殖直到死亡。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q8-container">
                     <p><strong>8. "Cognitive" relates to:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q8" value="a"> A) Physical strength 體力</label></li>
-                        <li><label><input type="radio" name="q8" value="b"> B) Mental processes like thinking 思維等心理過程</label></li>
-                        <li><label><input type="radio" name="q8" value="c"> C) Digestion 消化</label></li>
-                        <li><label><input type="radio" name="q8" value="d"> D) Breathing 呼吸</label></li>
+                        <li><label id="q8-a"><input type="radio" name="q8" value="a" onclick="checkAnswer('q8', 'b')"> A) Physical strength 體力</label></li>
+                        <li><label id="q8-b"><input type="radio" name="q8" value="b" onclick="checkAnswer('q8', 'b')"> B) Mental processes like thinking 思維等心理過程</label></li>
+                        <li><label id="q8-c"><input type="radio" name="q8" value="c" onclick="checkAnswer('q8', 'b')"> C) Digestion 消化</label></li>
+                        <li><label id="q8-d"><input type="radio" name="q8" value="d" onclick="checkAnswer('q8', 'b')"> D) Breathing 呼吸</label></li>
                     </ul>
+                    <div id="q8-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Cognitive" relates to mental processes like thinking, understanding, and learning. Researchers seek to prevent cognitive decline in aging.<br>
+                            <strong>「Cognitive」同思維、理解同學習等心理過程有關。研究人員尋求防止衰老期間嘅認知能力下降。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q9-container">
                     <p><strong>9. A "colony" is:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q9" value="a"> A) Single organism 單個生物</label></li>
-                        <li><label><input type="radio" name="q9" value="b"> B) Group of organisms living together 群居的生物群體</label></li>
-                        <li><label><input type="radio" name="q9" value="c"> C) Type of food 食物類型</label></li>
-                        <li><label><input type="radio" name="q9" value="d"> D) Type of habitat 棲息地類型</label></li>
+                        <li><label id="q9-a"><input type="radio" name="q9" value="a" onclick="checkAnswer('q9', 'b')"> A) Single organism 單個生物</label></li>
+                        <li><label id="q9-b"><input type="radio" name="q9" value="b" onclick="checkAnswer('q9', 'b')"> B) Group of organisms living together 群居的生物群體</label></li>
+                        <li><label id="q9-c"><input type="radio" name="q9" value="c" onclick="checkAnswer('q9', 'b')"> C) Type of food 食物類型</label></li>
+                        <li><label id="q9-d"><input type="radio" name="q9" value="d" onclick="checkAnswer('q9', 'b')"> D) Type of habitat 棲息地類型</label></li>
                     </ul>
+                    <div id="q9-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            A "colony" is a group of organisms of the same species living together. Naked mole rat colonies have 2 to over 100 animals, each with a queen.<br>
+                            <strong>「Colony」係同一物種嘅生物群體生活在一起。裸鼴鼠群落有 2 到超過 100 隻動物，每個群落有一隻蟻后。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="quiz-question">
+                <div class="quiz-question" id="q10-container">
                     <p><strong>10. "Juvenile" means:</strong></p>
                     <ul class="quiz-options">
-                        <li><label><input type="radio" name="q10" value="a"> A) Adult 成年</label></li>
-                        <li><label><input type="radio" name="q10" value="b"> B) Old 年老</label></li>
-                        <li><label><input type="radio" name="q10" value="c"> C) Young or immature 年輕或不成熟</label></li>
-                        <li><label><input type="radio" name="q10" value="d"> D) Wise 智慧</label></li>
+                        <li><label id="q10-a"><input type="radio" name="q10" value="a" onclick="checkAnswer('q10', 'c')"> A) Adult 成年</label></li>
+                        <li><label id="q10-b"><input type="radio" name="q10" value="b" onclick="checkAnswer('q10', 'c')"> B) Old 年老</label></li>
+                        <li><label id="q10-c"><input type="radio" name="q10" value="c" onclick="checkAnswer('q10', 'c')"> C) Young or immature 年輕或不成熟</label></li>
+                        <li><label id="q10-d"><input type="radio" name="q10" value="d" onclick="checkAnswer('q10', 'c')"> D) Wise 智慧</label></li>
                     </ul>
+                    <div id="q10-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation | 解釋:</strong><br>
+                            "Juvenile" means young or immature. Naked mole rats maintain juvenile biological features—even fetal ones—as they age.<br>
+                            <strong>「Juvenile」意思係年輕或不成熟。裸鼴鼠隨著年齡增長保持青少年嘅生物特徵——甚至胎兒時期嘅特徵。</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Answers | 提交答案</button>
+                <button type="button" class="submit-btn" onclick="checkQuiz()">Submit All Answers | 提交所有答案</button>
             </form>
 
             <div id="result" class="result" style="display: none;"></div>
@@ -313,22 +392,61 @@
     </div>
 
     <script>
-        function checkQuiz() {
-            const answers = {
-                q1: 'b', q2: 'b', q3: 'b', q4: 'c', q5: 'b',
-                q6: 'b', q7: 'a', q8: 'b', q9: 'b', q10: 'c'
-            };
+        const answers = {
+            q1: 'b', q2: 'b', q3: 'b', q4: 'c', q5: 'b',
+            q6: 'b', q7: 'a', q8: 'b', q9: 'b', q10: 'c'
+        };
+        
+        let score = 0;
+        let answeredQuestions = new Set();
+        
+        function checkAnswer(question, correctAnswer) {
+            if (answeredQuestions.has(question)) {
+                return;
+            }
+            answeredQuestions.add(question);
             
-            let score = 0;
-            let total = Object.keys(answers).length;
-            const form = document.getElementById('quizForm');
-            const formData = new FormData(form);
+            const formData = new FormData(document.getElementById('quizForm'));
+            const userAnswer = formData.get(question);
             
-            for (let [question, correctAnswer] of Object.entries(answers)) {
-                const userAnswer = formData.get(question);
-                if (userAnswer === correctAnswer) {
-                    score++;
+            const options = document.querySelectorAll(`input[name="${question}"]`);
+            options.forEach(opt => {
+                opt.disabled = true;
+                const label = document.getElementById(`${question}-${opt.value}`);
+                if (opt.value === correctAnswer) {
+                    label.classList.add('correct');
+                } else if (opt.value === userAnswer && userAnswer !== correctAnswer) {
+                    label.classList.add('incorrect');
                 }
+            });
+            
+            const feedbackDiv = document.getElementById(`${question}-feedback`);
+            feedbackDiv.classList.add('show');
+            
+            if (userAnswer === correctAnswer) {
+                feedbackDiv.classList.add('correct');
+                feedbackDiv.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 5px;">✅ Correct! 正確！</div>
+                    <div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>
+                `;
+                score++;
+            } else {
+                feedbackDiv.classList.add('incorrect');
+                const correctText = correctAnswer.toUpperCase();
+                feedbackDiv.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 5px;">❌ Incorrect. Correct answer: ${correctText} 錯誤。正確答案：${correctText}</div>
+                    <div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>
+                `;
+            }
+        }
+        
+        function checkQuiz() {
+            const total = Object.keys(answers).length;
+            const answered = answeredQuestions.size;
+            
+            if (answered < total) {
+                alert(`You have answered ${answered} out of ${total} questions. Please answer all questions first! | 你已回答 ${answered} 題，共 ${total} 題。請先回答所有問題！`);
+                return;
             }
             
             const resultDiv = document.getElementById('result');
