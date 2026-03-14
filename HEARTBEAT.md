@@ -24,6 +24,9 @@ If nothing needs attention, reply HEARTBEAT_OK.
 **3 月 18 日 (星期三)**
 • 13:00-16:00 - [Raymond] 匹克球 @ 會所 (3 hours)
 
+**3 月 21 日 (星期六)**
+• 12:00-13:00 - [Raymond] 匹克球 @ 荃灣愉景新城 BayPickle
+
 **3 月 14 日 (星期六)** ✅ 已報名成功
 • 08:45-16:30 [Family] 伊利沙伯中學 PTA 新春親子旅行 (已中籤)
   - 集合：08:45 (待定地點)
