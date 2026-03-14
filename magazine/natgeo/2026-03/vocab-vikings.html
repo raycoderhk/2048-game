@@ -458,7 +458,7 @@
         let score = 0;
         let answeredQuestions = new Set();
         
-        // Function to get AI details from Aliyun Qwen API (Real-time!)
+        // Function to get AI details from Aliyun Qwen API via CORS proxy
         async function getAIDetails(questionId, word) {
             const btn = event.target.closest('.ai-details-btn');
             const contentDiv = document.getElementById(`${questionId}-ai-content`);
@@ -474,36 +474,46 @@
             
             // Show loading
             btn.disabled = true;
-            btn.innerHTML = '<span class="loading-spinner"></span> Asking Aliyun AI...';
+            btn.innerHTML = '<span class="loading-spinner"></span> Asking AI...';
             
             try {
-                // Call Aliyun DashScope API
-                const response = await fetch('https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation', {
+                // Use CORS proxy to avoid browser security blocking
+                const proxyUrl = 'https://api.allorigins.win/raw?url=';
+                const apiUrl = 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation';
+                
+                // Alternative: Use a different approach - fetch from our own server endpoint
+                // For now, let's try with allorigins proxy
+                const requestBody = JSON.stringify({
+                    model: 'qwen-plus',
+                    input: {
+                        messages: [{
+                            role: 'system',
+                            content: 'You are an ESL English teacher. Explain vocabulary words with etymology, technical usage, related words, and examples. Provide bilingual (English + Traditional Chinese) explanations. Use HTML formatting with <br>, <strong>, <em> tags. Keep it concise.'
+                        }, {
+                            role: 'user',
+                            content: `Explain the word "${word}" in detail. Include: 1) Word Origin, 2) Technical Usage, 3) Related Words, 4) Example. Provide both English and Traditional Chinese. Format with HTML.`
+                        }]
+                    },
+                    parameters: {
+                        temperature: 0.7,
+                        max_tokens: 500
+                    }
+                });
+                
+                // Try direct fetch first (might work on some browsers)
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Authorization': 'Bearer sk-92b75e89aa404648b08741885f191e6b',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        model: 'qwen-plus',
-                        input: {
-                            messages: [{
-                                role: 'system',
-                                content: 'You are an ESL English teacher. Explain vocabulary words with etymology, technical usage, related words, and examples. Provide bilingual (English + Traditional Chinese) explanations. Use HTML formatting with <br>, <strong>, <em> tags.'
-                            }, {
-                                role: 'user',
-                                content: `Explain the word "${word}" in detail. Include: 1) Word Origin/Etymology, 2) Technical/Academic Usage, 3) Related Words (synonyms, word family), 4) Example from National Geographic article. Provide both English and Traditional Chinese (Cantonese-friendly) explanations. Format with HTML tags.`
-                            }]
-                        },
-                        parameters: {
-                            temperature: 0.7,
-                            max_tokens: 500
-                        }
-                    })
+                    body: requestBody,
+                    mode: 'cors'
                 });
                 
                 if (!response.ok) {
-                    throw new Error(`API error: ${response.status}`);
+                    const errorText = await response.text();
+                    throw new Error(`API error ${response.status}: ${errorText}`);
                 }
                 
                 const data = await response.json();
@@ -522,8 +532,22 @@
                 
             } catch (error) {
                 console.error('AI API Error:', error);
-                textDiv.innerHTML = '<div style="color: #dc3545;">Unable to connect to AI. Please check your internet connection or API key.</div>';
-                btn.innerHTML = '<span>🔄 Retry</span>';
+                textDiv.innerHTML = `
+                    <div style="color: #dc3545; margin-bottom: 15px;">
+                        <strong>❌ CORS Error</strong><br>
+                        Browser security blocks direct API calls.
+                    </div>
+                    <div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>💡 Workaround:</strong><br>
+                        The AI explanation feature requires a server-side proxy.
+                        Contact the site administrator to enable serverless function.
+                    </div>
+                    <div style="font-size: 0.85em; color: #666;">
+                        <strong>Technical details:</strong> ${error.message}
+                    </div>
+                `;
+                contentDiv.classList.add('show');
+                btn.innerHTML = '<span>ℹ️ CORS Blocked</span>';
                 btn.disabled = false;
             }
         }
