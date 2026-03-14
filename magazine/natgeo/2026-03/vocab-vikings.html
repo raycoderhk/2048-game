@@ -45,6 +45,15 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .explanation { margin-top: 10px; font-size: 0.95em; line-height: 1.6; }
         .explanation strong { color: #ff9900; }
+        .ai-details-btn { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: bold; cursor: pointer; margin-top: 10px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+        .ai-details-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .ai-details-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+        .ai-details-content { margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #f5f7fa, #e4e8ec); border-radius: 8px; border-left: 4px solid #667eea; display: none; }
+        .ai-details-content.show { display: block; animation: fadeIn 0.4s ease-out; }
+        .ai-details-content h4 { color: #667eea; margin-bottom: 10px; font-size: 1em; }
+        .ai-details-content .detail-text { line-height: 1.8; font-size: 0.95em; }
+        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
         .result { margin-top: 20px; padding: 20px; border-radius: 5px; font-weight: bold; }
         .result.correct { background: #d4edda; color: #155724; }
         .result.incorrect { background: #f8d7da; color: #721c24; }
@@ -218,6 +227,13 @@
                             <strong>💡 Explanation | 解釋:</strong><br>
                             "Excavate" means to dig carefully, especially to uncover archaeological remains. In the article, archaeologist Michael Nielsen was excavating a Viking site in Greenland.<br>
                             <strong>「Excavate」意思是小心挖掘，特別係為了發掘考古遺址。文章中，考古學家 Michael Nielsen 喺格陵蘭發掘維京遺址。</strong>
+                        </div>
+                        <button class="ai-details-btn" onclick="getAIDetails('q1', 'excavate')">
+                            <span>🤖 AI Details</span>
+                        </button>
+                        <div id="q1-ai-content" class="ai-details-content">
+                            <h4>📚 Detailed Explanation | 詳細解釋</h4>
+                            <div class="detail-text" id="q1-detail-text"></div>
                         </div>
                     </div>
                 </div>
@@ -400,6 +416,145 @@
         
         let score = 0;
         let answeredQuestions = new Set();
+        
+        // Pre-prepared AI detailed explanations (simulating Aliyun Qwen API responses)
+        const aiDetails = {
+            q1: {
+                word: 'excavate',
+                content: `
+                    <strong>📖 Word Origin | 詞源:</strong><br>
+                    From Latin "excavare" (ex- "out" + cavare "to hollow"). First used in English in the 17th century.<br>
+                    <em>源自拉丁語 "excavare"（ex- "出來" + cavare "挖空"）。17 世紀首次用於英語。</em><br><br>
+                    
+                    <strong>🔬 Technical Usage | 專業用法:</strong><br>
+                    In archaeology, "excavate" refers to the systematic removal of soil and layers to uncover historical artifacts. The process involves careful documentation, grid systems, and preservation techniques.<br>
+                    <em>喺考古學中，「excavate」指系統性地移除土壤同地層以發現歷史文物。過程涉及仔細記錄、網格系統同保護技術。</em><br><br>
+                    
+                    <strong>📝 Related Words | 相關詞彙:</strong><br>
+                    • Excavation (n.) 挖掘，發掘<br>
+                    • Excavator (n.) 挖掘機，發掘者<br>
+                    • Dig (v.) 挖掘（較口語）<br><br>
+                    
+                    <strong>💬 Example from Article | 文章例句:</strong><br>
+                    "He returned from a summer spent <strong>excavating</strong> a Viking site in southern Greenland."<br>
+                    <em>佢從格陵蘭南部一個夏季的<strong>維京遺址發掘</strong>工作歸來。</em>
+                `
+            },
+            q2: {
+                word: 'midden',
+                content: `
+                    <strong>📖 Word Origin | 詞源:</strong><br>
+                    From Old Norse "mykjadyngja" (mykja "dung" + dyngja "heap"). Entered English via Scots dialect.<br>
+                    <em>源自古諾爾斯語 "mykjadyngja"（mykja "糞便" + dyngja "堆"）。通過蘇格蘭方言進入英語。</em><br><br>
+                    
+                    <strong>🔬 Technical Usage | 專業用法:</strong><br>
+                    In archaeology, middens are crucial for understanding past human diets, trade, and daily life. They often contain shells, bones, pottery shards, and organic materials that can be carbon-dated.<br>
+                    <em>喺考古學中，垃圾堆對於理解過去人類飲食、貿易同日常生活至關重要。佢哋通常包含貝殼、骨頭、陶器碎片同可碳測年的有機材料。</em><br><br>
+                    
+                    <strong>📝 Related Words | 相關詞彙:</strong><br>
+                    • Trash heap 垃圾堆<br>
+                    • Refuse pile 廢棄物堆<br>
+                    • Dump 垃圾場<br><br>
+                    
+                    <strong>💬 Example from Article | 文章例句:</strong><br>
+                    "The horse was found in a <strong>midden</strong>, or trash heap, raising questions about why it was discarded."<br>
+                    <em>這匹馬是在一個<strong>垃圾堆</strong>中發現的，引發了關於它為何被丟棄的疑問。</em>
+                `
+            },
+            q3: {
+                word: 'fjord',
+                content: `
+                    <strong>📖 Word Origin | 詞源:</strong><br>
+                    From Old Norse "fjörðr", related to "far" (journey). Originally meant "lake" or "body of water".<br>
+                    <em>源自古諾爾斯語 "fjörðr"，與 "far"（旅程）有關。最初意指「湖泊」或「水體」。</em><br><br>
+                    
+                    <strong>🔬 Technical Usage | 專業用法:</strong><br>
+                    Fjords are formed by glacial erosion during ice ages. Norway has over 1,700 fjords. Greenland's fjords can be over 100km long and 1km deep.<br>
+                    <em>峽灣係冰河時期冰川侵蝕形成。挪威有超過 1,700 個峽灣。格陵蘭嘅峽灣可以超過 100 公里長同 1 公里深。</em><br><br>
+                    
+                    <strong>📝 Related Words | 相關詞彙:</strong><br>
+                    • Inlet 海灣<br>
+                    • Sound 海峽<br>
+                    • Bay 灣<br><br>
+                    
+                    <strong>💬 Example from Article | 文章例句:</strong><br>
+                    "Settlers clung to narrow meadows between the sea and the great ice sheet in the serpentine <strong>fjords</strong> of southwestern Greenland."<br>
+                    <em>定居者依附於格陵蘭西南部蜿蜒<strong>峽灣</strong>中介於海洋同巨大冰蓋之間的狹窄草地。</em>
+                `
+            },
+            q4: {
+                word: 'extinct',
+                content: `
+                    <strong>📖 Word Origin | 詞源:</strong><br>
+                    From Latin "extinctus", past participle of "extinguere" (to extinguish, quench).<br>
+                    <em>源自拉丁語 "extinctus"，"extinguere"（熄滅）的過去分詞。</em><br><br>
+                    
+                    <strong>🔬 Technical Usage | 專業用法:</strong><br>
+                    In biology, a species is declared extinct when no living individuals remain. The IUCN Red List tracks extinction risk. Current extinction rate is 100-1000x higher than natural background rate.<br>
+                    <em>喺生物學中，當沒有存活個體時，物種被宣佈為滅絕。IUCN 紅色名錄追蹤滅絕風險。當前滅絕率比自然背景率高 100-1000 倍。</em><br><br>
+                    
+                    <strong>📝 Related Words | 相關詞彙:</strong><br>
+                    • Extinction (n.) 滅絕<br>
+                    • Endangered (adj.) 瀕危的<br>
+                    • Critically endangered 極度瀕危<br><br>
+                    
+                    <strong>💬 Example from Article | 文章例句:</strong><br>
+                    "The subtext is, they all went <strong>extinct</strong>—the Norse colonies in Greenland went dark and their citizens disappeared."<br>
+                    <em>言下之意是，他們都<strong>滅絕</strong>了——格陵蘭的諾爾斯殖民地陷入沉寂，居民消失了。</em>
+                `
+            },
+            q5: {
+                word: 'relic',
+                content: `
+                    <strong>📖 Word Origin | 詞源:</strong><br>
+                    From Latin "reliquiae" (remains), from "relinquere" (to leave behind).<br>
+                    <em>源自拉丁語 "reliquiae"（遺留物），來自 "relinquere"（留下）。</em><br><br>
+                    
+                    <strong>🔬 Technical Usage | 專業用法:</strong><br>
+                    In archaeology and religion, relics are objects of historical or spiritual significance. Religious relics include saint remains; archaeological relics include tools, pottery, and structures.<br>
+                    <em>喺考古學同宗教中，遺物係具有歷史或精神意義的物品。宗教遺物包括聖人遺骸；考古遺物包括工具、陶器同建築。</em><br><br>
+                    
+                    <strong>📝 Related Words | 相關詞彙:</strong><br>
+                    • Artifact 人工製品<br>
+                    • Remnant 殘留物<br>
+                    • Vestige 痕跡<br><br>
+                    
+                    <strong>💬 Example from Article | 文章例句:</strong><br>
+                    "The ruins were the <strong>relics</strong> of people who hadn't survived in the hard, cold fjords."<br>
+                    <em>這些廢墟是未能在寒冷艱苦的峽灣中倖存下來的人們的<strong>遺物</strong>。</em>
+                `
+            }
+        };
+        
+        // Function to get AI details (simulated - in production would call Aliyun API)
+        function getAIDetails(questionId, word) {
+            const btn = event.target.closest('.ai-details-btn');
+            const contentDiv = document.getElementById(`${questionId}-ai-content`);
+            const textDiv = document.getElementById(`${questionId}-detail-text`);
+            
+            // Toggle display
+            if (contentDiv.classList.contains('show')) {
+                contentDiv.classList.remove('show');
+                btn.disabled = false;
+                btn.innerHTML = '<span>🤖 AI Details</span>';
+                return;
+            }
+            
+            // Show loading
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span> Loading...';
+            
+            // Simulate API delay (in production: fetch from Aliyun Qwen API)
+            setTimeout(() => {
+                const details = aiDetails[questionId];
+                if (details) {
+                    textDiv.innerHTML = details.content;
+                    contentDiv.classList.add('show');
+                    btn.innerHTML = '<span>✅ Show Less</span>';
+                    btn.disabled = false;
+                }
+            }, 800);
+        }
         
         function checkAnswer(question, correctAnswer) {
             // Prevent multiple answers for same question
