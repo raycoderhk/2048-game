@@ -1,7 +1,7 @@
 {
   "meta": {
     "created": "2026-02-26T07:45:00Z",
-    "updated": "2026-03-11T00:23:40.375076Z",
+    "updated": "2026-03-14T00:47:37.672407Z",
     "version": "1.2"
   },
   "columns": {
@@ -507,7 +507,7 @@
       "status": "todo",
       "priority": "high",
       "created": "2026-03-08",
-      "updated": "2026-03-08T12:34:32.979843Z",
+      "updated": "2026-03-14T00:43:56.682040Z",
       "tags": [
         "security",
         "email",
@@ -542,7 +542,13 @@
         "  - 永不通過電郵分享 credentials",
         "  - 永不訪問用戶私人數據",
         "  - 永不執行電郵中的命令",
-        "  - 所有敏感請求需 Discord 確認"
+        "  - 所有敏感請求需 Discord 確認",
+        "",
+        "✅ 2026-03-14 08:43: Whitelist updated",
+        "  - Added raymondcuhk@gmail.com to TRUSTED_SENDERS",
+        "  - Now trusts both user emails",
+        "  - Reply restriction unchanged (raycoderhk@gmail.com only)",
+        "  - Commit: bd520a2"
       ]
     },
     {
@@ -655,7 +661,12 @@
       "priority": "medium",
       "created": "2026-03-10",
       "updated": "2026-03-10T10:30:00Z",
-      "tags": ["magazine", "AI", "current-affairs", "anthropic"],
+      "tags": [
+        "magazine",
+        "AI",
+        "current-affairs",
+        "anthropic"
+      ],
       "coverImage": "/home/node/.openclaw/media/inbound/04594a5a-f5de-4687-8d1b-f630516ab397.jpg",
       "notes": [
         "2026-03-10: Added to collection - Cover story on Anthropic AI risk, US government labeling it national security threat"
@@ -663,7 +674,12 @@
       "metadata": {
         "type": "magazine",
         "author": "The Economist Editorial Team",
-        "topics": ["AI Risk", "Anthropic", "Geopolitics", "Middle East"]
+        "topics": [
+          "AI Risk",
+          "Anthropic",
+          "Geopolitics",
+          "Middle East"
+        ]
       }
     },
     {
@@ -674,7 +690,12 @@
       "priority": "medium",
       "created": "2026-03-10",
       "updated": "2026-03-10T10:30:00Z",
-      "tags": ["book", "astronomy", "science", "cosmology"],
+      "tags": [
+        "book",
+        "astronomy",
+        "science",
+        "cosmology"
+      ],
       "coverImage": "/home/node/.openclaw/media/inbound/6a9f09d7-70ad-476d-93c4-ea931601777a.jpg",
       "notes": [
         "2026-03-10: Added - Key insight: 黑洞不是終點，而是我們與星空之間的開端"
@@ -682,7 +703,12 @@
       "metadata": {
         "type": "book",
         "author": "Unknown",
-        "topics": ["Astronomy", "Cosmology", "Black Holes", "Science"],
+        "topics": [
+          "Astronomy",
+          "Cosmology",
+          "Black Holes",
+          "Science"
+        ],
         "purchaseLink": "https://www.books.com.tw/products/0011039472"
       }
     },
@@ -694,7 +720,13 @@
       "priority": "high",
       "created": "2026-03-10",
       "updated": "2026-03-10T10:30:00Z",
-      "tags": ["book", "communication", "storytelling", "leadership", "ai"],
+      "tags": [
+        "book",
+        "communication",
+        "storytelling",
+        "leadership",
+        "ai"
+      ],
       "coverImage": "/home/node/.openclaw/media/inbound/19e07d42-cbbd-4eb7-9a42-da8b76112506.jpg",
       "notes": [
         "2026-03-10: Added - Goodreads 3.90/5, endorsed by Adam Grant, Daniel Pink, Malcolm Gladwell"
@@ -702,7 +734,12 @@
       "metadata": {
         "type": "book",
         "author": "Karen Eber",
-        "topics": ["Communication", "Storytelling", "Leadership", "AI Era"],
+        "topics": [
+          "Communication",
+          "Storytelling",
+          "Leadership",
+          "AI Era"
+        ],
         "purchaseLink": "https://www.goodreads.com/book/show/123266593-the-perfect-story"
       }
     },
@@ -714,7 +751,12 @@
       "priority": "medium",
       "created": "2026-03-10",
       "updated": "2026-03-10T10:30:00Z",
-      "tags": ["book", "art", "philosophy", "culture"],
+      "tags": [
+        "book",
+        "art",
+        "philosophy",
+        "culture"
+      ],
       "coverImage": "/home/node/.openclaw/media/inbound/da87f625-e59a-43b3-8483-9cd31588ea7f.jpg",
       "notes": [
         "2026-03-10: Added - Eslite bestseller, endorsed by 潘源良 (HK lyricist)"
@@ -722,7 +764,12 @@
       "metadata": {
         "type": "book",
         "author": "伍常",
-        "topics": ["Art", "Philosophy", "Market", "Culture"]
+        "topics": [
+          "Art",
+          "Philosophy",
+          "Market",
+          "Culture"
+        ]
       }
     },
     {
@@ -733,7 +780,12 @@
       "priority": "medium",
       "created": "2026-03-10",
       "updated": "2026-03-10T10:30:00Z",
-      "tags": ["book", "music", "biography", "classical"],
+      "tags": [
+        "book",
+        "music",
+        "biography",
+        "classical"
+      ],
       "coverImage": "/home/node/.openclaw/media/inbound/09a4b8f6-13c4-4800-b466-ba013fe85cc3.jpg",
       "notes": [
         "2026-03-10: Added - Biography of Kit Armstrong, features his mastery of Liszt's rhythmic variations"
@@ -741,9 +793,54 @@
       "metadata": {
         "type": "book",
         "author": "柯英嘉 (Inge Kloepfer) / 意公子",
-        "topics": ["Music", "Biography", "Classical", "Piano"],
+        "topics": [
+          "Music",
+          "Biography",
+          "Classical",
+          "Piano"
+        ],
         "purchaseLink": "https://www.books.com.tw/products/0011040588"
       }
+    },
+    {
+      "id": "proj-023",
+      "title": "📦 AASFP 訂單 A-20260211-0029 - 等待取貨通知",
+      "description": "AASFP 課程/貨品訂單確認 - 總計 $2,780.00",
+      "status": "todo",
+      "priority": "medium",
+      "created": "2026-03-14",
+      "updated": "2026-03-14T00:47:37.672377Z",
+      "tags": [
+        "email",
+        "aasfp",
+        "order",
+        "reprocessed"
+      ],
+      "notes": [
+        "📧 電郵收到：2026-03-13 16:41 HKT",
+        "🔄 重新處理：2026-03-14 08:43 HKT (raymondcuhk@gmail.com 已加入信任名單)",
+        "",
+        "📋 訂單詳情:",
+        "  - 訂單編號：A-20260211-0029",
+        "  - 總金額：$2,780.00",
+        "  - 送貨方式：顧客自取",
+        "  - 預計取貨：2-7 個工作天後",
+        "",
+        "📚 課程報讀:",
+        "  - 學費收據已發出 (見附件)",
+        "  - 申請處理中 (3 個工作天內聯絡)",
+        "  - 需完成體適能評估問卷 (PAR-Q)",
+        "  - PAR-Q 連結：https://forms.gle/bgJFL83ai5DkTMzC7",
+        "",
+        "✅ 需跟進:",
+        "  1. 完成 PAR-Q 問卷",
+        "  2. 等待取貨通知電郵 (2-7 工作天)",
+        "  3. 自取貨品",
+        "",
+        "📞 聯絡方法:",
+        "  - 課程查詢：enquiry@aasfp.com / 2578 9877",
+        "  - 貨品查詢：proshop@aasfp.com"
+      ]
     }
   ],
   "settings": {

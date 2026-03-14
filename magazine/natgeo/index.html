@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 National Geographic - 期號列表 | Nat Geo Archive</title>
+    <style>
+        :root { --natgeo-yellow: #ffcc00; --bg-color: #f5f5f5; --card-bg: #fff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+            background-color: var(--bg-color);
+            padding: 40px 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 24px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .back-link:hover { background: #555; transform: translateY(-2px); }
+        .header { text-align: center; margin-bottom: 50px; }
+        .magazine-title { font-size: 3em; color: #333; margin-bottom: 10px; font-weight: bold; }
+        .magazine-subtitle { font-size: 1.3em; color: #666; }
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        .issue-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+        .issue-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        .issue-cover {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        .issue-cover.has-image { background: none; }
+        .issue-cover::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 1;
+        }
+        .issue-cover.has-image::before { display: none; }
+        .issue-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+        }
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+        .cover-date { font-size: 1.5em; font-weight: bold; color: #333; }
+        .cover-label { font-size: 0.9em; color: #666; margin-top: 5px; }
+        .issue-info { padding: 20px; }
+        .issue-headline { font-size: 1.2em; font-weight: bold; color: #333; margin-bottom: 10px; line-height: 1.4; }
+        .issue-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 15px;
+        }
+        .meta-item { display: flex; align-items: center; gap: 5px; }
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #ffcc00;
+            color: #333;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .tag.new { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .footer a { color: #ffcc00; text-decoration: none; font-weight: bold; }
+        @media (max-width: 768px) {
+            .magazine-title { font-size: 2em; }
+            .issues-grid { grid-template-columns: 1fr; }
+            .issue-cover { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← 返回雜誌存檔 | Back to Magazine Archive</a>
+        
+        <div class="header">
+            <h1 class="magazine-title">🌍 National Geographic</h1>
+            <p class="magazine-subtitle">Nat Geo Archive - 國家地理雜誌存檔</p>
+        </div>
+        
+        <div class="issues-grid">
+            <!-- Coming Soon Placeholder -->
+            <div class="issue-card coming-soon" style="opacity: 0.6;">
+                <div class="issue-cover">
+                    <div style="text-align: center; position: relative; z-index: 2;">
+                        <div style="font-size: 4em; margin-bottom: 20px;">🌍</div>
+                        <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">Coming Soon</div>
+                        <div style="font-size: 1em; color: #666;">即將推出</div>
+                    </div>
+                </div>
+                <div class="issue-info">
+                    <span class="tag">即將推出</span>
+                    <h2 class="issue-headline">First issue coming soon</h2>
+                    <div class="issue-meta">
+                        <span class="meta-item">📅 敬請期待</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #ffcc00, #ff9900); padding: 30px; border-radius: 15px; margin-top: 40px; color: #333;">
+            <h2 style="margin-bottom: 15px; font-size: 1.8em;">📸 About National Geographic</h2>
+            <p style="line-height: 1.8; margin-bottom: 15px;">
+                <strong>National Geographic</strong> (國家地理雜誌) is one of the world's most iconic science and exploration magazines. 
+                Known for its stunning photography, in-depth articles about nature, science, culture, and conservation.
+            </p>
+            <p style="line-height: 1.8;">
+                <strong>適合學習者：</strong> 對自然、科學、地理、文化感興趣的學習者。文章難度中等 (B1-B2)，圖片豐富幫助理解，
+                適合家庭學習或學校教育用途。
+            </p>
+            <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="margin-bottom: 10px;">🔬 主題範圍</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>🌿 自然與生態 (Nature & Ecology)</li>
+                        <li>🦕 科學與研究 (Science & Research)</li>
+                        <li>🗺️ 地理與探險 (Geography & Exploration)</li>
+                        <li>👥 文化與人類學 (Culture & Anthropology)</li>
+                        <li>🌊 海洋與環境 (Ocean & Environment)</li>
+                        <li>📷 攝影與視覺故事 (Photography)</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="margin-bottom: 10px;">✨ 學習重點</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>📖 科學詞彙 (Scientific Vocabulary)</li>
+                        <li>🌍 地理名稱 (Geographic Names)</li>
+                        <li>🔬 研究術語 (Research Terminology)</li>
+                        <li>📊 數據表達 (Data Presentation)</li>
+                        <li>📝 說明文寫作 (Expository Writing)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>OpenClaw Magazine Archive - National Geographic</strong></p>
+            <p style="margin-top: 10px;">
+                <a href="../../">🎮 GameWorld</a> | 
+                <a href="../">📚 Magazine Archive</a> | 
+                <a href="https://www.nationalgeographic.com/" target="_blank">Nat Geo Official</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

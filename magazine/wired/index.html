@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔌 Wired - 期號列表 | Wired Archive</title>
+    <style>
+        :root { --wired-black: #000; --wired-red: #ff0000; --bg-color: #f5f5f5; --card-bg: #fff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+            background-color: var(--bg-color);
+            padding: 40px 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 24px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .back-link:hover { background: #555; transform: translateY(-2px); }
+        .header { text-align: center; margin-bottom: 50px; }
+        .magazine-title { font-size: 3em; color: #000; margin-bottom: 10px; font-weight: bold; }
+        .magazine-subtitle { font-size: 1.3em; color: #666; }
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        .issue-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+        .issue-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        .issue-cover {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .issue-cover.has-image { background: none; }
+        .issue-cover::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 1;
+        }
+        .issue-cover.has-image::before { display: none; }
+        .issue-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+        }
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: auto;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .cover-date { font-size: 1.5em; font-weight: bold; color: white; }
+        .cover-label { font-size: 0.9em; color: rgba(255,255,255,0.8); margin-top: 5px; }
+        .issue-info { padding: 20px; }
+        .issue-headline { font-size: 1.2em; font-weight: bold; color: #333; margin-bottom: 10px; line-height: 1.4; }
+        .issue-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 15px;
+        }
+        .meta-item { display: flex; align-items: center; gap: 5px; }
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #000;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .tag.new { background: linear-gradient(135deg, #ff0000, #ff6600); }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .footer a { color: #000; text-decoration: none; font-weight: bold; }
+        @media (max-width: 768px) {
+            .magazine-title { font-size: 2em; }
+            .issues-grid { grid-template-columns: 1fr; }
+            .issue-cover { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← 返回雜誌存檔 | Back to Magazine Archive</a>
+        
+        <div class="header">
+            <h1 class="magazine-title">🔌 Wired</h1>
+            <p class="magazine-subtitle">Wired Archive - 連線雜誌存檔</p>
+        </div>
+        
+        <div class="issues-grid">
+            <!-- Coming Soon Placeholder -->
+            <div class="issue-card coming-soon" style="opacity: 0.6;">
+                <div class="issue-cover">
+                    <div style="text-align: center; position: relative; z-index: 2;">
+                        <div style="font-size: 4em; margin-bottom: 20px;">🔌</div>
+                        <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">Coming Soon</div>
+                        <div style="font-size: 1em; color: rgba(255,255,255,0.7);">即將推出</div>
+                    </div>
+                </div>
+                <div class="issue-info">
+                    <span class="tag">即將推出</span>
+                    <h2 class="issue-headline">First issue coming soon</h2>
+                    <div class="issue-meta">
+                        <span class="meta-item">📅 敬請期待</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #000, #333); padding: 30px; border-radius: 15px; margin-top: 40px; color: white;">
+            <h2 style="margin-bottom: 15px; font-size: 1.8em;">🔌 About Wired</h2>
+            <p style="line-height: 1.8; margin-bottom: 15px;">
+                <strong>Wired</strong> (連線雜誌) is a monthly American magazine focusing on emerging technologies 
+                and their impact on culture, economy, and politics. Known for cutting-edge journalism and futuristic thinking.
+            </p>
+            <p style="line-height: 1.8;">
+                <strong>適合學習者：</strong> 對科技、創新、未來趨勢感興趣的學習者。文章難度較高 (C1-C2)，
+                適合 IT 從業員、科技愛好者、創業家，或想學習科技英文的進階學習者。
+            </p>
+            <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="margin-bottom: 10px; color: #ff0000;">💡 主題範圍</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>🤖 人工智能 (Artificial Intelligence)</li>
+                        <li>🔐 網絡安全 (Cybersecurity)</li>
+                        <li>📱 消費電子 (Consumer Electronics)</li>
+                        <li>🚀 太空探索 (Space Exploration)</li>
+                        <li>🧬 生物科技 (Biotechnology)</li>
+                        <li>💰 科技商業 (Tech Business)</li>
+                        <li>🌐 社交媒體 (Social Media)</li>
+                        <li>🎮 遊戲與娛樂 (Gaming & Entertainment)</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="margin-bottom: 10px; color: #ff0000;">✨ 學習重點</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>💻 科技詞彙 (Tech Vocabulary)</li>
+                        <li>📊 商業術語 (Business Terminology)</li>
+                        <li>🔬 科學表達 (Scientific Expression)</li>
+                        <li>📝 評論寫作 (Critical Writing)</li>
+                        <li>🎯 趨勢分析 (Trend Analysis)</li>
+                        <li>🌍 全球視野 (Global Perspective)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>OpenClaw Magazine Archive - Wired</strong></p>
+            <p style="margin-top: 10px;">
+                <a href="../../">🎮 GameWorld</a> | 
+                <a href="../">📚 Magazine Archive</a> | 
+                <a href="https://www.wired.com/" target="_blank">Wired Official</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -18,13 +18,31 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • 11:00-13:00 HKT - [Raymond] 匹克球 @ Pickleland
 • ~13:00 HKT - [Raymond] 午餐 - 匹克球朋友 (after pickleball)
 
+**3 月 16 日 (星期一)**
+• 10:00-12:00 - [Raymond] 匹克球 Morning Social Play @ Pickledise.hk (Pink court)
+
+**3 月 18 日 (星期三)**
+• 13:00-16:00 - [Raymond] 匹克球 @ 會所 (3 hours)
+
 **3 月 14 日 (星期六)** ✅ 已報名成功
-• [Family] 伊利沙伯中學 PTA 新春親子旅行 (已中籤)
+• 08:45-16:30 [Family] 伊利沙伯中學 PTA 新春親子旅行 (已中籤)
   - 集合：08:45 (待定地點)
   - 解散：16:30
   - 團費：$90/人 (已資助)
-  - 行程：火龍果農莊 → 韓式泡菜工作坊 → 流浮山鮑魚海鮮午宴 → 海味街 → 錦田壁畫村
+  - 詳細時間表：
+    08:45-09:15 集合及點名
+    09:15-10:15 乘車前往落馬洲
+    10:15-11:45 遊覽落馬洲富琴火龍果農莊 + 體驗韓國泡菜工作坊
+    11:45-12:30 乘車前往流浮山
+    12:30-13:30 於流浮山歡樂海鮮酒家享用午膳（鮑魚海鮮餐）
+    13:30-14:00 遊覽流浮山海味街及近觀后海灣景觀
+    14:00-14:30 乘車前往錦田
+    14:30-15:45 遊覽錦田壁畫村及參觀紅磚屋市集
+    15:45-16:30 集合及回程
   - 聯絡：2380 9621
+• 13:30 [Family] 流浮山幫師兄買蝦子
+  - 📍 流浮山海味街
+  - 🛒 買一樽蝦子
 • 18:30 HKT - [Family] 同鄉會晚宴 @North Point (Tentative)
 
 **3 月 15 日 (星期日)**
@@ -32,29 +50,32 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • [Family] 慶祝活動: board game
 
 **3 月 17 日 (星期二)** 💕
-• [Family] 結婚周年紀念日 (深圳)
-  - 11:00 深圳灣文化廣場展覽
-  - 食 + 按摩
-• [Family] 🏛️ 深圳灣文化廣場展覽 (Anniversary) @ 11:00
+• 10:00-11:00 [Couple] 荃灣皇崗巴士 (往皇崗口岸)
+• 11:00-13:00 [Couple] Didi to 深圳灣文化廣場展覽
   - 📍 深圳市南山區科苑南路 2516 號
   - 🚇 地鐵 13 號線「人才公園站」B1 出口
   - 🖼️ 必睇：《我心歸處》+《匠作中國》+《一個世紀的椅子》
+• 13:00-18:00 [Couple] Didi to 港灣一号 (午餐 + Lobby + Spa)
+  - 📍 深圳福田口岸附近
+• 18:00-20:00 [Couple] 週年紀念晚餐
+  - 📍 地點待定
+• 20:00-21:00 [Couple] Didi 皇崗口岸 返港
 
 **3 月 26 日 (星期四)** 📚
-• 08:15-09:00 [Daughter UT] 中文
-• 09:45-10:15 [Daughter UT] CES
+• 08:15 [Daughter UT] 中文
+• 09:45 [Daughter UT] CES
 
 **3 月 27 日 (星期五)** 📚
-• 08:15-09:00 [Daughter UT] 英文
-• 09:45-10:15 [Daughter UT] 地理
+• 08:15 [Daughter UT] 英文
+• 09:45 [Daughter UT] 地理
 
 **3 月 30 日 (星期一)** 📚
-• 08:15-09:00 [Daughter UT] 數學
-• 09:45-10:15 [Daughter UT] 歷史
+• 08:15 [Daughter UT] 數學
+• 09:45 [Daughter UT] 歷史
 
 **3 月 31 日 (星期二)** 📚
-• 08:15-09:00 [Daughter UT] 科學
-• 09:45-10:15 [Daughter UT] 中國歷史
+• 08:15 [Daughter UT] 科學
+• 09:45 [Daughter UT] 中國歷史
 
 **已完成 (Past Events):**
 • Hugging Face Token 申請
