@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 The Vikings Who Vanished - Vocabulary | Nat Geo March 2026</title>
+    <style>
+        :root { --natgeo-yellow: #ffcc00; --bg-color: #f5f5f5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif; background-color: var(--bg-color); color: #333; line-height: 1.8; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .back-link { display: inline-block; margin-bottom: 20px; padding: 10px 20px; background: #333; color: white; text-decoration: none; border-radius: 5px; }
+        .back-link:hover { background: #555; }
+        header { background: linear-gradient(135deg, #ffcc00, #ff9900); color: #333; padding: 30px; border-radius: 10px; margin-bottom: 30px; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; color: #333; }
+        .article-link { color: #ff9900; text-decoration: none; font-weight: bold; }
+        .article-link:hover { text-decoration: underline; }
+        .word-table { width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-collapse: collapse; margin-bottom: 30px; }
+        .word-table thead { background: #333; color: white; }
+        .word-table th { padding: 15px; text-align: left; font-weight: 600; }
+        .word-table td { padding: 15px; border-bottom: 1px solid #eee; }
+        .word-table tbody tr:hover { background-color: #fffbf0; }
+        .word { font-weight: bold; color: #ff9900; font-size: 1.1em; }
+        .pos { font-style: italic; color: #666; font-size: 0.9em; }
+        .ipa { color: #999; font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif; }
+        .definition { font-weight: 500; }
+        .example { color: #666; font-style: italic; margin-top: 5px; }
+        .quiz-section { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 30px; }
+        .quiz-section h2 { color: #ff9900; margin-bottom: 20px; }
+        .quiz-question { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .quiz-question:last-child { border-bottom: none; }
+        .quiz-options { list-style: none; }
+        .quiz-options li { margin: 10px 0; }
+        .quiz-options label { display: block; padding: 12px 15px; background: #f9f9f9; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
+        .quiz-options label:hover { background: #fffbf0; }
+        .quiz-options label.correct { background: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .quiz-options label.incorrect { background: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+        .quiz-options input[type="radio"] { margin-right: 10px; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; }
+        .feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .explanation { margin-top: 10px; font-size: 0.95em; line-height: 1.6; }
+        .explanation strong { color: #ff9900; }
+        .ai-details-btn { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: bold; cursor: pointer; margin-top: 10px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+        .ai-details-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .ai-details-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+        .ai-details-content { margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #f5f7fa, #e4e8ec); border-radius: 8px; border-left: 4px solid #667eea; display: none; }
+        .ai-details-content.show { display: block; animation: fadeIn 0.4s ease-out; }
+        .ai-details-content h4 { color: #667eea; margin-bottom: 10px; font-size: 1em; }
+        .ai-details-content .detail-text { line-height: 1.8; font-size: 0.95em; }
+        .result { margin-top: 20px; padding: 20px; border-radius: 5px; font-weight: bold; }
+        .result.correct { background: #d4edda; color: #155724; }
+        .result.incorrect { background: #f8d7da; color: #721c24; }
+        footer { text-align: center; padding: 30px; color: #666; margin-top: 30px; }
+        footer a { color: #ff9900; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Back to Issue</a>
+        <a href="../../" class="back-link" style="margin-left: 10px;">← Back to Nat Geo</a>
+        
+        <header>
+            <h1>🌍 The Vikings Who Vanished</h1>
+            <p style="font-size: 1.2em;">Vocabulary & Quiz</p>
+            <p style="margin-top: 10px;">
+                <a href="https://www.nationalgeographic.com/history/article/viking-greenland-norse-vanished" class="article-link" target="_blank">📖 Read Original Article →</a>
+            </p>
+        </header>
+
+        <h2 style="color: #ff9900; margin-bottom: 20px;">📚 Vocabulary</h2>
+        <table class="word-table">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Word</th>
+                    <th style="width: 10%;">POS</th>
+                    <th style="width: 15%;">IPA</th>
+                    <th style="width: 30%;">Definition</th>
+                    <th style="width: 30%;">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="word">excavate</span></td>
+                    <td><span class="pos">v.</span></td>
+                    <td><span class="ipa">/ˈek.sə.veɪt/</span></td>
+                    <td><div class="definition">To dig carefully to uncover archaeological remains<br>挖掘，發掘</div></td>
+                    <td><div class="example">"He returned from a summer spent <strong>excavating</strong> a Viking site."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">midden</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈmɪd.ən/</span></td>
+                    <td><div class="definition">A trash heap from ancient settlements<br>古代垃圾堆</div></td>
+                    <td><div class="example">"The horse was found in a <strong>midden</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">fjord</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/fjɔːrd/</span></td>
+                    <td><div class="definition">A long, narrow inlet created by glaciers<br>峽灣</div></td>
+                    <td><div class="example">"Settlers lived in the <strong>fjords</strong> of Greenland."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">extinct</span></td>
+                    <td><span class="pos">adj.</span></td>
+                    <td><span class="ipa">/ɪkˈstɪŋkt/</span></td>
+                    <td><div class="definition">No longer existing; died out completely<br>滅絕的</div></td>
+                    <td><div class="example">"They all went <strong>extinct</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">relic</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈrel.ɪk/</span></td>
+                    <td><div class="definition">An object from an earlier time<br>遺物</div></td>
+                    <td><div class="example">"The ruins were <strong>relics</strong> of the Norse people."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">outlaw</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈaʊt.lɔː/</span></td>
+                    <td><div class="definition">A person who has broken the law<br>逃犯</div></td>
+                    <td><div class="example">"Led by an <strong>outlaw</strong> named Erik the Red."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">exile</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈek.saɪl/</span></td>
+                    <td><div class="definition">Being barred from one's native country<br>流放</div></td>
+                    <td><div class="example">"Serving a sentence of <strong>exile</strong> for murder."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">apocalypse</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/əˈpɒk.ə.lɪps/</span></td>
+                    <td><div class="definition">A catastrophic event causing destruction<br>大災難</div></td>
+                    <td><div class="example">"If they died in some <strong>apocalypse</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">compelling</span></td>
+                    <td><span class="pos">adj.</span></td>
+                    <td><span class="ipa">/kəmˈpel.ɪŋ/</span></td>
+                    <td><div class="definition">Powerfully convincing<br>令人信服的</div></td>
+                    <td><div class="example">"A <strong>compelling</strong> new theory."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">heathland</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈhiːθ.lənd/</span></td>
+                    <td><div class="definition">Open land with low shrubs<br>荒野</div></td>
+                    <td><div class="example">"From the <strong>heathlands</strong> of Scandinavia."</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quiz-section">
+            <h2>📝 Quiz</h2>
+            <p style="margin-bottom: 20px; color: #666;">Choose the correct answer for each question.</p>
+            
+            <form id="quizForm">
+                <div class="quiz-question" id="q1-container">
+                    <p><strong>1. What does "excavate" mean?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q1-a"><input type="radio" name="q1" value="a" onclick="checkAnswer('q1', 'b')"> A) To build a new structure</label></li>
+                        <li><label id="q1-b"><input type="radio" name="q1" value="b" onclick="checkAnswer('q1', 'b')"> B) To dig carefully to uncover remains</label></li>
+                        <li><label id="q1-c"><input type="radio" name="q1" value="c" onclick="checkAnswer('q1', 'b')"> C) To paint a wall</label></li>
+                        <li><label id="q1-d"><input type="radio" name="q1" value="d" onclick="checkAnswer('q1', 'b')"> D) To sail across the ocean</label></li>
+                    </ul>
+                    <div id="q1-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            "Excavate" means to dig carefully, especially to uncover archaeological remains.
+                        </div>
+                        <button class="ai-details-btn" onclick="showAIDetails('q1')">
+                            <span>🤖 Show AI Explanation</span>
+                        </button>
+                        <div id="q1-ai-content" class="ai-details-content">
+                            <h4>📚 Detailed Explanation</h4>
+                            <div class="detail-text">
+                                <strong>📖 Word Origin:</strong><br>
+                                From Latin "excavare" (ex- "out" + cavare "to hollow"). First used in English in the 17th century.<br><br>
+                                
+                                <strong>🔬 Technical Usage:</strong><br>
+                                In archaeology, "excavate" refers to the systematic removal of soil and layers to uncover historical artifacts. The process involves careful documentation, grid systems, and preservation techniques.<br><br>
+                                
+                                <strong>📝 Related Words:</strong><br>
+                                • Excavation (n.) 挖掘，發掘<br>
+                                • Excavator (n.) 挖掘機，發掘者<br>
+                                • Dig (v.) 挖掘（較口語）<br><br>
+                                
+                                <strong>💬 Example from Article:</strong><br>
+                                "He returned from a summer spent <strong>excavating</strong> a Viking site in southern Greenland."<br>
+                                <em>他從格陵蘭南部一個夏季的維京遺址發掘工作歸來。</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q2-container">
+                    <p><strong>2. A "midden" is:</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q2-a"><input type="radio" name="q2" value="a" onclick="checkAnswer('q2', 'c')"> A) A type of Viking ship</label></li>
+                        <li><label id="q2-b"><input type="radio" name="q2" value="b" onclick="checkAnswer('q2', 'c')"> B) A religious ceremony</label></li>
+                        <li><label id="q2-c"><input type="radio" name="q2" value="c" onclick="checkAnswer('q2', 'c')"> C) A trash heap or refuse pile</label></li>
+                        <li><label id="q2-d"><input type="radio" name="q2" value="d" onclick="checkAnswer('q2', 'c')"> D) A farming tool</label></li>
+                    </ul>
+                    <div id="q2-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            A "midden" is an ancient trash heap where archaeologists often find artifacts.
+                        </div>
+                        <button class="ai-details-btn" onclick="showAIDetails('q2')">
+                            <span>🤖 Show AI Explanation</span>
+                        </button>
+                        <div id="q2-ai-content" class="ai-details-content">
+                            <h4>📚 Detailed Explanation</h4>
+                            <div class="detail-text">
+                                <strong>📖 Word Origin:</strong><br>
+                                From Old Norse "mykjadyngja" (mykja "dung" + dyngja "heap"). Entered English via Scots dialect.<br><br>
+                                
+                                <strong>🔬 Technical Usage:</strong><br>
+                                In archaeology, middens are crucial for understanding past human diets, trade, and daily life. They often contain shells, bones, pottery shards, and organic materials that can be carbon-dated.<br><br>
+                                
+                                <strong>📝 Related Words:</strong><br>
+                                • Trash heap 垃圾堆<br>
+                                • Refuse pile 廢棄物堆<br>
+                                • Dump 垃圾場<br><br>
+                                
+                                <strong>💬 Example from Article:</strong><br>
+                                "The horse was found in a <strong>midden</strong>, or trash heap, raising questions about why it was discarded."<br>
+                                <em>這匹馬是在一個垃圾堆中發現的，引發了關於它為何被丟棄的疑問。</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q3-container">
+                    <p><strong>3. What is a "fjord"?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q3-a"><input type="radio" name="q3" value="a" onclick="checkAnswer('q3', 'a')"> A) A long, narrow inlet with steep sides created by glaciers</label></li>
+                        <li><label id="q3-b"><input type="radio" name="q3" value="b" onclick="checkAnswer('q3', 'a')"> B) A type of Viking weapon</label></li>
+                        <li><label id="q3-c"><input type="radio" name="q3" value="c" onclick="checkAnswer('q3', 'a')"> C) A traditional Norse meal</label></li>
+                        <li><label id="q3-d"><input type="radio" name="q3" value="d" onclick="checkAnswer('q3', 'a')"> D) A type of ancient house</label></li>
+                    </ul>
+                    <div id="q3-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            A "fjord" is a long, narrow sea inlet with steep cliffs, formed by glacial erosion.
+                        </div>
+                        <button class="ai-details-btn" onclick="showAIDetails('q3')">
+                            <span>🤖 Show AI Explanation</span>
+                        </button>
+                        <div id="q3-ai-content" class="ai-details-content">
+                            <h4>📚 Detailed Explanation</h4>
+                            <div class="detail-text">
+                                <strong>📖 Word Origin:</strong><br>
+                                From Old Norse "fjörðr", related to "far" (journey). Originally meant "lake" or "body of water".<br><br>
+                                
+                                <strong>🔬 Technical Usage:</strong><br>
+                                Fjords are formed by glacial erosion during ice ages. Norway has over 1,700 fjords. Greenland's fjords can be over 100km long and 1km deep.<br><br>
+                                
+                                <strong>📝 Related Words:</strong><br>
+                                • Inlet 海灣<br>
+                                • Sound 海峽<br>
+                                • Bay 灣<br><br>
+                                
+                                <strong>💬 Example from Article:</strong><br>
+                                "Settlers clung to narrow meadows between the sea and the great ice sheet in the serpentine <strong>fjords</strong> of southwestern Greenland."<br>
+                                <em>定居者依附於格陵蘭西南部蜿蜒峽灣中介於海洋同巨大冰蓋之間的狹窄草地。</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" style="background: linear-gradient(135deg, #ffcc00, #ff9900); color: #333; border: none; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px;" onclick="checkQuiz()">Submit All Answers</button>
+            </form>
+
+            <div id="result" class="result" style="display: none;"></div>
+        </div>
+
+        <footer>
+            <p><strong>National Geographic Magazine Archive - ESL Vocabulary</strong></p>
+            <p>March 2026 Issue</p>
+        </footer>
+    </div>
+
+    <script>
+        const answers = {
+            q1: 'b', q2: 'c', q3: 'a', q4: 'c', q5: 'b',
+            q6: 'c', q7: 'b', q8: 'c', q9: 'b', q10: 'a'
+        };
+        
+        let score = 0;
+        let answeredQuestions = new Set();
+        
+        // Show pre-generated AI details (no API call needed!)
+        function showAIDetails(questionId) {
+            const contentDiv = document.getElementById(`${questionId}-ai-content`);
+            const btn = event.target.closest('.ai-details-btn');
+            
+            if (contentDiv.classList.contains('show')) {
+                contentDiv.classList.remove('show');
+                btn.innerHTML = '<span>🤖 Show AI Explanation</span>';
+            } else {
+                contentDiv.classList.add('show');
+                btn.innerHTML = '<span>✅ Hide</span>';
+            }
+        }
+        
+        function checkAnswer(question, correctAnswer) {
+            if (answeredQuestions.has(question)) return;
+            answeredQuestions.add(question);
+            
+            const formData = new FormData(document.getElementById('quizForm'));
+            const userAnswer = formData.get(question);
+            
+            const options = document.querySelectorAll(`input[name="${question}"]`);
+            options.forEach(opt => {
+                opt.disabled = true;
+                const label = document.getElementById(`${question}-${opt.value}`);
+                if (opt.value === correctAnswer) {
+                    label.classList.add('correct');
+                } else if (opt.value === userAnswer && userAnswer !== correctAnswer) {
+                    label.classList.add('incorrect');
+                }
+            });
+            
+            const feedbackDiv = document.getElementById(`${question}-feedback`);
+            feedbackDiv.classList.add('show');
+            
+            if (userAnswer === correctAnswer) {
+                feedbackDiv.classList.add('correct');
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">✅ Correct!</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>`;
+                score++;
+            } else {
+                feedbackDiv.classList.add('incorrect');
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">❌ Incorrect. Correct answer: ${correctAnswer.toUpperCase()}</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>`;
+            }
+        }
+        
+        function checkQuiz() {
+            const total = Object.keys(answers).length;
+            const answered = answeredQuestions.size;
+            
+            if (answered < total) {
+                alert(`You have answered ${answered} out of ${total} questions. Please answer all questions first!`);
+                return;
+            }
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            if (score === total) {
+                resultDiv.className = 'result correct';
+                resultDiv.innerHTML = `🎉 Perfect! ${score}/${total} correct!`;
+            } else if (score >= 7) {
+                resultDiv.className = 'result correct';
+                resultDiv.innerHTML = `✅ Great job! ${score}/${total} correct!`;
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.innerHTML = `📚 Keep studying! ${score}/${total} correct.`;
+            }
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

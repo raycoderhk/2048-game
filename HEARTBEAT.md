@@ -49,6 +49,9 @@ If nothing needs attention, reply HEARTBEAT_OK.
 • 18:30 HKT - [Family] 同鄉會晚宴 @North Point (Tentative)
 
 **3 月 15 日 (星期日)**
+• 11:15 [Raymond] Gym
+• 14:00-14:10 [Raymond] Parcel
+• 14:10 [Raymond] Buy cake
 • [Son] 兒子生日 🎂
 • [Family] 慶祝活動: board game
 
