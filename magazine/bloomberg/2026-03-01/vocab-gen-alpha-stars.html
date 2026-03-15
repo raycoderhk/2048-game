@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⭐ Gen Alpha Stars - Vocabulary | Bloomberg March 2026</title>
+    <style>
+        :root { --bloomberg-blue: #002878; --bloomberg-orange: #ff6600; --bg-color: #f5f5f5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif; background-color: var(--bg-color); color: #333; line-height: 1.8; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .back-link { display: inline-block; margin-bottom: 20px; padding: 10px 20px; background: #333; color: white; text-decoration: none; border-radius: 5px; }
+        .back-link:hover { background: #555; }
+        header { background: linear-gradient(135deg, var(--bloomberg-blue), #003399); color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; color: white; }
+        .article-link { color: var(--bloomberg-orange); text-decoration: none; font-weight: bold; }
+        .article-link:hover { text-decoration: underline; }
+        .word-table { width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-collapse: collapse; margin-bottom: 30px; }
+        .word-table thead { background: var(--bloomberg-blue); color: white; }
+        .word-table th { padding: 15px; text-align: left; font-weight: 600; }
+        .word-table td { padding: 15px; border-bottom: 1px solid #eee; }
+        .word-table tbody tr:hover { background-color: #f0f4ff; }
+        .word { font-weight: bold; color: var(--bloomberg-blue); font-size: 1.1em; }
+        .pos { font-style: italic; color: #666; font-size: 0.9em; }
+        .ipa { color: #999; font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif; }
+        .definition { font-weight: 500; }
+        .example { color: #666; font-style: italic; margin-top: 5px; }
+        .quiz-section { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 30px; }
+        .quiz-section h2 { color: var(--bloomberg-blue); margin-bottom: 20px; }
+        .quiz-question { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .quiz-question:last-child { border-bottom: none; }
+        .quiz-options { list-style: none; }
+        .quiz-options li { margin: 10px 0; }
+        .quiz-options label { display: block; padding: 12px 15px; background: #f9f9f9; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
+        .quiz-options label:hover { background: #f0f4ff; }
+        .quiz-options label.correct { background: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .quiz-options label.incorrect { background: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+        .quiz-options input[type="radio"] { margin-right: 10px; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; }
+        .feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .explanation { margin-top: 10px; font-size: 0.95em; line-height: 1.6; }
+        .ai-details-btn { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: bold; cursor: pointer; margin-top: 10px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+        .ai-details-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .ai-details-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+        .ai-details-content { margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #f5f7fa, #e4e8ec); border-radius: 8px; border-left: 4px solid #667eea; display: none; }
+        .ai-details-content.show { display: block; animation: fadeIn 0.4s ease-out; }
+        .ai-details-content h4 { color: #667eea; margin-bottom: 10px; font-size: 1em; }
+        .detail-text { line-height: 1.8; font-size: 0.95em; }
+        .loading-spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        footer { text-align: center; padding: 30px; color: #666; margin-top: 30px; }
+        footer a { color: var(--bloomberg-blue); text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Back to Issue</a>
+        <a href="../../" class="back-link" style="margin-left: 10px;">← Back to Bloomberg</a>
+        
+        <header>
+            <h1>⭐ Gen Alpha Stardom Vocabulary</h1>
+            <p style="font-size: 1.2em;">How Gen Alpha Stardom Became Big Business</p>
+            <p style="margin-top: 10px;">
+                <a href="https://www.bloomberg.com/news/features/2026-02-17/salish-matter-youtube-star-and-sincerely-yours-founder-is-coming-to-netflix" class="article-link" target="_blank">📖 Read Original Article →</a>
+            </p>
+        </header>
+
+        <h2 style="color: var(--bloomberg-blue); margin-bottom: 20px;">📚 Vocabulary | 詞彙</h2>
+        <table class="word-table">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Word</th>
+                    <th style="width: 10%;">POS</th>
+                    <th style="width: 15%;">IPA</th>
+                    <th style="width: 30%;">Definition</th>
+                    <th style="width: 30%;">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="word">stardom</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈstɑːr.dəm/</span></td>
+                    <td><div class="definition">The status of being a famous performer<br>明星地位，名氣</div></td>
+                    <td><div class="example">"Gen Alpha <strong>stardom</strong> is big business."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">content creator</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈkɒn.tent kriːˈeɪ.tər/</span></td>
+                    <td><div class="definition">Someone who makes digital media<br>內容創作者</div></td>
+                    <td><div class="example">"Young <strong>content creators</strong> earn millions."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">platform</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈplæt.fɔːrm/</span></td>
+                    <td><div class="definition">A digital service for sharing content<br>平台</div></td>
+                    <td><div class="example">"YouTube and TikTok are popular <strong>platforms</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">subscriber</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/səbˈskraɪ.bər/</span></td>
+                    <td><div class="definition">Someone who follows a channel<br>訂閱者</div></td>
+                    <td><div class="example">"She has millions of <strong>subscribers</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">sponsor</span></td>
+                    <td><span class="pos">n./v.</span></td>
+                    <td><span class="ipa">/ˈspɒn.sər/</span></td>
+                    <td><div class="definition">A company that pays for promotion<br>贊助商</div></td>
+                    <td><div class="example">"Brands <strong>sponsor</strong> young influencers."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">endorsement</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ɪnˈdɔːs.mənt/</span></td>
+                    <td><div class="definition">Public support for a product<br>代言，背書</div></td>
+                    <td><div class="example">"<strong>Endorsement</strong> deals are lucrative."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">audience</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈɔː.di.əns/</span></td>
+                    <td><div class="definition">The group of people who watch content<br>觀眾，受眾</div></td>
+                    <td><div class="example">"Her <strong>audience</strong> is mostly kids."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">viral</span></td>
+                    <td><span class="pos">adj.</span></td>
+                    <td><span class="ipa">/ˈvaɪ.rəl/</span></td>
+                    <td><div class="definition">Spreading quickly online<br>病毒式傳播的</div></td>
+                    <td><div class="example">"The video went <strong>viral</strong> overnight."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">monetize</span></td>
+                    <td><span class="pos">v.</span></td>
+                    <td><span class="ipa">/ˈmɒn.ɪ.taɪz/</span></td>
+                    <td><div class="definition">To make money from something<br>變現，貨幣化</div></td>
+                    <td><div class="example">"Creators <strong>monetize</strong> their content."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">influencer</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈɪn.flu.ən.sər/</span></td>
+                    <td><div class="definition">Someone who affects others' decisions<br>意見領袖，網紅</div></td>
+                    <td><div class="example">"Child <strong>influencers</strong> impact family purchases."</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quiz-section">
+            <h2>📝 Quiz | 測驗</h2>
+            <p style="margin-bottom: 20px; color: #666;">Choose the correct answer for each question.</p>
+            
+            <form id="quizForm">
+                <div class="quiz-question" id="q1-container">
+                    <p><strong>1. What is a "content creator"?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q1-a"><input type="radio" name="q1" value="a" onclick="checkAnswer('q1', 'c')"> A) Someone who writes code</label></li>
+                        <li><label id="q1-b"><input type="radio" name="q1" value="b" onclick="checkAnswer('q1', 'c')"> B) Someone who builds things</label></li>
+                        <li><label id="q1-c"><input type="radio" name="q1" value="c" onclick="checkAnswer('q1', 'c')"> C) Someone who makes digital media</label></li>
+                        <li><label id="q1-d"><input type="radio" name="q1" value="d" onclick="checkAnswer('q1', 'c')"> D) Someone who manages a company</label></li>
+                    </ul>
+                    <div id="q1-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            A content creator produces digital media like videos, photos, or posts for online platforms.
+                        </div>
+                        <button class="ai-details-btn" onclick="getAIDetails('q1', 'content creator')">
+                            <span>🤖 Ask AI for Details</span>
+                        </button>
+                        <div id="q1-ai-content" class="ai-details-content">
+                            <h4>📚 AI-Generated Explanation</h4>
+                            <div class="detail-text" id="q1-detail-text">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q2-container">
+                    <p><strong>2. What does "viral" mean?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q2-a"><input type="radio" name="q2" value="a" onclick="checkAnswer('q2', 'b')"> A) Related to computer viruses</label></li>
+                        <li><label id="q2-b"><input type="radio" name="q2" value="b" onclick="checkAnswer('q2', 'b')"> B) Spreading quickly online</label></li>
+                        <li><label id="q2-c"><input type="radio" name="q2" value="c" onclick="checkAnswer('q2', 'b')"> C) Being very expensive</label></li>
+                        <li><label id="q2-d"><input type="radio" name="q2" value="d" onclick="checkAnswer('q2', 'b')"> D) Becoming old-fashioned</label></li>
+                    </ul>
+                    <div id="q2-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            When content goes viral, it spreads rapidly through social media sharing.
+                        </div>
+                        <button class="ai-details-btn" onclick="getAIDetails('q2', 'viral')">
+                            <span>🤖 Ask AI for Details</span>
+                        </button>
+                        <div id="q2-ai-content" class="ai-details-content">
+                            <h4>📚 AI-Generated Explanation</h4>
+                            <div class="detail-text" id="q2-detail-text">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q3-container">
+                    <p><strong>3. What is an "influencer"?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q3-a"><input type="radio" name="q3" value="a" onclick="checkAnswer('q3', 'c')"> A) A software program</label></li>
+                        <li><label id="q3-b"><input type="radio" name="q3" value="b" onclick="checkAnswer('q3', 'c')"> B) A type of advertisement</label></li>
+                        <li><label id="q3-c"><input type="radio" name="q3" value="c" onclick="checkAnswer('q3', 'c')"> C) Someone who affects others' decisions</label></li>
+                        <li><label id="q3-d"><input type="radio" name="q3" value="d" onclick="checkAnswer('q3', 'c')"> D) A social media platform</label></li>
+                    </ul>
+                    <div id="q3-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            An influencer is someone with the power to affect the purchasing decisions of others.
+                        </div>
+                        <button class="ai-details-btn" onclick="getAIDetails('q3', 'influencer')">
+                            <span>🤖 Ask AI for Details</span>
+                        </button>
+                        <div id="q3-ai-content" class="ai-details-content">
+                            <h4>📚 AI-Generated Explanation</h4>
+                            <div class="detail-text" id="q3-detail-text">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" style="background: linear-gradient(135deg, var(--bloomberg-orange), #ff8800); color: white; border: none; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px;" onclick="checkQuiz()">Submit All Answers | 提交答案</button>
+            </form>
+
+            <div id="result" class="result" style="display: none; margin-top: 20px; padding: 20px; border-radius: 5px; font-weight: bold;"></div>
+        </div>
+
+        <footer>
+            <p><strong>Bloomberg Businessweek Archive - ESL Vocabulary</strong></p>
+            <p>March 1, 2026 Issue | Gen Alpha Section</p>
+        </footer>
+    </div>
+
+    <script>
+        const answers = { q1: 'c', q2: 'b', q3: 'c' };
+        let score = 0;
+        let answeredQuestions = new Set();
+        
+        async function getAIDetails(questionId, word) {
+            const btn = event.target.closest('.ai-details-btn');
+            const contentDiv = document.getElementById(`${questionId}-ai-content`);
+            const textDiv = document.getElementById(`${questionId}-detail-text`);
+            
+            if (contentDiv.classList.contains('show')) {
+                contentDiv.classList.remove('show');
+                btn.disabled = false;
+                btn.innerHTML = '<span>🤖 Ask AI for Details</span>';
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span> Asking AI...';
+            
+            try {
+                const proxyUrl = 'https://corsproxy.io/?';
+                const aliyunUrl = 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation';
+                
+                const requestBody = {
+                    model: 'qwen-plus',
+                    input: {
+                        messages: [{
+                            role: 'system',
+                            content: 'You are an ESL English teacher for business/social studies students. Explain vocabulary with etymology, usage, related words, examples. Bilingual: English + Traditional Chinese. Use HTML: <br>, <strong>, <em>. Keep concise (200-300 words).'
+                        }, {
+                            role: 'user',
+                            content: `Explain "${word}" with: 1) Word Origin, 2) Usage (social media/business context), 3) Related Words, 4) Example. English + Traditional Chinese. HTML format.`
+                        }]
+                    },
+                    parameters: { temperature: 0.7, max_tokens: 500 }
+                };
+                
+                const response = await fetch(proxyUrl + encodeURIComponent(aliyunUrl), {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer sk-92b75e89aa404648b08741885f191e6b',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!response.ok) throw new Error(`API ${response.status}`);
+                
+                const data = await response.json();
+                const aiResponse = data.output?.text || 'No response';
+                
+                textDiv.innerHTML = `<div style="line-height: 1.8;">${aiResponse}</div><div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;"><strong>🤖 Generated by Aliyun Qwen AI (Real-time)</strong></div>`;
+                contentDiv.classList.add('show');
+                btn.innerHTML = '<span>✅ Show Less</span>';
+                btn.disabled = false;
+                
+            } catch (error) {
+                textDiv.innerHTML = `<div style="color: #dc3545;"><strong>❌ Error:</strong> ${error.message}</div><button onclick="getAIDetails('${questionId}', '${word}')" style="margin-top: 10px; padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">🔄 Retry</button>`;
+                contentDiv.classList.add('show');
+                btn.innerHTML = '<span>🔄 Retry</span>';
+                btn.disabled = false;
+            }
+        }
+        
+        function checkAnswer(question, correctAnswer) {
+            if (answeredQuestions.has(question)) return;
+            answeredQuestions.add(question);
+            
+            const formData = new FormData(document.getElementById('quizForm'));
+            const userAnswer = formData.get(question);
+            
+            const options = document.querySelectorAll(`input[name="${question}"]`);
+            options.forEach(opt => {
+                opt.disabled = true;
+                const label = document.getElementById(`${question}-${opt.value}`);
+                if (opt.value === correctAnswer) label.classList.add('correct');
+                else if (opt.value === userAnswer && userAnswer !== correctAnswer) label.classList.add('incorrect');
+            });
+            
+            const feedbackDiv = document.getElementById(`${question}-feedback`);
+            feedbackDiv.classList.add('show');
+            
+            if (userAnswer === correctAnswer) {
+                feedbackDiv.classList.add('correct');
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">✅ Correct!</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>`;
+                score++;
+            } else {
+                feedbackDiv.classList.add('incorrect');
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">❌ Incorrect. Correct: ${correctAnswer.toUpperCase()}</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>`;
+            }
+        }
+        
+        function checkQuiz() {
+            const total = Object.keys(answers).length;
+            const answered = answeredQuestions.size;
+            if (answered < total) { alert(`Answered ${answered}/${total}. Complete all questions!`); return; }
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result ' + (score === total ? 'correct' : score >= 2 ? 'correct' : 'incorrect');
+            resultDiv.style.background = score === total ? '#d4edda' : score >= 2 ? '#d4edda' : '#f8d7da';
+            resultDiv.style.color = score === total ? '#155724' : score >= 2 ? '#155724' : '#721c24';
+            resultDiv.innerHTML = score === total ? `🎉 Perfect! ${score}/${total}` : score >= 2 ? `✅ Great! ${score}/${total}` : `📚 Keep studying! ${score}/${total}`;
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
