@@ -1,7 +1,7 @@
 {
   "meta": {
     "created": "2026-02-26T07:45:00Z",
-    "updated": "2026-03-14T00:47:37.672407Z",
+    "updated": "2026-03-15T05:04:15.691515Z",
     "version": "1.2"
   },
   "columns": {
@@ -840,6 +840,47 @@
         "📞 聯絡方法:",
         "  - 課程查詢：enquiry@aasfp.com / 2578 9877",
         "  - 貨品查詢：proshop@aasfp.com"
+      ]
+    },
+    {
+      "id": "proj-024",
+      "title": "⚠️ AWS Free Plan Ending - Upgrade Required by Mar 30",
+      "description": "AWS free plan ends on 2026-03-30 with $165 credits remaining. Need to upgrade to paid plan to avoid service interruption.",
+      "status": "todo",
+      "priority": "high",
+      "created": "2026-03-15",
+      "updated": "2026-03-15T05:04:15.691481Z",
+      "tags": [
+        "email",
+        "aws",
+        "billing",
+        "urgent",
+        "deadline"
+      ],
+      "notes": [
+        "📧 Email received: 2026-03-15 12:41 HKT",
+        "🔄 Processed: 2026-03-15 13:30 HKT",
+        "",
+        "⚠️ Critical Details:",
+        "  - Account ID: 619141387965",
+        "  - Free plan ends: 2026-03-30 (15 days remaining)",
+        "  - Remaining credits: USD $165",
+        "  - Grace period: 90 days after expiration",
+        "",
+        "🔴 Risk:",
+        "  - Lose access to current resources after expiry",
+        "  - Cannot launch new resources",
+        "  - Service interruption if not upgraded",
+        "",
+        "✅ Action Required:",
+        "  1. Review current AWS usage",
+        "  2. Decide: upgrade to paid plan or migrate resources",
+        "  3. Upgrade link: https://console.aws.amazon.com",
+        "  4. Deadline: 2026-03-30",
+        "",
+        "📞 AWS Support:",
+        "  - Console: https://console.aws.amazon.com",
+        "  - Billing dashboard for usage details"
       ]
     }
   ],

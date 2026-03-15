@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Prediction Markets - Vocabulary | Bloomberg March 2026</title>
+    <style>
+        :root { --bloomberg-blue: #002878; --bloomberg-orange: #ff6600; --bg-color: #f5f5f5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif; background-color: var(--bg-color); color: #333; line-height: 1.8; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .back-link { display: inline-block; margin-bottom: 20px; padding: 10px 20px; background: #333; color: white; text-decoration: none; border-radius: 5px; }
+        .back-link:hover { background: #555; }
+        header { background: linear-gradient(135deg, var(--bloomberg-blue), #003399); color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; color: white; }
+        .article-link { color: var(--bloomberg-orange); text-decoration: none; font-weight: bold; }
+        .article-link:hover { text-decoration: underline; }
+        .word-table { width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-collapse: collapse; margin-bottom: 30px; }
+        .word-table thead { background: var(--bloomberg-blue); color: white; }
+        .word-table th { padding: 15px; text-align: left; font-weight: 600; }
+        .word-table td { padding: 15px; border-bottom: 1px solid #eee; }
+        .word-table tbody tr:hover { background-color: #f0f4ff; }
+        .word { font-weight: bold; color: var(--bloomberg-blue); font-size: 1.1em; }
+        .pos { font-style: italic; color: #666; font-size: 0.9em; }
+        .ipa { color: #999; font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif; }
+        .definition { font-weight: 500; }
+        .example { color: #666; font-style: italic; margin-top: 5px; }
+        .quiz-section { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 30px; }
+        .quiz-section h2 { color: var(--bloomberg-blue); margin-bottom: 20px; }
+        .quiz-question { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .quiz-question:last-child { border-bottom: none; }
+        .quiz-options { list-style: none; }
+        .quiz-options li { margin: 10px 0; }
+        .quiz-options label { display: block; padding: 12px 15px; background: #f9f9f9; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
+        .quiz-options label:hover { background: #f0f4ff; }
+        .quiz-options label.correct { background: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .quiz-options label.incorrect { background: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+        .quiz-options input[type="radio"] { margin-right: 10px; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; }
+        .feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .explanation { margin-top: 10px; font-size: 0.95em; line-height: 1.6; }
+        .ai-details-btn { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: bold; cursor: pointer; margin-top: 10px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+        .ai-details-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .ai-details-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+        .ai-details-content { margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #f5f7fa, #e4e8ec); border-radius: 8px; border-left: 4px solid #667eea; display: none; }
+        .ai-details-content.show { display: block; animation: fadeIn 0.4s ease-out; }
+        .ai-details-content h4 { color: #667eea; margin-bottom: 10px; font-size: 1em; }
+        .detail-text { line-height: 1.8; font-size: 0.95em; }
+        .loading-spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        footer { text-align: center; padding: 30px; color: #666; margin-top: 30px; }
+        footer a { color: var(--bloomberg-blue); text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Back to Issue</a>
+        <a href="../../" class="back-link" style="margin-left: 10px;">← Back to Bloomberg</a>
+        
+        <header>
+            <h1>📊 Prediction Markets Vocabulary</h1>
+            <p style="font-size: 1.2em;">Cover Story: The Rise of Prediction Markets</p>
+            <p style="margin-top: 10px;">
+                <a href="https://www.bloomberg.com/features/2026-prediction-markets-polymarket-kalshi/" class="article-link" target="_blank">📖 Read Original Article →</a>
+            </p>
+        </header>
+
+        <h2 style="color: var(--bloomberg-blue); margin-bottom: 20px;">📚 Vocabulary | 詞彙</h2>
+        <table class="word-table">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Word</th>
+                    <th style="width: 10%;">POS</th>
+                    <th style="width: 15%;">IPA</th>
+                    <th style="width: 30%;">Definition</th>
+                    <th style="width: 30%;">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="word">prediction</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/prɪˈdɪk.ʃən/</span></td>
+                    <td><div class="definition">A statement about what will happen in the future<br>預測，預言</div></td>
+                    <td><div class="example">"Prediction markets allow people to bet on future events."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">market</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈmɑː.kɪt/</span></td>
+                    <td><div class="definition">A system for buying and selling goods or services<br>市場</div></td>
+                    <td><div class="example">"Prediction <strong>markets</strong> are reshaping how we verify reality."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">bet</span></td>
+                    <td><span class="pos">v./n.</span></td>
+                    <td><span class="ipa">/bet/</span></td>
+                    <td><div class="definition">To risk money on an uncertain outcome<br>下注，賭博</div></td>
+                    <td><div class="example">"Kalshi lets users <strong>bet</strong> on political outcomes."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">contract</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈkɒn.trækt/</span></td>
+                    <td><div class="definition">A formal agreement with legal force<br>合約，契約</div></td>
+                    <td><div class="example">"Each <strong>contract</strong> pays $1 if the event occurs."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">outcome</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈaʊt.kʌm/</span></td>
+                    <td><div class="definition">The result or consequence of an action<br>結果，成果</div></td>
+                    <td><div class="example">"Traders speculate on election <strong>outcomes</strong>."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">speculate</span></td>
+                    <td><span class="pos">v.</span></td>
+                    <td><span class="ipa">/ˈspek.jə.leɪt/</span></td>
+                    <td><div class="definition">To invest in risky ventures hoping for profit<br>投機， speculate</div></td>
+                    <td><div class="example">"Investors <strong>speculate</strong> on future events."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">probability</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˌprɒb.əˈbɪl.ɪ.ti/</span></td>
+                    <td><div class="definition">The likelihood of something happening<br>概率，可能性</div></td>
+                    <td><div class="example">"Market prices reflect the <strong>probability</strong> of an event."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">regulate</span></td>
+                    <td><span class="pos">v.</span></td>
+                    <td><span class="ipa">/ˈreɡ.jə.leɪt/</span></td>
+                    <td><div class="definition">To control by rules or laws<br>監管，規管</div></td>
+                    <td><div class="example">"The CFTC <strong>regulates</strong> prediction markets in the US."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">incentive</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ɪnˈsen.tɪv/</span></td>
+                    <td><div class="definition">Something that motivates action<br>激勵，誘因</div></td>
+                    <td><div class="example">"Financial <strong>incentives</strong> drive accurate predictions."</div></td>
+                </tr>
+                <tr>
+                    <td><span class="word">accuracy</span></td>
+                    <td><span class="pos">n.</span></td>
+                    <td><span class="ipa">/ˈæk.jər.ə.si/</span></td>
+                    <td><div class="definition">The quality of being correct or precise<br>準確性</div></td>
+                    <td><div class="example">"Prediction markets improve forecast <strong>accuracy</strong>."</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quiz-section">
+            <h2>📝 Quiz | 測驗</h2>
+            <p style="margin-bottom: 20px; color: #666;">Choose the correct answer for each question.</p>
+            
+            <form id="quizForm">
+                <div class="quiz-question" id="q1-container">
+                    <p><strong>1. What is a "prediction market"?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q1-a"><input type="radio" name="q1" value="a" onclick="checkAnswer('q1', 'c')"> A) A stock exchange for tech companies</label></li>
+                        <label id="q1-b"><input type="radio" name="q1" value="b" onclick="checkAnswer('q1', 'c')"> B) A grocery store for future goods</label></li>
+                        <label id="q1-c"><input type="radio" name="q1" value="c" onclick="checkAnswer('q1', 'c')"> C) A platform where people bet on future events</label></li>
+                        <label id="q1-d"><input type="radio" name="q1" value="d" onclick="checkAnswer('q1', 'c')"> D) A government regulatory agency</label></li>
+                    </ul>
+                    <div id="q1-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            A prediction market allows participants to trade contracts based on the outcome of future events.
+                        </div>
+                        <button class="ai-details-btn" onclick="getAIDetails('q1', 'prediction market')">
+                            <span>🤖 Ask AI for Details</span>
+                        </button>
+                        <div id="q1-ai-content" class="ai-details-content">
+                            <h4>📚 AI-Generated Explanation</h4>
+                            <div class="detail-text" id="q1-detail-text">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q2-container">
+                    <p><strong>2. What does "speculate" mean in finance?</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q2-a"><input type="radio" name="q2" value="a" onclick="checkAnswer('q2', 'b')"> A) To carefully analyze data</label></li>
+                        <label id="q2-b"><input type="radio" name="q2" value="b" onclick="checkAnswer('q2', 'b')"> B) To invest in risky ventures hoping for profit</label></li>
+                        <label id="q2-c"><input type="radio" name="q2" value="c" onclick="checkAnswer('q2', 'b')"> C) To save money in a bank</label></li>
+                        <label id="q2-d"><input type="radio" name="q2" value="d" onclick="checkAnswer('q2', 'b')"> D) To donate to charity</label></li>
+                    </ul>
+                    <div id="q2-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            "Speculate" means to take financial risks in hope of gaining profit from price changes.
+                        </div>
+                        <button class="ai-details-btn" onclick="getAIDetails('q2', 'speculate')">
+                            <span>🤖 Ask AI for Details</span>
+                        </button>
+                        <div id="q2-ai-content" class="ai-details-content">
+                            <h4>📚 AI-Generated Explanation</h4>
+                            <div class="detail-text" id="q2-detail-text">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q3-container">
+                    <p><strong>3. "Probability" refers to:</strong></p>
+                    <ul class="quiz-options">
+                        <li><label id="q3-a"><input type="radio" name="q3" value="a" onclick="checkAnswer('q3', 'c')"> A) The total cost of something</label></li>
+                        <label id="q3-b"><input type="radio" name="q3" value="b" onclick="checkAnswer('q3', 'c')"> B) The speed of an event</label></li>
+                        <label id="q3-c"><input type="radio" name="q3" value="c" onclick="checkAnswer('q3', 'c')"> C) The likelihood of something happening</label></li>
+                        <label id="q3-d"><input type="radio" name="q3" value="d" onclick="checkAnswer('q3', 'c')"> D) The number of participants</label></li>
+                    </ul>
+                    <div id="q3-feedback" class="feedback">
+                        <div class="explanation">
+                            <strong>💡 Explanation:</strong><br>
+                            Probability measures how likely an event is to occur, expressed as a percentage or decimal.
+                        </div>
+                        <button class="ai-details-btn" onclick="getAIDetails('q3', 'probability')">
+                            <span>🤖 Ask AI for Details</span>
+                        </button>
+                        <div id="q3-ai-content" class="ai-details-content">
+                            <h4>📚 AI-Generated Explanation</h4>
+                            <div class="detail-text" id="q3-detail-text">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" style="background: linear-gradient(135deg, var(--bloomberg-orange), #ff8800); color: white; border: none; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px;" onclick="checkQuiz()">Submit All Answers | 提交答案</button>
+            </form>
+
+            <div id="result" class="result" style="display: none; margin-top: 20px; padding: 20px; border-radius: 5px; font-weight: bold;"></div>
+        </div>
+
+        <footer>
+            <p><strong>Bloomberg Businessweek Archive - ESL Vocabulary</strong></p>
+            <p>March 1, 2026 Issue | Cover Story</p>
+        </footer>
+    </div>
+
+    <script>
+        const answers = { q1: 'c', q2: 'b', q3: 'c' };
+        let score = 0;
+        let answeredQuestions = new Set();
+        
+        // Real-time AI explanation via corsproxy.io
+        async function getAIDetails(questionId, word) {
+            const btn = event.target.closest('.ai-details-btn');
+            const contentDiv = document.getElementById(`${questionId}-ai-content`);
+            const textDiv = document.getElementById(`${questionId}-detail-text`);
+            
+            if (contentDiv.classList.contains('show')) {
+                contentDiv.classList.remove('show');
+                btn.disabled = false;
+                btn.innerHTML = '<span>🤖 Ask AI for Details</span>';
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span> Asking AI...';
+            
+            try {
+                const proxyUrl = 'https://corsproxy.io/?';
+                const aliyunUrl = 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation';
+                
+                const requestBody = {
+                    model: 'qwen-plus',
+                    input: {
+                        messages: [{
+                            role: 'system',
+                            content: 'You are an ESL English teacher for finance/business students. Explain vocabulary with etymology, usage, related words, examples. Bilingual: English + Traditional Chinese. Use HTML: <br>, <strong>, <em>. Keep concise (200-300 words).'
+                        }, {
+                            role: 'user',
+                            content: `Explain "${word}" with: 1) Word Origin, 2) Technical Usage (finance/business), 3) Related Words, 4) Example. English + Traditional Chinese. HTML format.`
+                        }]
+                    },
+                    parameters: { temperature: 0.7, max_tokens: 500 }
+                };
+                
+                const response = await fetch(proxyUrl + encodeURIComponent(aliyunUrl), {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer sk-92b75e89aa404648b08741885f191e6b',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!response.ok) throw new Error(`API ${response.status}`);
+                
+                const data = await response.json();
+                const aiResponse = data.output?.text || 'No response';
+                
+                textDiv.innerHTML = `<div style="line-height: 1.8;">${aiResponse}</div><div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 0.85em; color: #666;"><strong>🤖 Generated by Aliyun Qwen AI (Real-time)</strong></div>`;
+                contentDiv.classList.add('show');
+                btn.innerHTML = '<span>✅ Show Less</span>';
+                btn.disabled = false;
+                
+            } catch (error) {
+                textDiv.innerHTML = `<div style="color: #dc3545;"><strong>❌ Error:</strong> ${error.message}</div><button onclick="getAIDetails('${questionId}', '${word}')" style="margin-top: 10px; padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">🔄 Retry</button>`;
+                contentDiv.classList.add('show');
+                btn.innerHTML = '<span>🔄 Retry</span>';
+                btn.disabled = false;
+            }
+        }
+        
+        function checkAnswer(question, correctAnswer) {
+            if (answeredQuestions.has(question)) return;
+            answeredQuestions.add(question);
+            
+            const formData = new FormData(document.getElementById('quizForm'));
+            const userAnswer = formData.get(question);
+            
+            const options = document.querySelectorAll(`input[name="${question}"]`);
+            options.forEach(opt => {
+                opt.disabled = true;
+                const label = document.getElementById(`${question}-${opt.value}`);
+                if (opt.value === correctAnswer) label.classList.add('correct');
+                else if (opt.value === userAnswer && userAnswer !== correctAnswer) label.classList.add('incorrect');
+            });
+            
+            const feedbackDiv = document.getElementById(`${question}-feedback`);
+            feedbackDiv.classList.add('show');
+            
+            if (userAnswer === correctAnswer) {
+                feedbackDiv.classList.add('correct');
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">✅ Correct!</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>`;
+                score++;
+            } else {
+                feedbackDiv.classList.add('incorrect');
+                feedbackDiv.innerHTML = `<div style="font-weight: bold; margin-bottom: 5px;">❌ Incorrect. Correct: ${correctAnswer.toUpperCase()}</div><div class="explanation">${feedbackDiv.querySelector('.explanation').innerHTML}</div>`;
+            }
+        }
+        
+        function checkQuiz() {
+            const total = Object.keys(answers).length;
+            const answered = answeredQuestions.size;
+            if (answered < total) { alert(`Answered ${answered}/${total}. Complete all questions!`); return; }
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result ' + (score === total ? 'correct' : score >= 2 ? 'correct' : 'incorrect');
+            resultDiv.style.background = score === total ? '#d4edda' : score >= 2 ? '#d4edda' : '#f8d7da';
+            resultDiv.style.color = score === total ? '#155724' : score >= 2 ? '#155724' : '#721c24';
+            resultDiv.innerHTML = score === total ? `🎉 Perfect! ${score}/${total}` : score >= 2 ? `✅ Great! ${score}/${total}` : `📚 Keep studying! ${score}/${total}`;
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

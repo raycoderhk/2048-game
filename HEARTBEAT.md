@@ -23,6 +23,9 @@ If nothing needs attention, reply HEARTBEAT_OK.
 
 **3 月 18 日 (星期三)**
 • 13:00-16:00 - [Raymond] 匹克球 @ 會所 (3 hours)
+• [Family] 用百佳 $50 現金券 (HSBC Credit Card Coupon)
+  - 📍 百佳
+  - 💳 帶 HSBC Credit Card
 
 **3 月 21 日 (星期六)**
 • 12:00-13:00 - [Raymond] 匹克球 @ 荃灣愉景新城 BayPickle
@@ -50,8 +53,8 @@ If nothing needs attention, reply HEARTBEAT_OK.
 
 **3 月 15 日 (星期日)**
 • 11:15 [Raymond] Gym
-• 14:00-14:10 [Raymond] Parcel
-• 14:10 [Raymond] Buy cake
+• [Raymond] ☐ Parcel
+• [Raymond] ☐ Buy cake
 • [Son] 兒子生日 🎂
 • [Family] 慶祝活動: board game
 
