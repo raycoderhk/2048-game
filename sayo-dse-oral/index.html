@@ -461,18 +461,61 @@
         
         async function synthResponse(userText) {
             setStatus('Thinking...');
-            await sleep(500);
+            await sleep(800);
             
+            // Analyze user's input and generate contextual response
+            const topic = currentTopic ? currentTopic.q.toLowerCase() : '';
+            const text = userText.toLowerCase();
+            
+            // Determine user stance and generate relevant response
+            const isAgreeing = text.includes('agree') || text.includes('yes') || text.includes('support') || text.includes('good') || text.includes('right');
+            const isDisagreeing = text.includes('disagree') || text.includes('no') || text.includes('not') || text.includes('wrong') || text.includes('against');
+            const mentionsMoney = text.includes('money') || text.includes('cost') || text.includes('expensive') || text.includes('cheap') || text.includes('salary') || text.includes('wage') || text.includes('pay');
+            const mentionsYouth = text.includes('young') || text.includes('teenager') || text.includes('student') || text.includes('youth');
+            const mentionsCulture = text.includes('culture') || text.includes('traditional') || text.includes('heritage') || text.includes('festival');
+            const mentionsWork = text.includes('work') || text.includes('job') || text.includes('career') || text.includes('employment');
+            const mentionsHealth = text.includes('health') || text.includes('medical') || text.includes('hospital') || text.includes('doctor');
+            const mentionsAI = text.includes('ai') || text.includes('robot') || text.includes('chatgpt') || text.includes('technology');
+            
+            // Build contextual response based on candidate personality
+            const sarahResponses = [
+                "That's a well-structured point. Let me add that we should also consider the long-term implications. How would this affect different groups in society?",
+                "I agree with your analysis. To build on that, we need to look at the data more carefully. What evidence supports this view?",
+                "You've raised an important aspect. In my opinion, the key question is whether this approach is sustainable in the long run."
+            ];
+            
+            const mikeResponses = [
+                "I appreciate your view, but I have some concerns. Have you thought about the potential unintended consequences?",
+                "That's interesting, but I'm not entirely convinced. What about the counterarguments?",
+                "I hear you, but let me play devil's advocate. Wouldn't this approach actually create more problems?"
+            ];
+            
+            const amyResponses = [
+                "I completely agree with your perspective! And I'd like to add that this also benefits the community in other ways.",
+                "That's a wonderful point! Building on that, I think we should also consider how this affects families.",
+                "I agree wholeheartedly! This reminds me of how similar issues were handled in other countries."
+            ];
+            
+            // Rotate candidates and responses
+            const candidates = ['Sarah', 'Mike', 'Amy'];
             const responses = {
-                'Sarah': 'That is an interesting perspective. Could you tell us more about your reasoning?',
-                'Mike': 'I hear what you are saying, but have you considered the opposite viewpoint?',
-                'Amy': 'I agree with that! I would also like to add some additional points to consider.'
+                'Sarah': sarahResponses,
+                'Mike': mikeResponses,
+                'Amy': amyResponses
             };
             
-            const c = ['Sarah','Mike','Amy'][Math.floor(Math.random()*3)];
-            addMsg(c, responses[c], true);
+            // Pick candidate based on content
+            let c = candidates[Math.floor(Math.random() * candidates.length)];
+            if (mentionsYouth && Math.random() > 0.5) c = 'Sarah';
+            if (isDisagreeing && Math.random() > 0.5) c = 'Mike';
+            if (isAgreeing && Math.random() > 0.5) c = 'Amy';
+            
+            const candidateResponses = responses[c];
+            const response = candidateResponses[Math.floor(Math.random() * candidateResponses.length)];
+            
+            addMsg(c, response, true);
             setStatus('Your turn — hold to speak');
-            await speak(responses[c], c);
+            await speak(response, c);
         }
         
         // ==================== STT ====================
