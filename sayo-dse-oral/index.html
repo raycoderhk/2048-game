@@ -181,7 +181,31 @@
             .sidebar { display: none; }
             .header h1 { font-size: 16px; }
         }
-    </style>
+    
+        .topic-selection h3 { font-size: 18px; font-weight: 700; }
+        .filter-btn {
+            padding: 8px 14px;
+            background: #40444b;
+            border: none;
+            border-radius: 20px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .filter-btn.active { background: #667eea; }
+        .filter-btn:hover { background: #52565e; }
+        .topic-card-select {
+            background: #2d2d2d;
+            border-radius: 8px;
+            padding: 14px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .topic-card-select:hover { background: #363636; border-color: #667eea; }
+        .topic-card-select .cat { font-size: 11px; color: #667eea; font-weight: 600; margin-bottom: 4px; }
+        .topic-card-select .q { font-size: 13px; color: #ddd; line-height: 1.4; }
+</style>
 </head>
 <body>
     <div class="header">
@@ -210,7 +234,21 @@
             <div class="welcome" id="welcome">
                 <h2>🎤 DSE English Oral Practice</h2>
                 <p>Practice with 3 AI candidates — Sarah, Mike, and Amy. Speak your answers or type them. Powered by your browser's free voice APIs!</p>
-                <button class="start-btn" onclick="startRandom()">▶ Start Practice</button>
+                <button class="start-btn" onclick="startRandom()">🎲 Random Topic</button>
+            </div>
+
+            <!-- Topic Selection Panel -->
+            <div class="topic-selection" id="topic-selection" style="display:none; padding: 20px; overflow-y: auto;">
+                <h3 style="margin-bottom: 16px; color: #667eea;">📚 Choose a Topic</h3>
+                <div style="margin-bottom: 20px; padding: 12px; background: #2d2d2d; border-radius: 8px;">
+                    <p style="color: #888; font-size: 12px; margin-bottom: 8px;">🔍 FILTER:</p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button onclick="filterTopics('all')" id="filter-all" class="filter-btn active">All (27)</button>
+                        <button onclick="filterTopics('real')" id="filter-real" class="filter-btn">📌 Real DSE (11)</button>
+                        <button onclick="filterTopics('practice')" id="filter-practice" class="filter-btn">📝 Practice (16)</button>
+                    </div>
+                </div>
+                <div id="topic-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;"></div>
             </div>
             
             <div class="controls" id="controls" style="display:none;">
@@ -471,6 +509,52 @@
         function setStatus(s) { document.getElementById('status').textContent = s; }
         function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
         
+        // ==================== TOPIC FILTER ====================
+        let currentFilter = 'all';
+
+        function filterTopics(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('filter-' + type).classList.add('active');
+            renderTopicGrid();
+        }
+
+        function renderTopicGrid() {
+            const grid = document.getElementById('topic-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            const filtered = TOPICS.filter(t => {
+                if (currentFilter === 'all') return true;
+                if (currentFilter === 'real') return t.cat.includes('REAL');
+                if (currentFilter === 'practice') return t.cat.includes('Practice');
+                return true;
+            });
+            filtered.forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'topic-card-select';
+                div.innerHTML = '<div class="cat">' + t.cat + '</div><div class="q">' + t.q + '</div>';
+                div.onclick = () => selectTopic(t);
+                grid.appendChild(div);
+            });
+        }
+
+        // Override startRandom to show topic selection
+        const origStartRandom = startRandom;
+        startRandom = function() {
+            document.getElementById('welcome').style.display = 'none';
+            document.getElementById('topic-selection').style.display = 'block';
+            document.getElementById('controls').style.display = 'none';
+            renderTopicGrid();
+        };
+
+        // Override selectTopic to show controls
+        const origSelectTopic = selectTopic;
+        selectTopic = function(t) {
+            origSelectTopic(t);
+            document.getElementById('topic-selection').style.display = 'none';
+            document.getElementById('controls').style.display = 'block';
+        };
+
         // Start
         init();
     </script>
