@@ -125,6 +125,36 @@
             background: linear-gradient(135deg, #faa61a, #d4910f);
             animation: pulse 1s infinite;
         }
+        
+        .interim-text {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        
+        .fallback-input {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .fallback-input input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #2d2d2d;
+            color: #fff;
+            font-size: 14px;
+        }
+        .fallback-input button {
+            padding: 10px 16px;
+            background: #667eea;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+        }
         @keyframes pulse { 0%,100%{transform: scale(1)} 50%{transform: scale(0.95)} }
         
         .status-text { font-size: 13px; color: #888; }
@@ -192,6 +222,11 @@
                 <div class="record-wrap">
                     <button class="mic-btn" id="mic-btn" onmousedown="startRecord()" onmouseup="stopRecord()" ontouchstart="startRecord()" ontouchend="stopRecord()">🎤</button>
                     <span class="status-text" id="status">Hold to record your answer</span>
+                    <div id="interim-text"></div>
+                </div>
+                <div class="fallback-input">
+                    <input type="text" id="text-input" placeholder="Or type your answer here..." onkeypress="if(event.key==='Enter')sendText()">
+                    <button onclick="sendText()">Send</button>
                 </div>
             </div>
         </div>
@@ -276,21 +311,28 @@
                 recognition.interimResults = true;
                 recognition.lang = 'en-US';
                 recognition.onresult = e => {
-                    const transcript = Array.from(e.results).map(r => r[0].transcript).join('');
-                    if (e.results[0].isFinal) {
-                        addMsg('you', transcript);
-                        synthResponse(transcript);
+                    let interim = '';
+                    let final = '';
+                    for (let i = e.resultIndex; i < e.results.length; i++) {
+                        const t = e.results[i][0].transcript;
+                        if (e.results[i].isFinal) final += t;
+                        else interim += t;
+                    }
+                    document.getElementById('interim-text').textContent = interim;
+                    if (final) {
+                        document.getElementById('interim-text').textContent = '';
+                        addMsg('you', final);
+                        synthResponse(final);
                     }
                 };
                 recognition.onerror = e => {
                     console.error('STT error:', e);
-                    setStatus('Try again...');
+                    setStatus('Try again... (or type below)');
+                    document.getElementById('interim-text').textContent = '';
                 };
                 recognition.onend = () => {
-                    if (isRecording) {
-                        isRecording = false;
-                        document.getElementById('mic-btn').classList.remove('recording');
-                    }
+                    isRecording = false;
+                    document.getElementById('mic-btn').classList.remove('recording');
                 };
             }
         }
@@ -405,6 +447,16 @@
             document.getElementById('mic-btn').classList.remove('recording');
             setStatus('Processing...');
             recognition.stop();
+        }
+        
+        // ==================== TEXT INPUT ====================
+        function sendText() {
+            const input = document.getElementById('text-input');
+            const text = input.value.trim();
+            if (!text) return;
+            input.value = '';
+            addMsg('you', text);
+            synthResponse(text);
         }
         
         // ==================== UTIL ====================
