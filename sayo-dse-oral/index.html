@@ -235,34 +235,36 @@
     <script>
         // ==================== TOPICS ====================
         const TOPICS = [
-            { id:101, cat:"Financial Literacy [DSE 2026]", q:"Financial literacy should be taught in all secondary schools in Hong Kong. To what extent do you agree?", data:"Surveys show only 30% of HK teenagers understand budgeting. Many young adults accumulate debt before graduating." },
-            { id:102, cat:"Online Ethics [DSE 2026]", q:"Online dishonesty, such as plagiarism and fake reviews, has become a serious problem. How can we address this?", data:"45% of HK university students admitted plagiarizing. Up to 30% of online reviews may be fake." },
-            { id:103, cat:"Food & Culture [DSE 2026]", q:"Hong Kong's street food culture is disappearing. Is this a significant loss for the city?", data:"Over 50 famous dai pai dongs closed in a decade. Rents increased 40%." },
-            { id:104, cat:"Autonomous Vehicles [DSE 2026]", q:"Autonomous vehicles should be introduced in Hong Kong. Do you agree?", data:"Self-driving taxis operate globally. HK's dense traffic poses challenges." },
-            { id:105, cat:"Minimum Wage [DSE 2026]", q:"Hong Kong should increase minimum wage for catering workers. To what extent do you agree?", data:"Catering workers earn ~HK$50/hour. Owners warn higher wages could force closures." },
-            { id:201, cat:"AI & Education [DSE 2026]", q:"AI tools like ChatGPT should be allowed in students' homework. To what extent do you agree?", data:"Educators worry students will lose critical thinking. Others argue AI helps efficient learning." },
-            { id:202, cat:"Workplace AI [DSE 2026]", q:"All in the future workplace: AI will eventually replace most human jobs. Do you agree?", data:"AI could automate 30% of current jobs by 2030. Some experts say AI creates more jobs than it displaces." },
-            { id:203, cat:"Tourism [DSE 2026]", q:"Set-jetting — travelling to destinations seen in films or TV shows — should be promoted in Hong Kong. Do you agree?", data:"Film-induced tourism generates billions globally. Hong Kong has been featured in many Hollywood films." },
-            { id:204, cat:"Environment [DSE 2026]", q:"Hong Kong's country parks should be better promoted to the public. How can this be done?", data:"Country parks cover 40% of Hong Kong land. Many residents are unaware of their existence." },
-            { id:205, cat:"Society [DSE 2026]", q:"Tipping should become widespread in Hong Kong. Do you agree?", data:"Some restaurants have added service charges. Workers' groups argue tipping can supplement low wages." },
-            { id:206, cat:"Health [DSE 2026]", q:"Home remedies, such as herbal soups and acupuncture, should be more widely accepted in Hong Kong. Discuss.", data:"Traditional Chinese medicine is popular in Hong Kong. Some remedies have scientific backing, others remain controversial." },
-            { id:207, cat:"GBA Opportunities [DSE 2026]", q:"Young people in Hong Kong should consider working in the Greater Bay Area. To what extent do you agree?", data:"The GBA includes 9 cities in Southern China. Career opportunities are growing but cultural differences exist." },
-            { id:1, cat:"Education", q:"Computers will eventually replace teachers in classrooms. To what extent do you agree?", data:"E-learning grew 300% post-pandemic. AI tutoring used in 50+ countries." },
-            { id:2, cat:"Technology", q:"Social media has a negative impact on teenagers' mental health. Do you agree?", data:"70% of HK teens spend 3+ hours daily on social media. 45% feel anxious without it." },
-            { id:3, cat:"Work & Career", q:"Young people should prioritize careers over starting a family. Discuss.", data:"Avg marriage age: 31M/29F. 60% of young adults prioritize career." },
-            { id:4, cat:"Environment", q:"Hong Kong should ban single-use plastics completely. Do you agree?", data:"HK generates 2,000+ tonnes plastic waste daily. Only 14% recycled." },
-            { id:5, cat:"Society", q:"University education should be free for all students. Discuss.", data:"HK university costs avg HK$50,000/year. Student debt increased 40%." },
-            { id:6, cat:"Health", q:"Schools should require students to participate in at least one sport. Agree?", data:"Only 30% of HK students meet daily activity guidelines. Obesity doubled in 20 years." },
-            { id:7, cat:"Technology", q:"AI will create more problems than it solves for society. Do you agree?", data:"AI could automate 30% of jobs by 2030, affecting 800 million workers." },
-            { id:8, cat:"Culture", q:"Traditional festivals are becoming less meaningful. Discuss.", data:"60% of young HK people find traditions outdated. 75% still enjoy festive activities." },
-            { id:9, cat:"Education", q:"Homework should be abolished in primary schools. Do you agree?", data:"70% of primary students spend 2+ hours on homework daily." },
-            { id:10, cat:"Society", q:"Living in Hong Kong is becoming unaffordable for young people. Discuss.", data:"HK apartments cost 20x annual salary. Rent HK$15-20k/month for a small flat." },
-            { id:11, cat:"Work & Career", q:"Employees should work from home permanently. To what extent do you agree?", data:"Remote work increased 400% during pandemic. 65% employers prefer hybrid." },
-            { id:12, cat:"Health", q:"Junk food advertising should be banned during children's TV programmes.", data:"30% of HK children overweight. Gov bans ads only during school hours." },
-            { id:13, cat:"Technology", q:"Online anonymity is more harmful than beneficial. Discuss.", data:"40% of HK internet users experienced online harassment." },
-            { id:14, cat:"Education", q:"Learning a second language should start from primary school. Agree?", data:"Children learning before age 10 show 40% better fluency." },
-            { id:15, cat:"Society", q:"The government should provide more support for elderly care. Discuss.", data:"Elderly (65+) will reach 33% by 2040. Only 45% receive gov care services." }
-        ];
+    // ======= 2026 DSE ENGLISH SPEAKING REAL EXAM TOPICS =======
+    { id:101, cat:"📌 REAL DSE 2026", q:"Financial literacy should be taught in all secondary schools in Hong Kong. To what extent do you agree?", data:"Surveys show only 30% of HK teenagers understand budgeting. Many young adults accumulate debt before graduating." },
+    { id:102, cat:"📌 REAL DSE 2026", q:"Online dishonesty, such as plagiarism and fake reviews, has become a serious problem. How can we address this?", data:"45% of HK university students admitted plagiarizing. Up to 30% of online reviews may be fake." },
+    { id:103, cat:"📌 REAL DSE 2026", q:"Hong Kong's street food culture is disappearing. Is this a significant loss for the city?", data:"Over 50 famous dai pai dongs closed in a decade. Rents increased 40%." },
+    { id:104, cat:"📌 REAL DSE 2026", q:"Autonomous vehicles should be introduced in Hong Kong. Do you agree?", data:"Self-driving taxis operate globally. HK's dense traffic poses challenges." },
+    { id:105, cat:"📌 REAL DSE 2026", q:"Hong Kong should increase minimum wage for catering workers. To what extent do you agree?", data:"Catering workers earn ~HK\$50/hour. Owners warn higher wages could force closures." },
+    { id:201, cat:"📌 REAL DSE 2026", q:"AI tools like ChatGPT should be allowed in students' homework. To what extent do you agree?", data:"Educators worry students will lose critical thinking. Others argue AI helps efficient learning." },
+    { id:202, cat:"📌 REAL DSE 2026", q:"All in the future workplace: AI will eventually replace most human jobs. Do you agree?", data:"AI could automate 30% of jobs by 2030. Some experts say AI creates more jobs than it displaces." },
+    { id:203, cat:"📌 REAL DSE 2026", q:"Tipping should become widespread in Hong Kong. Do you agree?", data:"Some restaurants have added service charges. Workers' groups argue tipping can supplement low wages." },
+    { id:204, cat:"📌 REAL DSE 2026", q:"Hong Kong's country parks should be better promoted to the public. How can this be done?", data:"Country parks cover 40% of Hong Kong land. Many residents are unaware of their existence." },
+    { id:205, cat:"📌 REAL DSE 2026", q:"Home remedies, such as herbal soups and acupuncture, should be more widely accepted in Hong Kong. Discuss.", data:"Traditional Chinese medicine is popular in Hong Kong. Some remedies have scientific backing, others remain controversial." },
+    { id:206, cat:"📌 REAL DSE 2026", q:"Young people in Hong Kong should consider working in the Greater Bay Area. To what extent do you agree?", data:"The GBA includes 9 cities in Southern China. Career opportunities are growing but cultural differences exist." },
+    // ======= PRACTICE TOPICS (DESIGNED FOR PRACTICE) =======
+    { id:301, cat:"📝 Practice Topic", q:"Set-jetting — travelling to destinations seen in films or TV shows — should be promoted in Hong Kong. Do you agree?", data:"Film-induced tourism generates billions globally. Hong Kong has been featured in many Hollywood films." },
+    { id:1, cat:"📝 Practice Topic", q:"Computers will eventually replace teachers in classrooms. To what extent do you agree?", data:"E-learning grew 300% post-pandemic. AI tutoring used in 50+ countries." },
+    { id:2, cat:"📝 Practice Topic", q:"Social media has a negative impact on teenagers' mental health. Do you agree?", data:"70% of HK teens spend 3+ hours daily on social media. 45% feel anxious without it." },
+    { id:3, cat:"📝 Practice Topic", q:"Young people should prioritize careers over starting a family. Discuss.", data:"Avg marriage age: 31M/29F. 60% of young adults prioritize career." },
+    { id:4, cat:"📝 Practice Topic", q:"Hong Kong should ban single-use plastics completely. Do you agree?", data:"HK generates 2,000+ tonnes plastic waste daily. Only 14% recycled." },
+    { id:5, cat:"📝 Practice Topic", q:"University education should be free for all students. Discuss.", data:"HK university costs avg HK\$50,000/year. Student debt increased 40%." },
+    { id:6, cat:"📝 Practice Topic", q:"Schools should require students to participate in at least one sport. Agree?", data:"Only 30% of HK students meet daily activity guidelines. Obesity doubled in 20 years." },
+    { id:7, cat:"📝 Practice Topic", q:"AI will create more problems than it solves for society. Do you agree?", data:"AI could automate 30% of jobs by 2030, affecting 800 million workers." },
+    { id:8, cat:"📝 Practice Topic", q:"Traditional festivals are becoming less meaningful. Discuss.", data:"60% of young HK people find traditions outdated. 75% still enjoy festive activities." },
+    { id:9, cat:"📝 Practice Topic", q:"Homework should be abolished in primary schools. Do you agree?", data:"70% of primary students spend 2+ hours on homework daily." },
+    { id:10, cat:"📝 Practice Topic", q:"Living in Hong Kong is becoming unaffordable for young people. Discuss.", data:"HK apartments cost 20x annual salary. Rent HK\$15-20k/month." },
+    { id:11, cat:"📝 Practice Topic", q:"Employees should work from home permanently. To what extent do you agree?", data:"Remote work increased 400% during pandemic. 65% employers prefer hybrid." },
+    { id:12, cat:"📝 Practice Topic", q:"Junk food advertising should be banned during children's TV programmes.", data:"30% of HK children overweight. Gov bans ads only during school hours." },
+    { id:13, cat:"📝 Practice Topic", q:"Online anonymity is more harmful than beneficial. Discuss.", data:"40% of HK internet users experienced online harassment." },
+    { id:14, cat:"📝 Practice Topic", q:"Learning a second language should start from primary school. Agree?", data:"Children learning before age 10 show 40% better fluency." },
+    { id:15, cat:"📝 Practice Topic", q:"The government should provide more support for elderly care. Discuss.", data:"Elderly (65+) will reach 33% by 2040. Only 45% receive gov care services." }
+];
         
         // ==================== STATE ====================
         let currentTopic = null;
