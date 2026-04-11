@@ -241,6 +241,12 @@
             { id:104, cat:"Autonomous Vehicles [DSE 2026]", q:"Autonomous vehicles should be introduced in Hong Kong. Do you agree?", data:"Self-driving taxis operate globally. HK's dense traffic poses challenges." },
             { id:105, cat:"Minimum Wage [DSE 2026]", q:"Hong Kong should increase minimum wage for catering workers. To what extent do you agree?", data:"Catering workers earn ~HK$50/hour. Owners warn higher wages could force closures." },
             { id:201, cat:"AI & Education [DSE 2026]", q:"AI tools like ChatGPT should be allowed in students' homework. To what extent do you agree?", data:"Educators worry students will lose critical thinking. Others argue AI helps efficient learning." },
+            { id:202, cat:"Workplace AI [DSE 2026]", q:"All in the future workplace: AI will eventually replace most human jobs. Do you agree?", data:"AI could automate 30% of current jobs by 2030. Some experts say AI creates more jobs than it displaces." },
+            { id:203, cat:"Tourism [DSE 2026]", q:"Set-jetting — travelling to destinations seen in films or TV shows — should be promoted in Hong Kong. Do you agree?", data:"Film-induced tourism generates billions globally. Hong Kong has been featured in many Hollywood films." },
+            { id:204, cat:"Environment [DSE 2026]", q:"Hong Kong's country parks should be better promoted to the public. How can this be done?", data:"Country parks cover 40% of Hong Kong land. Many residents are unaware of their existence." },
+            { id:205, cat:"Society [DSE 2026]", q:"Tipping should become widespread in Hong Kong. Do you agree?", data:"Some restaurants have added service charges. Workers' groups argue tipping can supplement low wages." },
+            { id:206, cat:"Health [DSE 2026]", q:"Home remedies, such as herbal soups and acupuncture, should be more widely accepted in Hong Kong. Discuss.", data:"Traditional Chinese medicine is popular in Hong Kong. Some remedies have scientific backing, others remain controversial." },
+            { id:207, cat:"GBA Opportunities [DSE 2026]", q:"Young people in Hong Kong should consider working in the Greater Bay Area. To what extent do you agree?", data:"The GBA includes 9 cities in Southern China. Career opportunities are growing but cultural differences exist." },
             { id:1, cat:"Education", q:"Computers will eventually replace teachers in classrooms. To what extent do you agree?", data:"E-learning grew 300% post-pandemic. AI tutoring used in 50+ countries." },
             { id:2, cat:"Technology", q:"Social media has a negative impact on teenagers' mental health. Do you agree?", data:"70% of HK teens spend 3+ hours daily on social media. 45% feel anxious without it." },
             { id:3, cat:"Work & Career", q:"Young people should prioritize careers over starting a family. Discuss.", data:"Avg marriage age: 31M/29F. 60% of young adults prioritize career." },
@@ -283,7 +289,7 @@
             TOPICS.forEach(t => {
                 const div = document.createElement('div');
                 div.className = 'topic-card';
-                div.innerHTML = `<div class="cat">${t.cat}</div><div class="q">${t.q.substring(0,80)}...</div>`;
+                div.innerHTML = `<div class="cat">${t.cat}</div><div class="q">${t.q.substring(0,70)}...</div>`;
                 div.onclick = () => selectTopic(t);
                 list.appendChild(div);
             });
