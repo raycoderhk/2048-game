@@ -205,6 +205,27 @@
         .topic-card-select:hover { background: #363636; border-color: #667eea; }
         .topic-card-select .cat { font-size: 11px; color: #667eea; font-weight: 600; margin-bottom: 4px; }
         .topic-card-select .q { font-size: 13px; color: #ddd; line-height: 1.4; }
+
+        .comp-article { padding: 20px; }
+        .comp-article h3 { color: #667eea; margin-bottom: 8px; }
+        .comp-article .source { color: #888; font-size: 12px; margin-bottom: 16px; }
+        .comp-article .article-text { background: #2d2d2d; padding: 16px; border-radius: 8px; line-height: 1.8; color: #ddd; font-size: 14px; margin-bottom: 20px; }
+        .comp-question { padding: 20px; }
+        .comp-question .q-num { color: #667eea; font-size: 13px; margin-bottom: 8px; }
+        .comp-question .q-text { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #fff; }
+        .q-options { display: flex; flex-direction: column; gap: 10px; }
+        .opt-btn { padding: 12px 16px; background: #40444b; border: 2px solid #555; border-radius: 8px; color: #fff; text-align: left; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+        .opt-btn:hover { background: #4f545c; border-color: #667eea; }
+        .opt-btn.correct { background: #27ae60; border-color: #27ae60; }
+        .opt-btn.wrong { background: #c0392b; border-color: #c0392b; }
+        .comp-result { padding: 40px; text-align: center; }
+        .comp-result h3 { font-size: 24px; margin-bottom: 12px; }
+        .comp-result .grade { font-size: 48px; color: #667eea; margin: 20px 0; }
+        .back-btn { background: #40444b; margin-left: 10px; }
+        .start-btn { padding: 14px 32px; background: #667eea; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
+        .back-btn { padding: 14px 32px; background: #40444b; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
+        #comp-view { display: none; background: #1e1e1e; min-height: 100%; }
+        .filter-btn { background: #40444b; }
 </style>
 </head>
 <body>
@@ -243,15 +264,17 @@
                 <div style="margin-bottom: 20px; padding: 12px; background: #2d2d2d; border-radius: 8px;">
                     <p style="color: #888; font-size: 12px; margin-bottom: 8px;">🔍 FILTER:</p>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                        <button onclick="filterTopics('all')" id="filter-all" class="filter-btn active">All (27)</button>
+                        <button onclick="filterTopics('all')" id="filter-all" class="filter-btn active">All (32)</button>
                         <button onclick="filterTopics('real')" id="filter-real" class="filter-btn">📌 Real DSE (11)</button>
+                        <button onclick="filterTopics('scmp')" id="filter-scmp" class="filter-btn">📰 SCMP (5)</button>
                         <button onclick="filterTopics('practice')" id="filter-practice" class="filter-btn">📝 Practice (16)</button>
+                        <button onclick="startComprehension()" id="comprehension-btn" class="filter-btn" style="background:#e74c3c;">📖 Comprehension</button>
                     </div>
                 </div>
                 <div id="topic-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;"></div>
             </div>
             
-            <div class="controls" id="controls" style="display:none;">
+            <div id="comp-view"></div><div class="controls" id="controls" style="display:none;">
                 <div class="candidate-btns">
                     <button class="sarah" onclick="playCandidate('Sarah')">👤 Sarah</button>
                     <button class="mike" onclick="playCandidate('Mike')">👤 Mike</button>
