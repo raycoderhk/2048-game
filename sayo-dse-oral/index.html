@@ -289,6 +289,10 @@
                     <input type="text" id="text-input" placeholder="Or type your answer here..." onkeypress="if(event.key==='Enter')sendText()">
                     <button onclick="sendText()">Send</button>
                 </div>
+                <div style="display:flex;gap:8px;margin-top:12px;">
+                    <button id="pause-btn" class="filter-btn" onclick="pauseResume()" disabled style="flex:1;">⏸️ Pause</button>
+                    <button class="filter-btn" onclick="stopSpeaking()" style="flex:1;background:#c0392b;">⏹️ Stop</button>
+                </div>
             </div>
         </div>
     </div>
@@ -458,18 +462,62 @@
         }
         
         // ==================== TTS ====================
-        function speak(text, candidate) {
+        let currentUtterance = null;
+        let isPaused = false;
+        
+        function speak(text, candidate, onEnd) {
             return new Promise(resolve => {
                 synth.cancel();
+                isPaused = false;
                 const u = new SpeechSynthesisUtterance(text);
                 const v = VOICES[candidate];
                 u.voice = v.voice;
                 u.rate = v.rate;
                 u.pitch = v.pitch;
-                u.onend = resolve;
-                u.onerror = resolve;
+                currentUtterance = u;
+                u.onend = () => {
+                    currentUtterance = null;
+                    if (onEnd) onEnd();
+                    resolve();
+                };
+                u.onerror = () => {
+                    currentUtterance = null;
+                    resolve();
+                };
                 synth.speak(u);
+                updatePauseBtn();
             });
+        }
+        
+        function pauseResume() {
+            if (!currentUtterance) return;
+            if (isPaused) {
+                synth.resume();
+                isPaused = false;
+            } else {
+                synth.pause();
+                isPaused = true;
+            }
+            updatePauseBtn();
+        }
+        
+        function stopSpeaking() {
+            synth.cancel();
+            currentUtterance = null;
+            isPaused = false;
+            updatePauseBtn();
+        }
+        
+        function updatePauseBtn() {
+            const btn = document.getElementById('pause-btn');
+            if (!btn) return;
+            if (!currentUtterance) {
+                btn.textContent = '⏸️ Pause';
+                btn.disabled = true;
+            } else {
+                btn.disabled = false;
+                btn.textContent = isPaused ? '▶️ Resume' : '⏸️ Pause';
+            }
         }
         
         async function playCandidate(name) {
@@ -477,71 +525,149 @@
             btn.classList.add('active');
             
             const prompts = {
-                'Sarah': `Hello everyone, I am Sarah. Let us start discussing. ${currentTopic.q} What do you all think?`,
-                'Mike': `I am Mike. I have some thoughts on this topic. ${currentTopic.q} Let me share my perspective.`,
-                'Amy': `Hi, I am Amy. I agree with what has been said. ${currentTopic.q} Let me add some points.`
+                'Sarah': `Hello everyone, I am Sarah. Let us start discussing. ${currentTopic ? currentTopic.q : 'What do you all think?'} What do you all think?`,
+                'Mike': `I am Mike. I have some thoughts on this topic. ${currentTopic ? currentTopic.q : 'Let me share my perspective.'} Let me share my perspective.`,
+                'Amy': `Hi, I am Amy. I agree with what has been said. ${currentTopic ? currentTopic.q : 'Let me add some points.'} Let me add some points.`
             };
             
             addMsg(name, prompts[name], true);
-            await speak(prompts[name], name);
-            
-            btn.classList.remove('active');
-            setStatus('Your turn — hold to speak');
+            await speak(prompts[name], name, () => {
+                btn.classList.remove('active');
+                setStatus('Your turn — hold to speak');
+            });
         }
         
         async function synthResponse(userText) {
             setStatus('Thinking...');
-            await sleep(800);
+            await sleep(600);
             
-            // Analyze user's input and generate contextual response
-            const topic = currentTopic ? currentTopic.q.toLowerCase() : '';
             const text = userText.toLowerCase();
+            const topic = currentTopic ? currentTopic.q.toLowerCase() : '';
             
-            // Determine user stance and generate relevant response
-            const isAgreeing = text.includes('agree') || text.includes('yes') || text.includes('support') || text.includes('good') || text.includes('right');
-            const isDisagreeing = text.includes('disagree') || text.includes('no') || text.includes('not') || text.includes('wrong') || text.includes('against');
-            const mentionsMoney = text.includes('money') || text.includes('cost') || text.includes('expensive') || text.includes('cheap') || text.includes('salary') || text.includes('wage') || text.includes('pay');
-            const mentionsYouth = text.includes('young') || text.includes('teenager') || text.includes('student') || text.includes('youth');
-            const mentionsCulture = text.includes('culture') || text.includes('traditional') || text.includes('heritage') || text.includes('festival');
-            const mentionsWork = text.includes('work') || text.includes('job') || text.includes('career') || text.includes('employment');
-            const mentionsHealth = text.includes('health') || text.includes('medical') || text.includes('hospital') || text.includes('doctor');
-            const mentionsAI = text.includes('ai') || text.includes('robot') || text.includes('chatgpt') || text.includes('technology');
+            // Analyze stance
+            const isAgreeing = /\b(agree|yes|support|true|good|right|definitely|absolutely)\b/.test(text);
+            const isDisagreeing = /\b(disagree|no|not|wrong|against|false|never)\b/.test(text);
+            const mentionsMoney = /\b(money|cost|expensive|cheap|salary|wage|pay|afford|cheap)\b/.test(text);
+            const mentionsYouth = /\b(young|teenager|student|youth|children|kid|school|college)\b/.test(text);
+            const mentionsCulture = /\b(culture|traditional|heritage|festival|identity|community)\b/.test(text);
+            const mentionsWork = /\b(work|job|career|employment|business|office|company)\b/.test(text);
+            const mentionsHealth = /\b(health|medical|hospital|doctor|disease|sick|exercise)\b/.test(text);
+            const mentionsAI = /\b(ai|robot|chatgpt|technology|computer|automation|digital)\b/.test(text);
+            const mentionsGov = /\b(government|policy|law|regulation|minister|authorities)\b/.test(text);
+            const mentionsHK = /\b(hong kong|hk|asia|city|urban|crowded)\b/.test(text);
             
-            // Build contextual response based on candidate personality
-            const sarahResponses = [
-                "That's a well-structured point. Let me add that we should also consider the long-term implications. How would this affect different groups in society?",
-                "I agree with your analysis. To build on that, we need to look at the data more carefully. What evidence supports this view?",
-                "You've raised an important aspect. In my opinion, the key question is whether this approach is sustainable in the long run."
+            // Rich response pools per candidate
+            const sarahLeader = [
+                "That's an excellent point. I think we should consider the broader implications here. Who would benefit most from this approach?",
+                "I appreciate your analysis. Could you elaborate on how this would work in practice? I think we need more specifics.",
+                "You've raised something important. In my view, the key issue here is balance. How can we ensure everyone is treated fairly?",
+                "That's worth thinking about. From a strategic perspective, what do you think are the main advantages and disadvantages?",
+                "I agree with parts of that. Let me add that we should also consider the timing. Is this the right moment to implement such a change?"
             ];
             
-            const mikeResponses = [
-                "I appreciate your view, but I have some concerns. Have you thought about the potential unintended consequences?",
-                "That's interesting, but I'm not entirely convinced. What about the counterarguments?",
-                "I hear you, but let me play devil's advocate. Wouldn't this approach actually create more problems?"
+            const mikeChallenger = [
+                "I'm not sure I fully agree. Have you considered how this might affect lower-income families?",
+                "That's one way to look at it, but let me play devil's advocate. What if this creates more problems than it solves?",
+                "I hear you, but I have serious doubts. Can you provide more evidence to support this claim?",
+                "Interesting perspective, but I'm skeptical. What about the unintended consequences we might face?",
+                "I understand your reasoning, but I think you're oversimplifying. There are many factors we need to consider here."
             ];
             
-            const amyResponses = [
-                "I completely agree with your perspective! And I'd like to add that this also benefits the community in other ways.",
-                "That's a wonderful point! Building on that, I think we should also consider how this affects families.",
-                "I agree wholeheartedly! This reminds me of how similar issues were handled in other countries."
+            const amySupporter = [
+                "I really agree with that viewpoint! And I'd like to add that this could also help strengthen community bonds.",
+                "Exactly my thoughts! Building on what you said, I think this approach would make life better for many families.",
+                "I couldn't agree more! In addition to what you mentioned, this would also create new opportunities for young people.",
+                "That's so true! I think this is especially important for Hong Kong's future competitiveness.",
+                "I love that idea! It reminds me of how other cities have successfully implemented similar policies."
             ];
             
-            // Rotate candidates and responses
+            // Topic-specific responses
+            let responses;
+            
+            if (mentionsAI || mentionsWork) {
+                responses = {
+                    'Sarah': ["AI is transforming the workplace. But we must ask: will this benefit everyone equally, or just those with the right skills?",
+                        "The data shows interesting trends. What specific sectors do you think would be most affected by this?",
+                        "That's a valid concern. How can we ensure workers are properly retrained for new challenges?"],
+                    'Mike': ["But here's the problem: what happens to workers who can't adapt to new technology quickly enough?",
+                        "I'm worried this could actually increase inequality. Not everyone has access to the same training opportunities.",
+                        "What about the middle-skilled workers? They often get squeezed out when AI automates routine tasks."],
+                    'Amy': ["That's true! And AI can also help small businesses compete with larger corporations.",
+                        "I agree! With proper training programs, many workers could actually benefit from these changes.",
+                        "Exactly. The key is making sure the benefits of AI are distributed more broadly across society."]
+                };
+            } else if (mentionsYouth || mentionsEducation) {
+                responses = {
+                    'Sarah': ["Education is fundamental. But what curriculum changes would actually prepare students for the future?",
+                        "That's crucial. How can schools balance academic achievement with practical life skills?",
+                        "Young people face unique pressures today. What support systems do they need most?"],
+                    'Mike': ["I'm concerned about the pressure on students. Are we creating unrealistic expectations?",
+                        "But what about students who don't fit the traditional academic model? What alternatives exist for them?",
+                        "I question whether more testing actually leads to better outcomes. What does the research show?"],
+                    'Amy': ["I completely agree. Holistic development is just as important as academic results.",
+                        "That's so important! Schools should also focus on mental health and emotional intelligence.",
+                        "Exactly. And we should celebrate different types of success, not just exam scores."]
+                };
+            } else if (mentionsMoney || mentionsWork) {
+                responses = {
+                    'Sarah': ["Economic inequality is a real concern. How can we ensure fair access to opportunities?",
+                        "The cost of living affects everyone's decisions. What policies could help address this?",
+                        "Money isn't everything, but financial stress impacts mental health significantly."],
+                    'Mike': ["But who pays for these initiatives? Higher taxes could discourage business investment.",
+                        "I'm skeptical about government spending programs. Do they actually deliver results efficiently?",
+                        "What about inflation risks? Well-intentioned policies sometimes have unintended consequences."],
+                    'Amy': ["I agree! Financial security allows families to make better choices for their children.",
+                        "That's true! Investment in people always pays long-term dividends for society.",
+                        "Exactly. When people aren't worried about money, they contribute more to their communities."]
+                };
+            } else if (mentionsCulture || mentionsHK) {
+                responses = {
+                    'Sarah': ["Hong Kong's unique identity is precious. How can we preserve our heritage while embracing change?",
+                        "Culture shapes who we are. What aspects are most worth protecting in your view?",
+                        "I think balance is important. Tradition and innovation can coexist in a modern city."],
+                    'Mike': ["But culture also evolves naturally. Can we really preserve everything, or should we accept some changes?",
+                        "I'm not convinced that trying to freeze culture in time is healthy. Progress requires adaptation.",
+                        "What about younger generations who may not value traditions the same way? Whose perspective matters more?"],
+                    'Amy': ["Hong Kong's multicultural identity is what makes us special. We should celebrate our diversity!",
+                        "I love our traditions! They're what connect us to our ancestors and give life meaning.",
+                        "Exactly. And traditional values like respect and family are timeless, no matter how society changes."]
+                };
+            } else if (isAgreeing) {
+                responses = {
+                    'Sarah': sarahLeader,
+                    'Mike': ["I understand where you're coming from, but let me offer a different angle. What if we considered the opposite viewpoint too?",
+                        "Fair point, but I'm curious about the implementation challenges. How would this actually work in reality?"],
+                    'Amy': amySupporter
+                };
+            } else if (isDisagreeing) {
+                responses = {
+                    'Sarah': ["That's a valid alternative perspective. Could you share more about why you hold this view?",
+                        "I appreciate your critical thinking. Let's explore what evidence supports both sides of this issue."],
+                    'Mike': mikeChallenger,
+                    'Amy': ["I hear your concerns, but I still believe there's merit in this approach. What would change your mind?"
+                };
+            } else {
+                // General responses when unclear
+                responses = {
+                    'Sarah': ["That's an interesting perspective. Could you tell us more about your reasoning?",
+                        "Let me think about this from a few different angles. What do you think would be the biggest challenge?"],
+                    'Mike': ["I'm not entirely convinced, but I'm willing to hear more. What evidence supports this view?",
+                        "That's one perspective, but I have some questions about the practicality of this approach."],
+                    'Amy': ["I think that's a lovely idea! It would really help many people in our community.",
+                        "I agree with parts of what you said. Let me add another consideration."]
+                };
+            }
+            
+            // Pick candidate, preferring varied picks
             const candidates = ['Sarah', 'Mike', 'Amy'];
-            const responses = {
-                'Sarah': sarahResponses,
-                'Mike': mikeResponses,
-                'Amy': amyResponses
-            };
-            
-            // Pick candidate based on content
             let c = candidates[Math.floor(Math.random() * candidates.length)];
-            if (mentionsYouth && Math.random() > 0.5) c = 'Sarah';
-            if (isDisagreeing && Math.random() > 0.5) c = 'Mike';
-            if (isAgreeing && Math.random() > 0.5) c = 'Amy';
             
-            const candidateResponses = responses[c];
-            const response = candidateResponses[Math.floor(Math.random() * candidateResponses.length)];
+            // Prefer Mike for disagreement, Amy for agreement
+            if (isDisagreeing && Math.random() > 0.4) c = 'Mike';
+            else if (isAgreeing && Math.random() > 0.4) c = 'Amy';
+            
+            const pool = responses[c];
+            const response = pool[Math.floor(Math.random() * pool.length)];
             
             addMsg(c, response, true);
             setStatus('Your turn — hold to speak');
