@@ -340,6 +340,150 @@
     { id:15, cat:"📝 Practice Topic", q:"The government should provide more support for elderly care. Discuss.", data:"Elderly (65+) will reach 33% by 2040. Only 45% receive gov care services." }
 ];
         
+        // ======= COMPREHENSION ARTICLES =======
+        const COMP_ARTICLES = [
+            {
+                id: 501,
+                cat: "📖 Comprehension",
+                title: "AI Education in Hong Kong Schools",
+                source: "SCMP",
+                article: "Hong Kong authorities will offer HK$500,000 to each public school that applies for funding to introduce artificial intelligence into classrooms over the next three years, with about HK$500 million allocated for the initiative.
+
+Schools receiving the funding can subscribe to AI-powered software and hardware, but must implement AI-assisted teaching in at least three subjects while developing six teaching examples or resources using the technology.
+
+Successful applicants will receive one-off funding of HK$500,000. Schools can use the funding to purchase AI-powered devices and services, as well as to subsidise students' participation in activities that enhance their AI literacy and skills.",
+                questions: [
+                    { q: "What is the purpose of the HK$500 million allocation?", options: ["To build new schools", "To promote AI adoption in classrooms", "To pay teachers' salaries", "To buy textbooks"], answer: 1 },
+                    { q: "How many subjects must schools implement AI-assisted teaching in?", options: ["One subject", "Two subjects", "At least three subjects", "At least six subjects"], answer: 2 },
+                    { q: "The word 'allocate' in line 2 is closest in meaning to:", options: ["Spend", "Distribute", "Save", "Borrow"], answer: 1 },
+                    { q: "According to the passage, what must schools develop?", options: ["New curriculum guidelines", "Six teaching examples using AI", "Teacher training programs", "AI research projects"], answer: 1 }
+                ]
+            },
+            {
+                id: 502,
+                cat: "📖 Comprehension",
+                title: "Students and AI Homework",
+                source: "SCMP", 
+                article: "Nearly one in four Hong Kong students now cannot complete their homework without AI assistance, according to a recent survey. The same survey also found that 71 per cent of teachers reported students using AI tools for their homework assignments.
+
+Some education experts say AI literacy is essential for students' future success. However, other teachers worry that over-reliance on AI could hinder the development of critical thinking and independent problem-solving skills.
+
+The debate over AI in education continues as schools grapple with how to balance technological advancement with traditional learning values.",
+                questions: [
+                    { q: "What proportion of students cannot complete homework without AI?", options: ["One in ten", "One in four", "Almost half", "Three in four"], answer: 1 },
+                    { q: "What percentage of teachers reported students using AI for homework?", options: ["55%", "71%", "80%", "90%"], answer: 1 },
+                    { q: "The word 'grapple' in the last paragraph is closest in meaning to:", options: ["Ignore", "Struggle with", "Accept", "Celebrate"], answer: 1 },
+                    { q: "According to the passage, what concern do some teachers have?", options: ["AI is too expensive", "Students lack access to devices", "Over-reliance may hinder critical thinking", "Parents refuse AI in schools"], answer: 2 }
+                ]
+            },
+            {
+                id: 503,
+                cat: "📖 Comprehension",
+                title: "Digital Divide and Ethnic Minorities",
+                source: "SCMP",
+                article: "A research team from the University of Hong Kong talked to 412 people from different ethnic groups between July 2024 and March last year. They wanted to see how members of these communities used devices to find public information, healthcare services, social media and government apps.
+
+However, only 55 per cent said the information provided by government apps was user-friendly. The Equal Opportunities Commission is urging the government to use artificial intelligence to help with language support and make app registration easier.
+
+The research highlights how technology could either bridge or widen existing social gaps depending on how it is implemented.",
+                questions: [
+                    { q: "How many people were surveyed in this research?", options: ["212", "412", "515", "550"], answer: 1 },
+                    { q: "What percentage found government apps user-friendly?", options: ["45%", "55%", "65%", "75%"], answer: 1 },
+                    { q: "The phrase 'bridge language barriers' means:", options: ["Create more languages", "Help people communicate across language differences", "Build bridges", "Learn foreign languages"], answer: 1 },
+                    { q: "What does the Equal Opportunities Commission suggest using AI for?", options: ["Entertainment", "Language support in apps", "Shopping", "Social media"], answer: 1 }
+                ]
+            }
+        ];
+        
+        // ======= COMPREHENSION FUNCTIONS =======
+        let currentCompArticle = null;
+        let currentCompQuestion = 0;
+        let compScore = 0;
+
+        function startComprehension() {
+            document.getElementById('welcome').style.display = 'none';
+            document.getElementById('topic-selection').style.display = 'none';
+            document.getElementById('comp-view').style.display = 'block';
+            document.getElementById('controls').style.display = 'none';
+            document.getElementById('topic-bar').style.display = 'none';
+            document.getElementById('messages').innerHTML = '';
+            
+            currentCompArticle = COMP_ARTICLES[Math.floor(Math.random() * COMP_ARTICLES.length)];
+            currentCompQuestion = 0;
+            compScore = 0;
+            showCompArticle();
+        }
+        
+        function showCompArticle() {
+            const div = document.createElement('div');
+            div.className = 'comp-article';
+            div.innerHTML = '<h3>' + currentCompArticle.title + '</h3><p class="source">' + currentCompArticle.source + '</p><div class="article-text">' + currentCompArticle.article.replace(/\n/g, '<br>') + '</div><button onclick="startCompQuestions()" class="comp-btn">Start Questions</button>';
+            document.getElementById('comp-view').innerHTML = '';
+            document.getElementById('comp-view').appendChild(div);
+        }
+        
+        function startCompQuestions() {
+            currentCompQuestion = 0;
+            showCompQuestion();
+        }
+        
+        function showCompQuestion() {
+            const q = currentCompArticle.questions[currentCompQuestion];
+            const total = currentCompArticle.questions.length;
+            
+            let html = '<div class="comp-question">';
+            html += '<p class="q-num">Question ' + (currentCompQuestion + 1) + ' of ' + total + '</p>';
+            html += '<p class="q-text">' + q.q + '</p>';
+            html += '<div class="q-options">';
+            q.options.forEach((opt, i) => {
+                html += '<button class="opt-btn" onclick="checkCompAnswer(' + i + ')">' + String.fromCharCode(65 + i) + '. ' + opt + '</button>';
+            });
+            html += '</div></div>';
+            
+            document.getElementById('comp-view').innerHTML = html;
+        }
+        
+        function checkCompAnswer(selected) {
+            const correct = currentCompArticle.questions[currentCompQuestion].answer;
+            const btns = document.querySelectorAll('.opt-btn');
+            
+            btns.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === correct) btn.classList.add('correct');
+                if (i === selected && selected !== correct) btn.classList.add('wrong');
+            });
+            
+            if (selected === correct) compScore++;
+            
+            setTimeout(() => {
+                currentCompQuestion++;
+                if (currentCompQuestion < currentCompArticle.questions.length) {
+                    showCompQuestion();
+                } else {
+                    showCompResult();
+                }
+            }, 1500);
+        }
+        
+        function showCompResult() {
+            const total = currentCompArticle.questions.length;
+            const pct = Math.round((compScore / total) * 100);
+            const grade = pct >= 80 ? 'A' : pct >= 60 ? 'B' : pct >= 40 ? 'C' : 'D';
+            
+            let html = '<div class="comp-result">';
+            html += '<h3>Result: ' + compScore + '/' + total + ' (' + pct + '%)</h3>';
+            html += '<p class="grade">Grade: <strong>' + grade + '</strong></p>';
+            html += '<button onclick="startComprehension()" class="comp-btn">Try Another Article</button>';
+            html += '<button onclick="backToHome()" class="back-btn">Back to Home</button></div>';
+            
+            document.getElementById('comp-view').innerHTML = html;
+        }
+        
+        function backToHome() {
+            document.getElementById('comp-view').style.display = 'none';
+            document.getElementById('welcome').style.display = 'flex';
+        }
+
         // ==================== STATE ====================
         let currentTopic = null;
         let isRecording = false;
