@@ -696,3 +696,81 @@
     </div>
 </body>
 </html>
+
+    // ======= MOCK EXAM =======
+    const MOCK_TOPICS = [
+        { q: "Financial literacy should be taught in all secondary schools in Hong Kong. To what extent do you agree?", d: "Only 30% of HK teens understand budgeting." },
+        { q: "Online dishonesty has become a serious problem. How can we address this?", d: "45% of HK university students admitted plagiarizing." },
+        { q: "Hong Kong's street food culture is disappearing. Is this a significant loss?", d: "Over 50 famous dai pai dongs closed in a decade." }
+    ];
+
+    let mockRunning = false, mockTimeout = null, mockIndex = 0, mockStartTime = 0;
+
+    function startMockExam() {
+        document.getElementById('welcome').style.display = 'none';
+        document.getElementById('controls').style.display = 'none';
+        document.getElementById('topic-bar').style.display = 'none';
+        document.getElementById('comp-view').style.display = 'none';
+        document.getElementById('mock-view').style.display = 'block';
+        const topic = MOCK_TOPICS[Math.floor(Math.random() * MOCK_TOPICS.length)];
+        document.getElementById('mock-view').innerHTML = '<div style="text-align:center;padding:20px;background:linear-gradient(135deg,#27ae60,#2ecc71);border-radius:12px;margin-bottom:16px;"><h3 style="color:#fff;">🎮 DSE Oral Mock Exam</h3><p style="color:#fff;opacity:0.9;font-size:13px;">4 AI Candidates • 8-Minute Group Discussion</p><div id="mock-timer" style="font-size:32px;font-weight:bold;color:#fff;margin:10px 0;">00:00 / 08:00</div><p style="font-size:13px;font-weight:bold;color:#fff;">📝 ' + topic.q + '</p><p style="font-size:11px;color:#fff;opacity:0.8;margin-top:4px;">📊 ' + topic.d + '</p></div><div id="mock-msgs" style="background:#2d2d2d;border-radius:12px;padding:14px;margin-bottom:16px;min-height:200px;"></div><div style="text-align:center;"><button onclick="stopMockExam()" style="padding:10px 24px;background:#444;border:none;border-radius:8px;color:#fff;cursor:pointer;">⏹ Stop</button><br><button onclick="backToHome()" style="margin-top:8px;padding:10px 24px;background:#333;border:none;border-radius:8px;color:#fff;cursor:pointer;">← Back</button></div>';
+        mockRunning = true;
+        mockStartTime = Date.now();
+        mockIndex = 0;
+        runMockTurn();
+        updateMockTimer();
+    }
+
+    const MOCK_SCRIPT = [
+        { c: 'Sarah', t: 'Hello everyone, I am Sarah. Let us start discussing. Financial literacy should be taught in all secondary schools. What do you all think?' },
+        { c: 'Mike', t: 'I am Mike. I disagree. I think financial literacy is too complex for secondary students. They should focus on basic maths first.' },
+        { c: 'Amy', t: 'I agree with Sarah. Many students do not understand budgeting. Starting with simple topics like saving pocket money would help.' },
+        { c: 'Ray', t: 'I partially agree. Some topics like saving are suitable, but stock market investing might be too advanced.' },
+        { c: 'Sarah', t: 'That is a good point. We should consider age-appropriate content. Younger students could learn basic saving, older students could tackle investing.' },
+        { c: 'Mike', t: 'But where would the teachers come from? Most teachers are not qualified to teach financial topics.' },
+        { c: 'Amy', t: 'I agree with Mike on that point. We would need proper teacher training programs.' },
+        { c: 'Ray', t: 'I think government support is crucial. The HK$500 million allocation could fund teacher training.' },
+        { c: 'Sarah', t: 'To summarize, we agreed financial education is important. We suggested starting with basic topics and providing teacher training. Thank you everyone!' }
+    ];
+
+    function runMockTurn() {
+        if (!mockRunning || mockIndex >= MOCK_SCRIPT.length) { endMockExam(); return; }
+        document.querySelectorAll('.mock-cand-card').forEach(c => c.classList.remove('active'));
+        const turn = MOCK_SCRIPT[mockIndex];
+        const msgs = document.getElementById('mock-msgs');
+        const div = document.createElement('div');
+        div.style = 'margin-bottom:10px;padding:8px 12px;border-radius:8px;background:#363636;';
+        div.innerHTML = '<strong style="color:' + (turn.c === 'Sarah' ? '#3ba55c' : turn.c === 'Mike' ? '#f04747' : turn.c === 'Amy' ? '#f47b67' : '#8e44ad') + '">' + turn.c + ':</strong> <span style="color:#aaa">' + turn.t + '</span>';
+        msgs.appendChild(div);
+        msgs.scrollTop = msgs.scrollHeight;
+        speak(turn.t, turn.c, function() {});
+        mockIndex++;
+        mockTimeout = setTimeout(runMockTurn, 12000);
+    }
+
+    function updateMockTimer() {
+        if (!mockRunning) return;
+        const elapsed = Date.now() - mockStartTime;
+        const secs = Math.floor(elapsed / 1000);
+        const mins = Math.floor(secs / 60);
+        const ss = secs % 60;
+        const timer = document.getElementById('mock-timer');
+        if (timer) timer.textContent = (mins < 10 ? '0' : '') + mins + ':' + (ss < 10 ? '0' : '') + ss + ' / 08:00';
+        setTimeout(updateMockTimer, 1000);
+    }
+
+    function endMockExam() {
+        if (!mockRunning) return;
+        mockRunning = false;
+        stopSpeaking();
+        clearTimeout(mockTimeout);
+        const msgs = document.getElementById('mock-msgs');
+        if (msgs) msgs.innerHTML += '<div style="text-align:center;padding:16px;background:#27ae60;border-radius:8px;color:#fff;margin-top:10px;"><strong>✅ Mock Exam Complete!</strong><br><span style="font-size:12px;opacity:0.9">In a real exam, you would participate as the 4th candidate!</span></div>';
+    }
+
+    function stopMockExam() {
+        mockRunning = false;
+        stopSpeaking();
+        clearTimeout(mockTimeout);
+        endMockExam();
+    }
