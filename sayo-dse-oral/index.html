@@ -331,7 +331,7 @@ async function speak(text,cand,onEnd){
             var audio=new Audio(url);
             audio.onended=function(){if(onEnd)onEnd();res()};
             audio.onerror=function(){if(onEnd)onEnd();res()};
-            curAudio=audio;
+            curAudio=audio;isSpeaking=true;
             updatePauseBtn();
             audio.play();
             return;
@@ -349,7 +349,7 @@ function fallbackTTS(text,cand,onEnd,res){
   var u=new SpeechSynthesisUtterance(text);
   var v=VOICES[cand];
   u.voice=v.v;u.rate=v.r;u.pitch=v.p;
-  curAudio=u;
+  curAudio=u;isSpeaking=true;
   u.onend=function(){curAudio=null;if(onEnd)onEnd();if(res)res()};
   u.onerror=function(){curAudio=null;if(onEnd)onEnd();if(res)res()};
   synth.speak(u);
@@ -366,7 +366,7 @@ function pauseRes(){
 function stopSpeak(){
   if(curAudio&&curAudio.pause){curAudio.pause();curAudio.currentTime=0;}
   else synth.cancel();
-  curAudio=null;isPaused=false;updatePauseBtn();
+  curAudio=null;isSpeaking=false;isPaused=false;updatePauseBtn();
 }
 function updatePauseBtn(){
   var btn=document.getElementById('pause-btn');
@@ -374,7 +374,7 @@ function updatePauseBtn(){
   else{btn.disabled=false;btn.textContent=isPaused?'▶️ Resume':'⏸️ Pause';}
 }
 
-async function playC(name){
+async function playC(name){if(isSpeaking)return;
   var btn=document.querySelector('.cand-btns .'+name.toLowerCase());
   btn.classList.add('active');
   var prompts={
@@ -387,7 +387,7 @@ async function playC(name){
 }
 
 // ==================== AI RESPONSE ====================
-async function synthResp(text){
+async function synthResp(text){if(isSpeaking)return;
   document.getElementById('status').textContent='Thinking...';
   await new Promise(function(r){setTimeout(r,600)});
   var tx=text.toLowerCase();
