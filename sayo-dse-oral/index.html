@@ -6,246 +6,94 @@
     <title>Sayo — DSE English Oral Practice</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #1a1a1a; color: #fff; min-height: 100vh; }
-        
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .header-left { display: flex; align-items: center; gap: 12px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a1a; color: #fff; min-height: 100vh; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+        .header h1 { font-size: 18px; font-weight: 700; }
+        .badge { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 12px; font-size: 11px; }
         .back-link { background: rgba(255,255,255,0.2); color: #fff; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 13px; }
         .back-link:hover { background: rgba(255,255,255,0.3); }
-        .logo { font-size: 28px; }
-        .header h1 { font-size: 20px; font-weight: 700; }
-        .badge { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 12px; font-size: 11px; }
-        
-        /* Main */
-        .main { display: flex; height: calc(100vh - 60px); }
-        
-        /* Sidebar */
-        .sidebar {
-            width: 280px;
-            background: #252525;
-            border-right: 1px solid #333;
-            overflow-y: auto;
-            padding: 16px;
-        }
+        .container { display: flex; height: calc(100vh - 56px); }
+        .sidebar { width: 260px; background: #252525; border-right: 1px solid #333; overflow-y: auto; padding: 14px; }
         .sidebar h3 { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-        
-        .topic-card {
-            background: #2d2d2d;
-            border-radius: 8px;
-            padding: 14px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-        }
+        .topic-card { background: #2d2d2d; border-radius: 8px; padding: 12px; margin-bottom: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
         .topic-card:hover { background: #363636; }
         .topic-card.active { border-color: #667eea; background: #2d3748; }
-        .topic-card .cat { font-size: 11px; color: #667eea; font-weight: 600; margin-bottom: 4px; }
-        .topic-card .q { font-size: 13px; line-height: 1.4; color: #ddd; }
-        
-        /* Chat */
-        .chat { flex: 1; display: flex; flex-direction: column; }
-        
-        /* Topic Bar */
-        .topic-bar {
-            background: #252525;
-            padding: 16px 20px;
-            border-bottom: 1px solid #333;
-        }
-        .topic-bar .q { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
-        .topic-bar .data { font-size: 13px; color: #aaa; background: #1e1e1e; padding: 10px 14px; border-radius: 6px; border-left: 3px solid #667eea; }
-        
-        /* Messages */
-        .messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
-        
-        .msg { display: flex; gap: 12px; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } }
-        
-        .avatar {
-            width: 44px; height: 44px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 16px; flex-shrink: 0;
-        }
+        .topic-card .cat { font-size: 10px; color: #667eea; font-weight: 600; margin-bottom: 3px; }
+        .topic-card .q { font-size: 12px; color: #aaa; line-height: 1.3; }
+        .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .topic-bar { background: #252525; padding: 14px; border-bottom: 1px solid #333; }
+        .topic-bar .q { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+        .topic-bar .data { font-size: 12px; color: #aaa; background: #1e1e1e; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #667eea; }
+        .messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+        .msg { display: flex; gap: 10px; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } }
+        .avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
         .avatar.sarah { background: linear-gradient(135deg, #3ba55c, #2d8a4e); }
         .avatar.mike { background: linear-gradient(135deg, #f04747, #c73b3b); }
         .avatar.amy { background: linear-gradient(135deg, #f47b67, #d65a4a); }
         .avatar.you { background: linear-gradient(135deg, #667eea, #764ba2); }
-        
         .msg-body { flex: 1; }
-        .msg-header { display: flex; gap: 8px; align-items: baseline; margin-bottom: 4px; }
-        .msg-header .name { font-weight: 700; font-size: 14px; }
-        .msg-header .time { font-size: 11px; color: #666; }
-        .msg-body .text { font-size: 14px; line-height: 1.6; color: #ddd; }
-        .msg-body .play-btn {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: #333; border: none; color: #fff;
-            padding: 6px 12px; border-radius: 6px; cursor: pointer;
-            font-size: 12px; margin-top: 8px;
-        }
-        .msg-body .play-btn:hover { background: #444; }
-        
-        /* Controls */
-        .controls {
-            padding: 20px;
-            background: #1e1e1e;
-            border-top: 1px solid #333;
-        }
-        
-        .candidate-btns { display: flex; gap: 8px; margin-bottom: 12px; }
-        .candidate-btns button {
-            flex: 1; padding: 10px;
-            background: #333; border: none; border-radius: 8px;
-            color: #fff; cursor: pointer; font-size: 13px; font-weight: 600;
-            transition: all 0.2s;
-        }
+        .msg-header { display: flex; gap: 6px; align-items: baseline; margin-bottom: 3px; }
+        .msg-header .name { font-weight: 700; font-size: 13px; }
+        .msg-header .time { font-size: 10px; color: #666; }
+        .msg-body .text { font-size: 13px; line-height: 1.5; color: #ddd; }
+        .controls { padding: 14px; background: #1e1e1e; border-top: 1px solid #333; }
+        .candidate-btns { display: flex; gap: 6px; margin-bottom: 10px; }
+        .candidate-btns button { flex: 1; padding: 8px; background: #333; border: none; border-radius: 6px; color: #fff; cursor: pointer; font-size: 12px; font-weight: 600; }
         .candidate-btns button:hover { background: #444; }
         .candidate-btns button.sarah:hover, .candidate-btns button.sarah.active { background: #3ba55c; }
         .candidate-btns button.mike:hover, .candidate-btns button.mike.active { background: #f04747; }
         .candidate-btns button.amy:hover, .candidate-btns button.amy.active { background: #f47b67; }
-        
-        .record-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        
-        .mic-btn {
-            width: 72px; height: 72px; border-radius: 50%;
-            background: linear-gradient(135deg, #ed4245, #c93b3b);
-            border: none; color: #fff; font-size: 28px;
-            cursor: pointer; transition: all 0.2s;
-            box-shadow: 0 4px 15px rgba(237,66,69,0.4);
-        }
-        .mic-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(237,66,69,0.5); }
-        .mic-btn.recording {
-            background: linear-gradient(135deg, #faa61a, #d4910f);
-            animation: pulse 1s infinite;
-        }
-        
-        .interim-text {
-            font-size: 12px;
-            color: #888;
-            margin-top: 4px;
-            font-style: italic;
-        }
-        
-        .fallback-input {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        .fallback-input input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #444;
-            background: #2d2d2d;
-            color: #fff;
-            font-size: 14px;
-        }
-        .fallback-input button {
-            padding: 10px 16px;
-            background: #667eea;
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            cursor: pointer;
-        }
-        @keyframes pulse { 0%,100%{transform: scale(1)} 50%{transform: scale(0.95)} }
-        
-        .status-text { font-size: 13px; color: #888; }
-        
-        /* Welcome */
-        .welcome {
-            flex: 1; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center; padding: 40px;
-        }
-        .welcome h2 { font-size: 28px; margin-bottom: 12px; }
-        .welcome p { color: #888; font-size: 15px; max-width: 400px; line-height: 1.6; margin-bottom: 24px; }
-        .start-btn {
-            padding: 14px 32px; background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none; border-radius: 8px; color: #fff;
-            font-size: 16px; font-weight: 600; cursor: pointer;
-        }
-        .welcome.hidden { display: none; }
-        
-        /* Speaking indicator */
-        .speaking { animation: wave 0.5s infinite alternate; }
-        @keyframes wave { from { opacity: 0.5; } to { opacity: 1; } }
-        
-        @media (max-width: 768px) {
-            .sidebar { display: none; }
-            .header h1 { font-size: 16px; }
-        }
-    
-        .topic-selection h3 { font-size: 18px; font-weight: 700; }
-        .filter-btn {
-            padding: 8px 14px;
-            background: #40444b;
-            border: none;
-            border-radius: 20px;
-            color: #fff;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        .filter-btn.active { background: #667eea; }
-        .filter-btn:hover { background: #52565e; }
-        .topic-card-select {
-            background: #2d2d2d;
-            border-radius: 8px;
-            padding: 14px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-        }
-        .topic-card-select:hover { background: #363636; border-color: #667eea; }
-        .topic-card-select .cat { font-size: 11px; color: #667eea; font-weight: 600; margin-bottom: 4px; }
-        .topic-card-select .q { font-size: 13px; color: #ddd; line-height: 1.4; }
-
-        .comp-article { padding: 20px; }
-        .comp-article h3 { color: #667eea; margin-bottom: 8px; }
-        .comp-article .source { color: #888; font-size: 12px; margin-bottom: 16px; }
-        .comp-article .article-text { background: #2d2d2d; padding: 16px; border-radius: 8px; line-height: 1.8; color: #ddd; font-size: 14px; margin-bottom: 20px; }
-        .comp-question { padding: 20px; }
-        .comp-question .q-num { color: #667eea; font-size: 13px; margin-bottom: 8px; }
-        .comp-question .q-text { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #fff; }
-        .q-options { display: flex; flex-direction: column; gap: 10px; }
-        .opt-btn { padding: 12px 16px; background: #40444b; border: 2px solid #555; border-radius: 8px; color: #fff; text-align: left; cursor: pointer; font-size: 14px; transition: all 0.2s; }
-        .opt-btn:hover { background: #4f545c; border-color: #667eea; }
+        .mic-btn { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #ed4245, #c93b3b); border: none; color: #fff; font-size: 24px; cursor: pointer; margin: 0 auto; display: block; box-shadow: 0 4px 12px rgba(237,66,69,0.3); }
+        .mic-btn:hover { transform: scale(1.05); }
+        .mic-btn.recording { animation: pulse 0.8s infinite; }
+        @keyframes pulse { 0%,100%{transform: scale(1);} 50%{transform: scale(0.95);} }
+        .status { text-align: center; font-size: 12px; color: #888; margin-top: 8px; }
+        .fallback { display: flex; gap: 6px; margin-top: 10px; }
+        .fallback input { flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #444; background: #2d2d2d; color: #fff; font-size: 13px; }
+        .fallback button { padding: 8px 14px; background: #667eea; border: none; border-radius: 6px; color: #fff; cursor: pointer; }
+        .pause-row { display: flex; gap: 6px; margin-top: 8px; }
+        .pause-row button { flex: 1; padding: 8px; background: #333; border: none; border-radius: 6px; color: #fff; cursor: pointer; font-size: 12px; }
+        .pause-row button:hover { background: #444; }
+        .welcome { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; }
+        .welcome h2 { font-size: 24px; margin-bottom: 10px; }
+        .welcome p { color: #888; font-size: 14px; max-width: 360px; line-height: 1.6; margin-bottom: 20px; }
+        .btn-main { padding: 14px 28px; background: linear-gradient(135deg, #667eea, #764ba2); border: none; border-radius: 8px; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; margin: 6px; }
+        .btn-main:hover { opacity: 0.9; }
+        .btn-comp { background: #e74c3c; }
+        #comp-view { display: none; background: #1e1e1e; min-height: 100%; padding: 20px; overflow-y: auto; }
+        .comp-article h3 { color: #e74c3c; margin-bottom: 6px; }
+        .comp-article .source { color: #888; font-size: 11px; margin-bottom: 14px; }
+        .comp-article .article-text { background: #2d2d2d; padding: 14px; border-radius: 8px; line-height: 1.7; color: #ddd; font-size: 13px; margin-bottom: 16px; }
+        .comp-question .q-num { color: #e74c3c; font-size: 12px; margin-bottom: 6px; }
+        .comp-question .q-text { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+        .q-options { display: flex; flex-direction: column; gap: 8px; }
+        .opt-btn { padding: 10px 14px; background: #333; border: 2px solid #444; border-radius: 8px; color: #fff; text-align: left; cursor: pointer; font-size: 13px; }
+        .opt-btn:hover { border-color: #667eea; }
         .opt-btn.correct { background: #27ae60; border-color: #27ae60; }
         .opt-btn.wrong { background: #c0392b; border-color: #c0392b; }
-        .comp-result { padding: 40px; text-align: center; }
-        .comp-result h3 { font-size: 24px; margin-bottom: 12px; }
-        .comp-result .grade { font-size: 48px; color: #667eea; margin: 20px 0; }
-        .back-btn { background: #40444b; margin-left: 10px; }
-        .start-btn { padding: 14px 32px; background: #667eea; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
-        .back-btn { padding: 14px 32px; background: #40444b; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
-        #comp-view { display: none; background: #1e1e1e; min-height: 100%; }
-        .filter-btn { background: #40444b; }
-.comp-start-btn { padding: 14px 32px; background: #e74c3c; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 12px; width: 100%; }
-</style>
+        .comp-result { text-align: center; padding: 40px; }
+        .comp-result h3 { font-size: 22px; margin-bottom: 10px; }
+        .comp-result .grade { font-size: 48px; color: #e74c3c; margin: 16px 0; }
+        .comp-btn { padding: 12px 24px; background: #e74c3c; border: none; border-radius: 8px; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; margin: 8px; }
+        .back-btn { background: #444; }
+        @media(max-width:768px) { .sidebar{display:none;} }
+    </style>
 </head>
 <body>
     <div class="header">
-        <div class="header-left">
-            <a href="../index.html" class="back-link">← GameWorld</a>
-            <span class="logo">🎓</span>
-            <h1>Sayo — DSE Oral Practice</h1>
-        </div>
-        <span class="badge">FREE • Browser TTS/STT</span>
+        <a href="../index.html" class="back-link">← GameWorld</a>
+        <h1>🎓 Sayo — DSE Oral Practice</h1>
+        <span class="badge">FREE Browser TTS/STT</span>
     </div>
     
-    <div class="main">
+    <div class="container">
         <div class="sidebar">
             <h3>📚 Topics</h3>
             <div id="topic-list"></div>
         </div>
         
-        <div class="chat">
+        <div class="main">
             <div class="topic-bar" id="topic-bar" style="display:none;">
                 <div class="q" id="topic-q"></div>
                 <div class="data" id="topic-data"></div>
@@ -255,653 +103,405 @@
             
             <div class="welcome" id="welcome">
                 <h2>🎤 DSE English Oral Practice</h2>
-                <p>Practice with 3 AI candidates — Sarah, Mike, and Amy. Speak your answers or type them. Powered by your browser's free voice APIs!</p>
-                <button class="start-btn" onclick="startRandom()">🎲 Random Topic</button>
-                <button class="comp-start-btn" onclick="startComprehension()">📖 Reading Comprehension</button>
-            </div>
-
-            <!-- Topic Selection Panel -->
-            <div class="topic-selection" id="topic-selection" style="display:none; padding: 20px; overflow-y: auto;">
-                <h3 style="margin-bottom: 16px; color: #667eea;">📚 Choose a Topic</h3>
-                <div style="margin-bottom: 20px; padding: 12px; background: #2d2d2d; border-radius: 8px;">
-                    <p style="color: #888; font-size: 12px; margin-bottom: 8px;">🔍 FILTER:</p>
-                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                        <button onclick="filterTopics('all')" id="filter-all" class="filter-btn active">All (32)</button>
-                        <button onclick="filterTopics('real')" id="filter-real" class="filter-btn">📌 Real DSE (11)</button>
-                        <button onclick="filterTopics('scmp')" id="filter-scmp" class="filter-btn">📰 SCMP (5)</button>
-                        <button onclick="filterTopics('practice')" id="filter-practice" class="filter-btn">📝 Practice (16)</button>
-                        <button onclick="startComprehension()" id="comprehension-btn" class="filter-btn" style="background:#e74c3c;">📖 Comprehension</button>
-                    </div>
-                </div>
-                <div id="topic-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;"></div>
+                <p>Practice with 3 AI candidates — Sarah, Mike, Amy. Speak or type your answers!</p>
+                <button class="btn-main" onclick="startRandom()">🎲 Random Topic</button>
+                <button class="btn-main btn-comp" onclick="startComprehension()">📖 Reading Comprehension</button>
             </div>
             
-            <div id="comp-view"></div><div class="controls" id="controls" style="display:none;">
+            <div class="controls" id="controls" style="display:none;">
                 <div class="candidate-btns">
                     <button class="sarah" onclick="playCandidate('Sarah')">👤 Sarah</button>
                     <button class="mike" onclick="playCandidate('Mike')">👤 Mike</button>
                     <button class="amy" onclick="playCandidate('Amy')">👤 Amy</button>
                 </div>
-                <div class="record-wrap">
-                    <button class="mic-btn" id="mic-btn" onmousedown="startRecord()" onmouseup="stopRecord()" ontouchstart="startRecord()" ontouchend="stopRecord()">🎤</button>
-                    <span class="status-text" id="status">Hold to record your answer</span>
-                    <div id="interim-text"></div>
-                </div>
-                <div class="fallback-input">
-                    <input type="text" id="text-input" placeholder="Or type your answer here..." onkeypress="if(event.key==='Enter')sendText()">
+                <button class="mic-btn" id="mic-btn" onmousedown="startRecord()" onmouseup="stopRecord()" ontouchstart="startRecord()" ontouchend="stopRecord()">🎤</button>
+                <div class="status" id="status">Hold to record</div>
+                <div class="fallback">
+                    <input type="text" id="text-input" placeholder="Type your answer..." onkeypress="if(event.key==='Enter')sendText()">
                     <button onclick="sendText()">Send</button>
                 </div>
-                <div style="display:flex;gap:8px;margin-top:12px;">
-                    <button id="pause-btn" class="filter-btn" onclick="pauseResume()" disabled style="flex:1;">⏸️ Pause</button>
-                    <button class="filter-btn" onclick="stopSpeaking()" style="flex:1;background:#c0392b;">⏹️ Stop</button>
+                <div class="pause-row">
+                    <button id="pause-btn" onclick="pauseResume()" disabled>⏸️ Pause</button>
+                    <button onclick="stopSpeaking()">⏹️ Stop</button>
                 </div>
             </div>
+            
+            <div id="comp-view"></div>
         </div>
     </div>
     
     <script>
-        // ==================== TOPICS ====================
-        const TOPICS = [
-    // ======= 2026 DSE ENGLISH SPEAKING REAL EXAM TOPICS =======
-    { id:101, cat:"📌 REAL DSE 2026", q:"Financial literacy should be taught in all secondary schools in Hong Kong. To what extent do you agree?", data:"Surveys show only 30% of HK teenagers understand budgeting. Many young adults accumulate debt before graduating." },
-    { id:102, cat:"📌 REAL DSE 2026", q:"Online dishonesty, such as plagiarism and fake reviews, has become a serious problem. How can we address this?", data:"45% of HK university students admitted plagiarizing. Up to 30% of online reviews may be fake." },
-    { id:103, cat:"📌 REAL DSE 2026", q:"Hong Kong's street food culture is disappearing. Is this a significant loss for the city?", data:"Over 50 famous dai pai dongs closed in a decade. Rents increased 40%." },
-    { id:104, cat:"📌 REAL DSE 2026", q:"Autonomous vehicles should be introduced in Hong Kong. Do you agree?", data:"Self-driving taxis operate globally. HK's dense traffic poses challenges." },
-    { id:105, cat:"📌 REAL DSE 2026", q:"Hong Kong should increase minimum wage for catering workers. To what extent do you agree?", data:"Catering workers earn ~HK\$50/hour. Owners warn higher wages could force closures." },
-    { id:201, cat:"📌 REAL DSE 2026", q:"AI tools like ChatGPT should be allowed in students' homework. To what extent do you agree?", data:"Educators worry students will lose critical thinking. Others argue AI helps efficient learning." },
-    { id:202, cat:"📌 REAL DSE 2026", q:"All in the future workplace: AI will eventually replace most human jobs. Do you agree?", data:"AI could automate 30% of jobs by 2030. Some experts say AI creates more jobs than it displaces." },
-    { id:203, cat:"📌 REAL DSE 2026", q:"Tipping should become widespread in Hong Kong. Do you agree?", data:"Some restaurants have added service charges. Workers' groups argue tipping can supplement low wages." },
-    { id:204, cat:"📌 REAL DSE 2026", q:"Hong Kong's country parks should be better promoted to the public. How can this be done?", data:"Country parks cover 40% of Hong Kong land. Many residents are unaware of their existence." },
-    { id:205, cat:"📌 REAL DSE 2026", q:"Home remedies, such as herbal soups and acupuncture, should be more widely accepted in Hong Kong. Discuss.", data:"Traditional Chinese medicine is popular in Hong Kong. Some remedies have scientific backing, others remain controversial." },
-    { id:206, cat:"📌 REAL DSE 2026", q:"Young people in Hong Kong should consider working in the Greater Bay Area. To what extent do you agree?", data:"The GBA includes 9 cities in Southern China. Career opportunities are growing but cultural differences exist." },
-    // ======= SCMP ARTICLES (REAL NEWS SOURCE FOR DSE) =======
-    { id:401, cat:"📰 SCMP Source", q:"Hong Kong will offer HK$500,000 to each public school for AI education. Some say AI will enhance creativity, others worry about over-reliance on technology. Discuss.", data:"Public schools can apply for AI funding by Feb 2026. Schools must use AI in at least 3 subjects. Some teachers worry AI will make students lazy." },
-    { id:402, cat:"📰 SCMP Source", q:"Nearly one in four Hong Kong students now cannot complete homework without AI. Should students be allowed to use AI for homework?", data:"71% of teachers report students using AI for homework. Some experts say AI literacy is essential, others worry about dependency." },
-    { id:403, cat:"📰 SCMP Source", q:"Hong Kong is promoting AI education in schools. How can schools balance AI use with traditional learning?", data:"Schools must implement AI in at least 3 subjects. Experts say AI should enhance creativity, not replace fundamental skills." },
-    { id:404, cat:"📰 SCMP Source", q:"AI could help bridge Hong Kong's digital divide for ethnic minorities. Do you agree?", data:"Only 55% of ethnic minorities find government apps user-friendly. AI tools could help with language barriers." },
-    { id:405, cat:"📰 SCMP Source", q:"Young people in Hong Kong spend more time on social media than studying. Is this a problem?", data:"Surveys show teens spend 3+ hours daily on social media. Some experts link this to declining academic performance." },
+    // ==================== TOPICS ====================
+    const TOPICS = [
+        { id:101, cat:"📌 REAL DSE 2026", q:"Financial literacy should be taught in all secondary schools in Hong Kong. To what extent do you agree?", d:"Surveys show only 30% of HK teens understand budgeting." },
+        { id:102, cat:"📌 REAL DSE 2026", q:"Online dishonesty, such as plagiarism and fake reviews, has become a serious problem. How can we address this?", d:"45% of HK university students admitted plagiarizing." },
+        { id:103, cat:"📌 REAL DSE 2026", q:"Hong Kong's street food culture is disappearing. Is this a significant loss for the city?", d:"Over 50 famous dai pai dongs closed in a decade." },
+        { id:104, cat:"📌 REAL DSE 2026", q:"Autonomous vehicles should be introduced in Hong Kong. Do you agree?", d:"Self-driving taxis operate globally. HK's dense traffic poses challenges." },
+        { id:105, cat:"📌 REAL DSE 2026", q:"Hong Kong should increase minimum wage for catering workers. To what extent do you agree?", d:"Catering workers earn ~HK$50/hour." },
+        { id:201, cat:"📌 REAL DSE 2026", q:"AI tools like ChatGPT should be allowed in students' homework. To what extent do you agree?", d:"Educators worry about loss of critical thinking." },
+        { id:202, cat:"📌 REAL DSE 2026", q:"All in the future workplace: AI will eventually replace most human jobs. Do you agree?", d:"AI could automate 30% of jobs by 2030." },
+        { id:203, cat:"📌 REAL DSE 2026", q:"Tipping should become widespread in Hong Kong. Do you agree?", d:"Some restaurants added service charges." },
+        { id:204, cat:"📌 REAL DSE 2026", q:"Hong Kong's country parks should be better promoted. How can this be done?", d:"Country parks cover 40% of HK land." },
+        { id:205, cat:"📌 REAL DSE 2026", q:"Home remedies should be more widely accepted in Hong Kong. Discuss.", d:"TCM is popular. Some remedies controversial." },
+        { id:206, cat:"📌 REAL DSE 2026", q:"Young people in Hong Kong should consider working in the Greater Bay Area. Agree?", d:"GBA includes 9 cities. Opportunities growing." },
+        { id:301, cat:"📝 Practice", q:"Set-jetting — travelling to destinations seen in films — should be promoted in Hong Kong. Agree?", d:"Film tourism generates billions globally." },
+        { id:1, cat:"📝 Practice", q:"Computers will eventually replace teachers in classrooms. Agree?", d:"E-learning grew 300% post-pandemic." },
+        { id:2, cat:"📝 Practice", q:"Social media has a negative impact on teenagers' mental health. Do you agree?", d:"70% of HK teens spend 3+ hours daily on social media." },
+        { id:3, cat:"📝 Practice", q:"Young people should prioritize careers over starting a family. Discuss.", d:"Avg marriage age: 31M/29F." },
+        { id:4, cat:"📝 Practice", q:"Hong Kong should ban single-use plastics completely. Do you agree?", d:"HK generates 2,000+ tonnes plastic waste daily." },
+        { id:5, cat:"📝 Practice", q:"University education should be free for all students. Discuss.", d:"HK university costs avg HK$50,000/year." },
+        { id:6, cat:"📝 Practice", q:"Schools should require students to participate in at least one sport. Agree?", d:"Only 30% of HK students meet daily activity guidelines." },
+        { id:7, cat:"📝 Practice", q:"AI will create more problems than it solves for society. Do you agree?", d:"AI could automate 30% of jobs by 2030." },
+        { id:8, cat:"📝 Practice", q:"Traditional festivals are becoming less meaningful. Discuss.", d:"60% of young HK people find traditions outdated." },
+        { id:9, cat:"📝 Practice", q:"Homework should be abolished in primary schools. Do you agree?", d:"70% of primary students spend 2+ hours on homework daily." },
+        { id:10, cat:"📝 Practice", q:"Living in Hong Kong is becoming unaffordable for young people. Discuss.", d:"HK apartments cost 20x annual salary." },
+        { id:11, cat:"📝 Practice", q:"Employees should work from home permanently. Agree?", d:"Remote work increased 400% during pandemic." },
+        { id:12, cat:"📝 Practice", q:"Junk food advertising should be banned during children's TV programmes.", d:"30% of HK children overweight." },
+        { id:13, cat:"📝 Practice", q:"Online anonymity is more harmful than beneficial. Discuss.", d:"40% of HK internet users experienced online harassment." },
+        { id:14, cat:"📝 Practice", q:"Learning a second language should start from primary school. Agree?", d:"Children learning before 10 show 40% better fluency." },
+        { id:15, cat:"📝 Practice", q:"The government should provide more support for elderly care. Discuss.", d:"Elderly (65+) will reach 33% by 2040." }
+    ];
     
-    // ======= PRACTICE TOPICS (DESIGNED FOR PRACTICE) =======
-    { id:301, cat:"📝 Practice Topic", q:"Set-jetting — travelling to destinations seen in films or TV shows — should be promoted in Hong Kong. Do you agree?", data:"Film-induced tourism generates billions globally. Hong Kong has been featured in many Hollywood films." },
-    { id:1, cat:"📝 Practice Topic", q:"Computers will eventually replace teachers in classrooms. To what extent do you agree?", data:"E-learning grew 300% post-pandemic. AI tutoring used in 50+ countries." },
-    { id:2, cat:"📝 Practice Topic", q:"Social media has a negative impact on teenagers' mental health. Do you agree?", data:"70% of HK teens spend 3+ hours daily on social media. 45% feel anxious without it." },
-    { id:3, cat:"📝 Practice Topic", q:"Young people should prioritize careers over starting a family. Discuss.", data:"Avg marriage age: 31M/29F. 60% of young adults prioritize career." },
-    { id:4, cat:"📝 Practice Topic", q:"Hong Kong should ban single-use plastics completely. Do you agree?", data:"HK generates 2,000+ tonnes plastic waste daily. Only 14% recycled." },
-    { id:5, cat:"📝 Practice Topic", q:"University education should be free for all students. Discuss.", data:"HK university costs avg HK\$50,000/year. Student debt increased 40%." },
-    { id:6, cat:"📝 Practice Topic", q:"Schools should require students to participate in at least one sport. Agree?", data:"Only 30% of HK students meet daily activity guidelines. Obesity doubled in 20 years." },
-    { id:7, cat:"📝 Practice Topic", q:"AI will create more problems than it solves for society. Do you agree?", data:"AI could automate 30% of jobs by 2030, affecting 800 million workers." },
-    { id:8, cat:"📝 Practice Topic", q:"Traditional festivals are becoming less meaningful. Discuss.", data:"60% of young HK people find traditions outdated. 75% still enjoy festive activities." },
-    { id:9, cat:"📝 Practice Topic", q:"Homework should be abolished in primary schools. Do you agree?", data:"70% of primary students spend 2+ hours on homework daily." },
-    { id:10, cat:"📝 Practice Topic", q:"Living in Hong Kong is becoming unaffordable for young people. Discuss.", data:"HK apartments cost 20x annual salary. Rent HK\$15-20k/month." },
-    { id:11, cat:"📝 Practice Topic", q:"Employees should work from home permanently. To what extent do you agree?", data:"Remote work increased 400% during pandemic. 65% employers prefer hybrid." },
-    { id:12, cat:"📝 Practice Topic", q:"Junk food advertising should be banned during children's TV programmes.", data:"30% of HK children overweight. Gov bans ads only during school hours." },
-    { id:13, cat:"📝 Practice Topic", q:"Online anonymity is more harmful than beneficial. Discuss.", data:"40% of HK internet users experienced online harassment." },
-    { id:14, cat:"📝 Practice Topic", q:"Learning a second language should start from primary school. Agree?", data:"Children learning before age 10 show 40% better fluency." },
-    { id:15, cat:"📝 Practice Topic", q:"The government should provide more support for elderly care. Discuss.", data:"Elderly (65+) will reach 33% by 2040. Only 45% receive gov care services." }
-];
-        
-        // ======= COMPREHENSION ARTICLES =======
-        const COMP_ARTICLES = [
-            {
-                id: 501,
-                cat: "📖 Comprehension",
-                title: "AI Education in Hong Kong Schools",
-                source: "SCMP",
-                article: "Hong Kong authorities will offer HK$500,000 to each public school that applies for funding to introduce artificial intelligence into classrooms over the next three years, with about HK$500 million allocated for the initiative.
-
-Schools receiving the funding can subscribe to AI-powered software and hardware, but must implement AI-assisted teaching in at least three subjects while developing six teaching examples or resources using the technology.
-
-Successful applicants will receive one-off funding of HK$500,000. Schools can use the funding to purchase AI-powered devices and services, as well as to subsidise students' participation in activities that enhance their AI literacy and skills.",
-                questions: [
-                    { q: "What is the purpose of the HK$500 million allocation?", options: ["To build new schools", "To promote AI adoption in classrooms", "To pay teachers' salaries", "To buy textbooks"], answer: 1 },
-                    { q: "How many subjects must schools implement AI-assisted teaching in?", options: ["One subject", "Two subjects", "At least three subjects", "At least six subjects"], answer: 2 },
-                    { q: "The word 'allocate' in line 2 is closest in meaning to:", options: ["Spend", "Distribute", "Save", "Borrow"], answer: 1 },
-                    { q: "According to the passage, what must schools develop?", options: ["New curriculum guidelines", "Six teaching examples using AI", "Teacher training programs", "AI research projects"], answer: 1 }
-                ]
-            },
-            {
-                id: 502,
-                cat: "📖 Comprehension",
-                title: "Students and AI Homework",
-                source: "SCMP", 
-                article: "Nearly one in four Hong Kong students now cannot complete their homework without AI assistance, according to a recent survey. The same survey also found that 71 per cent of teachers reported students using AI tools for their homework assignments.
-
-Some education experts say AI literacy is essential for students' future success. However, other teachers worry that over-reliance on AI could hinder the development of critical thinking and independent problem-solving skills.
-
-The debate over AI in education continues as schools grapple with how to balance technological advancement with traditional learning values.",
-                questions: [
-                    { q: "What proportion of students cannot complete homework without AI?", options: ["One in ten", "One in four", "Almost half", "Three in four"], answer: 1 },
-                    { q: "What percentage of teachers reported students using AI for homework?", options: ["55%", "71%", "80%", "90%"], answer: 1 },
-                    { q: "The word 'grapple' in the last paragraph is closest in meaning to:", options: ["Ignore", "Struggle with", "Accept", "Celebrate"], answer: 1 },
-                    { q: "According to the passage, what concern do some teachers have?", options: ["AI is too expensive", "Students lack access to devices", "Over-reliance may hinder critical thinking", "Parents refuse AI in schools"], answer: 2 }
-                ]
-            },
-            {
-                id: 503,
-                cat: "📖 Comprehension",
-                title: "Digital Divide and Ethnic Minorities",
-                source: "SCMP",
-                article: "A research team from the University of Hong Kong talked to 412 people from different ethnic groups between July 2024 and March last year. They wanted to see how members of these communities used devices to find public information, healthcare services, social media and government apps.
-
-However, only 55 per cent said the information provided by government apps was user-friendly. The Equal Opportunities Commission is urging the government to use artificial intelligence to help with language support and make app registration easier.
-
-The research highlights how technology could either bridge or widen existing social gaps depending on how it is implemented.",
-                questions: [
-                    { q: "How many people were surveyed in this research?", options: ["212", "412", "515", "550"], answer: 1 },
-                    { q: "What percentage found government apps user-friendly?", options: ["45%", "55%", "65%", "75%"], answer: 1 },
-                    { q: "The phrase 'bridge language barriers' means:", options: ["Create more languages", "Help people communicate across language differences", "Build bridges", "Learn foreign languages"], answer: 1 },
-                    { q: "What does the Equal Opportunities Commission suggest using AI for?", options: ["Entertainment", "Language support in apps", "Shopping", "Social media"], answer: 1 }
-                ]
-            }
-        ];
-        
-        // ======= COMPREHENSION FUNCTIONS =======
-        let currentCompArticle = null;
-        let currentCompQuestion = 0;
-        let compScore = 0;
-
-        function startComprehension() {
-            document.getElementById('welcome').style.display = 'none';
-            document.getElementById('topic-selection').style.display = 'none';
-            document.getElementById('comp-view').style.display = 'block';
-            document.getElementById('controls').style.display = 'none';
-            document.getElementById('topic-bar').style.display = 'none';
-            document.getElementById('messages').innerHTML = '';
-            
-            currentCompArticle = COMP_ARTICLES[Math.floor(Math.random() * COMP_ARTICLES.length)];
-            currentCompQuestion = 0;
-            compScore = 0;
-            showCompArticle();
-        }
-        
-        function showCompArticle() {
+    // ==================== STATE ====================
+    let currentTopic = null;
+    let isRecording = false;
+    let recognition = null;
+    let synth = window.speechSynthesis;
+    let currentUtterance = null;
+    let isPaused = false;
+    
+    const VOICES = {
+        'Sarah': { rate: 0.95, pitch: 1.1, voice: null },
+        'Mike': { rate: 1.1, pitch: 0.9, voice: null },
+        'Amy': { rate: 0.9, pitch: 1.2, voice: null }
+    };
+    
+    // ==================== INIT ====================
+    function init() {
+        renderTopics();
+        initSpeech();
+    }
+    
+    function renderTopics() {
+        const list = document.getElementById('topic-list');
+        list.innerHTML = '';
+        TOPICS.forEach(t => {
             const div = document.createElement('div');
-            div.className = 'comp-article';
-            div.innerHTML = '<h3>' + currentCompArticle.title + '</h3><p class="source">' + currentCompArticle.source + '</p><div class="article-text">' + currentCompArticle.article.replace(/\n/g, '<br>') + '</div><button onclick="startCompQuestions()" class="comp-btn">Start Questions</button>';
-            document.getElementById('comp-view').innerHTML = '';
-            document.getElementById('comp-view').appendChild(div);
-        }
+            div.className = 'topic-card';
+            div.innerHTML = '<div class="cat">' + t.cat + '</div><div class="q">' + t.q.substring(0, 70) + '...</div>';
+            div.onclick = () => selectTopic(t);
+            list.appendChild(div);
+        });
+    }
+    
+    function initSpeech() {
+        const loadVoices = () => {
+            const all = synth.getVoices();
+            const en = all.filter(v => v.lang.startsWith('en'));
+            const pref = en.length > 0 ? en : all;
+            VOICES['Sarah'].voice = pref.find(v => v.name.includes('Female')) || pref[0];
+            VOICES['Mike'].voice = pref.find(v => v.name.includes('Male')) || pref[1] || pref[0];
+            VOICES['Amy'].voice = pref.find(v => v.name.includes('Female')) || pref[0];
+        };
+        loadVoices();
+        synth.onvoiceschanged = loadVoices;
         
-        function startCompQuestions() {
-            currentCompQuestion = 0;
-            showCompQuestion();
-        }
-        
-        function showCompQuestion() {
-            const q = currentCompArticle.questions[currentCompQuestion];
-            const total = currentCompArticle.questions.length;
-            
-            let html = '<div class="comp-question">';
-            html += '<p class="q-num">Question ' + (currentCompQuestion + 1) + ' of ' + total + '</p>';
-            html += '<p class="q-text">' + q.q + '</p>';
-            html += '<div class="q-options">';
-            q.options.forEach((opt, i) => {
-                html += '<button class="opt-btn" onclick="checkCompAnswer(' + i + ')">' + String.fromCharCode(65 + i) + '. ' + opt + '</button>';
-            });
-            html += '</div></div>';
-            
-            document.getElementById('comp-view').innerHTML = html;
-        }
-        
-        function checkCompAnswer(selected) {
-            const correct = currentCompArticle.questions[currentCompQuestion].answer;
-            const btns = document.querySelectorAll('.opt-btn');
-            
-            btns.forEach((btn, i) => {
-                btn.disabled = true;
-                if (i === correct) btn.classList.add('correct');
-                if (i === selected && selected !== correct) btn.classList.add('wrong');
-            });
-            
-            if (selected === correct) compScore++;
-            
-            setTimeout(() => {
-                currentCompQuestion++;
-                if (currentCompQuestion < currentCompArticle.questions.length) {
-                    showCompQuestion();
-                } else {
-                    showCompResult();
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SR) {
+            recognition = new SR();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+            recognition.onresult = e => {
+                let final = '', interim = '';
+                for (let i = e.resultIndex; i < e.results.length; i++) {
+                    const t = e.results[i][0].transcript;
+                    if (e.results[i].isFinal) final += t;
+                    else interim += t;
                 }
-            }, 1500);
-        }
-        
-        function showCompResult() {
-            const total = currentCompArticle.questions.length;
-            const pct = Math.round((compScore / total) * 100);
-            const grade = pct >= 80 ? 'A' : pct >= 60 ? 'B' : pct >= 40 ? 'C' : 'D';
-            
-            let html = '<div class="comp-result">';
-            html += '<h3>Result: ' + compScore + '/' + total + ' (' + pct + '%)</h3>';
-            html += '<p class="grade">Grade: <strong>' + grade + '</strong></p>';
-            html += '<button onclick="startComprehension()" class="comp-btn">Try Another Article</button>';
-            html += '<button onclick="backToHome()" class="back-btn">Back to Home</button></div>';
-            
-            document.getElementById('comp-view').innerHTML = html;
-        }
-        
-        function backToHome() {
-            document.getElementById('comp-view').style.display = 'none';
-            document.getElementById('welcome').style.display = 'flex';
-        }
-
-        // ==================== STATE ====================
-        let currentTopic = null;
-        let isRecording = false;
-        let recognition = null;
-        let synth = window.speechSynthesis;
-        
-        // Candidate voice settings
-        const VOICES = {
-            'Sarah': { rate: 0.95, pitch: 1.1, voice: null },
-            'Mike': { rate: 1.1, pitch: 0.9, voice: null },
-            'Amy': { rate: 0.9, pitch: 1.2, voice: null }
-        };
-        
-        // ==================== INIT ====================
-        function init() {
-            renderTopics();
-            initSpeech();
-        }
-        
-        function renderTopics() {
-            const list = document.getElementById('topic-list');
-            list.innerHTML = '';
-            TOPICS.forEach(t => {
-                const div = document.createElement('div');
-                div.className = 'topic-card';
-                div.innerHTML = `<div class="cat">${t.cat}</div><div class="q">${t.q.substring(0,70)}...</div>`;
-                div.onclick = () => selectTopic(t);
-                list.appendChild(div);
-            });
-        }
-        
-        function initSpeech() {
-            // Load voices
-            const loadVoices = () => {
-                const all = synth.getVoices();
-                // Prefer English voices
-                const enVoices = all.filter(v => v.lang.startsWith('en'));
-                const prefered = enVoices.length > 0 ? enVoices : all;
-                VOICES['Sarah'].voice = prefered.find(v => v.name.includes('Female')) || prefered[0];
-                VOICES['Mike'].voice = prefered.find(v => v.name.includes('Male')) || prefered[1] || prefered[0];
-                VOICES['Amy'].voice = prefered.find(v => v.name.includes('Female')) || prefered[0];
+                document.getElementById('status').textContent = interim || 'Processing...';
+                if (final) {
+                    addMsg('you', final);
+                    synthResponse(final);
+                }
             };
-            loadVoices();
-            synth.onvoiceschanged = loadVoices;
-            
-            // Init SpeechRecognition
-            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (SpeechRec) {
-                recognition = new SpeechRec();
-                recognition.continuous = false;
-                recognition.interimResults = true;
-                recognition.lang = 'en-US';
-                recognition.onresult = e => {
-                    let interim = '';
-                    let final = '';
-                    for (let i = e.resultIndex; i < e.results.length; i++) {
-                        const t = e.results[i][0].transcript;
-                        if (e.results[i].isFinal) final += t;
-                        else interim += t;
-                    }
-                    document.getElementById('interim-text').textContent = interim;
-                    if (final) {
-                        document.getElementById('interim-text').textContent = '';
-                        addMsg('you', final);
-                        synthResponse(final);
-                    }
-                };
-                recognition.onerror = e => {
-                    console.error('STT error:', e);
-                    setStatus('Try again... (or type below)');
-                    document.getElementById('interim-text').textContent = '';
-                };
-                recognition.onend = () => {
-                    isRecording = false;
-                    document.getElementById('mic-btn').classList.remove('recording');
-                };
-            }
+            recognition.onerror = () => { document.getElementById('status').textContent = 'Try again...'; };
+            recognition.onend = () => { isRecording = false; document.getElementById('mic-btn').classList.remove('recording'); };
         }
-        
-        // ==================== TOPIC ====================
-        function startRandom() {
-            const t = TOPICS[Math.floor(Math.random() * TOPICS.length)];
-            selectTopic(t);
-        }
-        
-        function selectTopic(t) {
-            currentTopic = t;
-            document.getElementById('welcome').classList.add('hidden');
-            document.getElementById('controls').style.display = 'block';
-            document.getElementById('topic-bar').style.display = 'block';
-            document.getElementById('topic-q').textContent = t.q;
-            document.getElementById('topic-data').textContent = t.data;
-            document.getElementById('messages').innerHTML = '';
-            
-            // Mark active
-            document.querySelectorAll('.topic-card').forEach((c,i) => {
-                c.classList.toggle('active', TOPICS[i].id === t.id);
-            });
-            
-            // Auto-start Sarah
-            setTimeout(() => playCandidate('Sarah'), 500);
-        }
-        
-        // ==================== MESSAGES ====================
-        function addMsg(speaker, text, isAI = false) {
-            const div = document.createElement('div');
-            div.className = 'msg';
-            const cls = speaker === 'you' ? 'you' : speaker.toLowerCase();
-            const name = speaker === 'you' ? 'You' : speaker;
-            div.innerHTML = `
-                <div class="avatar ${cls}">${speaker[0].toUpperCase()}</div>
-                <div class="msg-body">
-                    <div class="msg-header">
-                        <span class="name">${name}</span>
-                        <span class="time">${new Date().toLocaleTimeString()}</span>
-                    </div>
-                    <div class="text">${text}</div>
-                </div>
-            `;
-            document.getElementById('messages').appendChild(div);
-            document.getElementById('messages').scrollTop = 9999;
-        }
-        
-        // ==================== TTS ====================
-        let currentUtterance = null;
-        let isPaused = false;
-        
-        function speak(text, candidate, onEnd) {
-            return new Promise(resolve => {
-                synth.cancel();
-                isPaused = false;
-                const u = new SpeechSynthesisUtterance(text);
-                const v = VOICES[candidate];
-                u.voice = v.voice;
-                u.rate = v.rate;
-                u.pitch = v.pitch;
-                currentUtterance = u;
-                u.onend = () => {
-                    currentUtterance = null;
-                    if (onEnd) onEnd();
-                    resolve();
-                };
-                u.onerror = () => {
-                    currentUtterance = null;
-                    resolve();
-                };
-                synth.speak(u);
-                updatePauseBtn();
-            });
-        }
-        
-        function pauseResume() {
-            if (!currentUtterance) return;
-            if (isPaused) {
-                synth.resume();
-                isPaused = false;
-            } else {
-                synth.pause();
-                isPaused = true;
-            }
-            updatePauseBtn();
-        }
-        
-        function stopSpeaking() {
+    }
+    
+    // ==================== TOPIC ====================
+    function startRandom() {
+        selectTopic(TOPICS[Math.floor(Math.random() * TOPICS.length)]);
+    }
+    
+    function selectTopic(t) {
+        currentTopic = t;
+        document.getElementById('welcome').style.display = 'none';
+        document.getElementById('controls').style.display = 'block';
+        document.getElementById('topic-bar').style.display = 'block';
+        document.getElementById('comp-view').style.display = 'none';
+        document.getElementById('topic-q').textContent = t.q;
+        document.getElementById('topic-data').textContent = t.d;
+        document.getElementById('messages').innerHTML = '';
+        document.querySelectorAll('.topic-card').forEach((c, i) => {
+            c.classList.toggle('active', TOPICS[i].id === t.id);
+        });
+        setTimeout(() => playCandidate('Sarah'), 500);
+    }
+    
+    // ==================== MESSAGES ====================
+    function addMsg(speaker, text) {
+        const div = document.createElement('div');
+        div.className = 'msg';
+        div.innerHTML = '<div class="avatar ' + speaker.toLowerCase() + '">' + speaker[0].toUpperCase() + '</div><div class="msg-body"><div class="msg-header"><span class="name">' + speaker + '</span><span class="time">' + new Date().toLocaleTimeString() + '</span></div><div class="text">' + text + '</div></div>';
+        document.getElementById('messages').appendChild(div);
+        document.getElementById('messages').scrollTop = 99999;
+    }
+    
+    // ==================== TTS ====================
+    function speak(text, candidate, onEnd) {
+        return new Promise(resolve => {
             synth.cancel();
-            currentUtterance = null;
             isPaused = false;
+            const u = new SpeechSynthesisUtterance(text);
+            const v = VOICES[candidate];
+            u.voice = v.voice;
+            u.rate = v.rate;
+            u.pitch = v.pitch;
+            currentUtterance = u;
+            u.onend = () => { currentUtterance = null; if (onEnd) onEnd(); resolve(); };
+            u.onerror = () => { currentUtterance = null; resolve(); };
+            synth.speak(u);
             updatePauseBtn();
-        }
+        });
+    }
+    
+    function pauseResume() {
+        if (!currentUtterance) return;
+        if (isPaused) { synth.resume(); isPaused = false; }
+        else { synth.pause(); isPaused = true; }
+        updatePauseBtn();
+    }
+    
+    function stopSpeaking() {
+        synth.cancel();
+        currentUtterance = null;
+        isPaused = false;
+        updatePauseBtn();
+    }
+    
+    function updatePauseBtn() {
+        const btn = document.getElementById('pause-btn');
+        if (!currentUtterance) { btn.textContent = '⏸️ Pause'; btn.disabled = true; }
+        else { btn.disabled = false; btn.textContent = isPaused ? '▶️ Resume' : '⏸️ Pause'; }
+    }
+    
+    async function playCandidate(name) {
+        const btn = document.querySelector('.candidate-btns .' + name.toLowerCase());
+        btn.classList.add('active');
+        const prompts = {
+            'Sarah': 'Hello everyone, I am Sarah. Let us start discussing. ' + (currentTopic ? currentTopic.q : '') + ' What do you all think?',
+            'Mike': 'I am Mike. I have some thoughts on this topic. ' + (currentTopic ? currentTopic.q : '') + ' Let me share my perspective.',
+            'Amy': 'Hi, I am Amy. I agree with what has been said. ' + (currentTopic ? currentTopic.q : '') + ' Let me add some points.'
+        };
+        addMsg(name, prompts[name]);
+        await speak(prompts[name], name, () => { btn.classList.remove('active'); document.getElementById('status').textContent = 'Your turn — hold to speak'; });
+    }
+    
+    // ==================== AI RESPONSE ====================
+    async function synthResponse(userText) {
+        document.getElementById('status').textContent = 'Thinking...';
+        await new Promise(r => setTimeout(r, 600));
         
-        function updatePauseBtn() {
-            const btn = document.getElementById('pause-btn');
-            if (!btn) return;
-            if (!currentUtterance) {
-                btn.textContent = '⏸️ Pause';
-                btn.disabled = true;
-            } else {
-                btn.disabled = false;
-                btn.textContent = isPaused ? '▶️ Resume' : '⏸️ Pause';
-            }
-        }
+        const text = userText.toLowerCase();
+        const isAgree = /\\b(agree|yes|support|true|good|right|definitely)\\b/.test(text);
+        const isDisagree = /\\b(disagree|no|not|wrong|against|false)\\b/.test(text);
+        const mentionsAI = /\\b(ai|robot|chatgpt|technology|automation)\\b/.test(text);
+        const mentionsYouth = /\\b(young|teenager|student|youth|school|children)\\b/.test(text);
+        const mentionsMoney = /\\b(money|cost|salary|wage|pay|afford|expensive)\\b/.test(text);
+        const mentionsHK = /\\b(hong kong|hk|asia|city|urban)\\b/.test(text);
         
-        async function playCandidate(name) {
-            const btn = document.querySelector(`.candidate-btns .${name.toLowerCase()}`);
-            btn.classList.add('active');
-            
-            const prompts = {
-                'Sarah': `Hello everyone, I am Sarah. Let us start discussing. ${currentTopic ? currentTopic.q : 'What do you all think?'} What do you all think?`,
-                'Mike': `I am Mike. I have some thoughts on this topic. ${currentTopic ? currentTopic.q : 'Let me share my perspective.'} Let me share my perspective.`,
-                'Amy': `Hi, I am Amy. I agree with what has been said. ${currentTopic ? currentTopic.q : 'Let me add some points.'} Let me add some points.`
+        let responses;
+        if (mentionsAI || mentionsWork) {
+            responses = {
+                'Sarah': ["AI is transforming the workplace. But will this benefit everyone equally?", "The data shows interesting trends. What sectors would be most affected?", "How can we ensure workers are properly retrained?"],
+                'Mike': ["But what happens to workers who cannot adapt quickly enough?", "I am worried this could increase inequality.", "What about middle-skilled workers who get squeezed out?"],
+                'Amy': ["And AI can help small businesses compete with larger ones.", "With proper training, many workers could benefit.", "The key is distributing benefits more broadly."]
             };
-            
-            addMsg(name, prompts[name], true);
-            await speak(prompts[name], name, () => {
-                btn.classList.remove('active');
-                setStatus('Your turn — hold to speak');
-            });
+        } else if (mentionsYouth || mentionsEducation) {
+            responses = {
+                'Sarah': ["Education is fundamental. What curriculum changes are needed?", "How can schools balance academic achievement with life skills?", "Young people face unique pressures. What support do they need most?"],
+                'Mike': ["I am concerned about student pressure. Are we creating unrealistic expectations?", "What about students who do not fit the traditional academic model?", "Does more testing actually lead to better outcomes?"],
+                'Amy': ["Holistic development is just as important as academic results.", "Schools should also focus on mental health and emotional intelligence.", "We should celebrate different types of success."]
+            };
+        } else if (isAgree) {
+            responses = {
+                'Sarah': ["That is an excellent point. Let me add that we should consider the long-term implications.", "Could you elaborate on how this would work in practice?"],
+                'Mike': ["I understand where you are coming from, but let me offer a different angle.", "Fair point, but what about implementation challenges?"],
+                'Amy': ["I completely agree! This would help many people in our community.", "Exactly! It reminds me of how other places have done this successfully."]
+            };
+        } else if (isDisagree) {
+            responses = {
+                'Sarah': ["That is a valid alternative perspective. Could you share more about your view?"],
+                'Mike': ["I hear your concerns, but I have some doubts. Can you provide more evidence?", "I am skeptical. What about the unintended consequences?"],
+                'Amy': ["I hear your concerns, but I still believe there is merit in this approach.", "What would change your mind about this?"]
+            };
+        } else {
+            responses = {
+                'Sarah': ["That is an interesting perspective. Could you tell us more about your reasoning?", "Let me think about this from different angles. What do you think would be the biggest challenge?"],
+                'Mike': ["I am not entirely convinced. What evidence supports this view?", "That is one perspective, but I have questions about the practicality."],
+                'Amy': ["I think that is a lovely idea! It would really help many people.", "I agree with parts of what you said. Let me add another consideration."]
+            };
         }
         
-        async function synthResponse(userText) {
-            setStatus('Thinking...');
-            await sleep(600);
-            
-            const text = userText.toLowerCase();
-            const topic = currentTopic ? currentTopic.q.toLowerCase() : '';
-            
-            // Analyze stance
-            const isAgreeing = /\b(agree|yes|support|true|good|right|definitely|absolutely)\b/.test(text);
-            const isDisagreeing = /\b(disagree|no|not|wrong|against|false|never)\b/.test(text);
-            const mentionsMoney = /\b(money|cost|expensive|cheap|salary|wage|pay|afford|cheap)\b/.test(text);
-            const mentionsYouth = /\b(young|teenager|student|youth|children|kid|school|college)\b/.test(text);
-            const mentionsCulture = /\b(culture|traditional|heritage|festival|identity|community)\b/.test(text);
-            const mentionsWork = /\b(work|job|career|employment|business|office|company)\b/.test(text);
-            const mentionsHealth = /\b(health|medical|hospital|doctor|disease|sick|exercise)\b/.test(text);
-            const mentionsAI = /\b(ai|robot|chatgpt|technology|computer|automation|digital)\b/.test(text);
-            const mentionsGov = /\b(government|policy|law|regulation|minister|authorities)\b/.test(text);
-            const mentionsHK = /\b(hong kong|hk|asia|city|urban|crowded)\b/.test(text);
-            
-            // Rich response pools per candidate
-            const sarahLeader = [
-                "That's an excellent point. I think we should consider the broader implications here. Who would benefit most from this approach?",
-                "I appreciate your analysis. Could you elaborate on how this would work in practice? I think we need more specifics.",
-                "You've raised something important. In my view, the key issue here is balance. How can we ensure everyone is treated fairly?",
-                "That's worth thinking about. From a strategic perspective, what do you think are the main advantages and disadvantages?",
-                "I agree with parts of that. Let me add that we should also consider the timing. Is this the right moment to implement such a change?"
-            ];
-            
-            const mikeChallenger = [
-                "I'm not sure I fully agree. Have you considered how this might affect lower-income families?",
-                "That's one way to look at it, but let me play devil's advocate. What if this creates more problems than it solves?",
-                "I hear you, but I have serious doubts. Can you provide more evidence to support this claim?",
-                "Interesting perspective, but I'm skeptical. What about the unintended consequences we might face?",
-                "I understand your reasoning, but I think you're oversimplifying. There are many factors we need to consider here."
-            ];
-            
-            const amySupporter = [
-                "I really agree with that viewpoint! And I'd like to add that this could also help strengthen community bonds.",
-                "Exactly my thoughts! Building on what you said, I think this approach would make life better for many families.",
-                "I couldn't agree more! In addition to what you mentioned, this would also create new opportunities for young people.",
-                "That's so true! I think this is especially important for Hong Kong's future competitiveness.",
-                "I love that idea! It reminds me of how other cities have successfully implemented similar policies."
-            ];
-            
-            // Topic-specific responses
-            let responses;
-            
-            if (mentionsAI || mentionsWork) {
-                responses = {
-                    'Sarah': ["AI is transforming the workplace. But we must ask: will this benefit everyone equally, or just those with the right skills?",
-                        "The data shows interesting trends. What specific sectors do you think would be most affected by this?",
-                        "That's a valid concern. How can we ensure workers are properly retrained for new challenges?"],
-                    'Mike': ["But here's the problem: what happens to workers who can't adapt to new technology quickly enough?",
-                        "I'm worried this could actually increase inequality. Not everyone has access to the same training opportunities.",
-                        "What about the middle-skilled workers? They often get squeezed out when AI automates routine tasks."],
-                    'Amy': ["That's true! And AI can also help small businesses compete with larger corporations.",
-                        "I agree! With proper training programs, many workers could actually benefit from these changes.",
-                        "Exactly. The key is making sure the benefits of AI are distributed more broadly across society."]
-                };
-            } else if (mentionsYouth || mentionsEducation) {
-                responses = {
-                    'Sarah': ["Education is fundamental. But what curriculum changes would actually prepare students for the future?",
-                        "That's crucial. How can schools balance academic achievement with practical life skills?",
-                        "Young people face unique pressures today. What support systems do they need most?"],
-                    'Mike': ["I'm concerned about the pressure on students. Are we creating unrealistic expectations?",
-                        "But what about students who don't fit the traditional academic model? What alternatives exist for them?",
-                        "I question whether more testing actually leads to better outcomes. What does the research show?"],
-                    'Amy': ["I completely agree. Holistic development is just as important as academic results.",
-                        "That's so important! Schools should also focus on mental health and emotional intelligence.",
-                        "Exactly. And we should celebrate different types of success, not just exam scores."]
-                };
-            } else if (mentionsMoney || mentionsWork) {
-                responses = {
-                    'Sarah': ["Economic inequality is a real concern. How can we ensure fair access to opportunities?",
-                        "The cost of living affects everyone's decisions. What policies could help address this?",
-                        "Money isn't everything, but financial stress impacts mental health significantly."],
-                    'Mike': ["But who pays for these initiatives? Higher taxes could discourage business investment.",
-                        "I'm skeptical about government spending programs. Do they actually deliver results efficiently?",
-                        "What about inflation risks? Well-intentioned policies sometimes have unintended consequences."],
-                    'Amy': ["I agree! Financial security allows families to make better choices for their children.",
-                        "That's true! Investment in people always pays long-term dividends for society.",
-                        "Exactly. When people aren't worried about money, they contribute more to their communities."]
-                };
-            } else if (mentionsCulture || mentionsHK) {
-                responses = {
-                    'Sarah': ["Hong Kong's unique identity is precious. How can we preserve our heritage while embracing change?",
-                        "Culture shapes who we are. What aspects are most worth protecting in your view?",
-                        "I think balance is important. Tradition and innovation can coexist in a modern city."],
-                    'Mike': ["But culture also evolves naturally. Can we really preserve everything, or should we accept some changes?",
-                        "I'm not convinced that trying to freeze culture in time is healthy. Progress requires adaptation.",
-                        "What about younger generations who may not value traditions the same way? Whose perspective matters more?"],
-                    'Amy': ["Hong Kong's multicultural identity is what makes us special. We should celebrate our diversity!",
-                        "I love our traditions! They're what connect us to our ancestors and give life meaning.",
-                        "Exactly. And traditional values like respect and family are timeless, no matter how society changes."]
-                };
-            } else if (isAgreeing) {
-                responses = {
-                    'Sarah': sarahLeader,
-                    'Mike': ["I understand where you're coming from, but let me offer a different angle. What if we considered the opposite viewpoint too?",
-                        "Fair point, but I'm curious about the implementation challenges. How would this actually work in reality?"],
-                    'Amy': amySupporter
-                };
-            } else if (isDisagreeing) {
-                responses = {
-                    'Sarah': ["That's a valid alternative perspective. Could you share more about why you hold this view?",
-                        "I appreciate your critical thinking. Let's explore what evidence supports both sides of this issue."],
-                    'Mike': mikeChallenger,
-                    'Amy': ["I hear your concerns, but I still believe there's merit in this approach. What would change your mind?"
-                };
-            } else {
-                // General responses when unclear
-                responses = {
-                    'Sarah': ["That's an interesting perspective. Could you tell us more about your reasoning?",
-                        "Let me think about this from a few different angles. What do you think would be the biggest challenge?"],
-                    'Mike': ["I'm not entirely convinced, but I'm willing to hear more. What evidence supports this view?",
-                        "That's one perspective, but I have some questions about the practicality of this approach."],
-                    'Amy': ["I think that's a lovely idea! It would really help many people in our community.",
-                        "I agree with parts of what you said. Let me add another consideration."]
-                };
-            }
-            
-            // Pick candidate, preferring varied picks
-            const candidates = ['Sarah', 'Mike', 'Amy'];
-            let c = candidates[Math.floor(Math.random() * candidates.length)];
-            
-            // Prefer Mike for disagreement, Amy for agreement
-            if (isDisagreeing && Math.random() > 0.4) c = 'Mike';
-            else if (isAgreeing && Math.random() > 0.4) c = 'Amy';
-            
-            const pool = responses[c];
-            const response = pool[Math.floor(Math.random() * pool.length)];
-            
-            addMsg(c, response, true);
-            setStatus('Your turn — hold to speak');
-            await speak(response, c);
-        }
+        let c = ['Sarah', 'Mike', 'Amy'][Math.floor(Math.random() * 3)];
+        if (isDisagree && Math.random() > 0.4) c = 'Mike';
+        if (isAgree && Math.random() > 0.4) c = 'Amy';
         
-        // ==================== STT ====================
-        function startRecord() {
-            if (!recognition) {
-                setStatus('Speech not supported in this browser');
-                return;
-            }
-            isRecording = true;
-            document.getElementById('mic-btn').classList.add('recording');
-            setStatus('Listening...');
-            recognition.start();
-        }
+        const pool = responses[c];
+        const response = pool[Math.floor(Math.random() * pool.length)];
         
-        function stopRecord() {
-            if (!isRecording) return;
-            isRecording = false;
-            document.getElementById('mic-btn').classList.remove('recording');
-            setStatus('Processing...');
-            recognition.stop();
+        addMsg(c, response);
+        document.getElementById('status').textContent = 'Your turn';
+        await speak(response, c);
+    }
+    
+    // ==================== STT ====================
+    function startRecord() {
+        if (!recognition) { document.getElementById('status').textContent = 'Not supported'; return; }
+        isRecording = true;
+        document.getElementById('mic-btn').classList.add('recording');
+        document.getElementById('status').textContent = 'Listening...';
+        recognition.start();
+    }
+    
+    function stopRecord() {
+        if (!isRecording) return;
+        isRecording = false;
+        document.getElementById('mic-btn').classList.remove('recording');
+        document.getElementById('status').textContent = 'Processing...';
+        recognition.stop();
+    }
+    
+    function sendText() {
+        const input = document.getElementById('text-input');
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+        addMsg('you', text);
+        synthResponse(text);
+    }
+    
+    // ==================== COMPREHENSION ====================
+    const COMP = [
+        {
+            id: 501,
+            title: "AI Education in Hong Kong Schools",
+            source: "SCMP",
+            article: "Hong Kong authorities will offer HK$500,000 to each public school for AI funding. Schools must implement AI in at least 3 subjects and develop 6 teaching examples. Students can use AI-powered tools with supervision.",
+            qs: [
+                { q: "What is the purpose of the HK$500 million allocation?", o: ["To build new schools", "To promote AI adoption in classrooms", "To pay teachers' salaries", "To buy textbooks"], a: 1 },
+                { q: "How many subjects must schools implement AI in?", o: ["One subject", "Two subjects", "At least three subjects", "At least six subjects"], a: 2 },
+                { q: "The word 'allocate' is closest in meaning to:", o: ["Spend", "Distribute", "Save", "Borrow"], a: 1 },
+                { q: "What must schools develop according to the passage?", o: ["New curriculum", "Six teaching examples using AI", "Training programs", "Research projects"], a: 1 }
+            ]
+        },
+        {
+            id: 502,
+            title: "Students and AI Homework",
+            source: "SCMP",
+            article: "Nearly one in four Hong Kong students cannot complete homework without AI. 71% of teachers reported students using AI tools. Some experts say AI literacy is essential, but teachers worry about over-reliance and hindered critical thinking.",
+            qs: [
+                { q: "What proportion of students cannot complete homework without AI?", o: ["One in ten", "One in four", "Almost half", "Three in four"], a: 1 },
+                { q: "What percentage of teachers reported AI use for homework?", o: ["55%", "71%", "80%", "90%"], a: 1 },
+                { q: "The word 'grapple' is closest in meaning to:", o: ["Ignore", "Struggle with", "Accept", "Celebrate"], a: 1 },
+                { q: "What concern do some teachers have?", o: ["AI is too expensive", "Students lack devices", "Over-reliance may hinder critical thinking", "Parents refuse AI"], a: 2 }
+            ]
+        },
+        {
+            id: 503,
+            title: "Digital Divide and Ethnic Minorities",
+            source: "SCMP",
+            article: "Researchers from HKU surveyed 412 ethnic minority people. Only 55% found government apps user-friendly. The Equal Opportunities Commission urges using AI for language support to make apps more accessible.",
+            qs: [
+                { q: "How many people were surveyed?", o: ["212", "412", "515", "550"], a: 1 },
+                { q: "What percentage found government apps user-friendly?", o: ["45%", "55%", "65%", "75%"], a: 1 },
+                { q: "'Bridge language barriers' means:", o: ["Create more languages", "Help people communicate across languages", "Build bridges", "Learn languages"], a: 1 },
+                { q: "What does the EOC suggest using AI for?", o: ["Entertainment", "Language support in apps", "Shopping", "Social media"], a: 1 }
+            ]
         }
-        
-        // ==================== TEXT INPUT ====================
-        function sendText() {
-            const input = document.getElementById('text-input');
-            const text = input.value.trim();
-            if (!text) return;
-            input.value = '';
-            addMsg('you', text);
-            synthResponse(text);
-        }
-        
-        // ==================== UTIL ====================
-        function setStatus(s) { document.getElementById('status').textContent = s; }
-        function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-        
-        // ==================== TOPIC FILTER ====================
-        let currentFilter = 'all';
-
-        function filterTopics(type) {
-            currentFilter = type;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('filter-' + type).classList.add('active');
-            renderTopicGrid();
-        }
-
-        function renderTopicGrid() {
-            const grid = document.getElementById('topic-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            const filtered = TOPICS.filter(t => {
-                if (currentFilter === 'all') return true;
-                if (currentFilter === 'real') return t.cat.includes('REAL');
-                if (currentFilter === 'practice') return t.cat.includes('Practice');
-                return true;
-            });
-            filtered.forEach(t => {
-                const div = document.createElement('div');
-                div.className = 'topic-card-select';
-                div.innerHTML = '<div class="cat">' + t.cat + '</div><div class="q">' + t.q + '</div>';
-                div.onclick = () => selectTopic(t);
-                grid.appendChild(div);
-            });
-        }
-
-        // Override startRandom to show topic selection
-        const origStartRandom = startRandom;
-        startRandom = function() {
-            document.getElementById('welcome').style.display = 'none';
-            document.getElementById('topic-selection').style.display = 'block';
-            document.getElementById('controls').style.display = 'none';
-            renderTopicGrid();
-        };
-
-        // Override selectTopic to show controls
-        const origSelectTopic = selectTopic;
-        selectTopic = function(t) {
-            origSelectTopic(t);
-            document.getElementById('topic-selection').style.display = 'none';
-            document.getElementById('controls').style.display = 'block';
-        };
-
-        // Start
-        init();
+    ];
+    
+    let currentComp = null;
+    let compQ = 0;
+    let compScore = 0;
+    
+    function startComprehension() {
+        document.getElementById('welcome').style.display = 'none';
+        document.getElementById('controls').style.display = 'none';
+        document.getElementById('topic-bar').style.display = 'none';
+        document.getElementById('comp-view').style.display = 'block';
+        currentComp = COMP[Math.floor(Math.random() * COMP.length)];
+        compQ = 0;
+        compScore = 0;
+        showCompArticle();
+    }
+    
+    function showCompArticle() {
+        const v = document.getElementById('comp-view');
+        v.innerHTML = '<div class="comp-article"><h3>' + currentComp.title + '</h3><p class="source">' + currentComp.source + '</p><div class="article-text">' + currentComp.article + '</div><button class="comp-btn" onclick="startCompQs()">Start Questions</button></div>';
+    }
+    
+    function startCompQs() { showCompQ(); }
+    
+    function showCompQ() {
+        const q = currentComp.qs[compQ];
+        const total = currentComp.qs.length;
+        let h = '<div class="comp-question">';
+        h += '<p class="q-num">Question ' + (compQ + 1) + ' of ' + total + '</p>';
+        h += '<p class="q-text">' + q.q + '</p>';
+        h += '<div class="q-options">';
+        q.o.forEach(function(opt, i) {
+            h += '<button class="opt-btn" onclick="checkCompA(' + i + ')">' + String.fromCharCode(65 + i) + '. ' + opt + '</button>';
+        });
+        h += '</div></div>';
+        document.getElementById('comp-view').innerHTML = h;
+    }
+    
+    function checkCompA(selected) {
+        const correct = currentComp.qs[compQ].a;
+        document.querySelectorAll('.opt-btn').forEach(function(btn, i) {
+            btn.disabled = true;
+            if (i === correct) btn.classList.add('correct');
+            if (i === selected && selected !== correct) btn.classList.add('wrong');
+        });
+        if (selected === correct) compScore++;
+        setTimeout(function() {
+            compQ++;
+            if (compQ < currentComp.qs.length) showCompQ();
+            else showCompResult();
+        }, 1200);
+    }
+    
+    function showCompResult() {
+        const total = currentComp.qs.length;
+        const pct = Math.round((compScore / total) * 100);
+        const grade = pct >= 80 ? 'A' : pct >= 60 ? 'B' : pct >= 40 ? 'C' : 'D';
+        let h = '<div class="comp-result">';
+        h += '<h3>Result: ' + compScore + '/' + total + ' (' + pct + '%)</h3>';
+        h += '<p class="grade">Grade: <strong>' + grade + '</strong></p>';
+        h += '<button class="comp-btn" onclick="startComprehension()">Try Another</button>';
+        h += '<button class="comp-btn back-btn" onclick="backToHome()">Back to Home</button></div>';
+        document.getElementById('comp-view').innerHTML = h;
+    }
+    
+    function backToHome() {
+        document.getElementById('comp-view').style.display = 'none';
+        document.getElementById('welcome').style.display = 'flex';
+    }
+    
+    init();
     </script>
 </body>
 </html>
