@@ -191,6 +191,7 @@
     let miniMaxApiKey = localStorage.getItem('minimax_api_key') || '';
 
     function showSettings() {
+        if (localStorage.getItem("minimax_api_key")) return; // skip if has key
         document.getElementById('settings-modal').style.display = 'flex';
         document.getElementById('api-key-input').value = miniMaxApiKey;
         checkApiKey();
@@ -300,11 +301,10 @@
         currentUtterance = null; isPaused = false; updatePauseBtn();
     };
 
-    checkApiKey();
 
 
     // ==================== INIT ====================
-    function init() { showSettings(); 
+    function init() { 
         renderTopics();
         initSpeech();
     }
