@@ -11,7 +11,7 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 .back-link{background:rgba(255,255,255,0.2);color:#fff;padding:5px 10px;border-radius:6px;text-decoration:none;font-size:12px}
 .header h1{font-size:16px;font-weight:700}
 .header .badge{background:rgba(255,255,255,0.2);padding:3px 8px;border-radius:10px;font-size:10px}
-.header .settings{margin-left:auto;background:rgba(255,255,255,0.2);border:none;border-radius:6px;color:#fff;padding:5px 10px;cursor:pointer;font-size:12px}
+.settings{margin-left:auto;background:rgba(255,255,255,0.2);border:none;border-radius:6px;color:#fff;padding:5px 10px;cursor:pointer;font-size:12px}
 .container{display:flex;height:calc(100vh - 50px)}
 .sidebar{width:240px;background:#252525;border-right:1px solid #333;padding:12px;overflow-y:auto}
 .sidebar h3{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
@@ -23,7 +23,7 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .topic-bar{background:#252525;padding:12px;border-bottom:1px solid #333;display:none}
 .topic-bar .q{font-size:13px;font-weight:600;margin-bottom:6px}
-.topic-bar .d{font-size:11px;color:#aaa;background:#1e1e1e;padding:6px 10px;border-radius:4px;border-left:3px solid #667eea}
+.topic-bar .d{font-size:11px;color:#aaa;background:#1e1e1a;padding:6px 10px;border-radius:4px;border-left:3px solid #667eea}
 .messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
 .msg{display:flex;gap:8px;animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}}
@@ -37,7 +37,7 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 .msg-header .name{font-weight:700;font-size:12px}
 .msg-header .time{font-size:9px;color:#666}
 .msg-body .text{font-size:12px;line-height:1.5;color:#ddd}
-.controls{padding:12px;background:#1e1e1e;border-top:1px solid #333;display:none}
+.controls{padding:12px;background:#1e1e1a;border-top:1px solid #333;display:none}
 .cand-btns{display:flex;gap:5px;margin-bottom:8px}
 .cand-btns button{flex:1;padding:7px;background:#333;border:none;border-radius:6px;color:#fff;cursor:pointer;font-size:11px;font-weight:600}
 .cand-btns button:hover{background:#444}
@@ -58,13 +58,13 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 .welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
 .welcome h2{font-size:22px;margin-bottom:8px}
 .welcome p{color:#888;font-size:13px;max-width:320px;line-height:1.5;margin-bottom:16px}
-.btn-main{padding:12px 24px;background:linear-gradient(135deg,#667eea,#764ba2);border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin:4px}
+.btn-main{padding:12px 24px;background:linear-gradient(135deg,#667eea,#764ba2);border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin:4px;display:inline-block}
 .btn-comp{background:linear-gradient(135deg,#e74c3c,#c0392b)}
 .btn-mock{background:linear-gradient(135deg,#27ae60,#2ecc71)}
-#comp-view,#mock-view{display:none;background:#1e1e1e;min-height:100%;padding:16px;overflow-y:auto}
+#comp-view,#mock-view{display:none;background:#1e1e1a;min-height:100%;padding:16px;overflow-y:auto}
 .comp-art h3{color:#e74c3c;margin-bottom:4px;font-size:15px}
 .comp-art .src{color:#888;font-size:10px;margin-bottom:12px}
-.comp-art .txt{background:#2d2d2d;padding:14px;border-radius:8px;line-height:1.8;color:#ddd;font-size:13px;margin-bottom:14px;max-height:none;overflow:visible}
+.comp-art .txt{background:#2d2d2d;padding:14px;border-radius:8px;line-height:1.8;color:#ddd;font-size:13px;margin-bottom:14px;white-space:pre-wrap}
 .comp-q{padding:10px}
 .comp-q .qn{color:#e74c3c;font-size:11px;margin-bottom:6px}
 .comp-q .qt{font-size:14px;font-weight:600;margin-bottom:12px}
@@ -75,7 +75,7 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 .comp-res{text-align:center;padding:30px}
 .comp-res h3{font-size:20px;margin-bottom:8px}
 .comp-res .grade{font-size:44px;color:#e74c3c;margin:12px 0}
-.comp-btn{padding:10px 20px;background:#e74c3c;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;margin:4px}
+.comp-btn{padding:10px 20px;background:#e74c3c;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;margin:4px;display:inline-block}
 .back-btn{background:#444}
 .mock-hdr{text-align:center;padding:16px;background:linear-gradient(135deg,#27ae60,#2ecc71);border-radius:10px;margin-bottom:14px}
 .mock-hdr h3{color:#fff;font-size:16px;margin-bottom:4px}
@@ -110,19 +110,19 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 <a href="../index.html" class="back-link">&larr; GameWorld</a>
 <h1>🎓 Sayo — DSE Oral Practice</h1>
 <span class="badge">FREE TTS/STT</span>
-<button class="settings" onclick="showSettings()">⚙️</button>
+<button class="settings" id="settingsBtn">⚙️</button>
 </div>
 
 <div class="container">
 <div class="sidebar">
 <h3>📚 Topics</h3>
-<div id="topic-list"></div>
+<div id="topicList"></div>
 </div>
 
 <div class="main">
-<div class="topic-bar" id="topic-bar">
-<div class="q" id="topic-q"></div>
-<div class="d" id="topic-d"></div>
+<div class="topic-bar" id="topicBar">
+<div class="q" id="topicQ"></div>
+<div class="d" id="topicD"></div>
 </div>
 
 <div class="messages" id="messages"></div>
@@ -130,52 +130,52 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 <div class="welcome" id="welcome">
 <h2>🎤 DSE English Oral Practice</h2>
 <p>Practice with 3 AI candidates. Speak or type your answers!</p>
-<button class="btn-main" onclick="startRandom()">🎲 Random Topic</button>
-<button class="btn-main btn-comp" onclick="startComp()">📖 Reading Comprehension</button>
-<button class="btn-main btn-mock" onclick="startMock()">🎮 Watch Mock Exam</button>
+<button class="btn-main" id="randomBtn">🎲 Random Topic</button><br>
+<button class="btn-main btn-comp" id="compBtn">📖 Reading Comprehension</button><br>
+<button class="btn-main btn-mock" id="mockBtn">🎮 Watch Mock Exam</button>
 </div>
 
 <div class="controls" id="controls">
 <div class="cand-btns">
-<button class="sarah" onclick="playC('Sarah')">👤 Sarah</button>
-<button class="mike" onclick="playC('Mike')">👤 Mike</button>
-<button class="amy" onclick="playC('Amy')">👤 Amy</button>
+<button class="sarah" id="sarahBtn">👤 Sarah</button>
+<button class="mike" id="mikeBtn">👤 Mike</button>
+<button class="amy" id="amyBtn">👤 Amy</button>
 </div>
-<button class="mic-btn" id="mic-btn" onmousedown="startRec()" onmouseup="stopRec()" ontouchstart="startRec()" ontouchend="stopRec()">🎤</button>
+<button class="mic-btn" id="micBtn">🎤</button>
 <div class="status" id="status">Hold to record</div>
 <div class="fallback">
-<input type="text" id="txt-input" placeholder="Type your answer..." onkeypress="if(event.key==13)sendTxt()">
-<button onclick="sendTxt()">Send</button>
+<input type="text" id="txtInput" placeholder="Type your answer...">
+<button id="sendBtn">Send</button>
 </div>
 <div class="pause-row">
-<button id="pause-btn" onclick="pauseRes()" disabled>⏸️ Pause</button>
-<button onclick="stopSpeak()">⏹️ Stop</button>
+<button id="pauseBtn" disabled>⏸️ Pause</button>
+<button id="stopBtn">⏹️ Stop</button>
 </div>
 </div>
 
-<div id="comp-view"></div>
-<div id="mock-view"></div>
+<div id="compView"></div>
+<div id="mockView"></div>
 </div>
 </div>
 
-<div id="settings-modal">
+<div id="settingsModal">
 <div class="settings-box">
 <h3>⚙️ Settings</h3>
 <div>
 <label>MiniMax API Key (better TTS)</label>
-<input type="password" id="api-key" placeholder="Enter MiniMax API Key">
+<input type="password" id="apiKeyInput" placeholder="Enter MiniMax API Key">
 <div class="hint">platform.minimax.io &rarr; API Keys</div>
-<div class="status" id="api-status"></div>
+<div class="status" id="apiStatus"></div>
 </div>
 <div class="settings-row">
-<button onclick="testKey()">Test</button>
-<button class="close" onclick="closeSettings()">Close</button>
+<button id="testKeyBtn">Test</button>
+<button class="close" id="closeSettingsBtn">Close</button>
 </div>
 </div>
 </div>
 
 <script>
-// ==================== TOPICS ====================
+// Topics
 var TOPICS=[
 {id:101,cat:"📌 REAL DSE 2026",q:"Financial literacy should be taught in all secondary schools in Hong Kong. To what extent do you agree?",d:"Only 30% of HK teens understand budgeting."},
 {id:102,cat:"📌 REAL DSE 2026",q:"Online dishonesty has become a serious problem. How can we address this?",d:"45% of HK university students admitted plagiarizing."},
@@ -205,7 +205,7 @@ var TOPICS=[
 {id:15,cat:"📝 Practice",q:"The government should provide more support for elderly care. Discuss.",d:"Elderly (65+) will reach 33% by 2040."}
 ];
 
-// ==================== COMP ARTICLES ====================
+// COMP Articles
 var COMP=[
 {id:501,title:"AI Education in Hong Kong Schools",src:"SCMP",art:"Hong Kong authorities will offer HK$500,000 to each public school for AI funding. Schools must implement AI in at least 3 subjects and develop 6 teaching examples. Students can use AI tools with supervision.",qs:[
 {q:"What is the purpose of the HK$500 million?",o:["Build schools","Promote AI in classrooms","Pay teachers","Buy textbooks"],a:1},
@@ -213,13 +213,13 @@ var COMP=[
 {q:"The word 'allocate' means:",o:["Spend","Distribute","Save","Borrow"],a:1},
 {q:"What must schools develop?",o:["Curriculum","6 teaching examples","Training programs","Research"],a:1}
 ]},
-{id:502,title:"Students and AI Homework",src:"SCMP",art:"Nearly one in four HK students cannot complete homework without AI. 71% of teachers reported students using AI tools. Some say AI literacy is essential, but teachers worry about over-reliance.",qs:[
+{id:502,title:"Students and AI Homework",src:"SCMP",art:"Nearly one in four HK students cannot complete homework without AI. 71% of teachers reported students using AI tools. Some say AI literacy is essential, but teachers worry about over-reliance and hindered critical thinking.",qs:[
 {q:"What proportion cannot complete homework without AI?",o:["1 in 10","1 in 4","1 in 2","3 in 4"],a:1},
 {q:"What % of teachers reported AI use?",o:["55%","71%","80%","90%"],a:1},
 {q:"The word 'grapple' means:",o:["Ignore","Struggle with","Accept","Celebrate"],a:1},
 {q:"What concern do teachers have?",o:["AI is expensive","Students lack devices","Over-reliance hinders thinking","Parents refuse AI"],a:2}
 ]},
-{id:503,title:"Digital Divide and Ethnic Minorities",src:"SCMP",art:"Researchers from HKU surveyed 412 ethnic minority people. Only 55% found government apps user-friendly. The EOC urges using AI for language support.",qs:[
+{id:503,title:"Digital Divide and Ethnic Minorities",src:"SCMP",art:"Researchers from HKU surveyed 412 ethnic minority people. Only 55% found government apps user-friendly. The EOC urges using AI for language support to make apps more accessible.",qs:[
 {q:"How many people were surveyed?",o:["212","412","515","550"],a:1},
 {q:"What % found apps user-friendly?",o:["45%","55%","65%","75%"],a:1},
 {q:"'Bridge language barriers' means:",o:["Create languages","Help communicate across languages","Build bridges","Learn languages"],a:1},
@@ -239,19 +239,52 @@ var COMP=[
 ]}
 ];
 
-// ==================== STATE ====================
-var curTopic=null,isRec=false,rec=null,synth=window.speechSynthesis,curAudio=null,isPaused=false;
+// State
+var curTopic=null;
+var isRec=false;
+var rec=null;
+var synth=window.speechSynthesis;
+var curAudio=null;
+var isSpeaking=false;
+var isPaused=false;
 var apiKey=localStorage.getItem('minimax_api_key')||'';
 var VOICES={'Sarah':{r:.95,p:1.1,v:null},'Mike':{r:1.1,p:.9,v:null},'Amy':{r:.9,p:1.2,v:null}};
 
-// ==================== INIT ====================
+// Mock Exam
+var MOCK_TOPICS=[
+{q:"Financial literacy should be taught in all secondary schools. To what extent do you agree?",d:"Only 30% of HK teens understand budgeting."},
+{q:"Online dishonesty has become a serious problem. How can we address this?",d:"45% of HK university students admitted plagiarizing."},
+{q:"Hong Kong's street food culture is disappearing. Is this a significant loss?",d:"Over 50 famous dai pai dongs closed in a decade."}
+];
+var MOCK_SCRIPT=[
+{c:'Sarah',t:'Hello everyone, I am Sarah. Let us start discussing. Financial literacy should be taught in all secondary schools. What do you all think?'},
+{c:'Mike',t:'I am Mike. I disagree. I think financial literacy is too complex for secondary students. They should focus on basic maths first.'},
+{c:'Amy',t:'I agree with Sarah. Many students do not understand budgeting. Starting with simple topics like saving pocket money would help.'},
+{c:'Ray',t:'I partially agree. Some topics like saving are suitable, but stock market investing might be too advanced.'},
+{c:'Sarah',t:'That is a good point. We should consider age-appropriate content. Younger students could learn basic saving, older students could tackle investing.'},
+{c:'Mike',t:'But where would the teachers come from? Most teachers are not qualified to teach financial topics. This is a major challenge.'},
+{c:'Amy',t:'I agree with Mike on that point. We would need proper teacher training programs.'},
+{c:'Ray',t:'I think government support is crucial. The HK$500 million allocation could fund teacher training.'},
+{c:'Sarah',t:'To summarize, we agreed that financial education is important. We suggested starting with basic topics and providing teacher training. Thank you everyone!'}
+];
+var mockRunning=false;
+var mockPaused=false;
+var mockIdx=0;
+var mockStart=0;
+var mockTO=null;
+
+// Init
 function init(){
   renderTopics();
   var v=synth.getVoices();
   if(v.length>0)loadVoices(v);
   synth.onvoiceschanged=function(){loadVoices(synth.getVoices())};
   var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(SR){rec=new SR();rec.continuous=false;rec.interimResults=true;rec.lang='en-US';
+  if(SR){
+    rec=new SR();
+    rec.continuous=false;
+    rec.interimResults=true;
+    rec.lang='en-US';
     rec.onresult=function(e){
       var fin='',int='';
       for(var i=e.resultIndex;i<e.results.length;i++){
@@ -262,10 +295,12 @@ function init(){
       if(fin){addMsg('you',fin);synthResp(fin);}
     };
     rec.onerror=function(){document.getElementById('status').textContent='Try again...';};
-    rec.onend=function(){isRec=false;document.getElementById('mic-btn').classList.remove('recording');};
+    rec.onend=function(){isRec=false;document.getElementById('micBtn').classList.remove('recording');};
   }
-  if(apiKey)document.getElementById('api-key').value=apiKey;
+  if(apiKey)document.getElementById('apiKeyInput').value=apiKey;
+  checkKeyStatus();
 }
+
 function loadVoices(v){
   var en=v.filter(function(x){return x.lang.startsWith('en')});
   var base=en.length>0?en:v;
@@ -274,9 +309,9 @@ function loadVoices(v){
   VOICES.Amy.v=base.find(function(x){return x.name.includes('Female')})||base[0];
 }
 
-// ==================== TOPICS ====================
+// Topics
 function renderTopics(){
-  var el=document.getElementById('topic-list');
+  var el=document.getElementById('topicList');
   el.innerHTML='';
   TOPICS.forEach(function(t){
     var div=document.createElement('div');
@@ -286,22 +321,25 @@ function renderTopics(){
     el.appendChild(div);
   });
 }
-function startRandom(){selectTopic(TOPICS[Math.floor(Math.random()*TOPICS.length)])}
+
 function selectTopic(t){
   curTopic=t;
   document.getElementById('welcome').style.display='none';
   document.getElementById('controls').style.display='block';
-  document.getElementById('topic-bar').style.display='block';
-  document.getElementById('comp-view').style.display='none';
-  document.getElementById('mock-view').style.display='none';
-  document.getElementById('topic-q').textContent=t.q;
-  document.getElementById('topic-d').textContent=t.d;
+  document.getElementById('topicBar').style.display='block';
+  document.getElementById('compView').style.display='none';
+  document.getElementById('mockView').style.display='none';
+  document.getElementById('topicQ').textContent=t.q;
+  document.getElementById('topicD').textContent=t.d;
   document.getElementById('messages').innerHTML='';
-  TOPICS.forEach(function(x,i){x.id===t.id?divs[i].classList.add('active'):null});
   setTimeout(function(){playC('Sarah')},500);
 }
 
-// ==================== MESSAGES ====================
+function startRandom(){
+  selectTopic(TOPICS[Math.floor(Math.random()*TOPICS.length)]);
+}
+
+// Messages
 function addMsg(speaker,text){
   var div=document.createElement('div');
   div.className='msg';
@@ -310,72 +348,78 @@ function addMsg(speaker,text){
   document.getElementById('messages').scrollTop=99999;
 }
 
-// ==================== TTS ====================
+// TTS
 async function speak(text,cand,onEnd){
+  if(isSpeaking){if(onEnd)onEnd();return;}
   if(apiKey&&apiKey.length>10){
-    return new Promise(async function(res){
+    return new Promise(function(res){
       var voices={'Sarah':'Cantonese_GentleLady','Mike':'Cantonese_PlayfulMan','Amy':'male-qn-qingse'};
       var cfg={'Sarah':{s:1,p:0},'Mike':{s:1.1,p:2},'Amy':{s:.95,p:1}};
       var v=voices[cand]||'Cantonese_GentleLady';
       var c=cfg[cand]||{s:1,p:0};
       try{
-        var resp=await fetch('https://api.minimaxi.com/v1/t2a_v2',{
+        fetch('https://api.minimaxi.com/v1/t2a_v2',{
           method:'POST',
           headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
           body:JSON.stringify({model:'speech-2.8-hd',text:text,stream:false,output_format:'url',voice_setting:{voice_id:v,speed:c.s,pitch:c.p},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
-        });
-        if(resp.ok){
-          var data=await resp.json();
+        }).then(function(resp){return resp.json()})
+        .then(function(data){
           var url=data.data&&data.data.audio;
           if(url){
             var audio=new Audio(url);
-            audio.onended=function(){if(onEnd)onEnd();res()};
-            audio.onerror=function(){if(onEnd)onEnd();res()};
-            curAudio=audio;isSpeaking=true;
+            audio.onended=function(){isSpeaking=false;if(onEnd)onEnd();res()};
+            audio.onerror=function(){isSpeaking=false;if(onEnd)onEnd();res()};
+            curAudio=audio;
+            isSpeaking=true;
             updatePauseBtn();
             audio.play();
             return;
           }
-        }
-      }catch(e){console.error('TTS err',e)}
-      fallbackTTS(text,cand,onEnd,res);
+          fallbackTTS(text,cand,onEnd,res);
+        }).catch(function(){fallbackTTS(text,cand,onEnd,res)});
+      }catch(e){fallbackTTS(text,cand,onEnd,res);}
     });
   }else{
     fallbackTTS(text,cand,onEnd);
   }
 }
+
 function fallbackTTS(text,cand,onEnd,res){
   synth.cancel();isPaused=false;
   var u=new SpeechSynthesisUtterance(text);
   var v=VOICES[cand];
   u.voice=v.v;u.rate=v.r;u.pitch=v.p;
   curAudio=u;isSpeaking=true;
-  u.onend=function(){curAudio=null;if(onEnd)onEnd();if(res)res()};
-  u.onerror=function(){curAudio=null;if(onEnd)onEnd();if(res)res()};
+  u.onend=function(){isSpeaking=false;if(onEnd)onEnd();if(res)res()};
+  u.onerror=function(){isSpeaking=false;if(onEnd)onEnd();if(res)res()};
   synth.speak(u);
   updatePauseBtn();
   if(res)res();
 }
+
 function pauseRes(){
-  if(curAudio&&curAudio.pause){
-    if(isPaused){curAudio.play();isPaused=false;}
-    else{curAudio.pause();isPaused=true;}
-    updatePauseBtn();
-  }
+  if(!curAudio)return;
+  if(isPaused){if(curAudio.play)curAudio.play();isPaused=false;}
+  else{if(curAudio.pause)curAudio.pause();isPaused=true;}
+  updatePauseBtn();
 }
+
 function stopSpeak(){
   if(curAudio&&curAudio.pause){curAudio.pause();curAudio.currentTime=0;}
   else synth.cancel();
   curAudio=null;isSpeaking=false;isPaused=false;updatePauseBtn();
 }
+
 function updatePauseBtn(){
-  var btn=document.getElementById('pause-btn');
+  var btn=document.getElementById('pauseBtn');
   if(!curAudio){btn.textContent='⏸️ Pause';btn.disabled=true;}
   else{btn.disabled=false;btn.textContent=isPaused?'▶️ Resume':'⏸️ Pause';}
 }
 
-async function playC(name){if(isSpeaking)return;
-  var btn=document.querySelector('.cand-btns .'+name.toLowerCase());
+// Candidates
+async function playC(name){
+  if(isSpeaking)return;
+  var btn=document.getElementById(name.toLowerCase()+'Btn');
   btn.classList.add('active');
   var prompts={
     'Sarah':'Hello everyone, I am Sarah. Let us start discussing. '+(curTopic?curTopic.q:'')+' What do you all think?',
@@ -386,8 +430,9 @@ async function playC(name){if(isSpeaking)return;
   await speak(prompts[name],name,function(){btn.classList.remove('active');document.getElementById('status').textContent='Your turn';});
 }
 
-// ==================== AI RESPONSE ====================
-async function synthResp(text){if(isSpeaking)return;
+// AI Response
+async function synthResp(text){
+  if(isSpeaking)return;
   document.getElementById('status').textContent='Thinking...';
   await new Promise(function(r){setTimeout(r,600)});
   var tx=text.toLowerCase();
@@ -395,7 +440,6 @@ async function synthResp(text){if(isSpeaking)return;
   var isDisagree=/\b(disagree|no|not|wrong|against|false)\b/.test(tx);
   var isAI=/\b(ai|robot|chatgpt|technology)\b/.test(tx);
   var isYouth=/\b(young|teenager|student|youth|school|children)\b/.test(tx);
-  var isMoney=/\b(money|cost|salary|wage|pay|afford)\b/.test(tx);
 
   var resp;
   if(isAI){
@@ -430,23 +474,24 @@ async function synthResp(text){if(isSpeaking)return;
   await speak(r,c);
 }
 
-// ==================== STT ====================
+// STT
 function startRec(){
   if(!rec){document.getElementById('status').textContent='Not supported';return;}
+  if(isSpeaking)return;
   isRec=true;
-  document.getElementById('mic-btn').classList.add('recording');
+  document.getElementById('micBtn').classList.add('recording');
   document.getElementById('status').textContent='Listening...';
   rec.start();
 }
 function stopRec(){
   if(!isRec)return;
   isRec=false;
-  document.getElementById('mic-btn').classList.remove('recording');
+  document.getElementById('micBtn').classList.remove('recording');
   document.getElementById('status').textContent='Processing...';
   rec.stop();
 }
 function sendTxt(){
-  var el=document.getElementById('txt-input');
+  var el=document.getElementById('txtInput');
   var txt=el.value.trim();
   if(!txt)return;
   el.value='';
@@ -454,22 +499,25 @@ function sendTxt(){
   synthResp(txt);
 }
 
-// ==================== COMPREHENSION ====================
+// COMPREHENSION
 var curComp=null,compQ=0,compScore=0;
+
 function startComp(){
   document.getElementById('welcome').style.display='none';
   document.getElementById('controls').style.display='none';
-  document.getElementById('topic-bar').style.display='none';
-  document.getElementById('mock-view').style.display='none';
-  document.getElementById('comp-view').style.display='block';
+  document.getElementById('topicBar').style.display='none';
+  document.getElementById('mockView').style.display='none';
+  document.getElementById('compView').style.display='block';
   curComp=COMP[Math.floor(Math.random()*COMP.length)];
   compQ=0;compScore=0;
   showCompArt();
 }
+
 function showCompArt(){
-  var v=document.getElementById('comp-view');
-  v.innerHTML='<div class="comp-art"><h3>'+curComp.title+'</h3><p class="src">Source: '+curComp.src+'</p><div class="txt">'+curComp.art+'</div><button class="btn-main" onclick="showCompQ()">Start Questions</button><br><button class="btn-main back-btn" onclick="backHome()">Back</button></div>';
+  var v=document.getElementById('compView');
+  v.innerHTML='<div class="comp-art"><h3>'+curComp.title+'</h3><p class="src">Source: '+curComp.src+'</p><div class="txt">'+curComp.art+'</div><button class="btn-main btn-comp" onclick="showCompQ()">Start Questions</button> <button class="btn-main back-btn" onclick="backHome()">Back</button></div>';
 }
+
 function showCompQ(){
   var q=curComp.qs[compQ];
   var tot=curComp.qs.length;
@@ -478,8 +526,9 @@ function showCompQ(){
     h+='<button class="opt-btn" onclick="checkAns('+i+')">'+String.fromCharCode(65+i)+'. '+opt+'</button>';
   });
   h+='</div>';
-  document.getElementById('comp-view').innerHTML=h;
+  document.getElementById('compView').innerHTML=h;
 }
+
 function checkAns(sel){
   var correct=curComp.qs[compQ].a;
   document.querySelectorAll('.opt-btn').forEach(function(btn,i){
@@ -494,56 +543,55 @@ function checkAns(sel){
     else showCompRes();
   },1200);
 }
+
 function showCompRes(){
   var tot=curComp.qs.length;
   var pct=Math.round((compScore/tot)*100);
   var grade=pct>=80?'A':pct>=60?'B':pct>=40?'C':'D';
-  var h='<div class="comp-res"><h3>Result: '+compScore+'/'+tot+' ('+pct+'%)</h3><p class="grade">Grade: <strong>'+grade+'</strong></p><button class="comp-btn" onclick="startComp()">Try Another</button><button class="comp-btn back-btn" onclick="backHome()">Back to Home</button></div>';
-  document.getElementById('comp-view').innerHTML=h;
+  document.getElementById('compView').innerHTML='<div class="comp-res"><h3>Result: '+compScore+'/'+tot+' ('+pct+'%)</h3><p class="grade">Grade: <strong>'+grade+'</strong></p><button class="btn-comp" onclick="startComp()">Try Another</button> <button class="btn-main back-btn" onclick="backHome()">Back to Home</button></div>';
 }
+
 function backHome(){
-  document.getElementById('comp-view').style.display='none';
-  document.getElementById('mock-view').style.display='none';
+  document.getElementById('compView').style.display='none';
+  document.getElementById('mockView').style.display='none';
   document.getElementById('welcome').style.display='flex';
 }
 
-// ==================== MOCK EXAM ====================
-var MOCK_TOPICS=[
-{q:"Financial literacy should be taught in all secondary schools. To what extent do you agree?",d:"Only 30% of HK teens understand budgeting."},
-{q:"Online dishonesty has become a serious problem. How can we address this?",d:"45% of HK university students admitted plagiarizing."},
-{q:"Hong Kong's street food culture is disappearing. Is this a significant loss?",d:"Over 50 famous dai pai dongs closed in a decade."}
-];
-var MOCK_SCRIPT=[
-{c:'Sarah',t:'Hello everyone, I am Sarah. Let us start discussing. Financial literacy should be taught in all secondary schools. What do you all think?'},
-{c:'Mike',t:'I am Mike. I disagree. I think financial literacy is too complex for secondary students. They should focus on basic maths first.'},
-{c:'Amy',t:'I agree with Sarah. Many students do not understand budgeting. Starting with simple topics like saving pocket money would help.'},
-{c:'Ray',t:'I partially agree. Some topics like saving are suitable, but stock market investing might be too advanced.'},
-{c:'Sarah',t:'That is a good point. We should consider age-appropriate content. Younger students could learn basic saving, older students could tackle investing.'},
-{c:'Mike',t:'But where would the teachers come from? Most teachers are not qualified to teach financial topics. This is a major challenge.'},
-{c:'Amy',t:'I agree with Mike on that point. We would need proper teacher training programs.'},
-{c:'Ray',t:'I think government support is crucial. The HK$500 million allocation could fund teacher training programs.'},
-{c:'Sarah',t:'To summarize, we agreed that financial education is important. We suggested starting with basic topics and providing teacher training. Thank you everyone!'}
-];
-var mockRunning=false;var mockPaused=false;;var mockPaused=false;,mockIdx=0,mockStart=0,mockTO=null;
-
+// MOCK EXAM
 function startMock(){
   document.getElementById('welcome').style.display='none';
   document.getElementById('controls').style.display='none';
-  document.getElementById('topic-bar').style.display='none';
-  document.getElementById('comp-view').style.display='none';
-  document.getElementById('mock-view').style.display='block';
+  document.getElementById('topicBar').style.display='none';
+  document.getElementById('compView').style.display='none';
+  document.getElementById('mockView').style.display='block';
   var topic=MOCK_TOPICS[Math.floor(Math.random()*MOCK_TOPICS.length)];
-  var hdr='<div class="mock-hdr"><h3>🎮 DSE Oral Mock Exam</h3><p>4 AI Candidates • 8-Minute Group Discussion</p><div class="mock-timer" id="mock-timer">00:00 / 08:00</div><p style="font-size:12px;font-weight:bold;margin-top:8px;">📝 '+topic.q+'</p><p style="font-size:10px;opacity:0.8;margin-top:4px;">📊 '+topic.d+'</p></div><div class="mock-msgs" id="mock-msgs"></div><div style="text-align:center;padding:10px;"><button class="btn-main" style="background:#444;padding:8px 16px;font-size:12px;" onclick="stopMock()">⏹ Stop</button><br><button class="btn-main back-btn" style="padding:8px 16px;font-size:12px;margin-top:6px;" onclick="backHome()">← Back to Home</button></div>';
-  document.getElementById('mock-view').innerHTML=hdr;
-  mockRunning=true;mockIdx=0;mockStart=Date.now();
+  document.getElementById('mockView').innerHTML='<div class="mock-hdr"><h3>🎮 DSE Oral Mock Exam</h3><p>4 AI Candidates • 8-Minute Group Discussion</p><div class="mock-timer" id="mockTimer">00:00 / 08:00</div><p style="font-size:12px;font-weight:bold;margin-top:8px;">📝 '+topic.q+'</p><p style="font-size:10px;opacity:0.8;margin-top:4px;">📊 '+topic.d+'</p></div><div class="mock-msgs" id="mockMsgs"></div><div style="text-align:center;padding:10px;"><button class="btn-main" style="background:#444;padding:8px 16px;font-size:12px;" id="mockPauseBtn">⏸️ Pause</button> <button class="btn-main back-btn" style="padding:8px 16px;font-size:12px;" onclick="backHome()">← Back</button></div>';
+  document.getElementById('mockPauseBtn').onclick=function(){toggleMockPause()};
+  mockRunning=true;mockPaused=false;mockIdx=0;mockStart=Date.now();
   runMockTurn();
   updateMockTimer();
+}
+
+function toggleMockPause(){
+  if(mockPaused){
+    mockPaused=false;
+    mockRunning=true;
+    runMockTurn();
+    updateMockTimer();
+    document.getElementById('mockPauseBtn').textContent='⏸️ Pause';
+  }else{
+    mockPaused=true;
+    mockRunning=false;
+    clearTimeout(mockTO);
+    stopSpeak();
+    document.getElementById('mockPauseBtn').textContent='▶️ Resume';
+  }
 }
 
 function runMockTurn(){
   if(!mockRunning||mockPaused||mockIdx>=MOCK_SCRIPT.length){return;}
   var turn=MOCK_SCRIPT[mockIdx];
-  var msgs=document.getElementById('mock-msgs');
+  var msgs=document.getElementById('mockMsgs');
   var colors={Sarah:'#3ba55c',Mike:'#f04747',Amy:'#f47b67',Ray:'#8e44ad'};
   var div=document.createElement('div');
   div.className='mock-msg '+turn.c.toLowerCase();
@@ -556,68 +604,63 @@ function runMockTurn(){
 }
 
 function updateMockTimer(){
-  if(!mockRunning)return;
+  if(!mockRunning||mockPaused)return;
   var elapsed=Date.now()-mockStart;
   var secs=Math.floor(elapsed/1000);
   var mins=Math.floor(secs/60);
   var ss=secs%60;
-  var el=document.getElementById('mock-timer');
+  var el=document.getElementById('mockTimer');
   if(el)el.textContent=(mins<10?'0':'')+mins+':'+(ss<10?'0':'')+ss+' / 08:00';
   setTimeout(updateMockTimer,1000);
 }
 
-function endMock(){
-  if(!mockRunning)return;
-  mockRunning=false;
-  stopSpeak();
-  clearTimeout(mockTO);
-  var msgs=document.getElementById('mock-msgs');
-  if(msgs)msgs.innerHTML+='<div style="text-align:center;padding:12px;background:#27ae60;border-radius:8px;margin-top:10px;color:#fff;"><strong>✅ Mock Exam Complete!</strong><br><span style="font-size:11px;opacity:0.9">In a real exam, you would participate as the 4th candidate!</span></div>';
-}
-
-function stopMock(){
-  if(mockPaused){
-    mockPaused=false;
-    mockRunning=true;
-    runMockTurn();
-    updateMockTimer();
-  } else {
-    mockPaused=true;
-    mockRunning=false;
-    clearTimeout(mockTO);
-    stopSpeak();
-  }
-}
-
-// ==================== SETTINGS ====================
+// SETTINGS
 function showSettings(){
-  document.getElementById('settings-modal').style.display='flex';
-  document.getElementById('api-key').value=apiKey;
+  document.getElementById('settingsModal').style.display='flex';
+  document.getElementById('apiKeyInput').value=apiKey;
   checkKeyStatus();
 }
-function closeSettings(){document.getElementById('settings-modal').style.display='none'}
+function closeSettings(){document.getElementById('settingsModal').style.display='none'}
 function saveKey(k){apiKey=k;localStorage.setItem('minimax_api_key',k);checkKeyStatus()}
 function checkKeyStatus(){
-  var el=document.getElementById('api-status');
+  var el=document.getElementById('apiStatus');
   if(apiKey){el.textContent='✓ Saved';el.className='status ok';}
   else{el.textContent='';el.className='status';}
 }
-async function testKey(){
-  var k=document.getElementById('api-key').value;
-  var el=document.getElementById('api-status');
+function testKey(){
+  var k=document.getElementById('apiKeyInput').value;
+  var el=document.getElementById('apiStatus');
   if(!k){el.textContent='Please enter a key';el.className='status err';return;}
   el.textContent='Testing...';el.className='status';
-  try{
-    var resp=await fetch('https://api.minimaxi.com/v1/t2a_v2',{
-      method:'POST',
-      headers:{'Authorization':'Bearer '+k,'Content-Type':'application/json'},
-      body:JSON.stringify({model:'speech-2.8-hd',text:'Testing',stream:false,output_format:'url',voice_setting:{voice_id:'Cantonese_GentleLady',speed:1,pitch:0},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
-    });
+  fetch('https://api.minimaxi.com/v1/t2a_v2',{
+    method:'POST',
+    headers:{'Authorization':'Bearer '+k,'Content-Type':'application/json'},
+    body:JSON.stringify({model:'speech-2.8-hd',text:'Testing',stream:false,output_format:'url',voice_setting:{voice_id:'Cantonese_GentleLady',speed:1,pitch:0},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
+  }).then(function(resp){
     if(resp.ok){el.textContent='✓ Works!';el.className='status ok';saveKey(k);}
     else{el.textContent='✗ Error: '+resp.status;el.className='status err';}
-  }catch(e){el.textContent='✗ Network error';el.className='status err';}
+  }).catch(function(){el.textContent='✗ Network error';el.className='status err';});
 }
-document.getElementById('api-key').addEventListener('keyup',function(e){saveKey(e.target.value)});
+
+// Event Listeners
+document.getElementById('randomBtn').onclick=startRandom;
+document.getElementById('compBtn').onclick=startComp;
+document.getElementById('mockBtn').onclick=startMock;
+document.getElementById('sarahBtn').onclick=function(){playC('Sarah')};
+document.getElementById('mikeBtn').onclick=function(){playC('Mike')};
+document.getElementById('amyBtn').onclick=function(){playC('Amy')};
+document.getElementById('micBtn').onmousedown=startRec;
+document.getElementById('micBtn').onmouseup=stopRec;
+document.getElementById('micBtn').ontouchstart=function(e){e.preventDefault();startRec()};
+document.getElementById('micBtn').ontouchend=stopRec;
+document.getElementById('sendBtn').onclick=sendTxt;
+document.getElementById('txtInput').onkeypress=function(e){if(e.key==='Enter')sendTxt()};
+document.getElementById('pauseBtn').onclick=pauseRes;
+document.getElementById('stopBtn').onclick=stopSpeak;
+document.getElementById('settingsBtn').onclick=showSettings;
+document.getElementById('closeSettingsBtn').onclick=closeSettings;
+document.getElementById('testKeyBtn').onclick=testKey;
+document.getElementById('apiKeyInput').onkeyup=function(e){saveKey(e.target.value)};
 
 init();
 </script>
