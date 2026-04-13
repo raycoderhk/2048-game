@@ -524,7 +524,7 @@ var MOCK_SCRIPT=[
 {c:'Ray',t:'I think government support is crucial. The HK$500 million allocation could fund teacher training programs.'},
 {c:'Sarah',t:'To summarize, we agreed that financial education is important. We suggested starting with basic topics and providing teacher training. Thank you everyone!'}
 ];
-var mockRunning=false,mockIdx=0,mockStart=0,mockTO=null;
+var mockRunning=false;var mockPaused=false;;var mockPaused=false;,mockIdx=0,mockStart=0,mockTO=null;
 
 function startMock(){
   document.getElementById('welcome').style.display='none';
@@ -541,7 +541,7 @@ function startMock(){
 }
 
 function runMockTurn(){
-  if(!mockRunning||mockIdx>=MOCK_SCRIPT.length){endMock();return;}
+  if(!mockRunning||mockPaused||mockIdx>=MOCK_SCRIPT.length){return;}
   var turn=MOCK_SCRIPT[mockIdx];
   var msgs=document.getElementById('mock-msgs');
   var colors={Sarah:'#3ba55c',Mike:'#f04747',Amy:'#f47b67',Ray:'#8e44ad'};
@@ -576,10 +576,17 @@ function endMock(){
 }
 
 function stopMock(){
-  mockRunning=false;
-  stopSpeak();
-  clearTimeout(mockTO);
-  endMock();
+  if(mockPaused){
+    mockPaused=false;
+    mockRunning=true;
+    runMockTurn();
+    updateMockTimer();
+  } else {
+    mockPaused=true;
+    mockRunning=false;
+    clearTimeout(mockTO);
+    stopSpeak();
+  }
 }
 
 // ==================== SETTINGS ====================
