@@ -78,13 +78,24 @@
         .comp-btn { padding: 12px 24px; background: #e74c3c; border: none; border-radius: 8px; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; margin: 8px; }
         .back-btn { background: #444; }
         @media(max-width:768px) { .sidebar{display:none;} }
-    </style>
+    
+        .api-key-section { padding: 10px 14px; background: #2d2d2d; border-radius: 8px; margin-bottom: 12px; }
+        .api-key-section label { display: block; font-size: 11px; color: #888; margin-bottom: 6px; }
+        .api-key-section input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #444; background: #1a1a1a; color: #fff; font-size: 12px; }
+        .api-key-section .hint { font-size: 10px; color: #666; margin-top: 4px; }
+        .api-key-status { font-size: 10px; margin-top: 4px; }
+        .api-key-status.ok { color: #27ae60; }
+        .api-key-status.err { color: #e74c3c; }
+
+</style>
 </head>
 <body>
     <div class="header">
         <a href="../index.html" class="back-link">← GameWorld</a>
         <h1>🎓 Sayo — DSE Oral Practice</h1>
-        <span class="badge">FREE Browser TTS/STT</span>
+        <span class="badge">FREE Browser TTS/STT</span><div style="display:flex;align-items:center;gap:8px;margin-left:auto;">
+            <button onclick="showSettings()" style="background:rgba(255,255,255,0.2);border:none;border-radius:6px;color:#fff;padding:6px 10px;cursor:pointer;font-size:12px;">⚙️</button>
+        </div>
     </div>
     
     <div class="container">
@@ -176,8 +187,124 @@
         'Amy': { rate: 0.9, pitch: 1.2, voice: null }
     };
     
+    
+    let miniMaxApiKey = localStorage.getItem('minimax_api_key') || '';
+
+    function showSettings() {
+        document.getElementById('settings-modal').style.display = 'flex';
+        document.getElementById('api-key-input').value = miniMaxApiKey;
+        checkApiKey();
+    }
+    function closeSettings() {
+        document.getElementById('settings-modal').style.display = 'none';
+    }
+    function saveApiKey(key) {
+        miniMaxApiKey = key;
+        localStorage.setItem('minimax_api_key', key);
+        checkApiKey();
+    }
+    function checkApiKey() {
+        const status = document.getElementById('api-key-status');
+        if (miniMaxApiKey) {
+            status.textContent = 'API Key saved';
+            status.className = 'api-key-status ok';
+        } else {
+            status.textContent = '';
+            status.className = 'api-key-status';
+        }
+    }
+    async function testApiKey() {
+        const key = document.getElementById('api-key-input').value;
+        const status = document.getElementById('api-key-status');
+        if (!key) { status.textContent = 'Please enter a key'; status.className = 'api-key-status err'; return; }
+        status.textContent = 'Testing...'; status.className = 'api-key-status';
+        try {
+            const resp = await fetch('https://api.minimaxi.com/v1/t2a_v2', {
+                method: 'POST',
+                headers: {'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'},
+                body: JSON.stringify({model:'speech-2.8-hd',text:'Testing API key',stream:false,output_format:'url',voice_setting:{voice_id:'Cantonese_GentleLady',speed:1,pitch:0},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
+            });
+            if (resp.ok) { status.textContent = '✅ API Key works!'; status.className = 'api-key-status ok'; saveApiKey(key); }
+            else { const e = await resp.text(); status.textContent = '❌ Error: ' + resp.status; status.className = 'api-key-status err'; }
+        } catch(err) { status.textContent = '❌ Network error'; status.className = 'api-key-status err'; }
+    }
+
+    async function speak(text, candidate, onEnd) {
+        if (miniMaxApiKey && miniMaxApiKey.length > 10) {
+            // Use MiniMax TTS
+            return new Promise(async (resolve) => {
+                synth.cancel();
+                isPaused = false;
+                const voices = {'Sarah':'Cantonese_GentleLady','Mike':'Cantonese_PlayfulMan','Amy':'male-qn-qingse'};
+                const cfg = {'Sarah':{s:1,p:0},'Mike':{s:1.1,p:2},'Amy':{s:0.95,p:1}};
+                const v = voices[candidate] || 'Cantonese_GentleLady';
+                const s = cfg[candidate] || {s:1,p:0};
+                try {
+                    const resp = await fetch('https://api.minimaxi.com/v1/t2a_v2', {
+                        method: 'POST',
+                        headers: {'Authorization':'Bearer '+miniMaxApiKey,'Content-Type':'application/json'},
+                        body: JSON.stringify({model:'speech-2.8-hd',text:text,stream:false,output_format:'url',voice_setting:{voice_id:v,speed:s.s,pitch:s.p},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
+                    });
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        const audioUrl = data.data && data.data.audio;
+                        if (audioUrl) {
+                            const audio = new Audio(audioUrl);
+                            audio.onended = () => { if (onEnd) onEnd(); resolve(); };
+                            audio.onerror = () => { if (onEnd) onEnd(); resolve(); };
+                            currentUtterance = audio;
+                            audio.play();
+                            updatePauseBtn();
+                            return;
+                        }
+                    }
+                } catch(e) { console.error('MiniMax TTS failed', e); }
+                // Fallback to browser TTS
+                fallbackSpeak(text, candidate, onEnd, resolve);
+            });
+        } else {
+            // Browser TTS
+            return fallbackSpeak(text, candidate, onEnd);
+        }
+    }
+
+    function fallbackSpeak(text, candidate, onEnd, resolve) {
+        synth.cancel();
+        isPaused = false;
+        const u = new SpeechSynthesisUtterance(text);
+        const v = VOICES[candidate];
+        u.voice = v.voice; u.rate = v.rate; u.pitch = v.pitch;
+        currentUtterance = u;
+        u.onend = () => { currentUtterance = null; if (onEnd) onEnd(); if (resolve) resolve(); };
+        u.onerror = () => { currentUtterance = null; if (onEnd) onEnd(); if (resolve) resolve(); };
+        synth.speak(u);
+        updatePauseBtn();
+        if (resolve) resolve();
+    }
+
+    // Override pauseResume/stopSpeaking for MiniMax audio
+    const origPause = pauseResume;
+    pauseResume = function() {
+        if (currentUtterance && currentUtterance.pause) {
+            if (isPaused) { currentUtterance.play(); isPaused = false; }
+            else { currentUtterance.pause(); isPaused = true; }
+            updatePauseBtn();
+        } else {
+            origPause();
+        }
+    };
+    const origStop = stopSpeaking;
+    stopSpeaking = function() {
+        if (currentUtterance && currentUtterance.pause) { currentUtterance.pause(); currentUtterance.currentTime = 0; }
+        else { synth.cancel(); }
+        currentUtterance = null; isPaused = false; updatePauseBtn();
+    };
+
+    checkApiKey();
+
+
     // ==================== INIT ====================
-    function init() {
+    function init() { showSettings(); 
         renderTopics();
         initSpeech();
     }
@@ -503,5 +630,20 @@
     
     init();
     </script>
+<div id="settings-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:1000;align-items:center;justify-content:center;">
+        <div style="background:#2d2d2d;padding:24px;border-radius:12px;max-width:400px;width:90%;">
+            <h3 style="margin-bottom:16px;">⚙️ Settings</h3>
+            <div class="api-key-section">
+                <label>MiniMax API Key (for better TTS quality)</label>
+                <input type="password" id="api-key-input" placeholder="Enter your MiniMax API Key" onkeyup="saveApiKey(this.value)">
+                <div class="hint">Get key from platform.minimax.io > API Keys</div>
+                <div id="api-key-status" class="api-key-status"></div>
+            </div>
+            <div style="margin-top:16px;display:flex;gap:8px;">
+                <button onclick="testApiKey()" style="flex:1;padding:10px;background:#667eea;border:none;border-radius:6px;color:#fff;cursor:pointer;">Test</button>
+                <button onclick="closeSettings()" style="flex:1;padding:10px;background:#444;border:none;border-radius:6px;color:#fff;cursor:pointer;">Close</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
