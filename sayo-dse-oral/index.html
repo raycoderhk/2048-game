@@ -87,6 +87,29 @@
         .api-key-status.ok { color: #27ae60; }
         .api-key-status.err { color: #e74c3c; }
 
+
+        .btn-4th { background: #8e44ad; }
+        .btn-4th:hover { background: #732d91; }
+        #mock-view { display: none; background: #1e1e1e; min-height: 100%; padding: 16px; overflow-y: auto; }
+        .mock-header { text-align: center; padding: 12px; background: linear-gradient(135deg, #27ae60, #2ecc71); border-radius: 12px; margin-bottom: 16px; }
+        .mock-header h3 { font-size: 18px; margin-bottom: 6px; }
+        .mock-header p { font-size: 12px; opacity: 0.9; }
+        .mock-timer { font-size: 28px; font-weight: bold; margin: 10px 0; font-family: monospace; }
+        .mock-progress { height: 6px; background: #333; border-radius: 3px; margin-bottom: 16px; }
+        .mock-progress-bar { height: 100%; background: linear-gradient(90deg, #27ae60, #2ecc71); border-radius: 3px; transition: width 1s; }
+        .mock-candidates { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+        .mock-cand-card { background: #2d2d2d; border-radius: 10px; padding: 12px; min-height: 80px; }
+        .mock-cand-card.sarah { border-left: 4px solid #3ba55c; }
+        .mock-cand-card.mike { border-left: 4px solid #f04747; }
+        .mock-cand-card.amy { border-left: 4px solid #f47b67; }
+        .mock-cand-card.ray { border-left: 4px solid #8e44ad; }
+        .mock-cand-name { font-size: 11px; font-weight: bold; margin-bottom: 6px; }
+        .mock-cand-text { font-size: 12px; color: #aaa; line-height: 1.4; }
+        .mock-cand-card.active { background: #363636; box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+        .mock-cand-text.speaking { color: #fff; font-style: italic; }
+        .mock-skip { margin: 10px auto; display: block; padding: 10px 20px; background: #444; border: none; border-radius: 8px; color: #fff; cursor: pointer; font-size: 13px; }
+        .mock-skip:hover { background: #555; }
+
 </style>
 </head>
 <body>
@@ -117,6 +140,7 @@
                 <p>Practice with 3 AI candidates — Sarah, Mike, Amy. Speak or type your answers!</p>
                 <button class="btn-main" onclick="startRandom()">🎲 Random Topic</button>
                 <button class="btn-main btn-comp" onclick="startComprehension()">📖 Reading Comprehension</button>
+                <button class="btn-main" style="background:#27ae60;" onclick="startMockExam()">🎮 Watch Mock Exam</button>
             </div>
             
             <div class="controls" id="controls" style="display:none;">
@@ -138,6 +162,7 @@
             </div>
             
             <div id="comp-view"></div>
+        <div id="mock-view"></div>
         </div>
     </div>
     
