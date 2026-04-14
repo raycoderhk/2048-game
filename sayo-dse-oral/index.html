@@ -472,7 +472,9 @@ async function speak(text,cand,onEnd){
       tryTTS(0);
     });
   }else{
-    fallbackTTS(text,cand,onEnd);
+    return new Promise(function(res){
+      fallbackTTS(text,cand,onEnd,res);
+    });
   }
 }
 
@@ -723,9 +725,18 @@ function runMockTurn(){
   div.innerHTML='<span class="nm" style="color:'+colors[turn.c]+' font-weight:bold">'+turn.c+':</span> <span class="tx" style="color:#aaa">'+turn.t+'</span>';
   msgs.appendChild(div);
   msgs.scrollTop=msgs.scrollHeight;
-  speak(turn.t,turn.c,function(){});
-  mockIdx++;
-  mockTO=setTimeout(runMockTurn,10000); // 10s per turn
+  // Wait for TTS to finish before moving to next turn
+  speak(turn.t,turn.c,function(){}).then(function(){
+    if(!mockRunning||mockPaused)return;
+    mockIdx++;
+    mockTO=setTimeout(runMockTurn,3000); // 3s pause between turns
+  });
+  // Also auto-advance after max 12s regardless
+  var turnTO=setTimeout(function(){
+    if(!mockRunning||mockPaused)return;
+    mockIdx++;
+    mockTO=setTimeout(runMockTurn,3000);
+  },12000);
 }
 
 function updateMockTimer(){
