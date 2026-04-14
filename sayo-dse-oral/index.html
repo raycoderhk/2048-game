@@ -273,6 +273,21 @@ var mockIdx=0;
 var mockStart=0;
 var mockTO=null;
 
+// Topic card click delegation
+document.addEventListener('click', function(e){
+  var card = e.target.closest('.topic-card');
+  if(card){
+    var idx = parseInt(card.getAttribute('data-idx'));
+    if(!isNaN(idx) && TOPICS[idx]) selectTopic(TOPICS[idx]);
+  }
+});
+
+// Topic click delegation
+document.addEventListener('click', function(e){ var c=e.target.closest('.topic-card'); if(c){ var i=parseInt(c.getAttribute('data-idx')); if(!isNaN(i)&& TOPICS[i]) selectTopic(TOPICS[i]); } });
+
+// Topic click delegation
+document.addEventListener('click', function(e){ var c=e.target.closest('.topic-card'); if(c){ var i=parseInt(c.getAttribute('data-idx')); if(!isNaN(i) && TOPICS[i]) selectTopic(TOPICS[i]); } });
+
 // Init
 function init(){
   renderTopics();
@@ -315,9 +330,9 @@ function renderTopics(){
   el.innerHTML='';
   TOPICS.forEach(function(t){
     var div=document.createElement('div');
-    div.className='topic-card';
+    div.className='topic-card'; div.setAttribute('data-idx', i);div.setAttribute('data-idx', i);div.setAttribute('data-idx', i);
     div.innerHTML='<div class="cat">'+t.cat+'</div><div class="q">'+t.q.substring(0,60)+'...</div>';
-    div.onclick=function(){selectTopic(t)};
+    
     el.appendChild(div);
   });
 }
