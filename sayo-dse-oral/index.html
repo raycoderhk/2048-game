@@ -228,7 +228,9 @@ var COMP=[
 ];
 
 // Long Mock Script - 36 turns ~8 minutes
-var MOCK_SCRIPT=[
+// Mock Exams — 3 different topics, each with 32-36 turns
+var MOCK_EXAMS=[
+[
 {c:'Sarah',t:'Hello everyone, I am Sarah. Let us start discussing. Financial literacy should be taught in all secondary schools in Hong Kong. What do you all think about this proposal?'},
 {c:'Mike',t:'I am Mike. I disagree with this proposal. I think financial literacy is too complex for most secondary students. They should focus on basic mathematics and core subjects first.'},
 {c:'Amy',t:'I agree with Sarah actually. Many students my age do not understand how to manage money properly. Starting with simple topics like budgeting pocket money would be really helpful for young people.'},
@@ -238,7 +240,7 @@ var MOCK_SCRIPT=[
 {c:'Amy',t:'I agree with Mike on that point. We would need proper teacher training programs before rolling out this curriculum nationwide. Professional development is essential.'},
 {c:'Ray',t:'I think government support is crucial here. The policy mentions significant funding allocation. That money could be used specifically for teacher training workshops and resources.'},
 {c:'Sarah',t:'Exactly, Ray. With proper funding, we could also invite professionals from banks and financial institutions to give talks and practical workshops for students.'},
-{c:'Mike',t:'But what about students in public schools in disadvantaged communities? They might not have the same access to financial resources and support as private school students.'},
+{c:'Mike',t:'But what about students in public schools in disadvantaged communities? They might not have the same access to financial resources and support as private school students?'},
 {c:'Amy',t:'That is such an important point, Mike. We need to ensure equal access regardless of family background or school type. Education should be fair for everyone.'},
 {c:'Ray',t:'Exactly. The government should provide additional support for lower-income communities. Maybe subsidies or free learning materials for students who cannot afford them.'},
 {c:'Sarah',t:'To build on that, I think the curriculum should be practical and hands-on. Students could learn by managing a mock investment portfolio or planning a household budget in real life scenarios.'},
@@ -256,15 +258,80 @@ var MOCK_SCRIPT=[
 {c:'Sarah',t:'To summarize our discussion today, we all agreed that financial education is important. We suggested starting with basic topics for younger students and more advanced topics for older ones.'},
 {c:'Mike',t:'And we agreed that teacher training is crucial, with government funding and partnerships with universities and financial institutions for professional development.'},
 {c:'Amy',t:'Plus, making the curriculum practical and engaging, not just another exam subject, would help students genuinely learn and apply these skills in real life.'},
-{c:'Ray',t:'And using local case studies and examples would make it more relevant to Hong Kong students' daily experiences and future aspirations.'},
+{c:'Ray',t:'And using local case studies and examples would make it more relevant to Hong Kong students daily experiences and future aspirations.'},
 {c:'Sarah',t:'Most importantly, we need to ensure equal access for students from disadvantaged backgrounds through government support, subsidies, and targeted funding.'},
 {c:'Mike',t:'I have to admit, I changed my perspective somewhat during this discussion. With proper implementation and comprehensive teacher support, I now see the genuine value.'},
 {c:'Amy',t:'I am happy we could explore all angles of this topic. Our discussion today was very productive and informative for everyone.'},
 {c:'Ray',t:'I think our discussion showed how complex policy issues require input from all perspectives. Thank you everyone for sharing your thoughtful viewpoints.'},
 {c:'Sarah',t:'Thank you all for this wonderful discussion. I believe our conversation today reflects the kind of balanced critical thinking needed for real DSE exams. Take care everyone!'}
+],
+[
+{c:'Sarah',t:'Hello everyone, I am Sarah. Let us start discussing. AI tools like ChatGPT should be allowed in homework in Hong Kong secondary schools. To what extent do you agree?'},
+{c:'Mike',t:'I am Mike. I strongly disagree with this proposal. Allowing AI in homework would completely undermine the purpose of education. Students need to develop their own thinking skills.'},
+{c:'Amy',t:'I see where you are coming from, Mike. But I think a complete ban is unrealistic. AI is already everywhere. We should teach students how to use it responsibly instead of pretending it does not exist.'},
+{c:'Ray',t:'I think both of you make valid points. The key is finding a balance between embracing technology and ensuring students actually learn the fundamentals.'},
+{c:'Sarah',t:'Exactly, Ray. Perhaps we could allow AI for certain tasks like research or proofreading, but not for assignments that are meant to test understanding.'},
+{c:'Mike',t:'But how would teachers actually enforce that distinction? Students would inevitably rely on AI for everything if given the chance.'},
+{c:'Amy',t:'I think the solution is to redesign assignments entirely. Instead of traditional written homework, we could have more oral presentations or in-class assessments where AI cannot help.'},
+{c:'Ray',t:'That is a great point, Amy. Project-based learning with presentations would be harder to fake. Plus it develops communication skills important for university and careers.'},
+{c:'Sarah',t:'I agree completely. We should also consider that AI literacy itself is becoming an essential skill for future employment. Blocking it entirely misses important opportunities.'},
+{c:'Mike',t:'But what about students who do not have access to AI tools at home? That would create an unfair advantage for wealthier families. Equality matters here.'},
+{c:'Amy',t:'That is such an important concern, Mike. We need to ensure any AI policy does not widen the gap between rich and poor students.'},
+{c:'Ray',t:'The government could provide free AI tools and training for all public schools. That would level the playing field and ensure equal access.'},
+{c:'Sarah',t:'To build on that, we could also teach students how to properly cite and acknowledge AI assistance, just like we do with other sources. Transparency is key.'},
+{c:'Mike',t:'I still worry about over-reliance. If students use AI for everything, how will they develop critical thinking or problem-solving skills?'},
+{c:'Amy',t:'That is a fair concern, Mike. But we could require students to submit their AI prompts and the original outputs alongside their work. That way teachers can see the learning process.'},
+{c:'Ray',t:'I like that idea, Amy. It makes AI use transparent and allows teachers to assess how students are thinking and improving their prompts.'},
+{c:'Sarah',t:'Ultimately, I think we need a clear policy framework from the Education Bureau. Blanket bans or blanket permissions both have problems. We need nuanced guidelines.'},
+{c:'Mike',t:'Agreed. And whatever policy we adopt, teacher training is essential. Many teachers currently do not understand AI well enough to guide students effectively.'},
+{c:'Amy',t:'Yes! Professional development for teachers on AI tools would benefit everyone. They could then become facilitators rather than opponents of new technology.'},
+{c:'Ray',t:'Building on that, we could have workshops where teachers and students learn together. That would create a more collaborative learning environment.'},
+{c:'Sarah',t:'I think our discussion today has been very productive. We all agree that some balance is needed, and that teacher training and clear guidelines are essential.'},
+{c:'Mike',t:'I have to admit, I now see more value in the potential of AI as a learning tool, as long as there are proper safeguards and monitoring mechanisms.'},
+{c:'Amy',t:'I am glad we could explore all sides of this complex issue. Thank you everyone for sharing your perspectives today.'},
+{c:'Ray',t:'Same here. This kind of nuanced discussion is exactly what DSE oral exams are looking for. Thank you all for this engaging conversation.'},
+{c:'Sarah',t:'To summarize, we agreed that a complete ban is impractical, but unrestricted use is also problematic. We need clear guidelines, teacher training, and redesigned assessments.'},
+{c:'Mike',t:'We also agreed that equity is crucial. Any AI policy must ensure level playing field for all students regardless of family background.'},
+{c:'Amy',t:'And we suggested making AI use transparent through prompts and outputs, and redesigning assignments to focus on skills that are harder to outsource to AI.'},
+{c:'Ray',t:'Most importantly, we need to teach responsible AI use rather than simply blocking it, since AI is only going to become more prevalent in our lives.'},
+{c:'Sarah',t:'Thank you all for this wonderful discussion. I believe our balanced perspective today reflects the kind of critical thinking needed for real DSE exams. Take care everyone!'}
+],
+[
+{c:'Sarah',t:'Hello everyone, I am Sarah. Let us start discussing. Hong Kong country parks should be better promoted as tourist destinations. How can this be done?'},
+{c:'Mike',t:'I am Mike. I have mixed feelings about this. While promoting tourism could bring economic benefits, I worry about overtourism damaging our precious natural environment.'},
+{c:'Amy',t:'I agree with your environmental concern, Mike. But I think with proper management, we could promote sustainable tourism that benefits both locals and visitors.'},
+{c:'Ray',t:'I think both economic and environmental considerations matter. We could promote lesser-known trails and parks to distribute visitors more evenly across the territory.'},
+{c:'Sarah',t:'That is a great point, Ray. We could develop new hiking trails in country parks that are currently under-visited, like those in the New Territories.'},
+{c:'Mike',t:'But infrastructure is a major challenge. Country parks already lack adequate facilities like restrooms, drinking fountains, and emergency phones. More tourists would make this worse.'},
+{c:'Amy',t:'That is a valid point, Mike. We need significant investment in infrastructure before we can responsibly promote eco-tourism.'},
+{c:'Ray',t:'The government could partner with hiking clubs and NGOs to maintain trails and provide guided tours. That would create jobs and distribute benefits more widely.'},
+{c:'Sarah',t:'I love that idea, Ray. Partnering with local organizations would also ensure that tourism revenue stays within the community rather than going to big tour operators.'},
+{c:'Mike',t:'But what about accessibility? Many country parks are very difficult to reach by public transport. How would tourists without cars get there?'},
+{c:'Amy',t:'We could introduce special shuttle bus services from MTR stations during weekends and holidays. That would make country parks accessible to everyone.'},
+{c:'Ray',t:'Building on that, we could also develop a country park app with maps, trail information, and real-time crowd levels so visitors can plan their trips better.'},
+{c:'Sarah',t:'I think technology could really help here. We could also use QR codes along trails to provide educational content about local flora and fauna.'},
+{c:'Mike',t:'I am still concerned about safety. Search and rescue operations in country parks are expensive and time-consuming. More visitors mean more emergencies.'},
+{c:'Amy',t:'That is a fair point, Mike. We could require visitors to register their hiking plans online, similar to systems used in other countries. That would improve safety management.'},
+{c:'Ray',t:'Or we could have ranger stations at key entry points where visitors can check in and get safety briefings before entering the parks.'},
+{c:'Sarah',t:'Education is also important. Many tourists do not know how to behave responsibly in nature. We could promote Leave No Trace principles through signage and apps.'},
+{c:'Mike',t:'Yes! I have seen too much litter and damage to trails. We need better education about environmental protection before we promote tourism.'},
+{c:'Amy',t:'We could also introduce a scoring system for hiking trails based on difficulty, scenery, and facilities. That would help visitors choose appropriate trails for their fitness level.'},
+{c:'Ray',t:'I think a rating system is a great idea. We could also have different themed routes, like bird-watching trails, historical trails, and photography spots.'},
+{c:'Sarah',t:'To build on that, we could partner with schools to organize educational field trips. Students could learn about ecology while enjoying nature.'},
+{c:'Mike',t:'I am starting to see the value in promoting country parks more. With proper management and infrastructure, it could benefit both tourism and conservation.'},
+{c:'Amy',t:'I am glad we had this discussion. We all brought different perspectives that together paint a more complete picture of the challenges and opportunities.'},
+{c:'Ray',t:'Same here. This kind of multi-faceted analysis is exactly what is needed for real DSE oral discussions. Thank you everyone.'},
+{c:'Sarah',t:'To summarize, we agreed that better promotion is possible but requires investment in infrastructure, safety measures, and environmental education first.'},
+{c:'Mike',t:'We also suggested improving public transport access, developing a country park app, and distributing visitors across more trails.'},
+{c:'Amy',t:'And we agreed that partnering with local organizations and schools would help ensure tourism benefits communities while protecting the environment.'},
+{c:'Ray',t:'Most importantly, we need to balance economic benefits with environmental protection. Sustainable tourism is the way forward.'},
+{c:'Sarah',t:'Thank you all for this wonderful discussion. I believe our balanced and practical recommendations reflect the kind of thinking needed for real DSE exams. Take care everyone!'}
+]
 ];
 
-// State
+// Use MOCK_EXAMS[0] as legacy single-script for backward compat
+var MOCK_SCRIPT=MOCK_EXAMS[0];
+
 var curTopic=null;
 var isRec=false;
 var rec=null;
@@ -366,29 +433,49 @@ async function speak(text,cand,onEnd){
       var cfg={'Sarah':{s:1,p:0},'Mike':{s:1.1,p:2},'Amy':{s:.95,p:1}};
       var v=voices[cand]||'Cantonese_GentleLady';
       var c=cfg[cand]||{s:1,p:0};
-      fetch('https://api.minimaxi.com/v1/t2a_v2',{
-        method:'POST',
-        headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
-        body:JSON.stringify({model:'speech-2.8-hd',text:text,stream:false,output_format:'url',voice_setting:{voice_id:v,speed:c.s,pitch:c.p},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
-      }).then(function(resp){return resp.json()})
-      .then(function(data){
-        var url=data.data&&data.data.audio;
-        if(url){
-          var audio=new Audio(url);
-          audio.onended=function(){isSpeaking=false;if(onEnd)onEnd();res()};
-          audio.onerror=function(){isSpeaking=false;if(onEnd)onEnd();res()};
-          curAudio=audio;isSpeaking=true;
-          updatePauseBtn();
-          audio.play();
-          return;
-        }
-        fallbackTTS(text,cand,onEnd,res);
-      }).catch(function(){fallbackTTS(text,cand,onEnd,res)});
+      var maxRetries=3;
+      var delay=500;
+      function tryTTS(attempt){
+        fetch('https://api.minimaxi.com/v1/t2a_v2',{
+          method:'POST',
+          headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
+          body:JSON.stringify({model:'speech-2.8-hd',text:text,stream:false,output_format:'url',voice_setting:{voice_id:v,speed:c.s,pitch:c.p},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
+        }).then(function(resp){
+          if(!resp.ok && resp.status===529 && attempt<maxRetries){
+            // 529: server overloaded, retry with backoff
+            setTimeout(function(){tryTTS(attempt+1);},delay);
+            delay*=2;return;
+          }
+          return resp.json();
+        }).then(function(data){
+          if(!data){return;} // was retrying
+          var url=data.data&&data.data.audio;
+          if(url){
+            var audio=new Audio(url);
+            audio.onended=function(){isSpeaking=false;if(onEnd)onEnd();res()};
+            audio.onerror=function(){isSpeaking=false;if(onEnd)onEnd();res()};
+            curAudio=audio;isSpeaking=true;
+            updatePauseBtn();
+            audio.play();
+            return;
+          }
+          fallbackTTS(text,cand,onEnd,res);
+        }).catch(function(){
+          if(attempt<maxRetries){
+            setTimeout(function(){tryTTS(attempt+1);},delay);
+            delay*=2;
+          }else{
+            fallbackTTS(text,cand,onEnd,res);
+          }
+        });
+      }
+      tryTTS(0);
     });
   }else{
     fallbackTTS(text,cand,onEnd);
   }
 }
+
 
 function fallbackTTS(text,cand,onEnd,res){
   synth.cancel();isPaused=false;
@@ -573,7 +660,10 @@ function startMock(){
   document.getElementById('topicBar').style.display='none';
   document.getElementById('compView').style.display='none';
   document.getElementById('mockView').style.display='block';
-  var topic=MOCK_SCRIPT[Math.floor(Math.random()*3)]; // Random topic from first 3
+  var chosenExam=MOCK_EXAMS[Math.floor(Math.random()*MOCK_EXAMS.length)];
+  var topic=chosenExam[0];
+  // Override MOCK_SCRIPT for this mock session
+  MOCK_SCRIPT=chosenExam;
   var displayTopic={q:topic.q,d:topic.d};
   document.getElementById('mockView').innerHTML='<div class="mock-hdr"><h3>🎮 DSE Oral Mock Exam</h3><p>4 AI Candidates • 8-Minute Group Discussion</p><div class="mock-timer" id="mockTimer">00:00 / 08:00</div><p style="font-size:12px;font-weight:bold;margin-top:8px;">📝 '+displayTopic.q+'</p><p style="font-size:10px;opacity:0.8;margin-top:4px;">📊 '+displayTopic.d+'</p></div><div class="mock-msgs" id="mockMsgs"></div><div style="text-align:center;padding:10px;"><button class="btn-main" id="mockPauseBtn">⏸ Pause</button> <button class="btn-main back-btn" id="mockBackBtn">← Back</button></div>';
   document.getElementById('mockPauseBtn').onclick=toggleMockPause;
