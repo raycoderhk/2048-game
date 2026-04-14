@@ -725,18 +725,20 @@ function runMockTurn(){
   div.innerHTML='<span class="nm" style="color:'+colors[turn.c]+' font-weight:bold">'+turn.c+':</span> <span class="tx" style="color:#aaa">'+turn.t+'</span>';
   msgs.appendChild(div);
   msgs.scrollTop=msgs.scrollHeight;
-  // Wait for TTS to finish before moving to next turn
-  speak(turn.t,turn.c,function(){}).then(function(){
+  var turnDone=false;
+  function advanceNext(){
+    if(turnDone)return;
+    turnDone=true;
+    clearTimeout(mockTO);
     if(!mockRunning||mockPaused)return;
     mockIdx++;
-    mockTO=setTimeout(runMockTurn,3000); // 3s pause between turns
-  });
-  // Also auto-advance after max 12s regardless
-  var turnTO=setTimeout(function(){
-    if(!mockRunning||mockPaused)return;
-    mockIdx++;
-    mockTO=setTimeout(runMockTurn,3000);
-  },12000);
+    if(mockIdx<MOCK_SCRIPT.length){
+      mockTO=setTimeout(runMockTurn,3000);
+    }
+  }
+  speak(turn.t,turn.c,function(){}).then(advanceNext);
+  // Backup: auto-advance after 12s no matter what
+  mockTO=setTimeout(advanceNext,12000);
 }
 
 function updateMockTimer(){
