@@ -653,16 +653,34 @@ function backHome(){
   document.getElementById('welcome').style.display='flex';
 }
 
-// Mock Exam
-function startMock(){
+// Mock Exam Selection
+function showMockSelect(){
   document.getElementById('welcome').style.display='none';
   document.getElementById('controls').style.display='none';
   document.getElementById('topicBar').style.display='none';
   document.getElementById('compView').style.display='none';
   document.getElementById('mockView').style.display='block';
-  var chosenExam=MOCK_EXAMS[Math.floor(Math.random()*MOCK_EXAMS.length)];
+
+  var topics=[
+    {idx:0,title:'Financial Literacy in Schools',desc:'Should financial literacy be taught in all secondary schools?'},
+    {idx:1,title:'AI Tools in Homework',desc:'Should ChatGPT and AI tools be allowed in homework?'},
+    {idx:2,title:'Country Parks Promotion',desc:'How can HK country parks be better promoted as destinations?'}
+  ];
+
+  var html='<div style="padding:16px;"><h3 style="color:#27ae60;margin-bottom:14px;">🎮 Choose Mock Exam Topic</h3>';
+  topics.forEach(function(t,i){
+    html+='<div style="background:#2d2d2d;border-radius:10px;padding:14px;margin-bottom:10px;cursor:pointer;border:2px solid transparent;transition:.2s" onclick="startMock('+t.idx+')" id="mockOpt'+t.idx+'">';
+    html+='<div style="font-weight:bold;color:#fff;margin-bottom:4px;font-size:14px;">'+(i+1)+'. '+t.title+'</div>';
+    html+='<div style="font-size:11px;color:#888">'+t.desc+'</div></div>';
+  });
+  html+='<button class="btn-main back-btn" onclick="backHome()" style="margin-top:10px">← Back</button></div>';
+  document.getElementById('mockView').innerHTML=html;
+}
+
+// Start mock with chosen exam index
+function startMock(examIdx){
+  var chosenExam=MOCK_EXAMS[examIdx];
   var topic=chosenExam[0];
-  // Override MOCK_SCRIPT for this mock session
   MOCK_SCRIPT=chosenExam;
   var displayTopic={q:topic.q,d:topic.d};
   document.getElementById('mockView').innerHTML='<div class="mock-hdr"><h3>🎮 DSE Oral Mock Exam</h3><p>4 AI Candidates • 8-Minute Group Discussion</p><div class="mock-timer" id="mockTimer">00:00 / 08:00</div><p style="font-size:12px;font-weight:bold;margin-top:8px;">📝 '+displayTopic.q+'</p><p style="font-size:10px;opacity:0.8;margin-top:4px;">📊 '+displayTopic.d+'</p></div><div class="mock-msgs" id="mockMsgs"></div><div style="text-align:center;padding:10px;"><button class="btn-main" id="mockPauseBtn">⏸ Pause</button> <button class="btn-main back-btn" id="mockBackBtn">← Back</button></div>';
@@ -753,7 +771,7 @@ async function testKey(){
 // Event listeners
 document.getElementById('randomBtn').onclick=startRandom;
 document.getElementById('compBtn').onclick=startComp;
-document.getElementById('mockBtn').onclick=startMock;
+document.getElementById('mockBtn').onclick=showMockSelect;
 document.getElementById('sarahBtn').onclick=function(){playC('Sarah')};
 document.getElementById('mikeBtn').onclick=function(){playC('Mike')};
 document.getElementById('amyBtn').onclick=function(){playC('Amy')};
