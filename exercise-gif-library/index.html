@@ -181,27 +181,6 @@
             font-size: 3em;
         }
 
-        .exercise-card .gif-container .play-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(233,69,96,0.9);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .exercise-card .gif-container:hover .play-overlay {
-            opacity: 1;
-        }
-
         .exercise-card .instructions {
             background: rgba(0,0,0,0.3);
             border-radius: 10px;
@@ -725,10 +704,7 @@
                     <p class="muscle-group">${ex.muscleGroup}</p>
                     
                     <div class="gif-container">
-                        <a href="${getVideoUrl(ex)}" target="_blank">
-                            <img src="${getGifUrl(ex)}" alt="${ex.name}" loading="lazy">
-                            <div class="play-overlay">▶</div>
-                        </a>
+                        <img src="${getGifUrl(ex)}" alt="${ex.name}" loading="lazy">
                     </div>
                     
                     <div class="instructions">
