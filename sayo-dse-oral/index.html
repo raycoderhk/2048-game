@@ -11,8 +11,8 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 .back-link{background:rgba(255,255,255,0.2);color:#fff;padding:5px 10px;border-radius:6px;text-decoration:none;font-size:12px}
 .header h1{font-size:16px;font-weight:700}
 .badge{background:rgba(255,255,255,0.2);padding:3px 8px;border-radius:10px;font-size:10px}
-.settings{background:rgba(255,255,255,0.2);border:none;border-radius:6px;color:#fff;padding:5px 10px;cursor:pointer;font-size:12px}
-.container{display:flex;height:calc(100vh - 50px)}
+.settings{background:rgba(255,255,255,0.2);border:none;border-radius:6px;color:#fff;padding:5px 10px;cursor:pointer}
+.container{display:flex;height:calc(100vh - 52px)}
 .sidebar{width:240px;background:#252525;border-right:1px solid #333;padding:12px;overflow-y:auto}
 .sidebar h3{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
 .topic-card{background:#2d2d2d;border-radius:6px;padding:10px;margin-bottom:6px;cursor:pointer;border:2px solid transparent;transition:.2s}
@@ -43,7 +43,7 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 .cand-btns button.sarah.active{background:#3ba55c}
 .cand-btns button.mike.active{background:#f04747}
 .cand-btns button.amy.active{background:#f47b67}
-.mic-btn{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#ed4245,#c93b3b);border:none;color:#fff;font-size:20px;cursor:pointer;display:block;margin:0 auto;box-shadow:0 3px 10px rgba(237,66,69,0.3)}
+.mic-btn{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#ed4245,#c93b3b;border:none;color:#fff;font-size:20px;cursor:pointer;display:block;margin:0 auto}
 .mic-btn:hover{transform:scale(1.05)}
 .mic-btn.recording{animation:pulse .8s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(0.95)}}
@@ -57,10 +57,24 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 .welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
 .welcome h2{font-size:22px;margin-bottom:8px}
 .welcome p{color:#888;font-size:13px;max-width:320px;line-height:1.5;margin-bottom:16px}
-.btn-main{padding:12px 24px;background:linear-gradient(135deg,#667eea,#764ba2);border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin:4px;display:inline-block}
+.btn-main{padding:12px 24px;background:linear-gradient(135deg,#667eea,#764ba2);border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin:4px}
 .btn-comp{background:linear-gradient(135deg,#e74c3c,#c0392b)}
 .btn-mock{background:linear-gradient(135deg,#27ae60,#2ecc71)}
-#comp-view,#mock-view{display:none;background:#1e1e1a;min-height:100%;padding:16px;overflow-y:auto}
+#comp-view,#mock-view,#record-view{display:none;background:#1e1e1a;min-height:100%;padding:16px;overflow-y:auto}
+.mock-hdr{text-align:center;padding:16px;background:linear-gradient(135deg,#27ae60,#2ecc71);border-radius:10px;margin-bottom:14px}
+.mock-hdr h3{color:#fff;font-size:16px;margin-bottom:4px}
+.mock-hdr p{color:rgba(255,255,255,0.85);font-size:11px}
+.mock-timer{font-size:28px;font-weight:bold;color:#fff;margin:8px 0;font-family:monospace}
+.mock-topic{font-size:12px;font-weight:bold;margin-top:8px;color:#fff}
+.mock-data{font-size:10px;opacity:0.8;margin-top:4px}
+.mock-msgs{background:#2d2d2d;border-radius:10px;padding:12px;margin-bottom:12px;min-height:200px;max-height:55vh;overflow-y:auto}
+.mock-msg{margin-bottom:8px;padding:7px 10px;background:#363636;border-radius:6px;font-size:12px}
+.mock-msg .nm{font-weight:700;margin-right:6px}
+.mock-msg.sarah .nm{color:#3ba55c}
+.mock-msg.mike .nm{color:#f04747}
+.mock-msg.amy .nm{color:#f47b67}
+.mock-msg.ray .nm{color:#8e44ad}
+.mock-msg .tx{color:#aaa}
 .comp-art h3{color:#e74c3c;margin-bottom:4px;font-size:15px}
 .comp-art .src{color:#888;font-size:10px;margin-bottom:12px}
 .comp-art .txt{background:#2d2d2d;padding:14px;border-radius:8px;line-height:1.8;color:#ddd;font-size:13px;margin-bottom:14px;white-space:pre-wrap}
@@ -76,27 +90,19 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 .comp-res .grade{font-size:44px;color:#e74c3c;margin:12px 0}
 .comp-btn{padding:10px 20px;background:#e74c3c;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;margin:4px;display:inline-block}
 .back-btn{background:#444}
-.mock-hdr{text-align:center;padding:16px;background:linear-gradient(135deg,#27ae60,#2ecc71);border-radius:10px;margin-bottom:14px}
-.mock-hdr h3{color:#fff;font-size:16px;margin-bottom:4px}
-.mock-hdr p{color:rgba(255,255,255,0.85);font-size:11px}
-.mock-timer{font-size:28px;font-weight:bold;color:#fff;margin:8px 0;font-family:monospace}
-.mock-msgs{background:#2d2d2d;border-radius:10px;padding:12px;margin-bottom:12px;min-height:200px;max-height:55vh;overflow-y:auto}
-.mock-msg{margin-bottom:8px;padding:7px 10px;background:#363636;border-radius:6px;font-size:12px}
-.mock-msg .nm{font-weight:700;margin-right:6px}
-.mock-msg.sarah .nm{color:#3ba55c}
-.mock-msg.mike .nm{color:#f04747}
-.mock-msg.amy .nm{color:#f47b67}
-.mock-msg.ray .nm{color:#8e44ad}
-.mock-msg .tx{color:#aaa}
+.record-btn{padding:10px 20px;background:#667eea;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;margin:4px}
+.record-list{background:#2d2d2d;border-radius:10px;padding:12px;margin-top:14px;text-align:left}
+.record-list h4{font-size:13px;color:#888;margin-bottom:8px}
+.record-item{background:#333;padding:8px 12px;border-radius:6px;margin-bottom:6px;cursor:pointer}
+.record-item:hover{background:#444}
+.record-item .title{font-size:12px;font-weight:600}
+.record-item .meta{font-size:10px;color:#888}
 #settings-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:100;align-items:center;justify-content:center}
 .settings-box{background:#2d2d2d;padding:20px;border-radius:12px;max-width:360px;width:90%}
 .settings-box h3{margin-bottom:14px;font-size:16px}
 .settings-box label{display:block;font-size:11px;color:#888;margin-bottom:4px}
 .settings-box input{width:100%;padding:8px;border-radius:6px;border:1px solid #444;background:#1a1a1a;color:#fff;font-size:12px}
 .settings-box .hint{font-size:10px;color:#666;margin-top:3px}
-.settings-box .status{font-size:10px;margin-top:3px}
-.settings-box .status.ok{color:#27ae60}
-.settings-box .status.err{color:#e74c3c}
 .settings-row{display:flex;gap:6px;margin-top:12px}
 .settings-row button{flex:1;padding:9px;background:#667eea;border:none;border-radius:6px;color:#fff;cursor:pointer}
 .settings-row button.close{background:#444}
@@ -124,13 +130,14 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 <p>Practice with 3 AI candidates. Speak or type your answers!</p>
 <button class="btn-main" id="randomBtn">🎲 Random Topic</button><br>
 <button class="btn-main btn-comp" id="compBtn">📖 Reading Comprehension</button><br>
-<button class="btn-main btn-mock" id="mockBtn">🎮 Watch Mock Exam</button>
+<button class="btn-main btn-mock" id="mockBtn">🎮 Mock Exam</button><br>
+<button class="btn-main" id="recordingsBtn">📁 My Recordings</button>
 </div>
 <div class="controls" id="controls">
 <div class="cand-btns">
-<button class="sarah" id="sarahBtn">👤 Sarah</button>
-<button class="mike" id="mikeBtn">👤 Mike</button>
-<button class="amy" id="amyBtn">👤 Amy</button>
+<button id="sarahBtn">👤 Sarah</button>
+<button id="mikeBtn">👤 Mike</button>
+<button id="amyBtn">👤 Amy</button>
 </div>
 <button class="mic-btn" id="micBtn">🎤</button>
 <div class="status" id="status">Hold to record</div>
@@ -145,6 +152,7 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 </div>
 <div id="compView"></div>
 <div id="mockView"></div>
+<div id="recordView"></div>
 </div>
 </div>
 <div id="settingsModal">
@@ -152,9 +160,9 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 <h3>⚙️ Settings</h3>
 <div>
 <label>MiniMax API Key (better TTS)</label>
-<input type="password" id="apiKeyInput" placeholder="Enter MiniMax API Key">
+<input type="password" id="apiKeyInput" placeholder="Enter API Key">
 <div class="hint">platform.minimax.io → API Keys</div>
-<div class="status" id="apiStatus"></div>
+<div id="apiStatus"></div>
 </div>
 <div class="settings-row">
 <button id="testKeyBtn">Test</button>
@@ -163,197 +171,169 @@ body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:
 </div>
 </div>
 <script>
-// Topics
 var TOPICS=[
 {id:101,cat:"📌 REAL DSE 2026",q:"Financial literacy should be taught in all secondary schools in Hong Kong. To what extent do you agree?",d:"Only 30% of HK teens understand budgeting."},
 {id:102,cat:"📌 REAL DSE 2026",q:"Online dishonesty has become a serious problem. How can we address this?",d:"45% of HK university students admitted plagiarizing."},
 {id:103,cat:"📌 REAL DSE 2026",q:"Hong Kong's street food culture is disappearing. Is this a significant loss?",d:"Over 50 famous dai pai dongs closed in a decade."},
-{id:104,cat:"📌 REAL DSE 2026",q:"Autonomous vehicles should be introduced in Hong Kong. Do you agree?",d:"Self-driving taxis operate globally. HK's dense traffic poses challenges."},
+{id:104,cat:"📌 REAL DSE 2026",q:"Autonomous vehicles should be introduced in Hong Kong. Do you agree?",d:"Self-driving taxis operate globally."},
 {id:105,cat:"📌 REAL DSE 2026",q:"Hong Kong should increase minimum wage for catering workers. To what extent do you agree?",d:"Catering workers earn ~HK$50/hour."},
-{id:201,cat:"📌 REAL DSE 2026",q:"AI tools like ChatGPT should be allowed in homework. To what extent do you agree?",d:"Educators worry about loss of critical thinking."},
+{id:201,cat:"📌 REAL DSE 2026",q:"AI tools like ChatGPT should be allowed in homework. To what extent do you agree?",d:"Educators worry about critical thinking."},
 {id:202,cat:"📌 REAL DSE 2026",q:"AI will eventually replace most human jobs. Do you agree?",d:"AI could automate 30% of jobs by 2030."},
 {id:203,cat:"📌 REAL DSE 2026",q:"Tipping should become widespread in Hong Kong. Do you agree?",d:"Some restaurants added service charges."},
 {id:204,cat:"📌 REAL DSE 2026",q:"Hong Kong's country parks should be better promoted. How can this be done?",d:"Country parks cover 40% of HK land."},
-{id:205,cat:"📌 REAL DSE 2026",q:"Home remedies should be more widely accepted in Hong Kong. Discuss.",d:"TCM is popular. Some remedies controversial."},
-{id:206,cat:"📌 REAL DSE 2026",q:"Young people in Hong Kong should consider working in the Greater Bay Area. Agree?",d:"GBA includes 9 cities. Opportunities growing."},
-{id:301,cat:"📝 Practice",q:"Computers will replace teachers in classrooms. Agree?",d:"E-learning grew 300% post-pandemic."},
-{id:2,cat:"📝 Practice",q:"Social media has negative impact on teenagers' mental health. Do you agree?",d:"70% of HK teens spend 3+ hours daily on social media."},
+{id:205,cat:"📌 REAL DSE 2026",q:"Home remedies should be more widely accepted in Hong Kong. Discuss.",d:"TCM is popular."},
+{id:206,cat:"📌 REAL DSE 2026",q:"Young people in Hong Kong should consider working in the Greater Bay Area. Agree?",d:"GBA includes 9 cities."},
+{id:301,cat:"📝 Practice",q:"Computers will replace teachers in classrooms. Agree?",d:"E-learning grew 300%."},
+{id:2,cat:"📝 Practice",q:"Social media has negative impact on teenagers' mental health. Do you agree?",d:"70% of HK teens spend 3+ hours daily."},
 {id:3,cat:"📝 Practice",q:"Young people should prioritize careers over starting a family. Discuss.",d:"Avg marriage age: 31M/29F."},
-{id:4,cat:"📝 Practice",q:"Hong Kong should ban single-use plastics completely. Do you agree?",d:"HK generates 2,000+ tonnes plastic waste daily."},
+{id:4,cat:"📝 Practice",q:"Hong Kong should ban single-use plastics completely. Do you agree?",d:"HK generates 2,000+ tonnes waste daily."},
 {id:5,cat:"📝 Practice",q:"University education should be free for all students. Discuss.",d:"HK university costs avg HK$50,000/year."},
-{id:6,cat:"📝 Practice",q:"Schools should require students to participate in at least one sport. Agree?",d:"Only 30% of HK students meet daily activity guidelines."},
+{id:6,cat:"📝 Practice",q:"Schools should require students to participate in at least one sport. Agree?",d:"Only 30% meet daily activity guidelines."},
 {id:7,cat:"📝 Practice",q:"AI will create more problems than it solves. Do you agree?",d:"AI could automate 30% of jobs."},
-{id:8,cat:"📝 Practice",q:"Traditional festivals are becoming less meaningful. Discuss.",d:"60% of young HK people find traditions outdated."},
-{id:9,cat:"📝 Practice",q:"Homework should be abolished in primary schools. Do you agree?",d:"70% of primary students spend 2+ hours on homework daily."},
+{id:8,cat:"📝 Practice",q:"Traditional festivals are becoming less meaningful. Discuss.",d:"60% find traditions outdated."},
+{id:9,cat:"📝 Practice",q:"Homework should be abolished in primary schools. Do you agree?",d:"70% spend 2+ hours on homework daily."},
 {id:10,cat:"📝 Practice",q:"Living in Hong Kong is becoming unaffordable for young people. Discuss.",d:"HK apartments cost 20x annual salary."},
-{id:11,cat:"📝 Practice",q:"Employees should work from home permanently. Agree?",d:"Remote work increased 400% during pandemic."},
-{id:12,cat:"📝 Practice",q:"Junk food advertising should be banned during children's TV programmes.",d:"30% of HK children overweight."},
-{id:13,cat:"📝 Practice",q:"Online anonymity is more harmful than beneficial. Discuss.",d:"40% of HK internet users experienced harassment."},
+{id:11,cat:"📝 Practice",q:"Employees should work from home permanently. Agree?",d:"Remote work increased 400%."},
+{id:12,cat:"📝 Practice",q:"Junk food advertising should be banned during children's TV.",d:"30% of HK children overweight."},
+{id:13,cat:"📝 Practice",q:"Online anonymity is more harmful than beneficial. Discuss.",d:"40% experienced harassment."},
 {id:14,cat:"📝 Practice",q:"Learning a second language should start from primary school. Agree?",d:"Children learning before 10 show 40% better fluency."},
 {id:15,cat:"📝 Practice",q:"The government should provide more support for elderly care. Discuss.",d:"Elderly (65+) will reach 33% by 2040."}
 ];
 
-// COMP Articles
 var COMP=[
-{id:501,title:"AI Education in Hong Kong Schools",src:"SCMP",art:"Hong Kong authorities will offer HK$500,000 to each public school for AI funding. Schools must implement AI in at least 3 subjects and develop 6 teaching examples. Students can use AI tools with supervision.",qs:[
+{id:501,title:"AI Education in Hong Kong Schools",src:"SCMP",art:"Hong Kong authorities will offer HK$500,000 to each public school for AI funding. Schools must implement AI in at least 3 subjects.",qs:[
 {q:"What is the purpose of the HK$500 million?",o:["Build schools","Promote AI in classrooms","Pay teachers","Buy textbooks"],a:1},
-{q:"How many subjects must schools implement AI in?",o:["One","Two","At least three","At least six"],a:2},
+{q:"How many subjects must implement AI?",o:["One","Two","At least three","At least six"],a:2},
 {q:"The word 'allocate' means?",o:["Spend","Distribute","Save","Borrow"],a:1},
 {q:"What must schools develop?",o:["Curriculum","6 teaching examples","Training programs","Research"],a:1}
 ]},
-{id:502,title:"Students and AI Homework",src:"SCMP",art:"Nearly one in four HK students cannot complete homework without AI. 71% of teachers reported students using AI tools. Some say AI literacy is essential, but teachers worry about over-reliance.",qs:[
-{q:"What proportion cannot complete homework without AI?",o:["1 in 10","1 in 4","1 in 2","3 in 4"],a:1},
+{id:502,title:"Students and AI Homework",src:"SCMP",art:"Nearly one in four HK students cannot complete homework without AI. 71% of teachers reported AI use.",qs:[
+{q:"What proportion cannot complete without AI?",o:["1 in 10","1 in 4","1 in 2","3 in 4"],a:1},
 {q:"What % of teachers reported AI use?",o:["55%","71%","80%","90%"],a:1},
 {q:"The word 'grapple' means?",o:["Ignore","Struggle with","Accept","Celebrate"],a:1},
-{q:"What concern do teachers have?",o:["AI is expensive","Students lack devices","Over-reliance hinders thinking","Parents refuse AI"],a:2}
+{q:"What concern do teachers have?",o:["AI expensive","Students lack devices","Over-reliance hinders thinking","Parents refuse AI"],a:2}
 ]},
-{id:503,title:"Digital Divide and Ethnic Minorities",src:"SCMP",art:"Researchers from HKU surveyed 412 ethnic minority people. Only 55% found government apps user-friendly. The EOC urges using AI for language support.",qs:[
+{id:503,title:"Digital Divide and Ethnic Minorities",src:"SCMP",art:"Researchers from HKU surveyed 412 ethnic minority people. Only 55% found government apps user-friendly.",qs:[
 {q:"How many people were surveyed?",o:["212","412","515","550"],a:1},
 {q:"What % found apps user-friendly?",o:["45%","55%","65%","75%"],a:1},
-{q:"'Bridge language barriers' means?",o:["Create languages","Help communicate across languages","Build bridges","Learn languages"],a:1},
+{q:"Bridge language barriers means?",o:["Create languages","Help communicate across languages","Build bridges","Learn languages"],a:1},
 {q:"What does EOC suggest using AI for?",o:["Entertainment","Language support","Shopping","Social media"],a:1}
 ]},
-{id:504,title:"France Bans Social Media for Minors",src:"CNN 10",art:"France has proposed a law to ban minors from social media. The government says it aims to protect young people from online harassment. Critics argue it may violate rights and limit access to information.",qs:[
+{id:504,title:"France Bans Social Media for Minors",src:"CNN 10",art:"France has proposed a law to ban minors from social media.",qs:[
 {q:"What has France proposed?",o:["Tax social media","Ban for minors","Mandatory education","New registration"],a:1},
-{q:"What is the stated purpose?",o:["Increase revenue","Protect young people","Create jobs","Reduce data use"],a:1},
+{q:"What is the purpose?",o:["Increase revenue","Protect young people","Create jobs","Reduce data use"],a:1},
 {q:"What do critics say?",o:["Too expensive","May violate rights","Unnecessary","Too strict"],a:1},
 {q:"What would the law require?",o:["School registration","Age verification","Monthly payments","Government approval"],a:1}
 ]},
-{id:505,title:"NASA's Artemis Moon Mission",src:"CNN 10",art:"NASA has launched the Artemis 2 mission, marking a significant step toward returning humans to the Moon. The mission aims to establish a sustainable presence and eventually support future Mars missions.",qs:[
-{q:"What is the name of NASA's mission?",o:["Apollo 2","Artemis 2","Luna 2","Moon 2"],a:1},
+{id:505,title:"NASA Artemis Moon Mission",src:"CNN 10",art:"NASA has launched the Artemis 2 mission to return humans to the Moon.",qs:[
+{q:"What is NASA's mission?",o:["Apollo 2","Artemis 2","Luna 2","Moon 2"],a:1},
 {q:"What is the ultimate goal?",o:["Space tourism","Support Mars missions","Mine resources","Study the Sun"],a:1},
 {q:"What will astronauts do?",o:["Build homes","Conduct experiments","Train for Mars","Launch satellites"],a:1},
-{q:"'Sustainable presence' means?",o:["Temporary visit","Long-term support","One-time visit","Military base"],a:1}
+{q:"Sustainable presence means?",o:["Temporary visit","Long-term support","One-time visit","Military base"],a:1}
 ]}
 ];
 
-// Long Mock Script - 36 turns ~8 minutes
-// Mock Exams — 3 different topics, each with 32-36 turns
-var MOCK_EXAMS=[
-[
-{c:'Sarah',t:'Hello everyone, I am Sarah. Let us start discussing. Financial literacy should be taught in all secondary schools in Hong Kong. What do you all think about this proposal?'},
-{c:'Mike',t:'I am Mike. I disagree with this proposal. I think financial literacy is too complex for most secondary students. They should focus on basic mathematics and core subjects first.'},
-{c:'Amy',t:'I agree with Sarah actually. Many students my age do not understand how to manage money properly. Starting with simple topics like budgeting pocket money would be really helpful for young people.'},
-{c:'Ray',t:'I partially agree with both sides. Some topics like saving and basic budgeting are suitable, but stock market investing might be too advanced for Form 1 and Form 2 students.'},
-{c:'Sarah',t:'That is a really good point, Ray. We should consider age-appropriate content. Younger secondary students could learn saving and basic budgeting, while older students in Forms 4 to 6 could tackle more complex topics like investing and loans.'},
-{c:'Mike',t:'But here is my major concern. Where would the qualified teachers come from? Most mathematics teachers are not specifically trained in financial topics. This is a huge implementation challenge.'},
-{c:'Amy',t:'I agree with Mike on that point. We would need proper teacher training programs before rolling out this curriculum nationwide. Professional development is essential.'},
-{c:'Ray',t:'I think government support is crucial here. The policy mentions significant funding allocation. That money could be used specifically for teacher training workshops and resources.'},
-{c:'Sarah',t:'Exactly, Ray. With proper funding, we could also invite professionals from banks and financial institutions to give talks and practical workshops for students.'},
-{c:'Mike',t:'But what about students in public schools in disadvantaged communities? They might not have the same access to financial resources and support as private school students?'},
-{c:'Amy',t:'That is such an important point, Mike. We need to ensure equal access regardless of family background or school type. Education should be fair for everyone.'},
-{c:'Ray',t:'Exactly. The government should provide additional support for lower-income communities. Maybe subsidies or free learning materials for students who cannot afford them.'},
-{c:'Sarah',t:'To build on that, I think the curriculum should be practical and hands-on. Students could learn by managing a mock investment portfolio or planning a household budget in real life scenarios.'},
-{c:'Mike',t:'I see the value in practical learning, but I still worry about assessment. How would financial literacy be tested? Would there be public examinations for this subject?'},
-{c:'Amy',t:'I do not think it needs to be in public exams. It should be about building real-life skills, not another academic subject to stress about in exams.'},
-{c:'Ray',t:'I agree with Amy. Making it an exam subject might defeat the genuine purpose of financial education. It should be practical and experience-based learning.'},
-{c:'Sarah',t:'That is an interesting perspective. Perhaps it could be assessed through projects and presentations rather than written examinations. Project-based assessment could be more meaningful.'},
-{c:'Mike',t:'But without some form of assessment, will students actually take it seriously? Many students already complain about overloaded curricula. How do we ensure engagement?'},
-{c:'Amy',t:'I think the key is making it engaging and relevant to daily life. If students see real benefits, they will naturally take it seriously. Relevance creates motivation.'},
-{c:'Ray',t:'Building on what Amy said, we could use real case studies of young entrepreneurs or successful investors from Hong Kong to make the content more relatable to students here.'},
-{c:'Sarah',t:'I love that idea, Ray. Using local examples and Hong Kong success stories would make the content much more meaningful and inspiring for local students.'},
-{c:'Mike',t:'Alright, I am starting to agree more now. With proper implementation and adequate teacher support, this could really benefit young people in Hong Kong.'},
-{c:'Amy',t:'I am glad we had this discussion. I learned a lot from listening to different perspectives on the topic from all of you today.'},
-{c:'Ray',t:'Same here. I think we all brought valuable viewpoints to the table. This kind of balanced discussion reflects real DSE format well.'},
-{c:'Sarah',t:'To summarize our discussion today, we all agreed that financial education is important. We suggested starting with basic topics for younger students and more advanced topics for older ones.'},
-{c:'Mike',t:'And we agreed that teacher training is crucial, with government funding and partnerships with universities and financial institutions for professional development.'},
-{c:'Amy',t:'Plus, making the curriculum practical and engaging, not just another exam subject, would help students genuinely learn and apply these skills in real life.'},
-{c:'Ray',t:'And using local case studies and examples would make it more relevant to Hong Kong students daily experiences and future aspirations.'},
-{c:'Sarah',t:'Most importantly, we need to ensure equal access for students from disadvantaged backgrounds through government support, subsidies, and targeted funding.'},
-{c:'Mike',t:'I have to admit, I changed my perspective somewhat during this discussion. With proper implementation and comprehensive teacher support, I now see the genuine value.'},
-{c:'Amy',t:'I am happy we could explore all angles of this topic. Our discussion today was very productive and informative for everyone.'},
-{c:'Ray',t:'I think our discussion showed how complex policy issues require input from all perspectives. Thank you everyone for sharing your thoughtful viewpoints.'},
-{c:'Sarah',t:'Thank you all for this wonderful discussion. I believe our conversation today reflects the kind of balanced critical thinking needed for real DSE exams. Take care everyone!'}
+// Mock Exam Scripts - one per topic
+var MOCK_SCRIPTS={
+101:[
+{c:"Sarah",t:"Hello everyone, I am Sarah. Let us discuss whether financial literacy should be taught in all secondary schools. Financial literacy should be taught because many young people graduate without basic money management skills."},
+{c:"Mike",t:"I am Mike. I disagree. I think financial literacy is too complex for most secondary students. They should focus on core subjects first."},
+{c:"Amy",t:"I agree with Sarah. Many students do not understand budgeting. Starting with simple topics like saving pocket money would help significantly."},
+{c:"Ray",t:"I partially agree. Some topics like saving are suitable, but stock market investing might be too advanced for Form 1 students."},
+{c:"Sarah",t:"That is a good point. Younger students could learn basic saving, older students could tackle more advanced topics."},
+{c:"Mike",t:"But where would qualified teachers come from? Most math teachers lack financial expertise."},
+{c:"Amy",t:"I agree. Teacher training programs would be essential before implementation."},
+{c:"Ray",t:"Government funding could support teacher workshops and professional development courses."},
+{c:"Sarah",t:"Exactly. With proper training, teachers could deliver effective financial education."},
+{c:"Mike",t:"What about equal access? Students from disadvantaged families might not benefit equally."},
+{c:"Amy",t:"Schools should provide resources for all students regardless of background."},
+{c:"Ray",t:"Government subsidies could ensure no student is left behind financially."},
+{c:"Sarah",t:"Practical projects like managing a mock budget would engage students meaningfully."},
+{c:"Mike",t:"I am concerned about assessment. Would this be tested in public exams?"},
+{c:"Amy",t:"I do not think it needs exams. It should build real-life skills, not create more stress."},
+{c:"Ray",t:"Project-based assessment could be more meaningful than written tests."},
+{c:"Sarah",t:"Case studies of local entrepreneurs would make content relevant to Hong Kong students."},
+{c:"Mike",t:"I am starting to agree. With proper support, this could genuinely benefit young people."},
+{c:"Amy",t:"Using local examples would make lessons more relatable and practical."},
+{c:"Ray",t:"Thank you for a thoughtful discussion. I learned different perspectives today."},
+{c:"Sarah",t:"We all agreed financial education is valuable. Practical, age-appropriate content with teacher training is key."},
+{c:"Mike",t:"And equal access for all students regardless of background is crucial."},
+{c:"Amy",t:"Learning from local entrepreneurs would inspire Hong Kong students."},
+{c:"Ray",t:"Project-based assessment rather than exams would work better."},
+{c:"Sarah",t:"Thank you everyone for this productive discussion on financial literacy in Hong Kong schools."}
 ],
-[
-{c:'Sarah',t:'Hello everyone, I am Sarah. Let us start discussing. AI tools like ChatGPT should be allowed in homework in Hong Kong secondary schools. To what extent do you agree?'},
-{c:'Mike',t:'I am Mike. I strongly disagree with this proposal. Allowing AI in homework would completely undermine the purpose of education. Students need to develop their own thinking skills.'},
-{c:'Amy',t:'I see where you are coming from, Mike. But I think a complete ban is unrealistic. AI is already everywhere. We should teach students how to use it responsibly instead of pretending it does not exist.'},
-{c:'Ray',t:'I think both of you make valid points. The key is finding a balance between embracing technology and ensuring students actually learn the fundamentals.'},
-{c:'Sarah',t:'Exactly, Ray. Perhaps we could allow AI for certain tasks like research or proofreading, but not for assignments that are meant to test understanding.'},
-{c:'Mike',t:'But how would teachers actually enforce that distinction? Students would inevitably rely on AI for everything if given the chance.'},
-{c:'Amy',t:'I think the solution is to redesign assignments entirely. Instead of traditional written homework, we could have more oral presentations or in-class assessments where AI cannot help.'},
-{c:'Ray',t:'That is a great point, Amy. Project-based learning with presentations would be harder to fake. Plus it develops communication skills important for university and careers.'},
-{c:'Sarah',t:'I agree completely. We should also consider that AI literacy itself is becoming an essential skill for future employment. Blocking it entirely misses important opportunities.'},
-{c:'Mike',t:'But what about students who do not have access to AI tools at home? That would create an unfair advantage for wealthier families. Equality matters here.'},
-{c:'Amy',t:'That is such an important concern, Mike. We need to ensure any AI policy does not widen the gap between rich and poor students.'},
-{c:'Ray',t:'The government could provide free AI tools and training for all public schools. That would level the playing field and ensure equal access.'},
-{c:'Sarah',t:'To build on that, we could also teach students how to properly cite and acknowledge AI assistance, just like we do with other sources. Transparency is key.'},
-{c:'Mike',t:'I still worry about over-reliance. If students use AI for everything, how will they develop critical thinking or problem-solving skills?'},
-{c:'Amy',t:'That is a fair concern, Mike. But we could require students to submit their AI prompts and the original outputs alongside their work. That way teachers can see the learning process.'},
-{c:'Ray',t:'I like that idea, Amy. It makes AI use transparent and allows teachers to assess how students are thinking and improving their prompts.'},
-{c:'Sarah',t:'Ultimately, I think we need a clear policy framework from the Education Bureau. Blanket bans or blanket permissions both have problems. We need nuanced guidelines.'},
-{c:'Mike',t:'Agreed. And whatever policy we adopt, teacher training is essential. Many teachers currently do not understand AI well enough to guide students effectively.'},
-{c:'Amy',t:'Yes! Professional development for teachers on AI tools would benefit everyone. They could then become facilitators rather than opponents of new technology.'},
-{c:'Ray',t:'Building on that, we could have workshops where teachers and students learn together. That would create a more collaborative learning environment.'},
-{c:'Sarah',t:'I think our discussion today has been very productive. We all agree that some balance is needed, and that teacher training and clear guidelines are essential.'},
-{c:'Mike',t:'I have to admit, I now see more value in the potential of AI as a learning tool, as long as there are proper safeguards and monitoring mechanisms.'},
-{c:'Amy',t:'I am glad we could explore all sides of this complex issue. Thank you everyone for sharing your perspectives today.'},
-{c:'Ray',t:'Same here. This kind of nuanced discussion is exactly what DSE oral exams are looking for. Thank you all for this engaging conversation.'},
-{c:'Sarah',t:'To summarize, we agreed that a complete ban is impractical, but unrestricted use is also problematic. We need clear guidelines, teacher training, and redesigned assessments.'},
-{c:'Mike',t:'We also agreed that equity is crucial. Any AI policy must ensure level playing field for all students regardless of family background.'},
-{c:'Amy',t:'And we suggested making AI use transparent through prompts and outputs, and redesigning assignments to focus on skills that are harder to outsource to AI.'},
-{c:'Ray',t:'Most importantly, we need to teach responsible AI use rather than simply blocking it, since AI is only going to become more prevalent in our lives.'},
-{c:'Sarah',t:'Thank you all for this wonderful discussion. I believe our balanced perspective today reflects the kind of critical thinking needed for real DSE exams. Take care everyone!'}
+102:[
+{c:"Sarah",t:"Hello everyone, I am Sarah. Let us discuss online dishonesty. Plagiarism and fake reviews are serious problems affecting trust online."},
+{c:"Mike",t:"I am Mike. I agree it is a problem, but solutions must be practical."},
+{c:"Amy",t:"I agree. Education about academic integrity should start early in schools."},
+{c:"Ray",t:"I partially agree. Prevention through education is better than punishment."},
+{c:"Sarah",t:"Technology can help detect plagiarism effectively with AI tools."},
+{c:"Mike",t:"But AI detection tools are not perfect. Students find ways around them."},
+{c:"Amy",t:"Education about consequences would deter students from cheating."},
+{c:"Ray",t:"Legal consequences for fake reviews should be stricter."},
+{c:"Sarah",t:"Platforms should verify reviewers more carefully."},
+{c:"Mike",t:"I agree. Verification processes need improvement."},
+{c:"Amy",t:"Both education and regulation are needed for solutions."},
+{c:"Ray",t:"Thank you for the thoughtful perspectives on online honesty."}
 ],
-[
-{c:'Sarah',t:'Hello everyone, I am Sarah. Let us start discussing. Hong Kong country parks should be better promoted as tourist destinations. How can this be done?'},
-{c:'Mike',t:'I am Mike. I have mixed feelings about this. While promoting tourism could bring economic benefits, I worry about overtourism damaging our precious natural environment.'},
-{c:'Amy',t:'I agree with your environmental concern, Mike. But I think with proper management, we could promote sustainable tourism that benefits both locals and visitors.'},
-{c:'Ray',t:'I think both economic and environmental considerations matter. We could promote lesser-known trails and parks to distribute visitors more evenly across the territory.'},
-{c:'Sarah',t:'That is a great point, Ray. We could develop new hiking trails in country parks that are currently under-visited, like those in the New Territories.'},
-{c:'Mike',t:'But infrastructure is a major challenge. Country parks already lack adequate facilities like restrooms, drinking fountains, and emergency phones. More tourists would make this worse.'},
-{c:'Amy',t:'That is a valid point, Mike. We need significant investment in infrastructure before we can responsibly promote eco-tourism.'},
-{c:'Ray',t:'The government could partner with hiking clubs and NGOs to maintain trails and provide guided tours. That would create jobs and distribute benefits more widely.'},
-{c:'Sarah',t:'I love that idea, Ray. Partnering with local organizations would also ensure that tourism revenue stays within the community rather than going to big tour operators.'},
-{c:'Mike',t:'But what about accessibility? Many country parks are very difficult to reach by public transport. How would tourists without cars get there?'},
-{c:'Amy',t:'We could introduce special shuttle bus services from MTR stations during weekends and holidays. That would make country parks accessible to everyone.'},
-{c:'Ray',t:'Building on that, we could also develop a country park app with maps, trail information, and real-time crowd levels so visitors can plan their trips better.'},
-{c:'Sarah',t:'I think technology could really help here. We could also use QR codes along trails to provide educational content about local flora and fauna.'},
-{c:'Mike',t:'I am still concerned about safety. Search and rescue operations in country parks are expensive and time-consuming. More visitors mean more emergencies.'},
-{c:'Amy',t:'That is a fair point, Mike. We could require visitors to register their hiking plans online, similar to systems used in other countries. That would improve safety management.'},
-{c:'Ray',t:'Or we could have ranger stations at key entry points where visitors can check in and get safety briefings before entering the parks.'},
-{c:'Sarah',t:'Education is also important. Many tourists do not know how to behave responsibly in nature. We could promote Leave No Trace principles through signage and apps.'},
-{c:'Mike',t:'Yes! I have seen too much litter and damage to trails. We need better education about environmental protection before we promote tourism.'},
-{c:'Amy',t:'We could also introduce a scoring system for hiking trails based on difficulty, scenery, and facilities. That would help visitors choose appropriate trails for their fitness level.'},
-{c:'Ray',t:'I think a rating system is a great idea. We could also have different themed routes, like bird-watching trails, historical trails, and photography spots.'},
-{c:'Sarah',t:'To build on that, we could partner with schools to organize educational field trips. Students could learn about ecology while enjoying nature.'},
-{c:'Mike',t:'I am starting to see the value in promoting country parks more. With proper management and infrastructure, it could benefit both tourism and conservation.'},
-{c:'Amy',t:'I am glad we had this discussion. We all brought different perspectives that together paint a more complete picture of the challenges and opportunities.'},
-{c:'Ray',t:'Same here. This kind of multi-faceted analysis is exactly what is needed for real DSE oral discussions. Thank you everyone.'},
-{c:'Sarah',t:'To summarize, we agreed that better promotion is possible but requires investment in infrastructure, safety measures, and environmental education first.'},
-{c:'Mike',t:'We also suggested improving public transport access, developing a country park app, and distributing visitors across more trails.'},
-{c:'Amy',t:'And we agreed that partnering with local organizations and schools would help ensure tourism benefits communities while protecting the environment.'},
-{c:'Ray',t:'Most importantly, we need to balance economic benefits with environmental protection. Sustainable tourism is the way forward.'},
-{c:'Sarah',t:'Thank you all for this wonderful discussion. I believe our balanced and practical recommendations reflect the kind of thinking needed for real DSE exams. Take care everyone!'}
-]
-];
+103:[
+{c:"Sarah",t:"Hello everyone, I am Sarah. Let us discuss Hong Kong street food culture disappearing."},
+{c:"Mike",t:"I am Mike. I disagree. I think change is natural in cities."},
+{c:"Amy",t:"I agree with Sarah. Cultural heritage deserves protection."},
+{c:"Ray",t:"Dai pai dongs are iconic Hong Kong identity."},
+{c:"Sarah",t:"Exactly. Tourism relies on authentic local food culture."},
+{c:"Mike",t:"But market forces drive change naturally."},
+{c:"Amy",t:"Government subsidies could preserve traditional vendors."},
+{c:"Ray",t:"Affordable food options would disappear without support."},
+{c:"Sarah",t:"Balancing tradition with modern development is key."},
+{c:"Mike",t:"I see value in both preservation and progress."},
+{c:"Amy",t:"Heritage status for select dai pai dongs could help."},
+{c:"Ray",t:"Thank you for discussing this cultural topic."}
+],
+104:[
+{c:"Sarah",t:"Hello everyone. Autonomous vehicles should be introduced in Hong Kong carefully."},
+{c:"Mike",t:"I am Mike. I disagree. HK roads are too crowded for self-driving cars."},
+{c:"Amy",t:"I agree with careful pilot programs first."},
+{c:"Ray",t:"Airport routes could be good test cases."},
+{c:"Sarah",t:"Technology improves safety over time with testing."},
+{c:"Mike",t:"Driverless buses could help elderly mobility."},
+{c:"Amy",t:"Environmental benefits include less pollution."},
+{c:"Ray",t:"Job losses for drivers concern me."},
+{c:"Sarah",t:"Retraining programs could help taxi drivers transition."},
+{c:"Mike",t:"I see both opportunities and challenges."},
+{c:"Amy",t:"A phased approach makes sense."},
+{c:"Ray",t:"Thank you for this balanced discussion."}
+],
+105:[
+{c:"Sarah",t:"Hello everyone. Minimum wage increases for catering workers deserve support."},
+{c:"Mike",t:"I am Mike. I worry about small business survival."},
+{c:"Amy",t:"Workers deserve living wages for Hong Kong costs."},
+{c:"Ray",t:"Balancing worker welfare and business viability is key."},
+{c:"Sarah",t:"Healthcare costs are rising for catering workers."},
+{c:"Mike",t:"Service charges already common in many restaurants."},
+{c:"Amy",t:"Tips supplement low wages usefully."},
+{c:"Ray",t:"Worker welfare should be priority."},
+{c:"Sarah",t:"Government subsidies could help small businesses cope."},
+{c:"Mike",t:"Market forces should determine wages naturally."},
+{c:"Amy",t:"Workers deserve fair compensation."},
+{c:"Ray",t:"Thank you for discussing this topic."
+}
+]};
 
-// Use MOCK_EXAMS[0] as legacy single-script for backward compat
-var MOCK_SCRIPT=MOCK_EXAMS[0];
-
+// State
 var curTopic=null;
-var isRec=false;
-var rec=null;
-var synth=window.speechSynthesis;
-var curAudio=null;
-var isSpeaking=false;
-var isPaused=false;
+var isRec=false,rec=null,synth=window.speechSynthesis,curAudio=null,isSpeaking=false,isPaused=false;
 var apiKey=localStorage.getItem('minimax_api_key')||'';
-var VOICES={'Sarah':{r:.95,p:1.1,v:null},'Mike':{r:1.1,p:.9,v:null},'Amy':{r:.9,p:1.2,v:null}};
-
-// Mock Exam state
-var mockRunning=false;
-var mockPaused=false;
-var mockIdx=0;
-var mockStart=0;
-var mockTO=null;
+var VOICES={Sarah:{r:.95,p:1.1,v:null},Mike:{r:1.1,p:.9,v:null},Amy:{r:.9,p:1.2,v:null}};
+var mockRunning=false,mockPaused=false,mockIdx=0,mockStart=0,mockTO=null;
+var curComp=null,compQ=0,compScore=0;
+var recordings=JSON.parse(localStorage.getItem('sayo_recordings')||'[]');
 
 // Init
 function init(){
   renderTopics();
   var v=synth.getVoices();
-  if(v.length>0)loadVoices(v);
+  if(v.length)loadVoices(v);
   synth.onvoiceschanged=function(){loadVoices(synth.getVoices())};
   var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(SR){
@@ -371,7 +351,10 @@ function init(){
       if(fin){addMsg('you',fin);synthResp(fin);}
     };
     rec.onerror=function(){document.getElementById('status').textContent='Try again...';};
-    rec.onend=function(){isRec=false;document.getElementById('micBtn').classList.remove('recording');};
+    rec.onend=function(){
+      isRec=false;
+      document.getElementById('micBtn').classList.remove('recording');
+    };
   }
   document.getElementById('apiKeyInput').value=apiKey;
   checkKeyStatus();
@@ -379,17 +362,16 @@ function init(){
 
 function loadVoices(v){
   var en=v.filter(function(x){return x.lang.startsWith('en')});
-  var base=en.length>0?en:v;
+  var base=en.length?en:v;
   VOICES.Sarah.v=base.find(function(x){return x.name.includes('Female')})||base[0];
   VOICES.Mike.v=base.find(function(x){return x.name.includes('Male')})||base[1]||base[0];
   VOICES.Amy.v=base.find(function(x){return x.name.includes('Female')})||base[0];
 }
 
-// Topics
 function renderTopics(){
   var el=document.getElementById('topicList');
   el.innerHTML='';
-  TOPICS.forEach(function(t,i){
+  TOPICS.forEach(function(t){
     var div=document.createElement('div');
     div.className='topic-card';
     div.innerHTML='<div class="cat">'+t.cat+'</div><div class="q">'+t.q.substring(0,60)+'...</div>';
@@ -405,6 +387,7 @@ function selectTopic(t){
   document.getElementById('topicBar').style.display='block';
   document.getElementById('compView').style.display='none';
   document.getElementById('mockView').style.display='none';
+  document.getElementById('recordView').style.display='none';
   document.getElementById('topicQ').textContent=t.q;
   document.getElementById('topicD').textContent=t.d;
   document.getElementById('messages').innerHTML='';
@@ -415,7 +398,6 @@ function startRandom(){
   selectTopic(TOPICS[Math.floor(Math.random()*TOPICS.length)]);
 }
 
-// Messages
 function addMsg(speaker,text){
   var div=document.createElement('div');
   div.className='msg';
@@ -424,60 +406,36 @@ function addMsg(speaker,text){
   document.getElementById('messages').scrollTop=99999;
 }
 
-// TTS
 async function speak(text,cand,onEnd){
   if(isSpeaking){if(onEnd)onEnd();return;}
   if(apiKey&&apiKey.length>10){
     return new Promise(function(res){
-      var voices={'Sarah':'Cantonese_GentleLady','Mike':'Cantonese_PlayfulMan','Amy':'male-qn-qingse'};
-      var cfg={'Sarah':{s:1,p:0},'Mike':{s:1.1,p:2},'Amy':{s:.95,p:1}};
+      var voices={Sarah:'Cantonese_GentleLady',Mike:'Cantonese_PlayfulMan',Amy:'male-qn-qingse'};
+      var cfg={Sarah:{s:1,p:0},Mike:{s:1.1,p:2},Amy:{s:.95,p:1}};
       var v=voices[cand]||'Cantonese_GentleLady';
       var c=cfg[cand]||{s:1,p:0};
-      var maxRetries=3;
-      var delay=500;
-      function tryTTS(attempt){
-        fetch('https://api.minimaxi.com/v1/t2a_v2',{
-          method:'POST',
-          headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
-          body:JSON.stringify({model:'speech-2.8-hd',text:text,stream:false,output_format:'url',voice_setting:{voice_id:v,speed:c.s,pitch:c.p},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
-        }).then(function(resp){
-          if(!resp.ok && resp.status===529 && attempt<maxRetries){
-            // 529: server overloaded, retry with backoff
-            setTimeout(function(){tryTTS(attempt+1);},delay);
-            delay*=2;return;
-          }
-          return resp.json();
-        }).then(function(data){
-          if(!data){return;} // was retrying
-          var url=data.data&&data.data.audio;
-          if(url){
-            var audio=new Audio(url);
-            audio.onended=function(){isSpeaking=false;if(onEnd)onEnd();res()};
-            audio.onerror=function(){isSpeaking=false;if(onEnd)onEnd();res()};
-            curAudio=audio;isSpeaking=true;
-            updatePauseBtn();
-            audio.play();
-            return;
-          }
-          fallbackTTS(text,cand,onEnd,res);
-        }).catch(function(){
-          if(attempt<maxRetries){
-            setTimeout(function(){tryTTS(attempt+1);},delay);
-            delay*=2;
-          }else{
-            fallbackTTS(text,cand,onEnd,res);
-          }
-        });
-      }
-      tryTTS(0);
+      fetch('https://api.minimaxi.com/v1/t2a_v2',{
+        method:'POST',
+        headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
+        body:JSON.stringify({model:'speech-2.8-hd',text:text,stream:false,output_format:'url',voice_setting:{voice_id:v,speed:c.s,pitch:c.p},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
+      }).then(function(r){return r.json()})
+      .then(function(d){
+        var url=d.data&&d.data.audio;
+        if(url){
+          var audio=new Audio(url);
+          audio.onend=function(){isSpeaking=false;if(onEnd)onEnd();res()};
+          audio.onerror=function(){isSpeaking=false;if(onEnd)onEnd();res()};
+          curAudio=audio;isSpeaking=true;updatePauseBtn();
+          audio.play();
+          return;
+        }
+        fallbackTTS(text,cand,onEnd,res);
+      }).catch(function(){fallbackTTS(text,cand,onEnd,res)});
     });
   }else{
-    return new Promise(function(res){
-      fallbackTTS(text,cand,onEnd,res);
-    });
+    fallbackTTS(text,cand,onEnd);
   }
 }
-
 
 function fallbackTTS(text,cand,onEnd,res){
   synth.cancel();isPaused=false;
@@ -494,8 +452,8 @@ function fallbackTTS(text,cand,onEnd,res){
 
 function pauseRes(){
   if(!curAudio)return;
-  if(isPaused){curAudio.play?curAudio.play():synth.resume();isPaused=false;}
-  else {if(curAudio.pause)curAudio.pause();isPaused=true;}
+  if(isPaused){curAudio.play();isPaused=false;}
+  else{curAudio.pause();isPaused=true;}
   updatePauseBtn();
 }
 
@@ -508,24 +466,22 @@ function stopSpeak(){
 function updatePauseBtn(){
   var btn=document.getElementById('pauseBtn');
   if(!curAudio){btn.textContent='⏸️ Pause';btn.disabled=true;}
-  else{btn.disabled=false;btn.textContent=isPaused?'▶️ Resume':'⏸️ Pause';}
+  else{btn.disabled=false;btn.textContent=isPaused?'▶ Resume':'⏸️ Pause';}
 }
 
-// Candidates
 async function playC(name){
   if(isSpeaking)return;
   var btn=document.getElementById(name.toLowerCase()+'Btn');
   btn.classList.add('active');
   var prompts={
-    'Sarah':'Hello everyone, I am Sarah. Let us start discussing. '+(curTopic?curTopic.q:'')+' What do you all think?',
-    'Mike':'I am Mike. I have some thoughts on this topic. '+(curTopic?curTopic.q:'')+' Let me share my perspective.',
-    'Amy':'Hi, I am Amy. I agree with what has been said. '+(curTopic?curTopic.q:'')+' Let me add some points.'
+    Sarah:'Hello everyone, I am Sarah. '+curTopic.q+' What do you all think?',
+    Mike:'I am Mike. '+curTopic.q+' Let me share my perspective.',
+    Amy:'Hi, I am Amy. I agree with views on '+curTopic.q+' Let me add points.'
   };
   addMsg(name,prompts[name]);
   await speak(prompts[name],name,function(){btn.classList.remove('active');document.getElementById('status').textContent='Your turn';});
 }
 
-// AI Response
 async function synthResp(text){
   if(isSpeaking)return;
   document.getElementById('status').textContent='Thinking...';
@@ -533,33 +489,16 @@ async function synthResp(text){
   var tx=text.toLowerCase();
   var isAgree=/\b(agree|yes|support|true|good|right|definitely)\b/.test(tx);
   var isDisagree=/\b(disagree|no|not|wrong|against|false)\b/.test(tx);
-  var isAI=/\b(ai|robot|chatgpt|technology)\b/.test(tx);
-  var isYouth=/\b(young|teenager|student|youth|school|children)\b/.test(tx);
-  var isMoney=/\b(money|cost|salary|wage|pay|afford)\b/.test(tx);
-
-  var resp;
-  if(isAI){
-    resp={'Sarah':["AI is transforming education. But will this benefit every student equally?","The data shows interesting trends in adoption. What sectors would be most affected?","How can we ensure teachers are properly trained for AI tools?"],
-      'Mike':["But what happens to students who cannot access AI tools at home?","I am worried about increased inequality in education.","What about over-reliance on technology in learning?"],
-      'Amy':["AI can help students with special educational needs significantly.","With proper guidance, AI could revolutionize personalized learning.","The key is balanced integration, not replacement."]};
-  }else if(isYouth||isMoney){
-    resp={'Sarah':["Education and financial issues are fundamental life skills. But how do we balance academic pressure with practical learning?","What curriculum changes would help address these concerns effectively?","Young people face real challenges in these areas. How can schools adapt?"],
-      'Mike':["I am concerned about fairness and accessibility for all students.","What about students from lower-income families?","Practical solutions need to consider everyone equally."],
-      'Amy':["These are essential life skills that schools should prioritize genuinely.","We need policies that actually help, not just look good on paper.","Affordable and accessible solutions are key for real impact."]};
-  }else if(isAgree){
-    resp={'Sarah':["That is an excellent point. Let me add that we should consider long-term implications.","Could you elaborate on how this would work in practice? We need concrete implementation steps."],
-      'Mike':["I understand your perspective, but let me offer another angle for consideration.","Fair point, but implementation challenges still concern me deeply."],
-      'Amy':["I completely agree! This would benefit many people in meaningful ways.","Exactly! It is refreshing to hear different viewpoints on this."]};
-  }else if(isDisagree){
-    resp={'Sarah':["That is a valid alternative perspective worth considering carefully.","What specific evidence supports your view?"],
-      'Mike':["I hear your concerns, but have you considered the unintended consequences?","I am skeptical. More data would help convince me."],
-      'Amy':["I understand your position. What would change your mind about this issue?","Fair points, but I believe there are solutions to address your concerns."]};
-  }else{
-    resp={'Sarah':["That is an interesting perspective. Could you elaborate on your reasoning?","Let me think about this from different angles. What would be the biggest challenge?"],
-      'Mike':["I am not entirely convinced yet. What evidence supports this view?","That is one perspective, but I have practical questions about feasibility."],
-      'Amy':["I think that is a lovely idea worth exploring further.","I agree with elements of what you said. Let me add another consideration."]};
-  }
-
+  var resp={
+    Sarah:["That is a good point. Let me add that we should consider practical implementation.","Could you elaborate on how this would work in Hong Kong schools?"],
+    Mike:["I hear your concern. What about the challenges?","I am skeptical. More evidence needed.","But unintended consequences worry me."],
+    Amy:["I agree. Equal access matters.","Exactly! Practical solutions help everyone."]
+  };
+  if(isDisagree)resp={
+    Sarah:["Valid point. What alternatives exist?","Could you suggest improvements?"],
+    Mike:["I disagree. Here is why:","But consider the costs and benefits carefully."],
+    Amy:["I understand concerns. What would change your view?"]
+  };
   var c=['Sarah','Mike','Amy'][Math.floor(Math.random()*3)];
   if(isDisagree&&Math.random()>.4)c='Mike';
   if(isAgree&&Math.random()>.4)c='Amy';
@@ -570,7 +509,6 @@ async function synthResp(text){
   await speak(r,c);
 }
 
-// STT
 function startRec(){
   if(!rec){document.getElementById('status').textContent='Not supported';return;}
   if(isSpeaking)return;
@@ -579,6 +517,7 @@ function startRec(){
   document.getElementById('status').textContent='Listening...';
   rec.start();
 }
+
 function stopRec(){
   if(!isRec)return;
   isRec=false;
@@ -586,6 +525,7 @@ function stopRec(){
   document.getElementById('status').textContent='Processing...';
   rec.stop();
 }
+
 function sendTxt(){
   var el=document.getElementById('txtInput');
   var txt=el.value.trim();
@@ -595,99 +535,16 @@ function sendTxt(){
   synthResp(txt);
 }
 
-// Comprehension
-var curComp=null,compQ=0,compScore=0;
-
-function startComp(){
-  document.getElementById('welcome').style.display='none';
-  document.getElementById('controls').style.display='none';
-  document.getElementById('topicBar').style.display='none';
-  document.getElementById('mockView').style.display='none';
-  document.getElementById('compView').style.display='block';
-  curComp=COMP[Math.floor(Math.random()*COMP.length)];
-  compQ=0;compScore=0;
-  showCompArt();
-}
-function showCompArt(){
-  var v=document.getElementById('compView');
-  v.innerHTML='<div class="comp-art"><h3>'+curComp.title+'</h3><p class="src">Source: '+curComp.src+'</p><div class="txt">'+curComp.art+'</div><button class="btn-comp" id="compStartQBtn">Start Questions</button> <button class="btn-main back-btn" id="compBackBtn">Back</button></div>';
-  document.getElementById('compStartQBtn').onclick=showCompQ;
-  document.getElementById('compBackBtn').onclick=backHome;
-}
-function showCompQ(){
-  var q=curComp.qs[compQ];
-  var tot=curComp.qs.length;
-  var h='<div class="comp-q"><p class="qn">Question '+(compQ+1)+' of '+tot+'</p><p class="qt">'+q.q+'</p>';
-  q.o.forEach(function(opt,i){
-    h+='<button class="opt-btn" id="opt'+i+'">'+String.fromCharCode(65+i)+'. '+opt+'</button>';
-  });
-  h+='</div>';
-  document.getElementById('compView').innerHTML=h;
-  q.o.forEach(function(opt,i){
-    document.getElementById('opt'+i).onclick=(function(idx){return function(){checkAns(idx);};})(i);
-  });
-}
-function checkAns(sel){
-  var correct=curComp.qs[compQ].a;
-  document.querySelectorAll('.opt-btn').forEach(function(btn,i){
-    btn.disabled=true;
-    if(i===correct)btn.classList.add('correct');
-    if(i===sel&&sel!==correct)btn.classList.add('wrong');
-  });
-  if(sel===correct)compScore++;
-  setTimeout(function(){
-    compQ++;
-    if(compQ<curComp.qs.length)showCompQ();
-    else showCompRes();
-  },1200);
-}
-function showCompRes(){
-  var tot=curComp.qs.length;
-  var pct=Math.round((compScore/tot)*100);
-  var grade=pct>=80?'A':pct>=60?'B':pct>=40?'C':'D';
-  document.getElementById('compView').innerHTML='<div class="comp-res"><h3>Result: '+compScore+'/'+tot+' ('+pct+'%)</h3><p class="grade">Grade: <strong>'+grade+'</strong></p><button class="btn-comp" id="compRetryBtn">Try Another</button> <button class="btn-main back-btn" id="compHomeBtn">Back to Home</button></div>';
-  document.getElementById('compRetryBtn').onclick=startComp;
-  document.getElementById('compHomeBtn').onclick=backHome;
-}
-function backHome(){
-  document.getElementById('compView').style.display='none';
-  document.getElementById('mockView').style.display='none';
-  document.getElementById('welcome').style.display='flex';
-}
-
-// Mock Exam Selection
-function showMockSelect(){
+// Mock Exam
+function startMock(){
   document.getElementById('welcome').style.display='none';
   document.getElementById('controls').style.display='none';
   document.getElementById('topicBar').style.display='none';
   document.getElementById('compView').style.display='none';
+  document.getElementById('recordView').style.display='none';
   document.getElementById('mockView').style.display='block';
-
-  var topics=[
-    {idx:0,title:'Financial Literacy in Schools',desc:'Should financial literacy be taught in all secondary schools?'},
-    {idx:1,title:'AI Tools in Homework',desc:'Should ChatGPT and AI tools be allowed in homework?'},
-    {idx:2,title:'Country Parks Promotion',desc:'How can HK country parks be better promoted as destinations?'}
-  ];
-
-  var html='<div style="padding:16px;"><h3 style="color:#27ae60;margin-bottom:14px;">🎮 Choose Mock Exam Topic</h3>';
-  topics.forEach(function(t,i){
-    html+='<div style="background:#2d2d2d;border-radius:10px;padding:14px;margin-bottom:10px;cursor:pointer;border:2px solid transparent;transition:.2s" onclick="startMock('+t.idx+')" id="mockOpt'+t.idx+'">';
-    html+='<div style="font-weight:bold;color:#fff;margin-bottom:4px;font-size:14px;">'+(i+1)+'. '+t.title+'</div>';
-    html+='<div style="font-size:11px;color:#888">'+t.desc+'</div></div>';
-  });
-  html+='<button class="btn-main back-btn" onclick="backHome()" style="margin-top:10px">← Back</button></div>';
-  document.getElementById('mockView').innerHTML=html;
-}
-
-// Start mock with chosen exam index
-function startMock(examIdx){
-  var chosenExam=MOCK_EXAMS[examIdx];
-  var topic=chosenExam[0];
-  MOCK_SCRIPT=chosenExam;
-  var displayTopic={q:topic.q,d:topic.d};
-  document.getElementById('mockView').innerHTML='<div class="mock-hdr"><h3>🎮 DSE Oral Mock Exam</h3><p>4 AI Candidates • 8-Minute Group Discussion</p><div class="mock-timer" id="mockTimer">00:00 / 08:00</div><p style="font-size:12px;font-weight:bold;margin-top:8px;">📝 '+displayTopic.q+'</p><p style="font-size:10px;opacity:0.8;margin-top:4px;">📊 '+displayTopic.d+'</p></div><div class="mock-msgs" id="mockMsgs"></div><div style="text-align:center;padding:10px;"><button class="btn-main" id="mockPauseBtn">⏸ Pause</button> <button class="btn-main back-btn" id="mockBackBtn">← Back</button></div>';
-  document.getElementById('mockPauseBtn').onclick=toggleMockPause;
-  document.getElementById('mockBackBtn').onclick=stopMock;
+  var t=curTopic||TOPICS[0];
+  document.getElementById('mockView').innerHTML='<div class="mock-hdr"><h3>🎮 Mock Exam</h3><p>4 AI Candidates • 8-Minute Discussion</p><div class="mock-timer" id="mockTimer">00:00 / 08:00</div><div class="mock-topic">📝 '+t.q+'</div><div class="mock-data">📊 '+t.d+'</div></div><div class="mock-msgs" id="mockMsgs"></div><div style="text-align:center;padding:10px"><button id="mockPauseBtn" onclick="toggleMockPause()">⏸ Pause</button> <button id="mockStopBtn" onclick="stopMock()">⏹ Stop</button></div>';
   mockRunning=true;mockPaused=false;mockIdx=0;mockStart=Date.now();
   runMockTurn();
   updateMockTimer();
@@ -716,40 +573,116 @@ function stopMock(){
 }
 
 function runMockTurn(){
-  if(!mockRunning||mockPaused||mockIdx>=MOCK_SCRIPT.length)return;
-  var turn=MOCK_SCRIPT[mockIdx];
+  if(!mockRunning||mockPaused)return;
+  var script=MOCK_SCRIPTS[curTopic?curTopic.id:101]||MOCK_SCRIPTS[101];
+  if(mockIdx>=script.length){stopMock();return;}
+  var turn=script[mockIdx];
   var msgs=document.getElementById('mockMsgs');
   var colors={Sarah:'#3ba55c',Mike:'#f04747',Amy:'#f47b67',Ray:'#8e44ad'};
   var div=document.createElement('div');
   div.className='mock-msg '+turn.c.toLowerCase();
-  div.innerHTML='<span class="nm" style="color:'+colors[turn.c]+' font-weight:bold">'+turn.c+':</span> <span class="tx" style="color:#aaa">'+turn.t+'</span>';
+  div.innerHTML='<span class="nm" style="color:'+colors[turn.c]+'">'+turn.c+':</span> <span class="tx">'+turn.t+'</span>';
   msgs.appendChild(div);
-  msgs.scrollTop=msgs.scrollHeight;
-  var turnDone=false;
-  function advanceNext(){
-    if(turnDone)return;
-    turnDone=true;
-    clearTimeout(mockTO);
-    if(!mockRunning||mockPaused)return;
-    mockIdx++;
-    if(mockIdx<MOCK_SCRIPT.length){
-      mockTO=setTimeout(runMockTurn,3000);
-    }
-  }
-  speak(turn.t,turn.c,function(){}).then(advanceNext);
-  // Backup: auto-advance after 12s no matter what
-  mockTO=setTimeout(advanceNext,12000);
+  msgs.scrollTop=99999;
+  speak(turn.t,turn.c,function(){});
+  mockIdx++;
+  mockTO=setTimeout(runMockTurn,10000);
 }
 
 function updateMockTimer(){
   if(!mockRunning||mockPaused)return;
-  var elapsed=Date.now()-mockStart;
-  var secs=Math.floor(elapsed/1000);
-  var mins=Math.floor(secs/60);
-  var ss=secs%60;
-  var el=document.getElementById('mockTimer');
-  if(el)el.textContent=(mins<10?'0':'')+mins+':'+(ss<10?'0':'')+ss+' / 08:00';
+  var e=Date.now()-mockStart;
+  var s=Math.floor(e/1000),m=Math.floor(s/60),ss=s%60;
+  document.getElementById('mockTimer').textContent=(m<10?'0':'')+m+':'+(ss<10?'0':'')+ss+' / 08:00';
   setTimeout(updateMockTimer,1000);
+}
+
+// Comprehension
+function startComp(){
+  document.getElementById('welcome').style.display='none';
+  document.getElementById('controls').style.display='none';
+  document.getElementById('topicBar').style.display='none';
+  document.getElementById('mockView').style.display='none';
+  document.getElementById('recordView').style.display='none';
+  document.getElementById('compView').style.display='block';
+  curComp=COMP[Math.floor(Math.random()*COMP.length)];
+  compQ=0;compScore=0;
+  showCompArt();
+}
+
+function showCompArt(){
+  var v=document.getElementById('compView');
+  v.innerHTML='<div class="comp-art"><h3>'+curComp.title+'</h3><p style="color:#888;font-size:10px">Source: '+curComp.src+'</p><div class="comp-art txt">'+curComp.art+'</div><button class="btn-main btn-comp" onclick="showCompQ()">Start Questions</button> <button class="btn-main back-btn" onclick="backHome()">Back</button></div>';
+}
+
+function showCompQ(){
+  var q=curComp.qs[compQ],tot=curComp.qs.length;
+  var h='<div class="comp-q"><p style="color:#e74c3c;font-size:11px;margin-bottom:6px">Question '+(compQ+1)+' of '+tot+'</p><p style="font-size:14px;font-weight:600;margin-bottom:12px">'+q.q+'</p>';
+  q.o.forEach(function(opt,i){
+    h+='<button class="opt-btn" id="optBtn'+i+'">'+String.fromCharCode(65+i)+'. '+opt+'</button>';
+  });
+  h+='</div>';
+  document.getElementById('compView').innerHTML=h;
+  q.o.forEach(function(opt,i){
+    document.getElementById('optBtn'+i).onclick=function(){checkCompAns(i)};
+  });
+}
+
+function checkCompAns(sel){
+  var correct=curComp.qs[compQ].a;
+  document.querySelectorAll('.opt-btn').forEach(function(btn,i){
+    btn.disabled=true;
+    if(i===correct)btn.classList.add('correct');
+    if(i===sel&&sel!==correct)btn.classList.add('wrong');
+  });
+  if(sel===correct)compScore++;
+  setTimeout(function(){
+    compQ++;
+    if(compQ<curComp.qs.length)showCompQ();
+    else showCompRes();
+  },1200);
+}
+
+function showCompRes(){
+  var pct=Math.round((compScore/curComp.qs.length)*100);
+  var grade=pct>=80?'A':pct>=60?'B':pct>=40?'C':'D';
+  document.getElementById('compView').innerHTML='<div class="comp-res"><h3>Result: '+compScore+'/'+curComp.qs.length+' ('+pct+'%)</h3><p style="font-size:44px;color:#e74c3c;margin:12px 0">Grade: <strong>'+grade+'</strong></p><button class="btn-comp" onclick="startComp()">Try Another</button> <button class="btn-main back-btn" onclick="backHome()">Back</button></div>';
+}
+
+function backHome(){
+  document.getElementById('compView').style.display='none';
+  document.getElementById('mockView').style.display='none';
+  document.getElementById('recordView').style.display='none';
+  document.getElementById('welcome').style.display='flex';
+}
+
+// Recordings
+function showRecordings(){
+  document.getElementById('welcome').style.display='none';
+  document.getElementById('controls').style.display='none';
+  document.getElementById('topicBar').style.display='none';
+  document.getElementById('compView').style.display='none';
+  document.getElementById('mockView').style.display='none';
+  document.getElementById('recordView').style.display='block';
+  var el=document.getElementById('recordView');
+  var h='<h3 style="margin-bottom:14px">📁 My Recordings</h3>';
+  if(recordings.length===0)h+='<p style="color:#888;font-size:13px">No recordings yet. Start a practice session!</p>';
+  else recordings.forEach(function(r,i){
+    h+='<div class="record-item" onclick="playRecording('+i+')"><div class="title">'+r.topic+'</div><div class="meta">'+r.date+' | '+r.turns+' turns</div></div>';
+  });
+  h+='<button class="btn-main back-btn" onclick="backHome()" style="margin-top:14px">← Back</button>';
+  el.innerHTML=h;
+}
+
+function playRecording(idx){
+  var r=recordings[idx];
+  if(!r)return;
+  document.getElementById('recordView').style.display='none';
+  document.getElementById('controls').style.display='block';
+  document.getElementById('topicBar').style.display='block';
+  document.getElementById('topicQ').textContent=r.topic;
+  document.getElementById('topicD').textContent=r.answers?'Score: '+r.score+'%':'';
+  document.getElementById('messages').innerHTML='<p style="color:#888;text-align:center;font-size:12px;margin-top:40px">🎮 Demo mode - recordings replay coming soon</p>';
 }
 
 // Settings
@@ -762,36 +695,35 @@ function closeSettings(){document.getElementById('settingsModal').style.display=
 function saveKey(k){apiKey=k;localStorage.setItem('minimax_api_key',k);checkKeyStatus()}
 function checkKeyStatus(){
   var el=document.getElementById('apiStatus');
-  if(apiKey){el.textContent='✓ Saved';el.className='status ok';}
-  else{el.textContent='';el.className='status';}
+  if(apiKey){el.textContent='✓ Saved';el.style.color='#27ae60';}
+  else el.textContent='';
 }
 async function testKey(){
   var k=document.getElementById('apiKeyInput').value;
   var el=document.getElementById('apiStatus');
-  if(!k){el.textContent='Please enter a key';el.className='status err';return;}
-  el.textContent='Testing...';el.className='status';
+  if(!k){el.textContent='Enter key';el.style.color='#e74c3c';return;}
+  el.textContent='Testing...';el.style.color='#888';
   try{
-    var resp=await fetch('https://api.minimaxi.com/v1/t2a_v2',{
+    var r=await fetch('https://api.minimaxi.com/v1/t2a_v2',{
       method:'POST',
       headers:{'Authorization':'Bearer '+k,'Content-Type':'application/json'},
       body:JSON.stringify({model:'speech-2.8-hd',text:'Testing',stream:false,output_format:'url',voice_setting:{voice_id:'Cantonese_GentleLady',speed:1,pitch:0},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
     });
-    if(resp.ok){el.textContent='✓ Works!';el.className='status ok';saveKey(k);}
-    else{el.textContent='✗ Error: '+resp.status;el.className='status err';}
-  }catch(e){el.textContent='✗ Network error';el.className='status err';}
+    if(r.ok){el.textContent='✓ Works!';el.style.color='#27ae60';saveKey(k);}
+    else{el.textContent='✗ Error '+r.status;el.style.color='#e74c3c';}
+  }catch(e){el.textContent='✗ Network error';el.style.color='#e74c3c';}
 }
 
 // Event listeners
 document.getElementById('randomBtn').onclick=startRandom;
 document.getElementById('compBtn').onclick=startComp;
-document.getElementById('mockBtn').onclick=showMockSelect;
+document.getElementById('mockBtn').onclick=startMock;
+document.getElementById('recordingsBtn').onclick=showRecordings;
 document.getElementById('sarahBtn').onclick=function(){playC('Sarah')};
 document.getElementById('mikeBtn').onclick=function(){playC('Mike')};
 document.getElementById('amyBtn').onclick=function(){playC('Amy')};
 document.getElementById('micBtn').onmousedown=startRec;
 document.getElementById('micBtn').onmouseup=stopRec;
-document.getElementById('micBtn').ontouchstart=function(e){e.preventDefault();startRec()};
-document.getElementById('micBtn').ontouchend=stopRec;
 document.getElementById('sendBtn').onclick=sendTxt;
 document.getElementById('txtInput').onkeypress=function(e){if(e.key==='Enter')sendTxt()};
 document.getElementById('pauseBtn').onclick=pauseRes;
