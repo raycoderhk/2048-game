@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏋️ Exercise GIF Library | 動作圖庫</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #e94560;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #aaa;
+            font-size: 1.1em;
+        }
+
+        .search-bar {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .search-bar input {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1.1em;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #e94560;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #e94560;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .category-tab {
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+
+        .category-tab:hover {
+            border-color: #e94560;
+            background: rgba(233,69,96,0.2);
+        }
+
+        .category-tab.active {
+            background: #e94560;
+            border-color: #e94560;
+        }
+
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .exercise-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border-color: #e94560;
+        }
+
+        .exercise-card h3 {
+            color: #e94560;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .exercise-card .emoji {
+            font-size: 1.5em;
+        }
+
+        .exercise-card .category-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(233,69,96,0.3);
+            border-radius: 15px;
+            font-size: 0.75em;
+            color: #e94560;
+            margin-left: auto;
+        }
+
+        .exercise-card .muscle-group {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .exercise-card .gif-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .exercise-card .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .exercise-card .gif-container .placeholder {
+            color: #666;
+            font-size: 3em;
+        }
+
+        .exercise-card .instructions {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .exercise-card .instructions h4 {
+            color: #e94560;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .exercise-card .instructions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exercise-card .instructions li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #ccc;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .exercise-card .instructions li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+        }
+
+        .exercise-card .reps-info {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .exercise-card .reps-info span {
+            background: rgba(233,69,96,0.2);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            color: #e94560;
+        }
+
+        .exercise-card .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #4ade80;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .exercise-card .video-link:hover {
+            text-decoration: underline;
+        }
+
+        .category-section {
+            margin-bottom: 40px;
+        }
+
+        .category-section h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e94560;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #888;
+        }
+
+        .no-results .emoji {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat .number {
+            font-size: 2em;
+            color: #e94560;
+            font-weight: bold;
+        }
+
+        .stat .label {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .gif-loading {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a2e;
+        }
+
+        .gif-loading::after {
+            content: "";
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #e94560;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #e94560;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 5px 20px rgba(233,69,96,0.4);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(233,69,96,0.6);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="https://gameworld.zeabur.app/" class="back-link">← Back to Gameworld</a>
+
+        <div class="header">
+            <h1>🏋️ Exercise GIF Library</h1>
+            <p>動作圖庫 | 動作示範 + 說明</p>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="搜尋動作... (例如: lateral lunge, cable woodchopper)" onkeyup="filterExercises()">
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="number" id="totalCount">0</div>
+                    <div class="label">總動作</div>
+                </div>
+                <div class="stat">
+                    <div class="number" id="categoryCount">0</div>
+                    <div class="label">分類</div>
+                </div>
+                <div class="stat">
+                    <div class="number">Pickleball</div>
+                    <div class="label">當前分類</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-tabs" id="categoryTabs">
+            <button class="category-tab active" onclick="filterCategory('all')">全部 All</button>
+            <button class="category-tab" onclick="filterCategory('warmup')">熱身 Warmup</button>
+            <button class="category-tab" onclick="filterCategory('lower')">下肢 Lower Body</button>
+            <button class="category-tab" onclick="filterCategory('upper')">上肢 Upper Body</button>
+            <button class="category-tab" onclick="filterCategory('core')">核心 Core</button>
+            <button class="category-tab" onclick="filterCategory('mobility')">靈活 Mobility</button>
+            <button class="category-tab" onclick="filterCategory('sport')">運動專項 Sport-Specific</button>
+        </div>
+
+        <div class="exercises-grid" id="exercisesGrid">
+            <!-- Exercises will be populated by JavaScript -->
+        </div>
+
+        <div class="no-results hidden" id="noResults">
+            <div class="emoji">🔍</div>
+            <p>找不到符合嘅動作</p>
+        </div>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Exercise data with GIF URLs
+        const exercises = [
+            {
+                id: 1,
+                name: "Lateral Lunge",
+                nameCn: "側弓步",
+                emoji: "🦵",
+                category: "lower",
+                muscleGroup: "大腿內外側、臀部、膝蓋穩定性",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzBtbXh5YnE3cG9xZGl4em1iYXJ5cXgzdWc4c2sxcXBzMnFwb2x6ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btPD1pJfpX2V0VO/giphy.gif",
+                instructions: [
+                    "雙腳站立，與肩同寬",
+                    "向右側大步跨出，彎曲右膝蓋",
+                    "左腿保持伸直，重心移到右腿",
+                    "保持上半身挺直，胸部向前",
+                    "用力推右腳回到起始位置",
+                    "兩側交替進行"
+                ],
+                reps: "10-12 次/側",
+                videoUrl: "https://www.youtube.com/results?search_query=lateral+lunge+form"
+            },
+            {
+                id: 2,
+                name: "Single-leg RDL",
+                nameCn: "單腿羅馬尼亞硬拉",
+                emoji: "🦿",
+                category: "lower",
+                muscleGroup: "腿後側（Hamstrings）、臀部、平衡",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnVmcXJ6dGVwY3h4Y2p4ZW4xbmV0dHBzZW9nZHRmcG5lbXF6aWZyZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3fQf1OEAq0iri9RC/giphy.gif",
+                instructions: [
+                    "單腳站立，膝蓋微微彎曲",
+                    "保持背部挺直，向前彎腰",
+                    "另一條腿向後伸展保持平衡",
+                    "雙手自然下垂或握啞鈴",
+                    "感受腿後側的拉伸",
+                    "回到起始位置，換邊"
+                ],
+                reps: "8-10 次/側",
+                videoUrl: "https://www.youtube.com/results?search_query=single+leg+romanian+deadlift+form"
+            },
+            {
+                id: 3,
+                name: "Calf Raises",
+                nameCn: "提踵",
+                emoji: "🦶",
+                category: "lower",
+                muscleGroup: "小腿、阿基里斯腱",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGtiZnF4N3h4YnJ5Y2RlbzJ5cGRmcW9mcHB4eXNxcDZkN3M5Y3VociZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ori6TRFfgV2T2j1S/giphy.gif",
+                instructions: [
+                    "雙腳與肩同寬站立",
+                    "慢慢踮起腳尖，尽量抬高",
+                    "在顶部停留1-2秒",
+                    "慢慢放下回到起始位置",
+                    "可以單腿做增加難度"
+                ],
+                reps: "15-20 次",
+                videoUrl: "https://www.youtube.com/results?search_query=calf+raises+proper+form"
+            },
+            {
+                id: 4,
+                name: "Cable Woodchopper",
+                nameCn: "繩索伐木轉體",
+                emoji: "🪓",
+                category: "core",
+                muscleGroup: "核心旋轉、腹斜肌、肩膊",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnRlcGF5dG9mMnE4N2p0eDZycW50ZnR4c2o4eHlhYnBmcDVsMnB6eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMHxhOfcgcMNf4U/giphy.gif",
+                instructions: [
+                    "繩索設置在高位置",
+                    "雙手握緊繩索手柄",
+                    "從高處斜向下拉至對側髖關節",
+                    "保持核心穩定，背部挺直",
+                    "用力控制，唔好借力擺動",
+                    "兩側交替進行"
+                ],
+                reps: "10-12 次/側",
+                videoUrl: "https://www.youtube.com/results?search_query=cable+woodchopper+form"
+            },
+            {
+                id: 5,
+                name: "Split Squat",
+                nameCn: "分腿蹲",
+                emoji: "🦵",
+                category: "lower",
+                muscleGroup: "Quad、臀部、腿部平衡",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW5rZ2w2MnB5bnd5c3g3bGhsOGtiZXd4eTZwZHBqemlhNHgxNmh5ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26n7b7PjNtXFE3M0E/giphy.gif",
+                instructions: [
+                    "前後腳分開站立",
+                    "後腳踮起腳尖放在後面",
+                    "慢慢下蹲直到前腿大腿與地面平行",
+                    "前膝蓋保持在腳趾上方",
+                    "用力推前腳回到起始位置"
+                ],
+                reps: "10-12 次/側",
+                videoUrl: "https://www.youtube.com/results?search_query=split+squat+form"
+            },
+            {
+                id: 6,
+                name: "Shoulder External Rotation",
+                nameCn: "肩袖外旋",
+                emoji: "💪",
+                category: "upper",
+                muscleGroup: "肩袖肌群、肩關節穩定性",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnV4cWNnMHg3dXN5d2x4Y2pxNnlqY2p6YnF5dXc4cG1mcXg5YnJ6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2Je9rFF6VrIISyT6/giphy.gif",
+                instructions: [
+                    "站立或坐著，手肘90度彎曲",
+                    "啞鈴或阻力帶在前方",
+                    "保持手肘固定，向外旋轉手臂",
+                    "慢慢控制回到起始位置",
+                    "整個過程保持核心穩定"
+                ],
+                reps: "12-15 次/側",
+                videoUrl: "https://www.youtube.com/results?search_query=shoulder+external+rotation+form"
+            },
+            {
+                id: 7,
+                name: "High Knees",
+                nameCn: "高抬腿",
+                emoji: "🏃",
+                category: "warmup",
+                muscleGroup: "髖關節、心肺、協調",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnZycG14c3M5dnd6cDdiY3Z0b3F4eWx2c2g4dnR1dHl5eTRwNDF0ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btStuthG9yWICs0/giphy.gif",
+                instructions: [
+                    "原地跑步姿勢",
+                    "盡量抬高膝蓋到臀部高度",
+                    "保持輕快的節奏",
+                    "手臂自然擺動",
+                    "持續30-60秒"
+                ],
+                reps: "30-60 秒",
+                videoUrl: "https://www.youtube.com/results?search_query=high+knees+running+form"
+            },
+            {
+                id: 8,
+                name: "Arm Circles",
+                nameCn: "手臂大風車",
+                emoji: "🔄",
+                category: "mobility",
+                muscleGroup: "肩關節、上背",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnNxdHFmYnQ5eG54c2p6eDZ0dGNic3Z4d2p5cTRxcDl0bG1wN2d1MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btMEOJ3FmNej7Go/giphy.gif",
+                instructions: [
+                    "雙腳與肩同寬站立",
+                    "雙臂向前伸展",
+                    "慢慢畫大圈",
+                    "向前10次，向後10次",
+                    "保持肩膀放鬆下沉"
+                ],
+                reps: "10-20 次",
+                videoUrl: "https://www.youtube.com/results?search_query=arm+circles+stretches"
+            },
+            {
+                id: 9,
+                name: "Torso Twists",
+                nameCn: "扭腰轉體",
+                emoji: "🌀",
+                category: "core",
+                muscleGroup: "腹斜肌、核心旋轉",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWQ4eWxkcWNmcXB4dWNzZnB5b3p2dndycXo0c2VmcHB6aWtidWNwdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgG50cE1Xz5V1Fe/giphy.gif",
+                instructions: [
+                    "站立，雙腳與肩同寬",
+                    "雙手抱胸或握啞鈴",
+                    "保持臀部穩定，轉動上身",
+                    "向左、向右交替",
+                    "控制速度，不要慣性擺動"
+                ],
+                reps: "20-30 次",
+                videoUrl: "https://www.youtube.com/results?search_query=torso+twist+exercise+form"
+            },
+            {
+                id: 10,
+                name: "Shadow Swings",
+                nameCn: "空氣挥拍",
+                emoji: "🎾",
+                category: "sport",
+                muscleGroup: "肌肉記憶、協調",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGJhYnQ4bWw3eWNxNjV0eTRmZHhsOGp5Y2ZhcGNmcDl0dWtsdWpxaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btNu5cX2e0XjCD2/giphy.gif",
+                instructions: [
+                    "站立，模擬正常擊球姿勢",
+                    "慢慢挥動球拍，專注姿勢",
+                    "練習正手和反手",
+                    "加入步伐移動",
+                    "保持肩膀放鬆"
+                ],
+                reps: "10-15 次/側",
+                videoUrl: "https://www.youtube.com/results?search_query=pickleball+forehand+shadow+swing"
+            },
+            {
+                id: 11,
+                name: "Split-step Practice",
+                nameCn: "分腿墊步",
+                emoji: "👟",
+                category: "sport",
+                muscleGroup: "反應速度、協調",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnFwdGdmY2Q4d3p2cDdiY3Z0b3F4eWx2c2g4dnR1dHl5eTRwNDF0ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btStuthG9yWICss/giphy.gif",
+                instructions: [
+                    "準備姿勢，膝蓋微彎",
+                    "對手擊球前一刻，雙腳稍微離地",
+                    "輕輕落在前腳掌",
+                    "立即準備移動",
+                    "持續練習建立習慣"
+                ],
+                reps: "10-15 次",
+                videoUrl: "https://www.youtube.com/results?search_query=split+step+pickleball"
+            },
+            {
+                id: 12,
+                name: "Side Leg Swings",
+                nameCn: "側向踢腿",
+                emoji: "🦵",
+                category: "mobility",
+                muscleGroup: "髖關節外展、靈活性",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnZycG14c3M5dnd6cDdiY3Z0b3F4eWx2c2g4dnR1dHl5eTRwNDF0ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btPD1pJfpX2V0VO/giphy.gif",
+                instructions: [
+                    "站立扶牆或欄杆",
+                    "向側面擺動一條腿",
+                    "保持核心穩定",
+                    "擺動幅度逐漸增加",
+                    "兩側交替"
+                ],
+                reps: "15-20 次/側",
+                videoUrl: "https://www.youtube.com/results?search_query=side+leg+swings+stretches"
+            },
+            {
+                id: 13,
+                name: "Wrist Curls & Extensions",
+                nameCn: "手腕彎舉與伸展",
+                emoji: "🤚",
+                category: "upper",
+                muscleGroup: "前臂、預防網球肘",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnV4cWNnMHg3dXN5d2x4Y2pxNnlqY2p6YnF5dXc4cG1mcXg5YnJ6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2Je9rFF6VrIISyT6/giphy.gif",
+                instructions: [
+                    "坐在凳子，前臂放在大腿上",
+                    "手掌握啞鈴，手腕懸空",
+                    "向上彎曲手腕（屈曲）",
+                    "然後向下伸展手腕",
+                    "保持緩慢、控制的速度"
+                ],
+                reps: "12-15 次",
+                videoUrl: "https://www.youtube.com/results?search_query=wrist+curls+extensions+form"
+            },
+            {
+                id: 14,
+                name: "Push-ups",
+                nameCn: "俯臥撐",
+                emoji: "💪",
+                category: "upper",
+                muscleGroup: "胸、肩、三頭、核芯",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnZycG14c3M5dnd6cDdiY3Z0b3F4eWx2c2g4dnR1dHl5eTRwNDF0ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btNu5cX2e0XjCD2/giphy.gif",
+                instructions: [
+                    "雙手撐地，與肩同寬",
+                    "身體保持一直線",
+                    "彎曲手肘，慢慢下降",
+                    "胸部接近地面",
+                    "推起回到起始位置"
+                ],
+                reps: "10-15 次",
+                videoUrl: "https://www.youtube.com/results?search_query=push+ups+proper+form"
+            },
+            {
+                id: 15,
+                name: "Bodyweight Squats",
+                nameCn: "深蹲",
+                emoji: "🦵",
+                category: "warmup",
+                muscleGroup: "Quad、臀部、膝蓋穩定性",
+                gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnVmcXJ6dGVwY3h4Y2p4ZW4xbmV0dHBzZW9nZHRmcG5lbXF6aWZyZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26n7b7PjNtXFE3M0E/giphy.gif",
+                instructions: [
+                    "雙腳與肩同寬站立",
+                    "慢慢下蹲，臀部向後",
+                    "膝蓋保持在腳趾上方",
+                    "大腿與地面平行",
+                    "用力推腳跟站起"
+                ],
+                reps: "15-20 次",
+                videoUrl: "https://www.youtube.com/results?search_query=bodyweight+squat+form"
+            }
+        ];
+
+        let currentCategory = 'all';
+        let searchTerm = '';
+
+        // Category names mapping
+        const categoryNames = {
+            'all': '全部',
+            'warmup': '熱身',
+            'lower': '下肢',
+            'upper': '上肢',
+            'core': '核心',
+            'mobility': '靈活',
+            'sport': '運動專項'
+        };
+
+        function init() {
+            renderExercises();
+            updateStats();
+        }
+
+        function renderExercises() {
+            const grid = document.getElementById('exercisesGrid');
+            const noResults = document.getElementById('noResults');
+            
+            const filtered = exercises.filter(ex => {
+                const matchCategory = currentCategory === 'all' || ex.category === currentCategory;
+                const matchSearch = searchTerm === '' || 
+                    ex.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    ex.nameCn.includes(searchTerm) ||
+                    ex.muscleGroup.toLowerCase().includes(searchTerm.toLowerCase());
+                return matchCategory && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(ex => `
+                <div class="exercise-card" data-id="${ex.id}">
+                    <h3>
+                        <span class="emoji">${ex.emoji}</span>
+                        ${ex.name}
+                        <span class="category-badge">${categoryNames[ex.category]}</span>
+                    </h3>
+                    <p class="muscle-group">${ex.muscleGroup}</p>
+                    
+                    <div class="gif-container">
+                        <img src="${ex.gifUrl}" alt="${ex.name}" 
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=placeholder>🎬</div>'"
+                             loading="lazy">
+                    </div>
+                    
+                    <div class="instructions">
+                        <h4>動作說明</h4>
+                        <ul>
+                            ${ex.instructions.map(step => `<li>${step}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="reps-info">
+                        <span>📊 ${ex.reps}</span>
+                    </div>
+                    
+                    <a href="${ex.videoUrl}" target="_blank" class="video-link">
+                        🎥 觀看影片示範
+                    </a>
+                </div>
+            `).join('');
+
+            // Update count
+            document.getElementById('totalCount').textContent = filtered.length;
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            
+            // Update tab UI
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.textContent.includes(categoryNames[cat]) || (cat === 'all' && tab.textContent.includes('全部')));
+            });
+            
+            renderExercises();
+        }
+
+        function filterExercises() {
+            searchTerm = document.getElementById('searchInput').value;
+            renderExercises();
+        }
+
+        function updateStats() {
+            document.getElementById('categoryCount').textContent = Object.keys(categoryNames).length - 1; // minus 'all'
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        init();
+    </script>
+</body>
+</html>
