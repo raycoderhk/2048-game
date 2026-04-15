@@ -78,6 +78,110 @@
             text-decoration: underline;
         }
 
+        .warmup-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(233,69,96,0.3);
+        }
+
+        .warmup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 0;
+        }
+
+        .warmup-header h2 {
+            color: #e94560;
+            font-size: 1.3em;
+        }
+
+        .warmup-header span {
+            color: #888;
+        }
+
+        .warmup-content {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .warmup-content.show {
+            display: block;
+        }
+
+        .warmup-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .warmup-phase {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .warmup-phase .phase-badge {
+            background: #e94560;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .warmup-phase .phase-time {
+            color: #888;
+            font-size: 0.85em;
+            margin: 10px 0 5px;
+        }
+
+        .warmup-phase .phase-title {
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .warmup-phase .phase-exercises {
+            color: #ccc;
+            font-size: 0.85em;
+        }
+
+        .warmup-tips {
+            background: rgba(233,69,96,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            border-left: 4px solid #e94560;
+        }
+
+        .warmup-tips h4 {
+            color: #e94560;
+            margin-bottom: 10px;
+        }
+
+        .warmup-tips ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .warmup-tips li {
+            color: #ccc;
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .warmup-tips li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+        }
+
         .category-tabs {
             display: flex;
             flex-wrap: wrap;
@@ -337,6 +441,55 @@
                 <div class="stat">
                     <div class="number" id="categoryCount">0</div>
                     <div class="label">分類</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="warmup-section">
+            <div class="warmup-header" onclick="toggleWarmup()">
+                <h2>🎾 Pickleball 完整熱身流程 (20-30分鐘)</h2>
+                <span id="warmupToggle">▼ 點擊展開</span>
+            </div>
+            <div class="warmup-content" id="warmupContent">
+                <div class="warmup-timeline">
+                    <div class="warmup-phase phase1">
+                        <div class="phase-badge">🔥 Phase 1</div>
+                        <div class="phase-time">0-3 分鐘</div>
+                        <div class="phase-title">心肺提升</div>
+                        <div class="phase-exercises">高抬腿、原地跑步</div>
+                    </div>
+                    <div class="warmup-phase phase2">
+                        <div class="phase-badge">🦵 Phase 2</div>
+                        <div class="phase-time">3-10 分鐘</div>
+                        <div class="phase-title">下肢激活</div>
+                        <div class="phase-exercises">側弓步、單腿RDL、提踵、分腿蹲</div>
+                    </div>
+                    <div class="warmup-phase phase3">
+                        <div class="phase-badge">💪 Phase 3</div>
+                        <div class="phase-time">10-18 分鐘</div>
+                        <div class="phase-title">上肢 + 核心</div>
+                        <div class="phase-exercises">繩索伐木、俯臥撐、肩袖外旋</div>
+                    </div>
+                    <div class="warmup-phase phase4">
+                        <div class="phase-badge">🔄 Phase 4</div>
+                        <div class="phase-time">18-25 分鐘</div>
+                        <div class="phase-title">動態拉伸</div>
+                        <div class="phase-exercises">側向踢腿、扭腰、手臂大風車</div>
+                    </div>
+                    <div class="warmup-phase phase5">
+                        <div class="phase-badge">🎾 Phase 5</div>
+                        <div class="phase-time">25-30 分鐘</div>
+                        <div class="phase-title">模擬擊球</div>
+                        <div class="phase-exercises">空氣挥拍、分腿墊步</div>
+                    </div>
+                </div>
+                <div class="warmup-tips">
+                    <h4>💡 熱身小貼士</h4>
+                    <ul>
+                        <li>所有動作輕鬆進行，唔好推到力竭</li>
+                        <li>趁身體夠熱直接去球場開始打球</li>
+                        <li>波板帶上 gym，Phase 5 可以真係郁動球板</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -677,6 +830,13 @@
         function init() {
             renderExercises();
             updateStats();
+        }
+
+        function toggleWarmup() {
+            const content = document.getElementById('warmupContent');
+            const toggle = document.getElementById('warmupToggle');
+            content.classList.toggle('show');
+            toggle.textContent = content.classList.contains('show') ? '▲ 點擊收合' : '▼ 點擊展開';
         }
 
         function renderExercises() {
