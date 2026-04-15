@@ -425,7 +425,7 @@
                 emoji: "🪓",
                 category: "core",
                 muscleGroup: "核心旋轉、腹斜肌、肩膊",
-                gifLocal: "cable-woodchop.gif",
+                gifUrl: "https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2025/03/cable-high-to-low-woodchop.gif?fit=600%2C600&ssl=1",
                 instructions: [
                     "繩索設置在高位置",
                     "雙手握緊繩索手柄",
@@ -658,10 +658,16 @@
         }
         
         function getGifUrl(ex) {
+            if (ex.gifUrl) {
+                return ex.gifUrl;
+            }
             if (ex.gifLocal) {
                 return ex.gifLocal;
             }
-            return getThumbUrl(ex);
+            if (ex.ytVideoId) {
+                return `https://img.youtube.com/vi/${ex.ytVideoId}/hqdefault.jpg`;
+            }
+            return '';
         }
 
         function getVideoUrl(ex) {
