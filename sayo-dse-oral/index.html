@@ -3,737 +3,441 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sayo — DSE English Oral Practice</title>
+<title>Sayo — DSE Oral Practice</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:100vh}
+body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#fff;min-height:100vh;display:flex;flex-direction:column}
 .header{background:linear-gradient(135deg,#667eea,#764ba2);padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.back-link{background:rgba(255,255,255,0.2);color:#fff;padding:5px 10px;border-radius:6px;text-decoration:none;font-size:12px}
-.header h1{font-size:16px;font-weight:700}
+.back{background:rgba(255,255,255,0.2);color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600}
+.header h1{font-size:16px;font-weight:700;flex:1}
 .badge{background:rgba(255,255,255,0.2);padding:3px 8px;border-radius:10px;font-size:10px}
-.settings{background:rgba(255,255,255,0.2);border:none;border-radius:6px;color:#fff;padding:5px 10px;cursor:pointer}
-.container{display:flex;height:calc(100vh - 52px)}
-.sidebar{width:240px;background:#252525;border-right:1px solid #333;padding:12px;overflow-y:auto}
-.sidebar h3{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.topic-card{background:#2d2d2d;border-radius:6px;padding:10px;margin-bottom:6px;cursor:pointer;border:2px solid transparent;transition:.2s}
-.topic-card:hover{background:#363636}
-.topic-card.active{border-color:#667eea;background:#2d3748}
-.topic-card .cat{font-size:9px;color:#667eea;font-weight:600;margin-bottom:2px}
-.topic-card .q{font-size:11px;color:#aaa;line-height:1.3}
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topic-bar{background:#252525;padding:12px;border-bottom:1px solid #333;display:none}
-.topic-bar .q{font-size:13px;font-weight:600;margin-bottom:6px}
-.topic-bar .d{font-size:11px;color:#aaa;background:#1e1e1a;padding:6px 10px;border-radius:4px;border-left:3px solid #667eea}
-.messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
-.msg{display:flex;gap:8px;animation:fadeIn .3s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}}
-.avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
-.avatar.sarah{background:linear-gradient(135deg,#3ba55c,#2d8a4e)}
-.avatar.mike{background:linear-gradient(135deg,#f04747,#c73b3b)}
-.avatar.amy{background:linear-gradient(135deg,#f47b67,#d65a4a)}
-.avatar.you{background:linear-gradient(135deg,#667eea,#764ba2)}
+.settings{background:rgba(255,255,255,0.2);border:none;border-radius:6px;color:#fff;padding:6px 10px;cursor:pointer}
+.main{flex:1;padding:16px;overflow-y:auto}
+.card{background:#252525;border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer;transition:transform .2s;border:2px solid transparent}
+.card:hover{border-color:#667eea;transform:translateY(-2px)
+.card h3{font-size:15px;margin-bottom:6px}
+.card p{font-size:12px;color:#888}
+.tag{font-size:10px;padding:2px 6px;background:#667eea;border-radius:4px;color:#fff;font-weight:600}
+.tag.real{background:#27ae60}
+.tag.practice{background:#f39c12}
+.tag.mock{background:#e74c3c}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr);gap:12px}
+.topic-item{background:#252525;border-radius:8px;padding:12px;cursor:pointer;border:2px solid transparent}
+.topic-item:hover{border-color:#667eea}
+.topic-item.active{border-color:#27ae60;background:#2d3748}
+.topic-item .cat{font-size:10px;color:#667eea;font-weight:600;margin-bottom:4px}
+.topic-item .q{font-size:12px;color:#ddd;line-height:1.4}
+.back-btn{display:inline-block;background:#333;border:none;border-radius:8px;color:#fff;padding:10px 20px;cursor:pointer;font-size:13px}
+.btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);border:none;border-radius:8px;color:#fff;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;display:inline-block}
+.btn-mock{background:linear-gradient(135deg,#27ae60,#2ecc71);border:none;border-radius:8px;color:#fff;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer}
+.btn-comp{background:linear-gradient(135deg,#e74c3c,#c0392b);border:none;border-radius:8px;color:#fff;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer}
+.btn-record{background:#333;border:none;border-radius:8px;color:#fff;padding:12px 20px;font-size:13px;cursor:pointer}
+.status{font-size:11px;color:#888;text-align:center;margin-top:6px}
+.ctrl{display:flex;gap:6px;margin-bottom:8px}
+.ctrl button{flex:1;padding:8px;background:#333;border:none;border-radius:6px;color:#fff;cursor:pointer;font-size:12px;font-weight:600}
+.ctrl button.active-sarah{background:#3ba55c}
+.ctrl button.active-mike{background:#f04747}
+.ctrl button.active-amy{background:#f47b67}
+.mic{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#ed4245,#c0392b);border:none;color:#fff;font-size:20px;cursor:pointer;display:block;margin:0 auto}
+.mic:active{transform:scale(0.95)}
+.msg{display:flex;gap:8px;margin-bottom:10px}
+.msg .av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+.msg.sarah .av{background:linear-gradient(#3ba55c,#2d8a4e)
+.msg.mike .av{background:linear-gradient(#f04747,#c73b3b)
+.msg.amy .av{background:linear-gradient(#f47b67,#d65a4a)
+.msg.you .av{background:linear-gradient(#667eea,#764ba2)
 .msg-body{flex:1}
-.msg-header{display:flex;gap:5px;align-items:baseline;margin-bottom:2px}
-.msg-header .name{font-weight:700;font-size:12px}
-.msg-header .time{font-size:9px;color:#666}
-.msg-body .text{font-size:12px;line-height:1.5;color:#ddd}
-.controls{padding:12px;background:#1e1e1a;border-top:1px solid #333;display:none}
-.cand-btns{display:flex;gap:5px;margin-bottom:8px}
-.cand-btns button{flex:1;padding:7px;background:#333;border:none;border-radius:6px;color:#fff;cursor:pointer;font-size:11px;font-weight:600}
-.cand-btns button.sarah.active{background:#3ba55c}
-.cand-btns button.mike.active{background:#f04747}
-.cand-btns button.amy.active{background:#f47b67}
-.mic-btn{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#ed4245,#c93b3b;border:none;color:#fff;font-size:20px;cursor:pointer;display:block;margin:0 auto}
-.mic-btn:hover{transform:scale(1.05)}
-.mic-btn.recording{animation:pulse .8s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(0.95)}}
-.status{text-align:center;font-size:11px;color:#888;margin-top:6px}
-.fallback{display:flex;gap:5px;margin-top:8px}
-.fallback input{flex:1;padding:7px;border-radius:6px;border:1px solid #444;background:#2d2d2d;color:#fff;font-size:12px}
-.fallback button{padding:7px 12px;background:#667eea;border:none;border-radius:6px;color:#fff;cursor:pointer}
-.pause-row{display:flex;gap:5px;margin-top:6px}
-.pause-row button{flex:1;padding:7px;background:#333;border:none;border-radius:6px;color:#fff;cursor:pointer;font-size:11px}
-.pause-row button:disabled{opacity:0.5}
-.welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
-.welcome h2{font-size:22px;margin-bottom:8px}
-.welcome p{color:#888;font-size:13px;max-width:320px;line-height:1.5;margin-bottom:16px}
-.btn-main{padding:12px 24px;background:linear-gradient(135deg,#667eea,#764ba2);border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin:4px}
-.btn-comp{background:linear-gradient(135deg,#e74c3c,#c0392b)}
-.btn-mock{background:linear-gradient(135deg,#27ae60,#2ecc71)}
-#comp-view,#mock-view,#record-view{display:none;background:#1e1e1a;min-height:100%;padding:16px;overflow-y:auto}
-.mock-hdr{text-align:center;padding:16px;background:linear-gradient(135deg,#27ae60,#2ecc71);border-radius:10px;margin-bottom:14px}
-.mock-hdr h3{color:#fff;font-size:16px;margin-bottom:4px}
-.mock-hdr p{color:rgba(255,255,255,0.85);font-size:11px}
-.mock-timer{font-size:28px;font-weight:bold;color:#fff;margin:8px 0;font-family:monospace}
-.mock-topic{font-size:12px;font-weight:bold;margin-top:8px;color:#fff}
-.mock-data{font-size:10px;opacity:0.8;margin-top:4px}
-.mock-msgs{background:#2d2d2d;border-radius:10px;padding:12px;margin-bottom:12px;min-height:200px;max-height:55vh;overflow-y:auto}
-.mock-msg{margin-bottom:8px;padding:7px 10px;background:#363636;border-radius:6px;font-size:12px}
-.mock-msg .nm{font-weight:700;margin-right:6px}
-.mock-msg.sarah .nm{color:#3ba55c}
-.mock-msg.mike .nm{color:#f04747}
-.mock-msg.amy .nm{color:#f47b67}
-.mock-msg.ray .nm{color:#8e44ad}
-.mock-msg .tx{color:#aaa}
-.comp-art h3{color:#e74c3c;margin-bottom:4px;font-size:15px}
-.comp-art .src{color:#888;font-size:10px;margin-bottom:12px}
-.comp-art .txt{background:#2d2d2d;padding:14px;border-radius:8px;line-height:1.8;color:#ddd;font-size:13px;margin-bottom:14px;white-space:pre-wrap}
-.comp-q{padding:10px}
-.comp-q .qn{color:#e74c3c;font-size:11px;margin-bottom:6px}
-.comp-q .qt{font-size:14px;font-weight:600;margin-bottom:12px}
+.msg .nm{font-size:11px;font-weight:700;color:#888}
+.msg .tx{font-size:12px;color:#ddd;line-height:1.5;margin-top:2px}
+.comp-art{background:#252525;border-radius:10px;padding:14px;margin-bottom:12px;white-space:pre-wrap;font-size:13px;line-height:1.7}
+.comp-art h3{color:#e74c3c;font-size:15px;margin-bottom:6px}
+.comp-q{padding:10px 0}
+.comp-q p:first-child{color:#e74c3c;font-size:11px}
+.comp-q h4{font-size:14px;font-weight:600;margin-bottom:10px}
 .opt-btn{display:block;width:100%;padding:9px 12px;background:#333;border:2px solid #444;border-radius:8px;color:#fff;text-align:left;cursor:pointer;font-size:12px;margin-bottom:6px}
 .opt-btn:hover{border-color:#667eea}
 .opt-btn.correct{background:#27ae60;border-color:#27ae60}
 .opt-btn.wrong{background:#c0392b;border-color:#c0392b}
 .comp-res{text-align:center;padding:30px}
-.comp-res h3{font-size:20px;margin-bottom:8px}
-.comp-res .grade{font-size:44px;color:#e74c3c;margin:12px 0}
-.comp-btn{padding:10px 20px;background:#e74c3c;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;margin:4px;display:inline-block}
-.back-btn{background:#444}
-.record-btn{padding:10px 20px;background:#667eea;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;margin:4px}
-.record-list{background:#2d2d2d;border-radius:10px;padding:12px;margin-top:14px;text-align:left}
-.record-list h4{font-size:13px;color:#888;margin-bottom:8px}
-.record-item{background:#333;padding:8px 12px;border-radius:6px;margin-bottom:6px;cursor:pointer}
-.record-item:hover{background:#444}
-.record-item .title{font-size:12px;font-weight:600}
-.record-item .meta{font-size:10px;color:#888}
-#settings-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:100;align-items:center;justify-content:center}
-.settings-box{background:#2d2d2d;padding:20px;border-radius:12px;max-width:360px;width:90%}
-.settings-box h3{margin-bottom:14px;font-size:16px}
-.settings-box label{display:block;font-size:11px;color:#888;margin-bottom:4px}
-.settings-box input{width:100%;padding:8px;border-radius:6px;border:1px solid #444;background:#1a1a1a;color:#fff;font-size:12px}
-.settings-box .hint{font-size:10px;color:#666;margin-top:3px}
-.settings-row{display:flex;gap:6px;margin-top:12px}
-.settings-row button{flex:1;padding:9px;background:#667eea;border:none;border-radius:6px;color:#fff;cursor:pointer}
-.settings-row button.close{background:#444}
-@media(max-width:700px){.sidebar{width:180px}}
-@media(max-width:500px){.sidebar{width:100%;max-height:25vh;border-right:none;border-bottom:1px solid #333}.container{flex-direction:column}}
+.comp-res h3{font-size:18px}
+.comp-res p{font-size:44px;color:#e74c3c;margin:10px 0}
+.mock-msgs{background:#252525;border-radius:10px;padding:12px;margin-bottom:12px;min-height:150px}
+.mock-turn{margin-bottom:8px;padding:7px 10px;background:#333;border-radius:6px;font-size:12px}
+.mock-turn .nm{font-weight:700;margin-right:6px}
+.mock-turn.sarah .nm{color:#3ba55c}
+.mock-turn.mike .nm{color:#f04747}
+.mock-turn.amy .nm{color:#f47b67}
+.mock-timer{font-size:28px;font-weight:bold;color:#fff;margin:8px 0}
+.mock-hdr{text-align:center;padding:16px;background:linear-gradient(#27ae60,#2ecc71);border-radius:10px;margin-bottom:14px}
+.mock-hdr h3{color:#fff;font-size:16px}
+.mock-hdr p{color:rgba(255,255,255,0.85);font-size:11px}
+.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:100;align-items:center;justify-content:center}
+.modal-box{background:#252525;padding:20px;border-radius:12px;max-width:360px;width:90%}
+.modal-box h3{margin-bottom:14px;font-size:16px}
+.modal-box p{font-size:12px;color:#888;margin-bottom:4px}
+input[type=text],input[type=password]{width:100%;padding:8px;border-radius:6px;border:1px solid #444;background:#1a1a1a;color:#fff;font-size:12px}
+input::placeholder{color:#666}
+.saved{color:#27ae60;font-size:10px;margin-top:4px}
+.error{color:#e74c3c;font-size:10px;margin-top:4px}
+.btn-row{display:flex;gap:6px;margin-top:12px}
+.btn-row button{flex:1;padding:9px;background:#667eea;border:none;border-radius:6px;color:#fff;cursor:pointer}
+.btn-row button.close{background:#333}
+@media(max-width:500px){.topic-grid{grid-template-columns:1fr}
 </style>
 </head>
 <body>
 <div class="header">
-<a href="../index.html" class="back-link">← GameWorld</a>
+<a href="../index.html" class="back">← GameWorld</a>
 <h1>🎓 Sayo — DSE Oral Practice</h1>
 <span class="badge">FREE TTS/STT</span>
-<button class="settings" id="settingsBtn">⚙️</button>
+<button class="settings" onclick="showSettings()">⚙️</button>
 </div>
-<div class="container">
-<div class="sidebar">
-<h3>📚 Topics</h3>
-<div id="topicList"></div>
+
+<div class="main" id="main">
+
+<!-- HOME SCREEN -->
+<div id="home">
+<div class="card" onclick="startComp()">
+<h3>📖 Reading Comprehension</h3>
+<p>MCQ + Vocab based on SCMP/CNN 10 articles</p>
 </div>
-<div class="main">
-<div class="topic-bar" id="topicBar"><div class="q" id="topicQ"></div><div class="d" id="topicD"></div></div>
-<div class="messages" id="messages"></div>
-<div class="welcome" id="welcome">
-<h2>🎤 DSE English Oral Practice</h2>
-<p>Practice with 3 AI candidates. Speak or type your answers!</p>
-<button class="btn-main" id="randomBtn">🎲 Random Topic</button><br>
-<button class="btn-main btn-comp" id="compBtn">📖 Reading Comprehension</button><br>
-<button class="btn-main btn-mock" id="mockBtn">🎮 Mock Exam</button><br>
-<button class="btn-main" id="recordingsBtn">📁 My Recordings</button>
+<div class="card" onclick="showMockPick()">
+<h3>🎮 Mock Exam</h3>
+<p>Watch 4 AI candidates discuss a topic for 8 minutes</p>
 </div>
-<div class="controls" id="controls">
-<div class="cand-btns">
-<button id="sarahBtn">👤 Sarah</button>
-<button id="mikeBtn">👤 Mike</button>
-<button id="amyBtn">👤 Amy</button>
+<div class="card" onclick="showTopicPick()">
+<h3>🎲 Practice Mode</h3>
+<p>Speak with 3 AI candidates on any topic</p>
 </div>
-<button class="mic-btn" id="micBtn">🎤</button>
-<div class="status" id="status">Hold to record</div>
-<div class="fallback">
-<input type="text" id="txtInput" placeholder="Type your answer...">
-<button id="sendBtn">Send</button>
-</div>
-<div class="pause-row">
-<button id="pauseBtn" disabled>⏸️ Pause</button>
-<button id="stopBtn">⏹️ Stop</button>
+<div class="card" onclick="showRecordings()">
+<h3>📁 My Recordings</h3>
+<p>Replay past practice sessions</p>
 </div>
 </div>
-<div id="compView"></div>
-<div id="mockView"></div>
-<div id="recordView"></div>
+
+<!-- TOPIC PICK SCREEN -->
+<div id="topicPick" style="display:none">
+<button class="back-btn" onclick="showHome()">← Back</button>
+<h2 style="margin:12px 0 8px">🎲 Choose a Topic</h2>
+<p style="font-size:12px;color:#888;margin-bottom:14px">Pick any topic to practice with 3 AI candidates</p>
+<div id="topicList" class="topic-grid"></div>
+</div>
+
+<!-- MOCK PICK SCREEN -->
+<div id="mockPick" style="display:none">
+<button class="back-btn" onclick="showHome()">← Back</button>
+<h2 style="margin:12px 0 8px">🎮 Mock Exam — Pick Topic</h2>
+<p style="font-size:12px;color:#888;margin-bottom:14px">Watch 4 AI candidates discuss for 8 min</p>
+<div id="mockList" class="topic-grid"></div>
+</div>
+
+<!-- PRACTICE SCREEN -->
+<div id="practiceScreen" style="display:none">
+<div style="margin-bottom:10px">
+<button class="back-btn" onclick="showHome()">← Topics</button>
+</div>
+<div class="card" style="margin-bottom:10px">
+<div id="curTopicQ" style="font-size:14px;font-weight:600;margin-bottom:6px"></div>
+<div id="curTopicD" style="font-size:11px;color:#888"></div>
+</div>
+<div id="practiceMsgs" class="msg" style="display:none"></div>
+<div id="practiceInput" style="display:none">
+<div class="ctrl">
+<button onclick="speakAs('Sarah')">👤 Sarah</button>
+<button onclick="speakAs('Mike')">👤 Mike</button>
+<button onclick="speakAs('Amy')">👤 Amy</button>
+</div>
+<button class="mic" id="micBtn">🎤</button>
+<div class="status" id="status">Hold mic to speak</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<input type="text" id="txtIn" placeholder="Or type your answer..." style="flex:1" onkeypress="if(event.key==='Enter')sendTxt()">
+<button onclick="sendTxt()" style="padding:8px 12px;background:#667eea;border:none;border-radius:6px;color:#fff;cursor:pointer">Send</button>
+</div>
+<div style="margin-top:8px">
+<button id="pauseBtn" disabled onclick="togglePause()" style="flex:1;padding:8px;background:#333;border:none;border-radius:6px;color:#fff;cursor:pointer">⏸️ Pause</button>
+<button onclick="stopSpeak()" style="flex:1;padding:8px;background:#333;border:none;border-radius:6px;color:#fff;cursor:pointer">⏹ Stop</button>
 </div>
 </div>
-<div id="settingsModal">
-<div class="settings-box">
-<h3>⚙️ Settings</h3>
-<div>
-<label>MiniMax API Key (better TTS)</label>
-<input type="password" id="apiKeyInput" placeholder="Enter API Key">
-<div class="hint">platform.minimax.io → API Keys</div>
-<div id="apiStatus"></div>
 </div>
-<div class="settings-row">
-<button id="testKeyBtn">Test</button>
-<button class="close" id="closeSettingsBtn">Close</button>
+
+<!-- COMP SCREEN -->
+<div id="compScreen" style="display:none">
+<button class="back-btn" onclick="showHome()">← Back</button>
+<div id="compQ" class="comp-art" style="margin-top:10px;white-space:pre-wrap"></div>
+<div id="compOpts"></div>
+</div>
+
+<!-- RECORDINGS SCREEN -->
+<div id="recsScreen" style="display:none">
+<button class="back-btn" onclick="showHome()">← Back</button>
+<h2 style="margin:12px 0">📁 My Practice Recordings</h2>
+<div id="recsList" style="margin-top:10px;font-size:12px;color:#888">No recordings yet.</div>
+</div>
+
+<!-- MOCK SCREEN -->
+<div id="mockScreen" style="display:none">
+<div id="mockHdr" class="mock-hdr">
+<h3>🎮 Mock Exam</h3>
+<p id="mockTmr">⏱️ Timer</p>
+</div>
+<div id="mockMsgs" class="mock-msgs"></div>
+<div style="margin-top:10px;text-align:center">
+<button id="mockPauseBtn" class="back-btn" style="background:#333" onclick="toggleMockPause()">⏸ Pause</button>
+<button class="back-btn" onclick="stopMock()">← Exit</button>
 </div>
 </div>
-</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal" id="settingsModal">
+<div class="modal-box">
+<h3>⚙️ MiniMax API Key</h3>
+<p>For better TTS quality (optional)</p>
+<input type="password" id="apiKeyIn" placeholder="sk-..." style="margin-top:10px">
+<p class="saved" id="apiSaved"></p>
+<p class="error" id="apiErr"></p>
+<div class="btn-row">
+<button onclick="testKey()">Test</button>
+<button class="close" onclick="closeSettings()">Close</button>
+</div></div>
+
 <script>
-var TOPICS=[
-{id:101,cat:"📌 REAL DSE 2026",q:"Financial literacy should be taught in all secondary schools in Hong Kong. To what extent do you agree?",d:"Only 30% of HK teens understand budgeting."},
-{id:102,cat:"📌 REAL DSE 2026",q:"Online dishonesty has become a serious problem. How can we address this?",d:"45% of HK university students admitted plagiarizing."},
-{id:103,cat:"📌 REAL DSE 2026",q:"Hong Kong's street food culture is disappearing. Is this a significant loss?",d:"Over 50 famous dai pai dongs closed in a decade."},
-{id:104,cat:"📌 REAL DSE 2026",q:"Autonomous vehicles should be introduced in Hong Kong. Do you agree?",d:"Self-driving taxis operate globally."},
-{id:105,cat:"📌 REAL DSE 2026",q:"Hong Kong should increase minimum wage for catering workers. To what extent do you agree?",d:"Catering workers earn ~HK$50/hour."},
-{id:201,cat:"📌 REAL DSE 2026",q:"AI tools like ChatGPT should be allowed in homework. To what extent do you agree?",d:"Educators worry about critical thinking."},
-{id:202,cat:"📌 REAL DSE 2026",q:"AI will eventually replace most human jobs. Do you agree?",d:"AI could automate 30% of jobs by 2030."},
-{id:203,cat:"📌 REAL DSE 2026",q:"Tipping should become widespread in Hong Kong. Do you agree?",d:"Some restaurants added service charges."},
-{id:204,cat:"📌 REAL DSE 2026",q:"Hong Kong's country parks should be better promoted. How can this be done?",d:"Country parks cover 40% of HK land."},
-{id:205,cat:"📌 REAL DSE 2026",q:"Home remedies should be more widely accepted in Hong Kong. Discuss.",d:"TCM is popular."},
-{id:206,cat:"📌 REAL DSE 2026",q:"Young people in Hong Kong should consider working in the Greater Bay Area. Agree?",d:"GBA includes 9 cities."},
-{id:301,cat:"📝 Practice",q:"Computers will replace teachers in classrooms. Agree?",d:"E-learning grew 300%."},
-{id:2,cat:"📝 Practice",q:"Social media has negative impact on teenagers' mental health. Do you agree?",d:"70% of HK teens spend 3+ hours daily."},
-{id:3,cat:"📝 Practice",q:"Young people should prioritize careers over starting a family. Discuss.",d:"Avg marriage age: 31M/29F."},
-{id:4,cat:"📝 Practice",q:"Hong Kong should ban single-use plastics completely. Do you agree?",d:"HK generates 2,000+ tonnes waste daily."},
-{id:5,cat:"📝 Practice",q:"University education should be free for all students. Discuss.",d:"HK university costs avg HK$50,000/year."},
-{id:6,cat:"📝 Practice",q:"Schools should require students to participate in at least one sport. Agree?",d:"Only 30% meet daily activity guidelines."},
-{id:7,cat:"📝 Practice",q:"AI will create more problems than it solves. Do you agree?",d:"AI could automate 30% of jobs."},
-{id:8,cat:"📝 Practice",q:"Traditional festivals are becoming less meaningful. Discuss.",d:"60% find traditions outdated."},
-{id:9,cat:"📝 Practice",q:"Homework should be abolished in primary schools. Do you agree?",d:"70% spend 2+ hours on homework daily."},
-{id:10,cat:"📝 Practice",q:"Living in Hong Kong is becoming unaffordable for young people. Discuss.",d:"HK apartments cost 20x annual salary."},
-{id:11,cat:"📝 Practice",q:"Employees should work from home permanently. Agree?",d:"Remote work increased 400%."},
-{id:12,cat:"📝 Practice",q:"Junk food advertising should be banned during children's TV.",d:"30% of HK children overweight."},
-{id:13,cat:"📝 Practice",q:"Online anonymity is more harmful than beneficial. Discuss.",d:"40% experienced harassment."},
-{id:14,cat:"📝 Practice",q:"Learning a second language should start from primary school. Agree?",d:"Children learning before 10 show 40% better fluency."},
-{id:15,cat:"📝 Practice",q:"The government should provide more support for elderly care. Discuss.",d:"Elderly (65+) will reach 33% by 2040."}
-];
+var TOPICS=[{id:101,tag:"📌",cat:"REAL DSE 2026",q:"Financial literacy should be taught in all secondary schools. To what extent do you agree?",d:"30% of HK teens lack budgeting skills"},
+{id:102,tag:"📌",cat:"REAL DSE 2026",q:"Online dishonesty has become serious. How can we address?",d:"45% admitted plagiarizing"},
+{id:103,tag:"📌",cat:"REAL DSE 2026",q:"HK street food culture disappearing. Significant loss?",d:"50+ dai pai dongs closed"},
+{id:104,tag:"📌",cat:"REAL DSE 2026",q:"Autonomous vehicles in HK. Agree?",d:"Dense traffic challenges"},
+{id:105,tag:"📌",cat:"REAL DSE 2026",q:"Min wage increase for catering. Agree?",d:"HK$50/hour typical"},
+{id:201,tag:"📌",cat:"REAL DSE 2026",q:"ChatGPT in homework. Agree?",d:"Critical thinking concerns"},
+{id:202,tag:"📌",cat:"REAL DSE 2026",q:"AI replaces most jobs. Agree?",d:"30% automation risk"},
+{id:203,tag:"📌",cat:"REAL DSE 2026",q:"Tipping widespread in HK. Agree?",d:"Service charges common"},
+{id:204,tag:"📌",cat:"REAL DSE 2026",q:"Country parks promotion. How?",d:"40% land area"},
+{id:205,tag:"📌",cat:"REAL DSE 2026",q:"TCM remedies accepted. Discuss.",d:"Popular but controversial"},
+{id:206,tag:"📌",cat:"REAL DSE 2026",q:"GBA careers for HK youth. Agree?",d:"9 cities, growing opportunities"},
+{id:301,tag:"📝",cat:"Practice",q:"Computers replace teachers. Agree?",d:"300% e-learning growth"},
+{id:302,tag:"📝",cat:"Practice",q:"Social media mental health. Negative?",d:"70% teens 3+ hours daily"},
+{id:303,tag:"📝",cat:"Practice",q:"Careers over family. Discuss.",d:"Marriage age 31M/29F"},
+{id:304,tag:"📝",cat:"Practice",q:"Single-use plastics ban. Agree?",d:"2000+ tonnes daily waste"},
+{id:305,tag:"📝",cat:"Practice",q:"Free university. Discuss.",d:"HK$50k/year average cost"},
+{id:306,tag:"📝",cat:"Practice",q:"School sport requirement. Agree?",d:"30% meet activity guidelines"},
+{id:307,tag:"📝",cat:"Practice",q:"AI problems vs benefits. Discuss.",d:"30% automation risk"},
+{id:308,tag:"📝",cat:"Practice",q:"Festivals losing meaning. Discuss.",d:"60% find outdated"},
+{id:309,tag:"📝",cat:"Practice",q:"Primary homework abolished. Agree?",d:"70% 2+ hrs daily homework"},
+{id:310,tag:"📝",cat:"Practice",q:"HK unaffordable living. Discuss.",d:"20x salary ratio apt prices"}];
+var COMP=[{q:"Q1",a:"ans1"},
+{q:"Q2",a:"ans2"},{q:"Q3",a:"ans3"},{q:"Q4",a:"ans4"}];
 
-var COMP=[
-{id:501,title:"AI Education in Hong Kong Schools",src:"SCMP",art:"Hong Kong authorities will offer HK$500,000 to each public school for AI funding. Schools must implement AI in at least 3 subjects.",qs:[
-{q:"What is the purpose of the HK$500 million?",o:["Build schools","Promote AI in classrooms","Pay teachers","Buy textbooks"],a:1},
-{q:"How many subjects must implement AI?",o:["One","Two","At least three","At least six"],a:2},
-{q:"The word 'allocate' means?",o:["Spend","Distribute","Save","Borrow"],a:1},
-{q:"What must schools develop?",o:["Curriculum","6 teaching examples","Training programs","Research"],a:1}
-]},
-{id:502,title:"Students and AI Homework",src:"SCMP",art:"Nearly one in four HK students cannot complete homework without AI. 71% of teachers reported AI use.",qs:[
-{q:"What proportion cannot complete without AI?",o:["1 in 10","1 in 4","1 in 2","3 in 4"],a:1},
-{q:"What % of teachers reported AI use?",o:["55%","71%","80%","90%"],a:1},
-{q:"The word 'grapple' means?",o:["Ignore","Struggle with","Accept","Celebrate"],a:1},
-{q:"What concern do teachers have?",o:["AI expensive","Students lack devices","Over-reliance hinders thinking","Parents refuse AI"],a:2}
-]},
-{id:503,title:"Digital Divide and Ethnic Minorities",src:"SCMP",art:"Researchers from HKU surveyed 412 ethnic minority people. Only 55% found government apps user-friendly.",qs:[
-{q:"How many people were surveyed?",o:["212","412","515","550"],a:1},
-{q:"What % found apps user-friendly?",o:["45%","55%","65%","75%"],a:1},
-{q:"Bridge language barriers means?",o:["Create languages","Help communicate across languages","Build bridges","Learn languages"],a:1},
-{q:"What does EOC suggest using AI for?",o:["Entertainment","Language support","Shopping","Social media"],a:1}
-]},
-{id:504,title:"France Bans Social Media for Minors",src:"CNN 10",art:"France has proposed a law to ban minors from social media.",qs:[
-{q:"What has France proposed?",o:["Tax social media","Ban for minors","Mandatory education","New registration"],a:1},
-{q:"What is the purpose?",o:["Increase revenue","Protect young people","Create jobs","Reduce data use"],a:1},
-{q:"What do critics say?",o:["Too expensive","May violate rights","Unnecessary","Too strict"],a:1},
-{q:"What would the law require?",o:["School registration","Age verification","Monthly payments","Government approval"],a:1}
-]},
-{id:505,title:"NASA Artemis Moon Mission",src:"CNN 10",art:"NASA has launched the Artemis 2 mission to return humans to the Moon.",qs:[
-{q:"What is NASA's mission?",o:["Apollo 2","Artemis 2","Luna 2","Moon 2"],a:1},
-{q:"What is the ultimate goal?",o:["Space tourism","Support Mars missions","Mine resources","Study the Sun"],a:1},
-{q:"What will astronauts do?",o:["Build homes","Conduct experiments","Train for Mars","Launch satellites"],a:1},
-{q:"Sustainable presence means?",o:["Temporary visit","Long-term support","One-time visit","Military base"],a:1}
-]}
-];
+var cur=null,recording=false,rec=window.SpeechRecognition||window.webkitSpeechRecognition,sy=window.speechSynthesis,aud=null,speaking=false,paused=false,apiKey=localStorage.minimax_key||'',VOICES={Sarah:{v:null},Mike:{v:null},Amy:{v:null}
+var mockR=false,mockP=false,mockI=0,mockS=0;
 
-// Mock Exam Scripts - one per topic
-var MOCK_SCRIPTS={
-101:[
-{c:"Sarah",t:"Hello everyone, I am Sarah. Let us discuss whether financial literacy should be taught in all secondary schools. Financial literacy should be taught because many young people graduate without basic money management skills."},
-{c:"Mike",t:"I am Mike. I disagree. I think financial literacy is too complex for most secondary students. They should focus on core subjects first."},
-{c:"Amy",t:"I agree with Sarah. Many students do not understand budgeting. Starting with simple topics like saving pocket money would help significantly."},
-{c:"Ray",t:"I partially agree. Some topics like saving are suitable, but stock market investing might be too advanced for Form 1 students."},
-{c:"Sarah",t:"That is a good point. Younger students could learn basic saving, older students could tackle more advanced topics."},
-{c:"Mike",t:"But where would qualified teachers come from? Most math teachers lack financial expertise."},
-{c:"Amy",t:"I agree. Teacher training programs would be essential before implementation."},
-{c:"Ray",t:"Government funding could support teacher workshops and professional development courses."},
-{c:"Sarah",t:"Exactly. With proper training, teachers could deliver effective financial education."},
-{c:"Mike",t:"What about equal access? Students from disadvantaged families might not benefit equally."},
-{c:"Amy",t:"Schools should provide resources for all students regardless of background."},
-{c:"Ray",t:"Government subsidies could ensure no student is left behind financially."},
-{c:"Sarah",t:"Practical projects like managing a mock budget would engage students meaningfully."},
-{c:"Mike",t:"I am concerned about assessment. Would this be tested in public exams?"},
-{c:"Amy",t:"I do not think it needs exams. It should build real-life skills, not create more stress."},
-{c:"Ray",t:"Project-based assessment could be more meaningful than written tests."},
-{c:"Sarah",t:"Case studies of local entrepreneurs would make content relevant to Hong Kong students."},
-{c:"Mike",t:"I am starting to agree. With proper support, this could genuinely benefit young people."},
-{c:"Amy",t:"Using local examples would make lessons more relatable and practical."},
-{c:"Ray",t:"Thank you for a thoughtful discussion. I learned different perspectives today."},
-{c:"Sarah",t:"We all agreed financial education is valuable. Practical, age-appropriate content with teacher training is key."},
-{c:"Mike",t:"And equal access for all students regardless of background is crucial."},
-{c:"Amy",t:"Learning from local entrepreneurs would inspire Hong Kong students."},
-{c:"Ray",t:"Project-based assessment rather than exams would work better."},
-{c:"Sarah",t:"Thank you everyone for this productive discussion on financial literacy in Hong Kong schools."}
-],
-102:[
-{c:"Sarah",t:"Hello everyone, I am Sarah. Let us discuss online dishonesty. Plagiarism and fake reviews are serious problems affecting trust online."},
-{c:"Mike",t:"I am Mike. I agree it is a problem, but solutions must be practical."},
-{c:"Amy",t:"I agree. Education about academic integrity should start early in schools."},
-{c:"Ray",t:"I partially agree. Prevention through education is better than punishment."},
-{c:"Sarah",t:"Technology can help detect plagiarism effectively with AI tools."},
-{c:"Mike",t:"But AI detection tools are not perfect. Students find ways around them."},
-{c:"Amy",t:"Education about consequences would deter students from cheating."},
-{c:"Ray",t:"Legal consequences for fake reviews should be stricter."},
-{c:"Sarah",t:"Platforms should verify reviewers more carefully."},
-{c:"Mike",t:"I agree. Verification processes need improvement."},
-{c:"Amy",t:"Both education and regulation are needed for solutions."},
-{c:"Ray",t:"Thank you for the thoughtful perspectives on online honesty."}
-],
-103:[
-{c:"Sarah",t:"Hello everyone, I am Sarah. Let us discuss Hong Kong street food culture disappearing."},
-{c:"Mike",t:"I am Mike. I disagree. I think change is natural in cities."},
-{c:"Amy",t:"I agree with Sarah. Cultural heritage deserves protection."},
-{c:"Ray",t:"Dai pai dongs are iconic Hong Kong identity."},
-{c:"Sarah",t:"Exactly. Tourism relies on authentic local food culture."},
-{c:"Mike",t:"But market forces drive change naturally."},
-{c:"Amy",t:"Government subsidies could preserve traditional vendors."},
-{c:"Ray",t:"Affordable food options would disappear without support."},
-{c:"Sarah",t:"Balancing tradition with modern development is key."},
-{c:"Mike",t:"I see value in both preservation and progress."},
-{c:"Amy",t:"Heritage status for select dai pai dongs could help."},
-{c:"Ray",t:"Thank you for discussing this cultural topic."}
-],
-104:[
-{c:"Sarah",t:"Hello everyone. Autonomous vehicles should be introduced in Hong Kong carefully."},
-{c:"Mike",t:"I am Mike. I disagree. HK roads are too crowded for self-driving cars."},
-{c:"Amy",t:"I agree with careful pilot programs first."},
-{c:"Ray",t:"Airport routes could be good test cases."},
-{c:"Sarah",t:"Technology improves safety over time with testing."},
-{c:"Mike",t:"Driverless buses could help elderly mobility."},
-{c:"Amy",t:"Environmental benefits include less pollution."},
-{c:"Ray",t:"Job losses for drivers concern me."},
-{c:"Sarah",t:"Retraining programs could help taxi drivers transition."},
-{c:"Mike",t:"I see both opportunities and challenges."},
-{c:"Amy",t:"A phased approach makes sense."},
-{c:"Ray",t:"Thank you for this balanced discussion."}
-],
-105:[
-{c:"Sarah",t:"Hello everyone. Minimum wage increases for catering workers deserve support."},
-{c:"Mike",t:"I am Mike. I worry about small business survival."},
-{c:"Amy",t:"Workers deserve living wages for Hong Kong costs."},
-{c:"Ray",t:"Balancing worker welfare and business viability is key."},
-{c:"Sarah",t:"Healthcare costs are rising for catering workers."},
-{c:"Mike",t:"Service charges already common in many restaurants."},
-{c:"Amy",t:"Tips supplement low wages usefully."},
-{c:"Ray",t:"Worker welfare should be priority."},
-{c:"Sarah",t:"Government subsidies could help small businesses cope."},
-{c:"Mike",t:"Market forces should determine wages naturally."},
-{c:"Amy",t:"Workers deserve fair compensation."},
-{c:"Ray",t:"Thank you for discussing this topic."
-}
-]};
-
-// State
-var curTopic=null;
-var isRec=false,rec=null,synth=window.speechSynthesis,curAudio=null,isSpeaking=false,isPaused=false;
-var apiKey=localStorage.getItem('minimax_api_key')||'';
-var VOICES={Sarah:{r:.95,p:1.1,v:null},Mike:{r:1.1,p:.9,v:null},Amy:{r:.9,p:1.2,v:null}};
-var mockRunning=false,mockPaused=false,mockIdx=0,mockStart=0,mockTO=null;
-var curComp=null,compQ=0,compScore=0;
-var recordings=JSON.parse(localStorage.getItem('sayo_recordings')||'[]');
-
-// Init
 function init(){
   renderTopics();
-  var v=synth.getVoices();
-  if(v.length)loadVoices(v);
-  synth.onvoiceschanged=function(){loadVoices(synth.getVoices())};
-  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(SR){
-    rec=new SR();
-    rec.continuous=false;
+  loadVoices();
+  if(rec){
     rec.interimResults=true;
-    rec.lang='en-US';
     rec.onresult=function(e){
-      var fin='',int='';
-      for(var i=e.resultIndex;i<e.results.length;i++){
-        var t=e.results[i][0].transcript;
-        if(e.results[i].isFinal)fin+=t;else int+=t;
+      var f='',i='';
+      for(var j=e.resultIndex;j<e.results.length;j++){
+        var t=e.results[j][0].transcript;
+        e.results[j].isFinal?f+=t:i+=t;
       }
-      document.getElementById('status').textContent=int||'Processing...';
-      if(fin){addMsg('you',fin);synthResp(fin);}
+      setStatus(i||'Processing...');
+      if(f){addMsg('you',f);aiResp(f);}
     };
-    rec.onerror=function(){document.getElementById('status').textContent='Try again...';};
-    rec.onend=function(){
-      isRec=false;
-      document.getElementById('micBtn').classList.remove('recording');
-    };
+    rec.onend=function(){recording=false;document.getElementById('micBtn').style.opacity=1};
+    rec.onerror=function(){setStatus('Try again')}
   }
-  document.getElementById('apiKeyInput').value=apiKey;
-  checkKeyStatus();
+  document.getElementById('apiKeyIn').value=apiKey;
+  checkKey();
 }
 
-function loadVoices(v){
-  var en=v.filter(function(x){return x.lang.startsWith('en')});
-  var base=en.length?en:v;
-  VOICES.Sarah.v=base.find(function(x){return x.name.includes('Female')})||base[0];
-  VOICES.Mike.v=base.find(function(x){return x.name.includes('Male')})||base[1]||base[0];
-  VOICES.Amy.v=base.find(function(x){return x.name.includes('Female')})||base[0];
+function loadVoices(){
+  var vs=sy.getVoices();
+  if(vs.length){
+    var en=vs.filter(v=>v.lang.startsWith('en'));
+    var base=en.length?en:vs;
+    VOICES.Sarah.v=base.find(v=>v.name.includes('Female'))||base[0];
+    VOICES.Mike.v=base.find(v=>v.name.includes('Male'))||base[1]||base[0];
+    VOICES.Amy.v=base[0];
+    sy.onvoiceschanged=loadVoices;
+  }
 }
+
+function setStatus(s){document.getElementById('status').textContent=s||'Hold mic to speak'}
 
 function renderTopics(){
   var el=document.getElementById('topicList');
   el.innerHTML='';
-  TOPICS.forEach(function(t){
-    var div=document.createElement('div');
-    div.className='topic-card';
-    div.innerHTML='<div class="cat">'+t.cat+'</div><div class="q">'+t.q.substring(0,60)+'...</div>';
-    div.onclick=function(){selectTopic(t)};
-    el.appendChild(div);
+  TOPICS.forEach(function(t,i){
+    el.innerHTML+='<div class="topic-item" onclick="pickTopic('+i+')"><span class="tag">'+t.tag+'</span><div class="q">'+t.q+'</div></div>';
+  });
+  var mel=document.getElementById('mockList');
+  mel.innerHTML='';
+  TOPICS.slice(0,11).forEach(function(t,i){
+    mel.innerHTML+='<div class="topic-item" onclick="mockTopic('+i+')"><span class="tag mock">MOCK</span> <span class="tag real">📌 REAL DSE</span><div class="q">'+t.q+'</div></div>';
   });
 }
 
-function selectTopic(t){
-  curTopic=t;
-  document.getElementById('welcome').style.display='none';
-  document.getElementById('controls').style.display='block';
-  document.getElementById('topicBar').style.display='block';
-  document.getElementById('compView').style.display='none';
-  document.getElementById('mockView').style.display='none';
-  document.getElementById('recordView').style.display='none';
-  document.getElementById('topicQ').textContent=t.q;
-  document.getElementById('topicD').textContent=t.d;
-  document.getElementById('messages').innerHTML='';
-  setTimeout(function(){playC('Sarah')},500);
+function showHome(){
+  ['home','topicPick','mockPick','practiceScreen','compScreen','recsScreen','mockScreen'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('home').style.display='block';
 }
 
-function startRandom(){
-  selectTopic(TOPICS[Math.floor(Math.random()*TOPICS.length)]);
+function showTopicPick(){
+  ['home','topicPick','mockPick','practiceScreen','compScreen','recsScreen','mockScreen'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('topicPick').style.display='block';
 }
 
-function addMsg(speaker,text){
+function pickTopic(i){
+  cur=TOPICS[i];
+  showPractice();
+}
+
+function showMockPick(){
+  ['home','topicPick','mockPick','practiceScreen','compScreen','recsScreen','mockScreen'].forEach(id=>document.getElementById(id).style.display='none';
+  document.getElementById('mockPick').style.display='block';
+}
+
+function mockTopic(i){
+  cur=TOPICS[i];
+  startMock();
+}
+
+function startComp(){
+  cur=TOPICS[Math.floor(Math.random()*TOPICS.length];
+  showComp();
+}
+
+function showComp(){
+  ['home','topicPick','mockPick','practiceScreen','compScreen','recsScreen','mockScreen'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('compScreen').style.display='block';
+  document.getElementById('compQ').innerHTML='<h3>📖 '+cur.q+'</h3><p style="font-size:11px;color:#888">'+cur.d+'</p>';
+  document.getElementById('compOpts').innerHTML='<p style="font-size:12px;color:#888">Answering as yourself. Questions coming...</p><button class="back-btn" style="margin-top:14px" onclick="showHome()">← Back</button>';
+  setTimeout(compQ1,2000);
+}
+
+function compQ1(){
+  var qs=[cur.q+' Yes or No?','Explain your answer','Give an example',"What's the opposite view?"];
+  var q=qs[Math.floor(Math.random()*qs.length];
+  document.getElementById('compOpts').innerHTML='<p style="font-size:12px">Q1: '+cur.q+'<div id="compOpts"></div>';
+  document.getElementById('compOpts').innerHTML='<button class="opt-btn" onclick="compA(0)">A) Yes</button><button class="opt-btn" onclick="compA(1)">B) No</button>';
+}
+
+function compA(a){document.getElementById('compOpts').innerHTML='<p style="font-size:13px;color:#27ae60">Answer: '+(a===0?'A) Yes':'B) No')+'. <button class="back-btn" style="margin-top:14px" onclick="showHome()">← Home</button>';}
+
+function showRecordings(){alert('Recordings coming soon')}
+
+function showPractice(){
+  ['home','topicPick','mockPick','compScreen','recsScreen','mockScreen'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('practiceScreen').style.display='block';
+  document.getElementById('practiceMsgs').innerHTML='<p style="color:#888;text-align:center;margin-top:40px">👆 Tap a candidate to hear their view, then share yours!</p>';
+  document.getElementById('curTopicQ').textContent=cur.q;
+  document.getElementById('curTopicD').textContent=cur.d;
+  document.getElementById('practiceMsgs').style.display='block';
+  document.getElementById('practiceInput').style.display='block';
+  setTimeout(function(){speakAs('Sarah')},1000);
+}
+
+function aiResp(t){
+  var tx=t.toLowerCase();
+  var agree=/\b(agree|yes|support|good)\b/.test(tx);
+  var disagree=/\b(disagree|no|not)\b/.test(tx);
+  var c=['Sarah','Mike','Amy'][Math.floor(Math.random()*3)];
+  if(disagree&&Math.random()>.4)c='Mike';
+  if(agree&&Math.random()>.4)c='Amy';
+  var reps={
+    Sarah:['Interesting point. Can you elaborate?','I see your point. What about costs?'],
+    Mike:['I disagree. Consider alternatives.','Fair point. What about the downsides?'],
+    Amy:['I agree! This benefits many people.','Exactly! Important perspective.']
+  };
+  var rs=reps[c];
+  var r=rs[Math.floor(Math.random()*rs.length)];
+  addMsg(c,r);
+  speak(r,c);
+}
+
+function addMsg(speaker,txt){
   var div=document.createElement('div');
   div.className='msg';
-  div.innerHTML='<div class="avatar '+speaker.toLowerCase()+'">'+speaker[0].toUpperCase()+'</div><div class="msg-body"><div class="msg-header"><span class="name">'+speaker+'</span><span class="time">'+new Date().toLocaleTimeString()+'</span></div><div class="text">'+text+'</div></div>';
-  document.getElementById('messages').appendChild(div);
-  document.getElementById('messages').scrollTop=99999;
+  div.innerHTML='<div class="av">'+speaker[0]+'</div><div><div class="nm">'+speaker+'<div class="tx">'+txt+'<div>';
+  document.getElementById('practiceMsgs').appendChild(div);
+  div.scrollTop=div.scrollHeight;
 }
 
-async function speak(text,cand,onEnd){
-  if(isSpeaking){if(onEnd)onEnd();return;}
-  if(apiKey&&apiKey.length>10){
-    return new Promise(function(res){
-      var voices={Sarah:'Cantonese_GentleLady',Mike:'Cantonese_PlayfulMan',Amy:'male-qn-qingse'};
-      var cfg={Sarah:{s:1,p:0},Mike:{s:1.1,p:2},Amy:{s:.95,p:1}};
-      var v=voices[cand]||'Cantonese_GentleLady';
-      var c=cfg[cand]||{s:1,p:0};
-      fetch('https://api.minimaxi.com/v1/t2a_v2',{
-        method:'POST',
-        headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
-        body:JSON.stringify({model:'speech-2.8-hd',text:text,stream:false,output_format:'url',voice_setting:{voice_id:v,speed:c.s,pitch:c.p},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
-      }).then(function(r){return r.json()})
-      .then(function(d){
-        var url=d.data&&d.data.audio;
-        if(url){
-          var audio=new Audio(url);
-          audio.onend=function(){isSpeaking=false;if(onEnd)onEnd();res()};
-          audio.onerror=function(){isSpeaking=false;if(onEnd)onEnd();res()};
-          curAudio=audio;isSpeaking=true;updatePauseBtn();
-          audio.play();
-          return;
-        }
-        fallbackTTS(text,cand,onEnd,res);
-      }).catch(function(){fallbackTTS(text,cand,onEnd,res)});
-    });
-  }else{
-    fallbackTTS(text,cand,onEnd);
+async function speak(txt,c){
+  if(speaking)return;
+  if(apiKey&&apiKey.startsWith('sk-')){
+    try{
+      var r=await fetch('https://api.minimaxi.com/v1/t2a_v2',{method:'POST',headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},body:JSON.stringify({model:'speech-2.8-hd',text:txt,stream:false,output_format:'url',voice_setting:{voice_id:'Cantonese_GentleLady',speed:1,pitch:0},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})})||{});
+      var url=(await r.json()).data.audio;
+      if(url){
+        var a=new Audio(url);
+        a.onend=function(){speaking=false;document.getElementById('pauseBtn').disabled=true};
+        a.onerror=function(){speaking=false;document.getElementById('pauseBtn').disabled=true};
+        aud=a;
+        speaking=true;
+        document.getElementById('pauseBtn').disabled=false;
+        a.play();
+        return;
+      }
+    }catch(e){}
   }
+  fallbackSpeak(txt);
 }
 
-function fallbackTTS(text,cand,onEnd,res){
-  synth.cancel();isPaused=false;
-  var u=new SpeechSynthesisUtterance(text);
-  var v=VOICES[cand];
-  u.voice=v.v;u.rate=v.r;u.pitch=v.p;
-  curAudio=u;isSpeaking=true;
-  u.onend=function(){isSpeaking=false;if(onEnd)onEnd();if(res)res()};
-  u.onerror=function(){isSpeaking=false;if(onEnd)onEnd();if(res)res()};
-  synth.speak(u);
-  updatePauseBtn();
-  if(res)res();
+function fallbackSpeak(txt){
+  var u=new SpeechSynthesisUtterance(txt);
+  u.voice=VOICES.Sarah.v;
+  u.onend=u.onerror=function(){speaking=false;document.getElementById('pauseBtn').disabled=true};
+  speaking=true;
+  document.getElementById('pauseBtn').disabled=false;
+  sy.speak(u);
 }
 
-function pauseRes(){
-  if(!curAudio)return;
-  if(isPaused){curAudio.play();isPaused=false;}
-  else{curAudio.pause();isPaused=true;}
-  updatePauseBtn();
+function togglePause(){
+  if(!aud&&!sy.speaking)return;
+  if(aud){if(aud.paused)aud.play();else aud.pause();
+  }else sy.resume();
 }
 
 function stopSpeak(){
-  if(curAudio&&curAudio.pause){curAudio.pause();curAudio.currentTime=0;}
-  else synth.cancel();
-  curAudio=null;isSpeaking=false;isPaused=false;updatePauseBtn();
-}
-
-function updatePauseBtn(){
-  var btn=document.getElementById('pauseBtn');
-  if(!curAudio){btn.textContent='⏸️ Pause';btn.disabled=true;}
-  else{btn.disabled=false;btn.textContent=isPaused?'▶ Resume':'⏸️ Pause';}
-}
-
-async function playC(name){
-  if(isSpeaking)return;
-  var btn=document.getElementById(name.toLowerCase()+'Btn');
-  btn.classList.add('active');
-  var prompts={
-    Sarah:'Hello everyone, I am Sarah. '+curTopic.q+' What do you all think?',
-    Mike:'I am Mike. '+curTopic.q+' Let me share my perspective.',
-    Amy:'Hi, I am Amy. I agree with views on '+curTopic.q+' Let me add points.'
-  };
-  addMsg(name,prompts[name]);
-  await speak(prompts[name],name,function(){btn.classList.remove('active');document.getElementById('status').textContent='Your turn';});
-}
-
-async function synthResp(text){
-  if(isSpeaking)return;
-  document.getElementById('status').textContent='Thinking...';
-  await new Promise(function(r){setTimeout(r,600)});
-  var tx=text.toLowerCase();
-  var isAgree=/\b(agree|yes|support|true|good|right|definitely)\b/.test(tx);
-  var isDisagree=/\b(disagree|no|not|wrong|against|false)\b/.test(tx);
-  var resp={
-    Sarah:["That is a good point. Let me add that we should consider practical implementation.","Could you elaborate on how this would work in Hong Kong schools?"],
-    Mike:["I hear your concern. What about the challenges?","I am skeptical. More evidence needed.","But unintended consequences worry me."],
-    Amy:["I agree. Equal access matters.","Exactly! Practical solutions help everyone."]
-  };
-  if(isDisagree)resp={
-    Sarah:["Valid point. What alternatives exist?","Could you suggest improvements?"],
-    Mike:["I disagree. Here is why:","But consider the costs and benefits carefully."],
-    Amy:["I understand concerns. What would change your view?"]
-  };
-  var c=['Sarah','Mike','Amy'][Math.floor(Math.random()*3)];
-  if(isDisagree&&Math.random()>.4)c='Mike';
-  if(isAgree&&Math.random()>.4)c='Amy';
-  var pool=resp[c];
-  var r=pool[Math.floor(Math.random()*pool.length)];
-  addMsg(c,r);
-  document.getElementById('status').textContent='Your turn';
-  await speak(r,c);
-}
-
-function startRec(){
-  if(!rec){document.getElementById('status').textContent='Not supported';return;}
-  if(isSpeaking)return;
-  isRec=true;
-  document.getElementById('micBtn').classList.add('recording');
-  document.getElementById('status').textContent='Listening...';
-  rec.start();
-}
-
-function stopRec(){
-  if(!isRec)return;
-  isRec=false;
-  document.getElementById('micBtn').classList.remove('recording');
-  document.getElementById('status').textContent='Processing...';
-  rec.stop();
+  if(aud){aud.pause();aud.src='';aud=null}
+  sy.cancel();
+  speaking=false;
+  document.getElementById('pauseBtn').disabled=true;
 }
 
 function sendTxt(){
-  var el=document.getElementById('txtInput');
-  var txt=el.value.trim();
-  if(!txt)return;
-  el.value='';
-  addMsg('you',txt);
-  synthResp(txt);
+  var v=document.getElementById('txtIn').value.trim();
+  if(!v)return;
+  document.getElementById('txtIn').value='';
+  addMsg('You',v);
+  aiResp(v);
 }
 
-// Mock Exam
-function startMock(){
-  document.getElementById('welcome').style.display='none';
-  document.getElementById('controls').style.display='none';
-  document.getElementById('topicBar').style.display='none';
-  document.getElementById('compView').style.display='none';
-  document.getElementById('recordView').style.display='none';
-  document.getElementById('mockView').style.display='block';
-  var t=curTopic||TOPICS[0];
-  document.getElementById('mockView').innerHTML='<div class="mock-hdr"><h3>🎮 Mock Exam</h3><p>4 AI Candidates • 8-Minute Discussion</p><div class="mock-timer" id="mockTimer">00:00 / 08:00</div><div class="mock-topic">📝 '+t.q+'</div><div class="mock-data">📊 '+t.d+'</div></div><div class="mock-msgs" id="mockMsgs"></div><div style="text-align:center;padding:10px"><button id="mockPauseBtn" onclick="toggleMockPause()">⏸ Pause</button> <button id="mockStopBtn" onclick="stopMock()">⏹ Stop</button></div>';
-  mockRunning=true;mockPaused=false;mockIdx=0;mockStart=Date.now();
-  runMockTurn();
-  updateMockTimer();
-}
-
-function toggleMockPause(){
-  if(mockPaused){
-    mockPaused=false;mockRunning=true;
-    runMockTurn();
-    updateMockTimer();
-    document.getElementById('mockPauseBtn').textContent='⏸ Pause';
-  }else{
-    mockPaused=true;mockRunning=false;
-    clearTimeout(mockTO);
-    stopSpeak();
-    document.getElementById('mockPauseBtn').textContent='▶ Resume';
-  }
-}
-
-function stopMock(){
-  mockRunning=false;mockPaused=false;
-  clearTimeout(mockTO);
-  stopSpeak();
-  document.getElementById('mockView').style.display='none';
-  document.getElementById('welcome').style.display='flex';
-}
-
-function runMockTurn(){
-  if(!mockRunning||mockPaused)return;
-  var script=MOCK_SCRIPTS[curTopic?curTopic.id:101]||MOCK_SCRIPTS[101];
-  if(mockIdx>=script.length){stopMock();return;}
-  var turn=script[mockIdx];
-  var msgs=document.getElementById('mockMsgs');
-  var colors={Sarah:'#3ba55c',Mike:'#f04747',Amy:'#f47b67',Ray:'#8e44ad'};
-  var div=document.createElement('div');
-  div.className='mock-msg '+turn.c.toLowerCase();
-  div.innerHTML='<span class="nm" style="color:'+colors[turn.c]+'">'+turn.c+':</span> <span class="tx">'+turn.t+'</span>';
-  msgs.appendChild(div);
-  msgs.scrollTop=99999;
-  speak(turn.t,turn.c,function(){});
-  mockIdx++;
-  mockTO=setTimeout(runMockTurn,10000);
-}
-
-function updateMockTimer(){
-  if(!mockRunning||mockPaused)return;
-  var e=Date.now()-mockStart;
-  var s=Math.floor(e/1000),m=Math.floor(s/60),ss=s%60;
-  document.getElementById('mockTimer').textContent=(m<10?'0':'')+m+':'+(ss<10?'0':'')+ss+' / 08:00';
-  setTimeout(updateMockTimer,1000);
-}
-
-// Comprehension
-function startComp(){
-  document.getElementById('welcome').style.display='none';
-  document.getElementById('controls').style.display='none';
-  document.getElementById('topicBar').style.display='none';
-  document.getElementById('mockView').style.display='none';
-  document.getElementById('recordView').style.display='none';
-  document.getElementById('compView').style.display='block';
-  curComp=COMP[Math.floor(Math.random()*COMP.length)];
-  compQ=0;compScore=0;
-  showCompArt();
-}
-
-function showCompArt(){
-  var v=document.getElementById('compView');
-  v.innerHTML='<div class="comp-art"><h3>'+curComp.title+'</h3><p style="color:#888;font-size:10px">Source: '+curComp.src+'</p><div class="comp-art txt">'+curComp.art+'</div><button class="btn-main btn-comp" onclick="showCompQ()">Start Questions</button> <button class="btn-main back-btn" onclick="backHome()">Back</button></div>';
-}
-
-function showCompQ(){
-  var q=curComp.qs[compQ],tot=curComp.qs.length;
-  var h='<div class="comp-q"><p style="color:#e74c3c;font-size:11px;margin-bottom:6px">Question '+(compQ+1)+' of '+tot+'</p><p style="font-size:14px;font-weight:600;margin-bottom:12px">'+q.q+'</p>';
-  q.o.forEach(function(opt,i){
-    h+='<button class="opt-btn" id="optBtn'+i+'">'+String.fromCharCode(65+i)+'. '+opt+'</button>';
-  });
-  h+='</div>';
-  document.getElementById('compView').innerHTML=h;
-  q.o.forEach(function(opt,i){
-    document.getElementById('optBtn'+i).onclick=function(){checkCompAns(i)};
-  });
-}
-
-function checkCompAns(sel){
-  var correct=curComp.qs[compQ].a;
-  document.querySelectorAll('.opt-btn').forEach(function(btn,i){
-    btn.disabled=true;
-    if(i===correct)btn.classList.add('correct');
-    if(i===sel&&sel!==correct)btn.classList.add('wrong');
-  });
-  if(sel===correct)compScore++;
-  setTimeout(function(){
-    compQ++;
-    if(compQ<curComp.qs.length)showCompQ();
-    else showCompRes();
-  },1200);
-}
-
-function showCompRes(){
-  var pct=Math.round((compScore/curComp.qs.length)*100);
-  var grade=pct>=80?'A':pct>=60?'B':pct>=40?'C':'D';
-  document.getElementById('compView').innerHTML='<div class="comp-res"><h3>Result: '+compScore+'/'+curComp.qs.length+' ('+pct+'%)</h3><p style="font-size:44px;color:#e74c3c;margin:12px 0">Grade: <strong>'+grade+'</strong></p><button class="btn-comp" onclick="startComp()">Try Another</button> <button class="btn-main back-btn" onclick="backHome()">Back</button></div>';
-}
-
-function backHome(){
-  document.getElementById('compView').style.display='none';
-  document.getElementById('mockView').style.display='none';
-  document.getElementById('recordView').style.display='none';
-  document.getElementById('welcome').style.display='flex';
-}
-
-// Recordings
-function showRecordings(){
-  document.getElementById('welcome').style.display='none';
-  document.getElementById('controls').style.display='none';
-  document.getElementById('topicBar').style.display='none';
-  document.getElementById('compView').style.display='none';
-  document.getElementById('mockView').style.display='none';
-  document.getElementById('recordView').style.display='block';
-  var el=document.getElementById('recordView');
-  var h='<h3 style="margin-bottom:14px">📁 My Recordings</h3>';
-  if(recordings.length===0)h+='<p style="color:#888;font-size:13px">No recordings yet. Start a practice session!</p>';
-  else recordings.forEach(function(r,i){
-    h+='<div class="record-item" onclick="playRecording('+i+')"><div class="title">'+r.topic+'</div><div class="meta">'+r.date+' | '+r.turns+' turns</div></div>';
-  });
-  h+='<button class="btn-main back-btn" onclick="backHome()" style="margin-top:14px">← Back</button>';
-  el.innerHTML=h;
-}
-
-function playRecording(idx){
-  var r=recordings[idx];
-  if(!r)return;
-  document.getElementById('recordView').style.display='none';
-  document.getElementById('controls').style.display='block';
-  document.getElementById('topicBar').style.display='block';
-  document.getElementById('topicQ').textContent=r.topic;
-  document.getElementById('topicD').textContent=r.answers?'Score: '+r.score+'%':'';
-  document.getElementById('messages').innerHTML='<p style="color:#888;text-align:center;font-size:12px;margin-top:40px">🎮 Demo mode - recordings replay coming soon</p>';
-}
-
-// Settings
 function showSettings(){
   document.getElementById('settingsModal').style.display='flex';
-  document.getElementById('apiKeyInput').value=apiKey;
-  checkKeyStatus();
-}
-function closeSettings(){document.getElementById('settingsModal').style.display='none'}
-function saveKey(k){apiKey=k;localStorage.setItem('minimax_api_key',k);checkKeyStatus()}
-function checkKeyStatus(){
-  var el=document.getElementById('apiStatus');
-  if(apiKey){el.textContent='✓ Saved';el.style.color='#27ae60';}
-  else el.textContent='';
-}
-async function testKey(){
-  var k=document.getElementById('apiKeyInput').value;
-  var el=document.getElementById('apiStatus');
-  if(!k){el.textContent='Enter key';el.style.color='#e74c3c';return;}
-  el.textContent='Testing...';el.style.color='#888';
-  try{
-    var r=await fetch('https://api.minimaxi.com/v1/t2a_v2',{
-      method:'POST',
-      headers:{'Authorization':'Bearer '+k,'Content-Type':'application/json'},
-      body:JSON.stringify({model:'speech-2.8-hd',text:'Testing',stream:false,output_format:'url',voice_setting:{voice_id:'Cantonese_GentleLady',speed:1,pitch:0},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})
-    });
-    if(r.ok){el.textContent='✓ Works!';el.style.color='#27ae60';saveKey(k);}
-    else{el.textContent='✗ Error '+r.status;el.style.color='#e74c3c';}
-  }catch(e){el.textContent='✗ Network error';el.style.color='#e74c3c';}
 }
 
-// Event listeners
-document.getElementById('randomBtn').onclick=startRandom;
-document.getElementById('compBtn').onclick=startComp;
-document.getElementById('mockBtn').onclick=startMock;
-document.getElementById('recordingsBtn').onclick=showRecordings;
-document.getElementById('sarahBtn').onclick=function(){playC('Sarah')};
-document.getElementById('mikeBtn').onclick=function(){playC('Mike')};
-document.getElementById('amyBtn').onclick=function(){playC('Amy')};
-document.getElementById('micBtn').onmousedown=startRec;
-document.getElementById('micBtn').onmouseup=stopRec;
-document.getElementById('sendBtn').onclick=sendTxt;
-document.getElementById('txtInput').onkeypress=function(e){if(e.key==='Enter')sendTxt()};
-document.getElementById('pauseBtn').onclick=pauseRes;
-document.getElementById('stopBtn').onclick=stopSpeak;
-document.getElementById('settingsBtn').onclick=showSettings;
-document.getElementById('closeSettingsBtn').onclick=closeSettings;
-document.getElementById('testKeyBtn').onclick=testKey;
-document.getElementById('apiKeyInput').onkeyup=function(e){saveKey(e.target.value)};
+function closeSettings(){document.getElementById('settingsModal').style.display='none'
+function saveKey(k){
+  localStorage.minimax_key=k;
+  apiKey=k;
+  checkKey();
+}
+
+async function testKey(){
+  var k=document.getElementById('apiKeyIn').value;
+  var el=document.getElementById('apiSaved');
+  var err=document.getElementById('apiErr');
+  if(!k)return;
+  el.textContent='Testing...';
+  err.textContent='';
+  try{
+    var r=await fetch('https://api.minimaxi.com/v1/t2a_v2',{method:'POST',headers:{'Authorization':'Bearer '+k,'Content-Type':'application/json'},body:JSON.stringify({model:'speech-2.8-hd',text:'Testing',stream:false,output_format:'url',voice_setting:{voice_id:'Cantonese_GentleLady',speed:1,pitch:0},audio_setting:{sample_rate:32000,bitrate:128000,format:'mp3',channel:1}})||{});
+    if(r.ok){el.textContent='✅ Works!';saveKey(k)
+    }else{err.textContent='❌ Error '+r.status}
+  }catch(e){err.textContent='❌ Network error'}
+}
 
 init();
 </script>
-</body>
-</html>
+</body></html>
