@@ -446,7 +446,7 @@
                 emoji: "🪓",
                 category: "core",
                 muscleGroup: "核心旋轉、腹斜肌、肩膊",
-                ytVideoId: "oL7exAOo_0I",
+                gifLocal: "cable-woodchop.gif",
                 instructions: [
                     "繩索設置在高位置",
                     "雙手握緊繩索手柄",
@@ -671,12 +671,22 @@
             'sport': '🎾運動專項'
         };
 
-        function getThumbUrl(videoId) {
-            return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        function getThumbUrl(ex) {
+            if (ex.ytVideoId) {
+                return `https://img.youtube.com/vi/${ex.ytVideoId}/hqdefault.jpg`;
+            }
+            return '';
+        }
+        
+        function getGifUrl(ex) {
+            if (ex.gifLocal) {
+                return ex.gifLocal;
+            }
+            return getThumbUrl(ex);
         }
 
-        function getVideoUrl(videoId) {
-            return `https://www.youtube.com/watch?v=${videoId}`;
+        function getVideoUrl(ex) {
+            return ex.ytVideoId ? `https://www.youtube.com/watch?v=${ex.ytVideoId}` : '#';
         }
 
         function init() {
@@ -715,8 +725,8 @@
                     <p class="muscle-group">${ex.muscleGroup}</p>
                     
                     <div class="gif-container">
-                        <a href="${getVideoUrl(ex.ytVideoId)}" target="_blank">
-                            <img src="${getThumbUrl(ex.ytVideoId)}" alt="${ex.name}" loading="lazy">
+                        <a href="${getVideoUrl(ex)}" target="_blank">
+                            <img src="${getGifUrl(ex)}" alt="${ex.name}" loading="lazy">
                             <div class="play-overlay">▶</div>
                         </a>
                     </div>
@@ -733,7 +743,7 @@
                         ${ex.importance ? `<span>🎯 ${ex.importance}</span>` : ''}
                     </div>
                     
-                    <a href="${getVideoUrl(ex.ytVideoId)}" target="_blank" class="video-link">
+                    <a href="${getVideoUrl(ex)}" target="_blank" class="video-link">
                         ▶️ 觀看影片示範
                     </a>
                 </div>
