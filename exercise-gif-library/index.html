@@ -510,6 +510,14 @@
             </div>
         </div>
 
+        <!-- Plyometric Training Special Link -->
+        <div style="text-align: center; margin: 20px 0;">
+            <a href="/plyometric-training" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 1.1em; box-shadow: 0 5px 20px rgba(238,90,36,0.4); transition: all 0.3s;">
+                💥 前往增強式訓練專頁 →
+            </a>
+            <p style="color: #888; font-size: 0.9em; margin-top: 10px;">Plate Hops | 反應訓練 | 爆發力提升</p>
+        </div>
+
         <div class="category-tabs" id="categoryTabs">
             <button class="category-tab active" onclick="filterCategory('all')">全部 All</button>
             <button class="category-tab" onclick="filterCategory('warmup')">🔥 熱身</button>
@@ -517,6 +525,7 @@
             <button class="category-tab" onclick="filterCategory('upper')">💪 上肢</button>
             <button class="category-tab" onclick="filterCategory('core')">🌀 核心</button>
             <button class="category-tab" onclick="filterCategory('mobility')">🔄 靈活</button>
+            <button class="category-tab" onclick="filterCategory('plyometric')">💥 增強式訓練</button>
             <button class="category-tab" onclick="filterCategory('sport')">🎾 運動專項</button>
         </div>
 
@@ -803,6 +812,78 @@
                 ],
                 reps: "15-20 次",
                 importance: "下肢熱身必做"
+            },
+            {
+                id: 26,
+                name: "Plate Hops (Two-Foot)",
+                nameCn: "雙腳跳板",
+                emoji: "💥",
+                category: "plyometric",
+                muscleGroup: "小腿、阿基里斯腱、腳踝穩定性",
+                gifUrl: "https://i.pinimg.com/originals/2a/3c/5e/2a3c5e8f9b1d4c6a7e8f9a0b1c2d3e4f.gif",
+                instructions: [
+                    "雙腳站立於重量片旁",
+                    "雙腳同時跳過重量片",
+                    "立即跳回原處",
+                    "著地輕柔，膝蓋微彎",
+                    "保持節奏，快速反彈"
+                ],
+                reps: "2-3 組 × 10-15 次",
+                importance: "提升腳踝彈性與快速變向能力"
+            },
+            {
+                id: 27,
+                name: "Lateral Plate Hops",
+                nameCn: "側向跳板",
+                emoji: "↔️",
+                category: "plyometric",
+                muscleGroup: "側線穩定、臀中肌、膝蓋控制",
+                gifUrl: "https://i.pinimg.com/originals/3b/4d/6f/3b4d6f9a0b1c2d3e4f5a6b7c8d9e0f1a.gif",
+                instructions: [
+                    "側身站立於重量片旁",
+                    "雙腳側向跳過重量片",
+                    "立即跳回原處",
+                    "保持膝蓋對齊腳趾",
+                    "著地穩定，控制動作"
+                ],
+                reps: "2-3 組 × 10-15 次/側",
+                importance: "模擬球場橫向移動，預防 IT Band 綜合症"
+            },
+            {
+                id: 28,
+                name: "Single-Leg Plate Hops",
+                nameCn: "單腳跳板",
+                emoji: "🦿",
+                category: "plyometric",
+                muscleGroup: "單腳穩定、腳踝本體感覺、核心控制",
+                gifUrl: "https://i.pinimg.com/originals/4c/5e/7a/4c5e7a0b1c2d3e4f5a6b7c8d9e0f1a2b.gif",
+                instructions: [
+                    "單腳站立於重量片旁",
+                    "單腳跳過重量片",
+                    "穩定著地，控制膝蓋",
+                    "立即跳回原處",
+                    "進階後換邊"
+                ],
+                reps: "2-3 組 × 6-10 次/腳",
+                importance: "進階訓練，提升單腳爆發力與落地穩定"
+            },
+            {
+                id: 29,
+                name: "Multi-Directional Hops",
+                nameCn: "多方向跳",
+                emoji: "🔄",
+                category: "plyometric",
+                muscleGroup: "全身協調、多平面穩定、核心整合",
+                gifUrl: "https://i.pinimg.com/originals/5d/6f/8b/5d6f8b1c2d3e4f5a6b7c8d9e0f1a2b3c.gif",
+                instructions: [
+                    "將 4 個重量片排成正方形",
+                    "向前、側向、對角線跳",
+                    "加入旋轉動作",
+                    "保持快速節奏",
+                    "模擬球場移動模式"
+                ],
+                reps: "2-3 組 × 30-45 秒",
+                importance: "整合多方向移動，提升球場覆蓋能力"
             }
         ];
 
@@ -816,6 +897,7 @@
             'upper': '💪上肢',
             'core': '🌀核心',
             'mobility': '🔄靈活',
+            'plyometric': '💥增強式訓練',
             'sport': '🎾運動專項'
         };
 
@@ -913,7 +995,7 @@
         function filterCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.category-tab').forEach((tab, i) => {
-                const tabCat = ['all','warmup','lower','upper','core','mobility','sport'][i];
+                const tabCat = ['all','warmup','lower','upper','core','mobility','plyometric','sport'][i];
                 tab.classList.toggle('active', tabCat === cat);
             });
             renderExercises();
