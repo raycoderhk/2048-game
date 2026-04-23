@@ -117,81 +117,100 @@
             display: block;
         }
 
-        .warmup-timeline {
+        .program-timeline {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
 
-        .warmup-phase {
+        .program-phase {
             background: rgba(0,0,0,0.3);
             border-radius: 10px;
             padding: 15px;
             text-align: center;
         }
 
-        .warmup-phase .phase-badge {
-            background: #e94560;
+        .program-phase .phase-badge {
             padding: 5px 10px;
             border-radius: 5px;
             font-size: 0.85em;
             font-weight: bold;
         }
+        .program-section.warmup .phase-badge { background: #e94560; color: white; }
+        .program-section.plyometric .phase-badge { background: #ff6b6b; color: white; }
+        .program-section.strength .phase-badge { background: #4facfe; color: white; }
 
-        .warmup-phase .phase-time {
+        .program-phase .phase-time {
             color: #888;
             font-size: 0.85em;
             margin: 10px 0 5px;
         }
 
-        .warmup-phase .phase-title {
+        .program-phase .phase-title {
             color: #fff;
             font-weight: bold;
             margin-bottom: 5px;
         }
 
-        .warmup-phase .phase-gif {
+        .program-phase .phase-gif {
             margin: 10px 0;
             border-radius: 8px;
             overflow: hidden;
             background: #000;
         }
-        .warmup-phase .phase-gif img {
+        .program-phase .phase-gif img {
             width: 100%;
             max-height: 120px;
             object-fit: cover;
         }
-        .warmup-phase .phase-exercises {
+        .program-phase .phase-exercises {
             color: #ccc;
             font-size: 0.85em;
         }
+        .program-phase .phase-exercises ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+        .program-phase .phase-exercises li {
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .program-phase .phase-exercises li:last-child {
+            border-bottom: none;
+        }
 
-        .warmup-tips {
-            background: rgba(233,69,96,0.1);
+        .program-tips {
             border-radius: 10px;
             padding: 15px;
-            border-left: 4px solid #e94560;
+            border-left: 4px solid;
         }
+        .program-section.warmup .program-tips { background: rgba(233,69,96,0.1); border-color: #e94560; }
+        .program-section.plyometric .program-tips { background: rgba(255,107,107,0.1); border-color: #ff6b6b; }
+        .program-section.strength .program-tips { background: rgba(79,172,254,0.1); border-color: #4facfe; }
 
-        .warmup-tips h4 {
-            color: #e94560;
+        .program-tips h4 {
             margin-bottom: 10px;
         }
+        .program-section.warmup .program-tips h4 { color: #e94560; }
+        .program-section.plyometric .program-tips h4 { color: #ff6b6b; }
+        .program-section.strength .program-tips h4 { color: #4facfe; }
 
-        .warmup-tips ul {
+        .program-tips ul {
             list-style: none;
             padding: 0;
         }
 
-        .warmup-tips li {
+        .program-tips li {
             color: #ccc;
             padding: 5px 0;
             padding-left: 20px;
             position: relative;
         }
 
-        .warmup-tips li::before {
+        .program-tips li::before {
             content: "✓";
             position: absolute;
             left: 0;
@@ -468,36 +487,36 @@
                 <span id="warmupToggle">▼ 點擊展開</span>
             </div>
             <div class="program-content" id="warmupContent">
-                <div class="warmup-timeline">
-                    <div class="warmup-phase phase1">
+                <div class="program-timeline">
+                    <div class="program-phase phase1">
                         <div class="phase-badge">🔥 Phase 1</div>
                         <div class="phase-time">0-3 min</div>
                         <div class="phase-title">Cardio Warmup</div>
                         <div class="phase-gif"><img src="https://i.pinimg.com/originals/69/b9/cf/69b9cf8b3c0a6d971ce0e1ac83a17c03.gif" alt="High Knees"></div>
                         <div class="phase-exercises">High Knees, Running</div>
                     </div>
-                    <div class="warmup-phase phase2">
+                    <div class="program-phase phase2">
                         <div class="phase-badge">🦵 Phase 2</div>
                         <div class="phase-time">3-10 min</div>
                         <div class="phase-title">Lower Body</div>
                         <div class="phase-gif"><img src="https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2025/11/side-lunge-bw.gif" alt="Lateral Lunge"></div>
                         <div class="phase-exercises">Lateral Lunge, Single-leg RDL, Calf Raises, Split Squat</div>
                     </div>
-                    <div class="warmup-phase phase3">
+                    <div class="program-phase phase3">
                         <div class="phase-badge">💪 Phase 3</div>
                         <div class="phase-time">10-18 min</div>
                         <div class="phase-title">Upper + Core</div>
                         <div class="phase-gif"><img src="https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2025/03/cable-high-to-low-woodchop.gif" alt="Cable Woodchop"></div>
                         <div class="phase-exercises">Cable Woodchop, Push-ups, Shoulder External Rotation</div>
                     </div>
-                    <div class="warmup-phase phase4">
+                    <div class="program-phase phase4">
                         <div class="phase-badge">🔄 Phase 4</div>
                         <div class="phase-time">18-25 min</div>
                         <div class="phase-title">Dynamic Stretch</div>
                         <div class="phase-gif"><img src="https://fitnessprogramer.com/wp-content/uploads/2021/07/Arm-Circles_Shoulders.gif" alt="Arm Circles"></div>
                         <div class="phase-exercises">Side Leg Swings, Torso Twists, Arm Circles</div>
                     </div>
-                    <div class="warmup-phase phase5">
+                    <div class="program-phase phase5">
                         <div class="phase-badge">🎾 Phase 5</div>
                         <div class="phase-time">25-30 min</div>
                         <div class="phase-title">Sport-Specific</div>
@@ -505,7 +524,7 @@
                         <div class="phase-exercises">Shadow Swings, Split-step Practice</div>
                     </div>
                 </div>
-                <div class="warmup-tips">
+                <div class="program-tips">
                     <h4>💡 熱身小貼士</h4>
                     <ul>
                         <li>所有動作輕鬆進行，唔好推到力竭</li>
@@ -523,67 +542,74 @@
                 <span id="plyometricToggle">▼ 點擊展開</span>
             </div>
             <div class="program-content" id="plyometricContent">
-                <p style="color: #ccc; margin-bottom: 20px;">爆發力提升訓練，包括反應訓練和Plate Hops。</p>
-                
-                <div class="exercise-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #ff6b6b;">
-                        <span style="background: #d1fae5; color: #065f46; padding: 3px 10px; border-radius: 15px; font-size: 0.8em;">初學</span>
-                        <h4 style="color: #333; margin: 10px 0;">🏋️ Two-Foot Forward/Backward</h4>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>站在板旁，向前跳過</li>
-                            <li>立即跳回</li>
-                            <li>重點：軟著陸、快速回彈</li>
-                            <li>份量：2-3組 × 10-15次</li>
-                        </ul>
+                <div class="program-timeline">
+                    <div class="program-phase">
+                        <div class="phase-badge">🏋️ Phase 1</div>
+                        <div class="phase-time">2-3 組 × 10-15次</div>
+                        <div class="phase-title">Two-Foot Hops</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>站在板旁，向前跳過</li>
+                                <li>立即跳回</li>
+                                <li>軟著陸、快速回彈</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #fbbf24;">
-                        <span style="background: #fef3c7; color: #92400e; padding: 3px 10px; border-radius: 15px; font-size: 0.8em;">中級</span>
-                        <h4 style="color: #333; margin: 10px 0;">🦘 Lateral Hops 側向跳</h4>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>左右跳過板</li>
-                            <li>保持輕盈，腳尖着地</li>
-                            <li>重點：腳踝穩定、膝蓋對齊</li>
-                            <li>份量：2-3組 × 10-15次/側</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">🦘 Phase 2</div>
+                        <div class="phase-time">2-3 組 × 10-15次/側</div>
+                        <div class="phase-title">Lateral Hops</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>左右跳過板</li>
+                                <li>保持輕盈，腳尖著地</li>
+                                <li>專注腳踝穩定</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #ef4444;">
-                        <span style="background: #fee2e2; color: #991b1b; padding: 3px 10px; border-radius: 15px; font-size: 0.8em;">進階</span>
-                        <h4 style="color: #333; margin: 10px 0;">🦿 Single-Leg Hops 單腿跳</h4>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>單腿跳過板</li>
-                            <li>控制着地，膝蓋不塌</li>
-                            <li>重點：平衡、本體感覺</li>
-                            <li>份量：2-3組 × 6-10次/腿</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">🦿 Phase 3</div>
+                        <div class="phase-time">2-3 組 × 6-10次/腿</div>
+                        <div class="phase-title">Single-Leg Hops</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>單腿跳過板</li>
+                                <li>控制著地，膝蓋不塌</li>
+                                <li>提升平衡、本體感覺</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #10b981;">
-                        <h4 style="color: #333; margin: 0 0 10px 0;">🏓 Kitchen → Baseline Transition</h4>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>向前/後板跳</li>
-                            <li>模擬：退後截高球後快攻網前</li>
-                            <li>好處：更快的轉換步法</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">🏓 Phase 4</div>
+                        <div class="phase-time">2-3 組 × 30秒</div>
+                        <div class="phase-title">Multi-Directional</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>4塊板成正方形</li>
+                                <li>向前、側、斜向、旋轉跳</li>
+                                <li>模擬球場移動模式</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #667eea;">
-                        <h4 style="color: #333; margin: 0 0 10px 0;">🎾 Split-Step Reactivity 分裂步反應</h4>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>快速跳 + 伙伴提示</li>
-                            <li>模擬：對手擊球後的反應</li>
-                            <li>好處：更快的第一步啟動</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">🎾 Phase 5</div>
+                        <div class="phase-time">2-3 組 × 10次</div>
+                        <div class="phase-title">Split-Step Reactivity</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>快速跳 + 伙伴提示</li>
+                                <li>模擬對手擊球後反應</li>
+                                <li>提升第一步啟動速度</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                
-                <div style="background: #fffbeb; border: 2px solid #fbbf24; border-radius: 12px; padding: 15px; margin-top: 20px;">
-                    <h4 style="color: #92400e; margin: 0 0 10px 0;">💡 Pro Tips</h4>
-                    <ul style="color: #78350f; margin: 0 0 0 20px; font-size: 0.9em;">
-                        <li><strong>由1塊板開始：</strong>掌握動作後再增加高度</li>
-                        <li><strong>專注「彈性」：</strong>使用彈性能量，非蠻力</li>
-                        <li><strong>輕柔着地：</strong>用肌肉吸收衝擊，非關節</li>
+                <div class="program-tips">
+                    <h4>💡 Pro Tips</h4>
+                    <ul>
+                        <li><strong>由1塊板開始</strong> — 掌握動作後再增加高度</li>
+                        <li><strong>專注「彈性」</strong> — 使用彈性能量，非蠻力</li>
+                        <li><strong>輕柔著地</strong> — 用肌肉吸收衝擊，非關節</li>
                     </ul>
                 </div>
             </div>
@@ -596,93 +622,102 @@
                 <span id="strengthToggle">▼ 點擊展開</span>
             </div>
             <div class="program-content" id="strengthContent">
-                <p style="color: #ccc; margin-bottom: 20px;">8個針對匹克球的力量訓練動作，來自 Experience Life。建議每週2-3次。</p>
-                
-                <div class="exercise-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #FF6B6B;">
-                        <h4 style="color: #FF6B6B; margin: 0 0 10px 0;">🔄 1. 分腿站繩索胸前推旋轉</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;"><strong>Benefits:</strong> 增加旋轉力量和速度，訓練核心及下肢穩定性</p>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>分腿站姿，繩索設置在胸部高度</li>
-                            <li>向前推動同時旋轉軀幹</li>
-                            <li>保持核心及下身穩定</li>
-                        </ul>
+                <div class="program-tips" style="margin-bottom: 20px;">
+                    <h4>📋 8個針對匹克球的力量訓練動作（建議每週2-3次）</h4>
+                </div>
+                <div class="program-timeline">
+                    <div class="program-phase">
+                        <div class="phase-badge">🔄 #1</div>
+                        <div class="phase-title">分腿站繩索胸前推旋轉</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>分腿站姿，繩索胸部高度</li>
+                                <li>向前推同時旋轉軀幹</li>
+                                <li>保持核心及下身穩定</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #FF6B6B;">
-                        <h4 style="color: #FF6B6B; margin: 0 0 10px 0;">🔄 2. 分腿站繩索划船旋轉</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;"><strong>Benefits:</strong> 建立旋轉爆發力，維持動態移動時的穩定性</p>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>分腿站姿面向拉力器</li>
-                            <li>拉向身體同時旋轉軀幹</li>
-                            <li>專注擠壓背肌</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">🔄 #2</div>
+                        <div class="phase-title">分腿站繩索划船旋轉</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>面向拉力器，分腿站姿</li>
+                                <li>拉向身體同時旋轉軀幹</li>
+                                <li>專注擠壓背肌</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #FF6B6B;">
-                        <h4 style="color: #FF6B6B; margin: 0 0 10px 0;">🔄 3. 半跪姿上推</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;"><strong>Benefits:</strong> 改善旋轉力量及速度，訓練核心和下肢穩定性</p>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>單膝跪地，另一腿平放</li>
-                            <li>旋轉軀幹向上推舉</li>
-                            <li>保持核心穩定</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">🔄 #3</div>
+                        <div class="phase-title">半跪姿上推</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>單膝跪地，另一腿平放</li>
+                                <li>旋轉軀幹向上推舉</li>
+                                <li>保持核心穩定</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #FF6B6B;">
-                        <h4 style="color: #FF6B6B; margin: 0 0 10px 0;">💥 4. 藥球抛擲</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;"><strong>Benefits:</strong> 發展旋轉爆發力，提升擊球力量</p>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>運動姿態握藥球</li>
-                            <li>旋轉髖關節和軀幹抛向牆</li>
-                            <li>爆發力來自髖關節和核心</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">💥 #4</div>
+                        <div class="phase-title">藥球抛擲</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>運動姿態握藥球</li>
+                                <li>旋轉髖關節和軀幹抛向牆</li>
+                                <li>爆發力來自髖關節和核心</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #4facfe;">
-                        <h4 style="color: #4facfe; margin: 0 0 10px 0;">🦿 5. 單腿硬拉</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;"><strong>Benefits:</strong> 強化腿部肌肉，提升平衡和協調性</p>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>單腳站立，向前彎腰</li>
-                            <li>另一條腿向後伸展保持平衡</li>
-                            <li>感受腿後側的拉伸</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">🦿 #5</div>
+                        <div class="phase-title">單腿硬拉</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>單腳站立，向前彎腰</li>
+                                <li>另一條腿向後伸展平衡</li>
+                                <li>感受腿後側的拉伸</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #4facfe;">
-                        <h4 style="color: #4facfe; margin: 0 0 10px 0;">🌀 6. 帕洛夫推壓</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;"><strong>Benefits:</strong> 需要力量、平衡和核心穩定性，強化核心同時增加靈活性</p>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>側身站立，面向拉力器</li>
-                            <li>向前推出手柄，保持2-3秒</li>
-                            <li>這是抗旋轉運動</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">🌀 #6</div>
+                        <div class="phase-title">帕洛夫推壓</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>側身站立，面向拉力器</li>
+                                <li>向前推出手柄，保持2-3秒</li>
+                                <li>抗旋轉運動</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #4facfe;">
-                        <h4 style="color: #4facfe; margin: 0 0 10px 0;">💪 7. 單臂地雷架推舉</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;"><strong>Benefits:</strong> 安全強化肩部，改善肩關節活動度</p>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>單手握槓鈴/啞鈴在肩膊高度</li>
-                            <li>向上推並稍微橫向移動</li>
-                            <li>交替手臂</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">💪 #7</div>
+                        <div class="phase-title">單臂地雷架推舉</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>單手握槓鈴在肩膊高度</li>
+                                <li>向上推並稍微橫向移動</li>
+                                <li>交替手臂</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="exercise-card" style="background: #fff; border-radius: 12px; padding: 20px; border-left: 4px solid #4facfe;">
-                        <h4 style="color: #4facfe; margin: 0 0 10px 0;">🦵 8. 酒杯深蹲</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;"><strong>Benefits:</strong> 建立力量和活動度基礎，增強向任何方向爆炸性移動的能力</p>
-                        <ul style="color: #666; margin-left: 20px; font-size: 0.9em;">
-                            <li>持啞鈴/壺鈴在胸口</li>
-                            <li>蹲下時胸部保持抬起</li>
-                            <li>通過腳跟推地站起</li>
-                        </ul>
+                    <div class="program-phase">
+                        <div class="phase-badge">🦵 #8</div>
+                        <div class="phase-title">酒杯深蹲</div>
+                        <div class="phase-exercises">
+                            <ul>
+                                <li>持啞鈴/壺鈴在胸口</li>
+                                <li>蹲下時胸部保持抬起</li>
+                                <li>通過腳跟推地站起</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                
-                <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; margin-top: 20px;">
-                    <h4 style="color: #fff; margin: 0 0 10px 0;">🏓 訓練小貼士</h4>
-                    <ul style="color: #ccc; margin: 0 0 0 20px; font-size: 0.9em;">
+                <div class="program-tips">
+                    <h4>🏓 訓練小貼士</h4>
+                    <ul>
                         <li><strong>每週2-3次</strong> — 每次訓練之間要休息</li>
                         <li><strong>專注功能動作</strong> — 旋轉運動直接轉化為擊球力量</li>
                         <li><strong>不要忽視單腿練習</strong> — 匹克球需要持續的單腿平衡</li>
