@@ -165,22 +165,29 @@
             object-fit: cover;
         }
         .program-phase .phase-gifs {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            gap: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             margin: 10px 0;
         }
         .program-phase .phase-gif-item {
-            text-align: center;
-            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0,0,0,0.2);
             border-radius: 8px;
-            overflow: hidden;
+            padding: 8px;
         }
         .program-phase .phase-gif-item img {
-            width: 100%;
+            width: 120px;
             height: 90px;
             object-fit: cover;
-            object-position: center top;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        .program-phase .phase-gif-item span {
+            font-size: 0.9em;
+            color: #ccc;
         }
         .program-phase .phase-gif-item span {
             display: block;
