@@ -172,22 +172,24 @@
         }
         .program-phase .phase-gif-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 15px;
             background: rgba(0,0,0,0.2);
             border-radius: 8px;
             padding: 8px;
         }
         .program-phase .phase-gif-item img {
-            width: 120px;
-            height: 90px;
-            object-fit: cover;
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
             border-radius: 6px;
-            flex-shrink: 0;
         }
         .program-phase .phase-gif-item span {
-            font-size: 0.9em;
+            font-size: 0.85em;
             color: #ccc;
+            margin-top: 6px;
+            text-align: center;
         }
         .program-phase .phase-gif-item span {
             display: block;
