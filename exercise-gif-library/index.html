@@ -164,6 +164,32 @@
             max-height: 120px;
             object-fit: cover;
         }
+        .program-phase .phase-gifs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .program-phase .phase-gif-item {
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .program-phase .phase-gif-item img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+        }
+        .program-phase .phase-gif-item span {
+            display: block;
+            font-size: 0.75em;
+            color: #aaa;
+            padding: 4px 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         .program-phase .phase-exercises {
             color: #ccc;
             font-size: 0.85em;
@@ -501,6 +527,12 @@
                         <div class="phase-title">Lower Body</div>
                         <div class="phase-gif"><img src="https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2025/11/side-lunge-bw.gif" alt="Lateral Lunge"></div>
                         <div class="phase-exercises">Lateral Lunge, Single-leg RDL, Calf Raises, Split Squat</div>
+                        <div class="phase-gifs">
+                            <div class="phase-gif-item"><img src="https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2025/11/side-lunge-bw.gif" alt="Lateral Lunge" loading="lazy"><span>Lateral Lunge</span></div>
+                            <div class="phase-gif-item"><img src="https://fitnessprogramer.com/wp-content/uploads/2021/02/Single-Leg-Hip-Hinge.gif" alt="Single-leg RDL" loading="lazy"><span>Single-leg RDL</span></div>
+                            <div class="phase-gif-item"><img src="https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2023/07/standing-calf-raise.gif" alt="Calf Raises" loading="lazy"><span>Calf Raises</span></div>
+                            <div class="phase-gif-item"><img src="https://fitnessprogramer.com/wp-content/uploads/2021/02/Split-Squat.gif" alt="Split Squat" loading="lazy"><span>Split Squat</span></div>
+                        </div>
                     </div>
                     <div class="program-phase phase3">
                         <div class="phase-badge">💪 Phase 3</div>
@@ -508,6 +540,11 @@
                         <div class="phase-title">Upper + Core</div>
                         <div class="phase-gif"><img src="https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2025/03/cable-high-to-low-woodchop.gif" alt="Cable Woodchop"></div>
                         <div class="phase-exercises">Cable Woodchop, Push-ups, Shoulder External Rotation</div>
+                        <div class="phase-gifs">
+                            <div class="phase-gif-item"><img src="https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2025/03/cable-high-to-low-woodchop.gif" alt="Cable Woodchop" loading="lazy"><span>Cable Woodchop</span></div>
+                            <div class="phase-gif-item"><img src="https://fitnessprogramer.com/wp-content/uploads/2021/02/Push-Up.gif" alt="Push-ups" loading="lazy"><span>Push-ups</span></div>
+                            <div class="phase-gif-item"><img src="https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2023/08/band-shoulder-external-rotation.gif" alt="Shoulder External Rotation" loading="lazy"><span>Shoulder External Rotation</span></div>
+                        </div>
                     </div>
                     <div class="program-phase phase4">
                         <div class="phase-badge">🔄 Phase 4</div>
@@ -515,6 +552,11 @@
                         <div class="phase-title">Dynamic Stretch</div>
                         <div class="phase-gif"><img src="https://fitnessprogramer.com/wp-content/uploads/2021/07/Arm-Circles_Shoulders.gif" alt="Arm Circles"></div>
                         <div class="phase-exercises">Side Leg Swings, Torso Twists, Arm Circles</div>
+                        <div class="phase-gifs">
+                            <div class="phase-gif-item"><img src="https://fitnessprogramer.com/wp-content/uploads/2021/08/Leg-Swings.gif" alt="Side Leg Swings" loading="lazy"><span>Side Leg Swings</span></div>
+                            <div class="phase-gif-item"><img src="https://fitnessprogramer.com/wp-content/uploads/2021/08/Woodchop-Half-Kneeling.gif" alt="Torso Twists" loading="lazy"><span>Torso Twists</span></div>
+                            <div class="phase-gif-item"><img src="https://fitnessprogramer.com/wp-content/uploads/2021/07/Arm-Circles_Shoulders.gif" alt="Arm Circles" loading="lazy"><span>Arm Circles</span></div>
+                        </div>
                     </div>
                     <div class="program-phase phase5">
                         <div class="phase-badge">🎾 Phase 5</div>
@@ -522,6 +564,10 @@
                         <div class="phase-title">Sport-Specific</div>
                         <div class="phase-gif"><img src="https://fitnessprogramer.com/wp-content/uploads/2023/12/Medicine-Ball-Rotational-Throw.gif" alt="Shadow Swings"></div>
                         <div class="phase-exercises">Shadow Swings, Split-step Practice</div>
+                        <div class="phase-gifs">
+                            <div class="phase-gif-item"><img src="https://fitnessprogramer.com/wp-content/uploads/2023/12/Medicine-Ball-Rotational-Throw.gif" alt="Shadow Swings" loading="lazy"><span>Shadow Swings</span></div>
+                            <div class="phase-gif-item"><img src="https://fitnessprogramer.com/wp-content/uploads/2021/08/High-Knee-Run.gif" alt="Split-step Practice" loading="lazy"><span>Split-step Practice</span></div>
+                        </div>
                     </div>
                 </div>
                 <div class="program-tips">
