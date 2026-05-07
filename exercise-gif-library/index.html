@@ -68,6 +68,18 @@
         .exercise-card li { margin-bottom: 5px; }
         
         .empty-state { text-align: center; padding: 40px; color: #888; }
+        
+        .footer-info {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #666;
+            font-size: 0.85em;
+        }
+        .footer-links { margin-top: 10px; }
+        .footer-links a { color: #667eea; text-decoration: none; }
+        .footer-links a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -419,6 +431,15 @@
         <div class="empty-state" id="emptyState">
             <p>選擇上方 Tab 或展開 Program 查看訓練動作</p>
         </div>
+        
+        <div class="footer-info">
+            <p>Last updated: <span id="lastUpdated"></span></p>
+            <p class="footer-links">
+                <a href="https://github.com/raycoderhk/mini-games" target="_blank">GitHub Repo</a>
+                 • 
+                <a href="https://gameworld.zeabur.app/exercise-gif-library/" target="_blank">Live Site</a>
+            </p>
+        </div>
     </div>
     
     <script>
@@ -484,6 +505,9 @@
         tabs.innerHTML = categories.map(c => 
             `<button class="tab-btn ${c === 'all' ? 'active' : ''}" onclick="setCategory('${c}')">${categoryNames[c]}</button>`
         ).join('');
+        
+        // Show last updated time
+        document.getElementById('lastUpdated').textContent = document.lastModified || new Date().toLocaleString();
         
         renderExercises();
     </script>
