@@ -277,6 +277,50 @@
 
         .name-input::placeholder { color: rgba(255,255,255,0.3); }
 
+        .history-toggle {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+        .history-toggle:hover { background: rgba(255,255,255,0.08); }
+        .history-toggle .toggle-icon { transition: transform 0.3s; }
+        .history-toggle.open .toggle-icon { transform: rotate(180deg); }
+        .history-content { display: none; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 0 0 10px 10px; margin-top: -4px; }
+        .history-content.open { display: block; }
+        .history-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .history-item:last-child { margin-bottom: 0; }
+        .history-question { font-weight: 600; margin-bottom: 0.25rem; font-size: 0.9rem; }
+        .history-result { font-size: 0.8rem; opacity: 0.7; }
+        .history-winner { color: var(--court-green); }
+        .history-no-winner { color: #e74c3c; }
+
+        .new-round-section {
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px dashed rgba(108, 92, 231, 0.4);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .new-round-section h6 {
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
         @media (max-width: 576px) {
             .hero h1 { font-size: 1.5rem; }
             .question-box { font-size: 1rem; padding: 1rem; }
@@ -355,6 +399,20 @@
         </table>
     </div>
 
+    <!-- Previous History (collapsed by default) -->
+    <div class="card-custom" id="historySection" style="display:none;">
+        <div class="history-toggle" id="historyToggle">
+            <span style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.5);">📜 Previous Rounds</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="history-content" id="historyContent"></div>
+    </div>
+
+    <!-- New Round Section -->
+    <div class="new-round-section">
+        <h6>🆕 New Round — Place Your Bet!</h6>
+    </div>
+
     <div class="admin-section">
         <h6>🔐 Admin (Reveal Result)</h6>
         <div class="d-flex gap-2 mb-2">
@@ -393,7 +451,8 @@
         pushups: 5,
         bets: [],
         revealed: false,
-        winner: null
+        winner: null,
+        history: []
     };
 
     // Load
@@ -404,6 +463,7 @@
             state.bets = parsed.bets || [];
             state.revealed = parsed.revealed || false;
             state.winner = parsed.winner || null;
+            state.history = parsed.history || [];
         }
     } catch(e) {}
 
@@ -468,17 +528,32 @@
             return;
         }
 
+        // Move current round to history before revealing
+        if (state.bets.length > 0) {
+            const roundResult = {
+                question: document.getElementById('questionBox').innerHTML,
+                winner: state.winner || winnerSelect.value,
+                bets: [...state.bets],
+                revealed: true,
+                timestamp: Date.now()
+            };
+            state.history.unshift(roundResult); // add to front
+            if (state.history.length > 10) state.history = state.history.slice(0, 10); // keep last 10
+        }
+
         state.revealed = true;
         state.winner = winnerSelect.value;
         save();
         renderReveal();
+        renderHistory();
     });
 
     function save() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({
             bets: state.bets,
             revealed: state.revealed,
-            winner: state.winner
+            winner: state.winner,
+            history: state.history
         }));
     }
 
@@ -569,6 +644,52 @@
     }
     renderOdds();
     if (state.revealed) renderReveal();
+
+    // History toggle
+    const historyToggle = document.getElementById('historyToggle');
+    const historyContent = document.getElementById('historyContent');
+    const historySection = document.getElementById('historySection');
+
+    historyToggle.addEventListener('click', () => {
+        historyToggle.classList.toggle('open');
+        historyContent.classList.toggle('open');
+    });
+
+    function renderHistory() {
+        if (state.history.length === 0) {
+            historySection.style.display = 'none';
+            return;
+        }
+        historySection.style.display = 'block';
+
+        let html = '';
+        state.history.forEach((round, i) => {
+            const winners = round.bets.filter(b => b.color === round.winner);
+            const totalPushups = round.bets.reduce((s, b) => s + b.pushups, 0);
+            const date = new Date(round.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+            if (winners.length > 0) {
+                const eachWin = Math.round(totalPushups / winners.length);
+                html += `
+                <div class="history-item">
+                    <div class="history-question">${round.question}</div>
+                    <div class="history-result history-winner">🏆 ${round.winner} won! ${winners.map(w => w.name).join(', ')} each got ${eachWin} push-ups</div>
+                    <div style="font-size:0.7rem;opacity:0.5;margin-top:0.25rem;">${date}</div>
+                </div>`;
+            } else {
+                html += `
+                <div class="history-item">
+                    <div class="history-question">${round.question}</div>
+                    <div class="history-result history-no-winner">😅 No winner — ${totalPushups} push-ups pool</div>
+                    <div style="font-size:0.7rem;opacity:0.5;margin-top:0.25rem;">${date}</div>
+                </div>`;
+            }
+        });
+
+        historyContent.innerHTML = html;
+    }
+
+    renderHistory();
 })();
 </script>
 </body>
