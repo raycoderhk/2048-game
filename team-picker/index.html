@@ -1,232 +1,181 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>🎾 Pickleball Team Picker</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
-        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: linear-gradient(135deg, #1a1a2e, #16213e); min-height: 100vh; padding: 15px; color: white; }
-        h1 { text-align: center; font-size: 1.4em; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #888; font-size: 0.85em; margin-bottom: 15px; }
-        .container { max-width: 600px; margin: 0 auto; }
-        .section { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 15px; margin-bottom: 15px; }
-        .section-title { font-size: 1em; margin-bottom: 10px; color: #667eea; }
-        
-        /* Players Pool */
-        .players-pool { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px; min-height: 50px; }
-        .player-chip {
-            padding: 10px 14px; background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 20px; font-size: 0.9em; cursor: pointer;
-            display: flex; align-items: center; gap: 6px;
-        }
-        .player-chip:active { transform: scale(0.95); }
-        .player-chip.selected { background: linear-gradient(135deg, #fbbf24, #f59e0b); box-shadow: 0 0 15px rgba(251,191,36,0.5); }
-        .player-chip.assigned { opacity: 0.3; pointer-events: none; }
-        .player-chip .dupr { font-size: 0.75em; background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; }
-        
-        /* Match Setup */
-        .match-selector { display: flex; gap: 10px; margin-bottom: 15px; }
-        .match-btn { flex: 1; padding: 12px; background: rgba(255,255,255,0.1); border: 2px solid transparent; border-radius: 12px; color: white; font-size: 1em; cursor: pointer; }
-        .match-btn.active { background: rgba(102,126,234,0.3); border-color: #667eea; }
-        
-        /* Games */
-        .games-grid { display: flex; flex-direction: column; gap: 12px; }
-        .game-card { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 12px; }
-        .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .game-title { font-weight: bold; font-size: 0.95em; }
-        .game-type { font-size: 0.8em; color: #fbbf24; }
-        .game-type.men { color: #3b82f6; }
-        .game-type.women { color: #f472b6; }
-        .game-type.mixed { color: #10b981; }
-        
-        /* Teams in Game */
-        .game-teams { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; }
-        .game-team { display: flex; flex-direction: column; gap: 5px; }
-        .game-team.men { }
-        .game-team.women { }
-        .game-vs { color: #fbbf24; font-weight: bold; font-size: 0.85em; }
-        
-        .slot { 
-            background: rgba(255,255,255,0.1); border: 2px dashed rgba(255,255,255,0.2); 
-            border-radius: 20px; padding: 8px 12px; font-size: 0.85em; text-align: center; color: rgba(255,255,255,0.4);
-        }
-        .slot.filled { background: linear-gradient(135deg, #667eea, #764ba2); border: none; color: white; }
-        .slot.men { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-        .slot.women { background: linear-gradient(135deg, #f472b6, #db2777); }
-        .slot.filled:active { transform: scale(0.98); }
-        .slot.empty:active { background: rgba(102,126,234,0.3); border-color: #667eea; }
-        
-        .reset-btn { display: block; margin: 15px auto; padding: 12px 30px; background: linear-gradient(135deg, #ef4444, #dc2626); border: none; border-radius: 25px; color: white; font-size: 1em; cursor: pointer; }
-        .footer { text-align: center; margin-top: 20px; color: #666; font-size: 0.8em; }
-        .footer a { color: #667eea; text-decoration: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>🎾 Pickleball Team Picker</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: linear-gradient(135deg, #1a1a2e, #16213e); min-height: 100vh; padding: 15px; color: white; }
+h1 { text-align: center; font-size: 1.4em; margin-bottom: 5px; }
+.subtitle { text-align: center; color: #888; font-size: 0.85em; margin-bottom: 15px; }
+.container { max-width: 600px; margin: 0 auto; }
+.section { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 15px; margin-bottom: 15px; }
+.section-title { font-size: 1em; margin-bottom: 10px; color: #667eea; }
+.players-pool { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px; }
+.player-chip { padding: 10px 14px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 20px; font-size: 0.9em; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.player-chip:active { transform: scale(0.95); }
+.player-chip.selected { background: linear-gradient(135deg, #fbbf24, #f59e0b); box-shadow: 0 0 15px rgba(251,191,36,0.5); }
+.player-chip.assigned { opacity: 0.3; pointer-events: none; }
+.dupr { font-size: 0.75em; background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; }
+.match-selector { display: flex; gap: 10px; margin-bottom: 15px; }
+.match-btn { flex: 1; padding: 12px; background: rgba(255,255,255,0.1); border: 2px solid transparent; border-radius: 12px; color: white; font-size: 1em; cursor: pointer; }
+.match-btn.active { background: rgba(102,126,234,0.3); border-color: #667eea; }
+.games-grid { display: flex; flex-direction: column; gap: 12px; }
+.game-card { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 12px; }
+.game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.game-title { font-weight: bold; font-size: 0.95em; }
+.game-type { font-size: 0.8em; color: #10b981; }
+.game-type.men { color: #3b82f6; }
+.game-type.women { color: #f472b6; }
+.game-teams { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; }
+.game-team { display: flex; flex-direction: column; gap: 5px; }
+.game-vs { color: #fbbf24; font-weight: bold; font-size: 0.85em; }
+.slot { background: rgba(255,255,255,0.1); border: 2px dashed rgba(255,255,255,0.2); border-radius: 20px; padding: 8px 12px; font-size: 0.85em; text-align: center; cursor: pointer; }
+.slot:active { background: rgba(102,126,234,0.3); border-color: #667eea; }
+.slot.filled { background: linear-gradient(135deg, #667eea, #764ba2); border: none; color: white; cursor: default; }
+.slot.men.filled { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.slot.women.filled { background: linear-gradient(135deg, #f472b6, #db2777); }
+.reset-btn { display: block; margin: 15px auto; padding: 12px 30px; background: linear-gradient(135deg, #ef4444, #dc2626); border: none; border-radius: 25px; color: white; font-size: 1em; cursor: pointer; }
+.footer { text-align: center; margin-top: 20px; color: #666; font-size: 0.8em; }
+.footer a { color: #667eea; text-decoration: none; }
+</style>
 </head>
 <body>
-    <h1>🎾 Pickleball Team Picker</h1>
-    <p class="subtitle">選擇球員 → 點擊空位擺放</p>
-    
-    <div class="container">
-        <div class="section">
-            <div class="section-title">👥 全部球員（點擊選擇）</div>
-            <div class="players-pool" id="playersPool"></div>
-        </div>
-        
-        <div class="section">
-            <div class="section-title">🏓 今晚賽程（1-2個 match）</div>
-            <div class="match-selector">
-                <button class="match-btn active" onclick="setMatches(1)">1 Match<br><small>5 games</small></button>
-                <button class="match-btn" onclick="setMatches(2)">2 Matches<br><small>10 games</small></button>
-            </div>
-            <div class="games-grid" id="gamesGrid"></div>
-        </div>
-        
-        <button class="reset-btn" onclick="resetAll()">🔄 重置所有</button>
-        
-        <div class="footer">
-            <p><a href="https://github.com/raycoderhk/mini-games" target="_blank">GitHub</a></p>
-        </div>
+<h1>🎾 Pickleball Team Picker</h1>
+<p class="subtitle">選擇球員 → 點擊空位擺放</p>
+<div class="container">
+  <div class="section">
+    <div class="section-title">👥 全部球員（點擊選擇）</div>
+    <div class="players-pool" id="playersPool"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">🏓 今晚賽程（1-2個 Match）</div>
+    <div class="match-selector">
+      <button class="match-btn active" id="match1Btn" onclick="setMatches(1)">1 Match<br><small>5 games</small></button>
+      <button class="match-btn" id="match2Btn" onclick="setMatches(2)">2 Matches<br><small>10 games</small></button>
     </div>
+    <div class="games-grid" id="gamesGrid"></div>
+  </div>
+  <button class="reset-btn" onclick="resetAll()">🔄 重置所有</button>
+  <div class="footer">
+    <a href="https://github.com/raycoderhk/mini-games" target="_blank">GitHub</a>
+  </div>
+</div>
+<script>
+const defaultPlayers = [
+  {name: 'Raymond', gender: 'M', dupr: 3.5},
+  {name: 'Edmond', gender: 'M', dupr: 3.2},
+  {name: 'Ivan', gender: 'M', dupr: 3.2},
+  {name: 'Ken', gender: 'M', dupr: 2.8},
+  {name: 'Keith', gender: 'M', dupr: 2.9},
+  {name: 'Agnes', gender: 'F', dupr: 3.0},
+  {name: 'Nicole', gender: 'F', dupr: 3.1},
+  {name: 'Vicky', gender: 'F', dupr: 3.3},
+  {name: 'Kelly', gender: 'F', dupr: 3.2},
+  {name: 'Jerry', gender: 'M', dupr: 2.9}
+];
 
-    <script>
-        const defaultPlayers = [
-            { name: 'Raymond', gender: 'M', dupr: 3.5 },
-            { name: 'Edmond', gender: 'M', dupr: 3.2 },
-            { name: 'Ivan', gender: 'M', dupr: 3.2 },
-            { name: 'Ken', gender: 'M', dupr: 2.8 },
-            { name: 'Keith', gender: 'M', dupr: 2.9 },
-            { name: 'Agnes', gender: 'F', dupr: 3.0 },
-            { name: 'Nicole', gender: 'F', dupr: 3.1 },
-            { name: 'Vicky', gender: 'F', dupr: 3.3 },
-            { name: 'Kelly', gender: 'F', dupr: 3.2 },
-            { name: 'Jerry', gender: 'M', dupr: 2.9 }
-        ];
+let selectedName = null;
+let matches = 1;
+let assignments = {};
 
-        let selectedPlayer = null;
-        let matches = 1; // 1 or 2
-        let assignments = {}; // { 'm1g1m1': 'Raymond', ... }
+function init() {
+  renderPlayers();
+  renderGames();
+}
 
-        function init() {
-            renderPlayers();
-            renderGames();
-        }
+function renderPlayers() {
+  const pool = document.getElementById('playersPool');
+  const assigned = Object.values(assignments);
+  pool.innerHTML = defaultPlayers.map(p => {
+    const isAssigned = assigned.includes(p.name);
+    const isSelected = selectedName === p.name;
+    let cls = 'player-chip';
+    if (isAssigned) cls += ' assigned';
+    if (isSelected) cls += ' selected';
+    let html = '<div class="' + cls + '"';
+    if (!isAssigned) html += ' onclick="selectPlayer(\'' + p.name + '\')"';
+    html += '>';
+    html += (p.gender === 'F' ? '👩' : '👨') + ' ' + p.name + ' <span class="dupr">' + p.dupr + '</span></div>';
+    return html;
+  }).join('');
+}
 
-        function renderPlayers() {
-            const pool = document.getElementById('playersPool');
-            pool.innerHTML = defaultPlayers.map(p => {
-                const isAssigned = Object.values(assignments).includes(p.name);
-                const isSelected = selectedPlayer && selectedPlayer.name === p.name;
-                return `
-                    <div class="player-chip ${isAssigned ? 'assigned' : ''} ${isSelected ? 'selected' : ''}"
-                         onclick="${isAssigned ? '' : `selectPlayer('${p.name}', '${p.gender}', ${p.dupr})`}">
-                        ${p.gender === 'F' ? '👩' : '👨'} ${p.name}
-                        <span class="dupr">${p.dupr}</span>
-                    </div>
-                `;
-            }).join('');
-        }
+function selectPlayer(name) {
+  selectedName = (selectedName === name) ? null : name;
+  renderPlayers();
+}
 
-        function selectPlayer(name, gender, dupr) {
-            if (selectedPlayer && selectedPlayer.name === name) {
-                selectedPlayer = null;
-            } else {
-                selectedPlayer = { name, gender, dupr };
-            }
-            renderPlayers();
-        }
+function setMatches(n) {
+  matches = n;
+  document.getElementById('match1Btn').classList.toggle('active', n === 1);
+  document.getElementById('match2Btn').classList.toggle('active', n === 2);
+  assignments = {};
+  selectedName = null;
+  renderPlayers();
+  renderGames();
+}
 
-        function setMatches(n) {
-            matches = n;
-            document.querySelectorAll('.match-btn').forEach((btn, i) => btn.classList.toggle('active', i === n - 1);
-            assignments = {};
-            selectedPlayer = null;
-            renderPlayers();
-            renderGames();
-        }
+function renderGames() {
+  const grid = document.getElementById('gamesGrid');
+  let html = '';
+  for (let m = 1; m <= matches; m++) {
+    if (matches > 1) {
+      html += '<div style="font-weight:bold;color:#667eea;margin:10px 0 5px;">Match ' + m + '</div>';
+    }
+    const games = [
+      {id: m + 'g1', type: 'Men\'s Doubles', cls: 'men'},
+      {id: m + 'g2', type: 'Women\'s Doubles', cls: 'women'},
+      {id: m + 'g3', type: 'Mixed Doubles', cls: 'mixed'},
+      {id: m + 'g4', type: 'Mixed Doubles', cls: 'mixed'},
+      {id: m + 'g5', type: 'Mixed Doubles', cls: 'mixed'}
+    ];
+    games.forEach(g => {
+      const p1 = assignments[g.id + 'p1'];
+      const p2 = assignments[g.id + 'p2'];
+      const p3 = assignments[g.id + 'p3'];
+      const p4 = assignments[g.id + 'p4'];
+      const gameLabel = 'Game ' + g.id.replace('g', '-');
+      html += '<div class="game-card"><div class="game-header"><span>' + gameLabel + '</span><span class="game-type ' + g.cls + '">' + g.type + '</span></div><div class="game-teams"><div class="game-team">';
+      // Left team: 2 men
+      const menClass = 'men';
+      html += '<div class="slot ' + menClass + (p1 ? ' filled' : '') + '" onclick="assignSlot(\'' + g.id + 'p1\', \'M\')">' + (p1 || '👨 + 👨') + '</div>';
+      // Left team: 2 women
+      html += '<div class="slot women' + (p3 ? ' filled' : '') + '" onclick="assignSlot(\'' + g.id + 'p3\', \'F\')">' + (p3 || '👩 + 👩') + '</div></div>';
+      html += '<div class="game-vs">VS</div><div class="game-team" style="text-align:right;">';
+      // Right team: 2 men
+      html += '<div class="slot men' + (p2 ? ' filled' : '') + '" onclick="assignSlot(\'' + g.id + 'p2\', \'M\')">' + (p2 || '👨 + 👨') + '</div>';
+      // Right team: 2 women
+      html += '<div class="slot women' + (p4 ? ' filled' : '') + '" onclick="assignSlot(\'' + g.id + 'p4\', \'F\')">' + (p4 || '👩 + 👩') + '</div></div></div></div>';
+    });
+  }
+  grid.innerHTML = html;
+}
 
-        function renderGames() {
-            const grid = document.getElementById('gamesGrid');
-            let html = '';
-            
-            for (let m = 1; m <= matches; m++) {
-                const games = [
-                    { id: `${m}g1`, type: 'Men\'s Doubles', typeClass: 'men' },
-                    { id: `${m}g2`, type: 'Women\'s Doubles', typeClass: 'women' },
-                    { id: `${m}g3`, type: 'Mixed Doubles', typeClass: 'mixed' },
-                    { id: `${m}g4`, type: 'Mixed Doubles', typeClass: 'mixed' },
-                    { id: `${m}g5`, type: 'Mixed Doubles', typeClass: 'mixed' }
-                ];
-                
-                if (matches > 1) {
-                    html += `<div style="font-weight:bold;color:#667eea;margin:10px 0 5px;">Match ${m}</div>`;
-                }
-                
-                games.forEach(g => {
-                    const slot1 = assignments[`${g.id}p1`];
-                    const slot2 = assignments[`${g.id}p2`];
-                    const slot3 = assignments[`${g.id}p3`];
-                    const slot4 = assignments[`${g.id}p4`];
-                    
-                    html += `
-                        <div class="game-card">
-                            <div class="game-header">
-                                <span class="game-title">${g.id.replace('m', 'Game ').replace('g', '-')}</span>
-                                <span class="game-type ${g.typeClass}">${g.type}</span>
-                            </div>
-                            <div class="game-teams">
-                                <div class="game-team">
-                                    <div class="slot ${slot1 ? 'filled men' : 'empty'}" onclick="assignSlot('${g.id}p1', 'M')">
-                                        ${slot1 || '👨 + 👨'}
-                                    </div>
-                                    <div class="slot ${slot3 ? 'filled women' : 'empty'}" onclick="assignSlot('${g.id}p3', 'F')">
-                                        ${slot3 || '👩 + 👩'}
-                                    </div>
-                                </div>
-                                <div class="game-vs">VS</div>
-                                <div class="game-team" style="text-align:right;">
-                                    <div class="slot ${slot2 ? 'filled men' : 'empty'}" onclick="assignSlot('${g.id}p2', 'M')">
-                                        ${slot2 || '👨 + 👨'}
-                                    </div>
-                                    <div class="slot ${slot4 ? 'filled women' : 'empty'}" onclick="assignSlot('${g.id}p4', 'F')">
-                                        ${slot4 || '👩 + 👩'}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
-            
-            grid.innerHTML = html;
-        }
+function assignSlot(slotId, gender) {
+  if (assignments[slotId]) {
+    delete assignments[slotId];
+    selectedName = null;
+    renderPlayers();
+    renderGames();
+    return;
+  }
+  if (!selectedName) return;
+  assignments[slotId] = selectedName;
+  selectedName = null;
+  renderPlayers();
+  renderGames();
+}
 
-        function assignSlot(slotId, gender) {
-            // If slot already filled, clear it
-            if (assignments[slotId]) {
-                delete assignments[slotId];
-                renderPlayers();
-                renderGames();
-                return;
-            }
-            
-            // Need to assign selected player
-            if (!selectedPlayer) return;
-            
-            // Assign
-            assignments[slotId] = selectedPlayer.name;
-            selectedPlayer = null;
-            renderPlayers();
-            renderGames();
-        }
+function resetAll() {
+  assignments = {};
+  selectedName = null;
+  renderPlayers();
+  renderGames();
+}
 
-        function resetAll() {
-            assignments = {};
-            selectedPlayer = null;
-            renderPlayers();
-            renderGames();
-        }
-
-        init();
-    </script>
+init();
+</script>
 </body>
 </html>
