@@ -2,338 +2,112 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎾 聯賽排陣器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🎾 Pickleball Team Picker</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            min-height: 100vh;
-            padding: 20px;
-            color: white;
-        }
-        h1 { text-align: center; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #888; margin-bottom: 20px; font-size: 0.9em; }
-        
-        .container { max-width: 1000px; margin: 0 auto; }
-        
-        .section {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .section-title {
-            font-size: 1em;
-            margin-bottom: 12px;
-            color: #667eea;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .section-title span { font-size: 0.85em; color: #888; }
-        
-        /* Players Pool */
-        .players-pool {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            min-height: 50px;
-            padding: 12px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 10px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; touch-action: none; -webkit-user-select: none; user-select: none; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: linear-gradient(135deg, #1a1a2e, #16213e); min-height: 100vh; padding: 15px; color: white; }
+        h1 { text-align: center; font-size: 1.5em; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #888; font-size: 0.85em; margin-bottom: 15px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .section { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 15px; margin-bottom: 15px; }
+        .section-title { font-size: 1em; margin-bottom: 10px; color: #667eea; }
+        .players-pool { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px; min-height: 50px; }
         .player-chip {
-            padding: 6px 14px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 20px;
-            cursor: grab;
-            user-select: none;
-            font-size: 0.9em;
+            padding: 10px 14px; background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px; cursor: grab; font-size: 0.95em; display: flex; align-items: center; gap: 6px;
             transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
-        .player-chip:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        .player-chip:active { transform: scale(1.05); box-shadow: 0 5px 20px rgba(102,126,234,0.5); }
+        .player-chip .dupr { font-size: 0.75em; background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; }
+        .player-chip.taken { opacity: 0.3; pointer-events: none; }
+        .courts { display: flex; flex-direction: column; gap: 10px; }
+        .court { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 12px; }
+        .court-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .court-title { font-weight: bold; color: #4ade80; }
+        .court-header button { background: rgba(255,255,255,0.1); border: none; color: white; padding: 5px 12px; border-radius: 6px; font-size: 0.85em; }
+        .teams { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .team-label { font-size: 0.8em; color: #888; margin-bottom: 5px; }
+        .team-players { display: flex; flex-direction: column; gap: 5px; min-height: 80px; }
+        .team-slot {
+            background: rgba(255,255,255,0.05); border: 2px dashed rgba(255,255,255,0.2); border-radius: 20px;
+            padding: 10px 12px; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85em; min-height: 44px;
         }
-        .player-chip.dragging { opacity: 0.5; }
-        .player-chip .dupr {
-            font-size: 0.7em;
-            background: rgba(255,255,255,0.2);
-            padding: 1px 5px;
-            border-radius: 8px;
-        }
-        
-        /* Team Assignment */
-        .teams-assign {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        @media (max-width: 600px) {
-            .teams-assign { grid-template-columns: 1fr; }
-        }
-        .team-assign {
-            background: rgba(0,0,0,0.2);
-            border-radius: 12px;
-            padding: 15px;
-        }
-        .team-assign-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .team-a .team-assign-title { color: #3b82f6; }
-        .team-b .team-assign-title { color: #ef4444; }
-        .team-count { font-size: 0.8em; color: #888; }
-        
-        .team-players {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            min-height: 50px;
-            padding: 10px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            border: 2px dashed rgba(255,255,255,0.1);
-        }
-        .team-players.drag-over { border-color: #667eea; background: rgba(102,126,234,0.1); }
-        .team-players.has-players { border-style: solid; }
-        
-        .assigned-player {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            cursor: grab;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .assigned-player.team-a { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-        .assigned-player.team-b { background: linear-gradient(135deg, #ef4444, #dc2626); }
-        .assigned-player .dupr {
-            font-size: 0.7em;
-            background: rgba(255,255,255,0.2);
-            padding: 1px 5px;
-            border-radius: 8px;
-        }
-        
-        /* Auto-assign buttons */
-        .auto-assign-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .btn {
-            flex: 1;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.85em;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-        .btn:hover { transform: scale(1.02); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
-        .btn-secondary { background: rgba(255,255,255,0.1); color: white; }
-        .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
-        
-        /* Games Schedule */
-        .match-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .match-btn {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            background: transparent;
-            color: white;
-            cursor: pointer;
-            font-size: 0.95em;
-            transition: all 0.2s;
-        }
-        .match-btn:hover { border-color: #667eea; }
-        .match-btn.active { border-color: #667eea; background: rgba(102,126,234,0.2); }
-        .match-btn .match-label { font-weight: bold; display: block; }
-        .match-btn .match-desc { font-size: 0.75em; color: #888; margin-top: 3px; }
-        
-        .games-grid {
-            display: grid;
-            gap: 12px;
-        }
-        .game-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 15px;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 15px;
-            align-items: center;
-        }
-        .game-num {
-            position: absolute;
-            top: -8px;
-            left: 15px;
-            background: #667eea;
-            padding: 2px 10px;
-            border-radius: 10px;
-            font-size: 0.75em;
-            font-weight: bold;
-        }
-        .game-card { position: relative; }
-        
-        .game-side {
-            text-align: center;
-        }
-        .side-label {
-            font-size: 0.7em;
-            color: #888;
-            margin-bottom: 5px;
-        }
-        .side-players {
-            font-size: 0.95em;
-            font-weight: bold;
-        }
-        .side-players .rest { 
-            font-size: 0.75em; 
-            color: #888; 
-            font-weight: normal;
-            display: block;
-            margin-top: 3px;
-        }
-        .team-a-color { color: #60a5fa; }
-        .team-b-color { color: #f87171; }
-        
-        .game-vs {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #fbbf24;
-        }
-        
-        .court-badge {
-            position: absolute;
-            top: -8px;
-            right: 15px;
-            background: rgba(251,191,36,0.2);
-            color: #fbbf24;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.7em;
-        }
-        
-        /* No games message */
-        .no-games {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-        .no-games-icon { font-size: 3em; margin-bottom: 10px; }
-        
-        /* Reset button */
-        .reset-section {
-            text-align: center;
-            margin-top: 20px;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #666;
-            font-size: 0.8em;
-        }
+        .team-slot.filled { background: linear-gradient(135deg, #667eea, #764ba2); border: none; color: white; }
+        .team-slot.female { background: linear-gradient(135deg, #f472b6, #db2777); }
+        .team-slot.male { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .team-slot.drop-target { border-color: #667eea; background: rgba(102,126,234,0.2); }
+        .reset-btn { display: block; margin: 15px auto; padding: 12px 30px; background: linear-gradient(135deg, #ef4444, #dc2626); border: none; border-radius: 25px; color: white; font-size: 1em; cursor: pointer; }
+        .reset-btn:active { transform: scale(0.98); }
+        .footer { text-align: center; margin-top: 20px; color: #666; font-size: 0.8em; }
+        .footer a { color: #667eea; text-decoration: none; }
+        .dragging { position: fixed; z-index: 1000; opacity: 0.9; transform: scale(1.1); pointer-events: none; }
+        .instructions { font-size: 0.85em; color: #888; text-align: center; margin-bottom: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎾 聯賽排陣器</h1>
-        <p class="subtitle">拖放球員 → 分隊 → 自動排出 5 個 game 雙打順序</p>
+        <h1>🎾 Pickleball Team Picker</h1>
+        <p class="subtitle">拖放球員到球場，自動排列五個 game</p>
         
-        <!-- Players Pool -->
         <div class="section">
-            <div class="section-title">
-                👥 球員名單
-                <span>（拖放到左邊兩隊）</span>
-            </div>
+            <div class="section-title">👥 球員名單（點擊球員再點擊球隊）</div>
+            <p class="instructions">👆 點擊球員，再點擊球隊伍來選擇</p>
             <div class="players-pool" id="playersPool"></div>
         </div>
         
-        <!-- Team Assignment -->
         <div class="section">
-            <div class="section-title">
-                ⚔️ 分隊
-                <span id="teamCount"></span>
-            </div>
-            <div class="teams-assign">
-                <div class="team-assign team-a">
-                    <div class="team-assign-title">
-                        <span>🔵 Team A</span>
-                        <span class="team-count" id="teamACount">0/5</span>
+            <div class="section-title">🏓 球場</div>
+            <div class="courts" id="courtsContainer">
+                <div class="court" id="court1">
+                    <div class="court-header">
+                        <span class="court-title">Court 1</span>
+                        <button onclick="clearCourt(1)">清除</button>
                     </div>
-                    <div class="team-players" id="teamA" data-team="A"></div>
-                </div>
-                <div class="team-assign team-b">
-                    <div class="team-assign-title">
-                        <span>🔴 Team B</span>
-                        <span class="team-count" id="teamBCount">0/5</span>
+                    <div class="teams">
+                        <div>
+                            <div class="team-label">Team A1</div>
+                            <div class="team-players" id="court1-team1"></div>
+                        </div>
+                        <div>
+                            <div class="team-label">Team A2</div>
+                            <div class="team-players" id="court1-team2"></div>
+                        </div>
                     </div>
-                    <div class="team-players" id="teamB" data-team="B"></div>
+                </div>
+                <div class="court" id="court2">
+                    <div class="court-header">
+                        <span class="court-title">Court 2</span>
+                        <button onclick="clearCourt(2)">清除</button>
+                    </div>
+                    <div class="teams">
+                        <div>
+                            <div class="team-label">Team B1</div>
+                            <div class="team-players" id="court2-team1"></div>
+                        </div>
+                        <div>
+                            <div class="team-label">Team B2</div>
+                            <div class="team-players" id="court2-team2"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="auto-assign-row">
-                <button class="btn btn-secondary" onclick="clearTeams()">清除兩隊</button>
-                <button class="btn btn-primary" onclick="autoAssign()">🎲 自動分隊</button>
-            </div>
         </div>
         
-        <!-- Match Type Selector -->
-        <div class="section">
-            <div class="section-title">🏆 比賽模式</div>
-            <div class="match-selector">
-                <button class="match-btn active" id="match1Btn" onclick="selectMatch(1)">
-                    <span class="match-label">1 場比賽</span>
-                    <span class="match-desc">5 games · 60-90分鐘</span>
-                </button>
-                <button class="match-btn" id="match2Btn" onclick="selectMatch(2)">
-                    <span class="match-label">2 場比賽</span>
-                    <span class="match-desc">各 5 games · 2小時+</span>
-                </button>
-            </div>
-            <div id="match2Info" style="display:none; margin-top:10px; padding:10px; background:rgba(251,191,36,0.1); border-radius:8px; font-size:0.85em; color:#fbbf24;">
-                ⚠️ 2場比賽需要20個球員（每隊10人）
-            </div>
+        <div class="section" id="gamesSection" style="display:none;">
+            <div class="section-title" style="color:#fbbf24;">🎯 5 個 Game 順序</div>
+            <div id="gamesList"></div>
         </div>
         
-        <!-- Games Schedule -->
-        <div class="section">
-            <div class="section-title">📋 Game 順序（雙打配對）</div>
-            <div id="gamesContainer"></div>
-        </div>
-        
-        <!-- Reset -->
-        <div class="reset-section">
-            <button class="btn btn-danger" onclick="resetAll()">🔄 重置</button>
-        </div>
+        <button class="reset-btn" onclick="resetAll()">🔄 重置所有</button>
         
         <div class="footer">
-            <p>🎾 10人聯賽排陣器 · 雙打5個game rotation</p>
+            <p>最後更新: <span id="lastUpdated"></span></p>
+            <p><a href="https://github.com/raycoderhk/mini-games" target="_blank">GitHub</a></p>
         </div>
     </div>
-    
+
     <script>
-        // Default 10 players - UPDATE THESE WITH YOUR LEAGUE PLAYERS
         const defaultPlayers = [
             { name: 'Raymond', gender: 'M', dupr: '3.5' },
             { name: 'Edmond', gender: 'M', dupr: '3.2' },
@@ -344,326 +118,163 @@
             { name: 'Nicole', gender: 'F', dupr: '3.1' },
             { name: 'Vicky', gender: 'F', dupr: '3.3' },
             { name: 'Kelly', gender: 'F', dupr: '3.2' },
-            { name: 'Jerry', gender: 'M', dupr: '2.9' },
+            { name: 'Jerry', gender: 'M', dupr: '2.9' }
         ];
-        
-        let players = [...defaultPlayers];
-        let teamA = [];
-        let teamB = [];
-        let selectedMatch = 1; // 1 or 2
-        let draggedPlayer = null;
-        
-        // Optimal rotation for 5 players (4 play, 1 rests)
-        // Each player pairs with someone new each game, rests once
-        const rotationPattern = [
-            [0, 1, 2], // Game 1: players 0,1 play; 2 rests
-            [3, 4, 0], // Game 2: players 3,4 play; 0 rests
-            [1, 2, 3], // Game 3: players 1,2 play; 3 rests
-            [4, 0, 1], // Game 4: players 4,0 play; 1 rests
-            [2, 3, 4], // Game 5: players 2,3 play; 4 rests
-        ];
-        
+
+        let selectedPlayer = null;
+        let courts = {
+            court1: { team1: [], team2: [] },
+            court2: { team1: [], team2: [] }
+        };
+
         function init() {
+            document.getElementById('lastUpdated').textContent = new Date().toLocaleString('zh-HK');
             renderPlayersPool();
-            updateTeamCounts();
+            renderCourts();
+            updateGames();
+            setupClickHandlers();
         }
-        
+
         function renderPlayersPool() {
             const pool = document.getElementById('playersPool');
-            const assignedNames = [...teamA, ...teamB].map(p => p.name);
-            const available = players.filter(p => !assignedNames.includes(p.name));
-            
-            pool.innerHTML = available.map(p => `
-                <div class="player-chip" draggable="true" data-name="${p.name}" data-gender="${p.gender}" data-dupr="${p.dupr}">
-                    ${p.gender === 'F' ? '👩' : '👨'} ${p.name}
-                    <span class="dupr">${p.dupr}</span>
-                </div>
-            `).join('');
-            
-            pool.querySelectorAll('.player-chip').forEach(chip => {
-                chip.addEventListener('dragstart', handleDragStart);
-                chip.addEventListener('dragend', handleDragEnd);
-            });
-        }
-        
-        function renderTeamPlayers() {
-            ['A', 'B'].forEach(team => {
-                const container = document.getElementById(`team${team}`);
-                const players = team === 'A' ? teamA : teamB;
-                const teamClass = team === 'A' ? 'team-a' : 'team-b';
-                
-                container.innerHTML = players.map(p => `
-                    <div class="assigned-player ${teamClass}" draggable="true" data-name="${p.name}" data-team="${team}">
+            const assigned = getAllAssigned();
+            pool.innerHTML = defaultPlayers.map(p => {
+                const isTaken = assigned.some(a => a.name === p.name);
+                const isSelected = selectedPlayer && selectedPlayer.name === p.name;
+                return `
+                    <div class="player-chip ${isTaken ? 'taken' : ''} ${isSelected ? 'selected' : ''}" 
+                         data-name="${p.name}" data-gender="${p.gender}" data-dupr="${p.dupr}"
+                         ${isTaken ? '' : 'onclick="selectPlayer(this)"'}>
                         ${p.gender === 'F' ? '👩' : '👨'} ${p.name}
                         <span class="dupr">${p.dupr}</span>
                     </div>
-                `).join('');
-                
-                container.classList.toggle('has-players', players.length > 0);
-                
-                // Add drag handlers
-                container.querySelectorAll('.assigned-player').forEach(chip => {
-                    chip.addEventListener('dragstart', handleTeamDragStart);
-                    chip.addEventListener('dragend', handleDragEnd);
+                `;
+            }).join('');
+        }
+
+        function selectPlayer(el) {
+            if (selectedPlayer) {
+                el.classList.remove('selected');
+            }
+            selectedPlayer = {
+                name: el.dataset.name,
+                gender: el.dataset.gender,
+                dupr: el.dataset.dupr
+            };
+            el.classList.add('selected');
+            highlightDropZones();
+        }
+
+        function highlightDropZones() {
+            document.querySelectorAll('.team-slot').forEach(slot => {
+                slot.classList.remove('drop-target');
+                slot.onclick = () => assignToSlot(slot);
+            });
+        }
+
+        function assignToSlot(slot) {
+            if (!selectedPlayer) return;
+            
+            const court = slot.dataset.court;
+            const team = slot.dataset.team;
+            
+            // Remove from any existing slot
+            Object.keys(courts).forEach(c => {
+                Object.keys(courts[c]).forEach(t => {
+                    courts[c][t] = courts[c][t].filter(p => p.name !== selectedPlayer.name);
                 });
             });
             
-            updateTeamCounts();
-        }
-        
-        function updateTeamCounts() {
-            document.getElementById('teamACount').textContent = `${teamA.length}/5`;
-            document.getElementById('teamBCount').textContent = `${teamB.length}/5`;
-            document.getElementById('teamCount').textContent = `已分：${teamA.length + teamB.length}/10 人`;
-        }
-        
-        function handleDragStart(e) {
-            const name = e.target.dataset.name;
-            const player = players.find(p => p.name === name);
-            draggedPlayer = player;
-            e.target.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
-        }
-        
-        function handleTeamDragStart(e) {
-            const name = e.target.dataset.name;
-            const team = e.target.dataset.team;
-            const player = players.find(p => p.name === name);
-            draggedPlayer = { player, fromTeam: team };
-            e.target.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
-        }
-        
-        function handleDragEnd(e) {
-            e.target.classList.remove('dragging');
-            draggedPlayer = null;
-            document.querySelectorAll('.team-players').forEach(el => el.classList.remove('drag-over'));
-        }
-        
-        function handleTeamDragOver(e) {
-            e.preventDefault();
-            e.currentTarget.classList.add('drag-over');
-        }
-        
-        function handleTeamDragLeave(e) {
-            e.currentTarget.classList.remove('drag-over');
-        }
-        
-        function handleTeamDrop(e) {
-            e.preventDefault();
-            e.currentTarget.classList.remove('drag-over');
+            // Add to selected slot
+            courts[court][team].push(selectedPlayer);
             
-            if (!draggedPlayer) return;
-            
-            const targetTeam = e.currentTarget.id === 'teamA' ? 'A' : 'B';
-            
-            if (draggedPlayer.fromTeam) {
-                // Moving between teams
-                if (draggedPlayer.fromTeam === 'A') {
-                    teamA = teamA.filter(p => p.name !== draggedPlayer.player.name);
-                } else {
-                    teamB = teamB.filter(p => p.name !== draggedPlayer.player.name);
-                }
-                
-                if (targetTeam === 'A' && teamA.length < 5) {
-                    teamA.push(draggedPlayer.player);
-                } else if (targetTeam === 'B' && teamB.length < 5) {
-                    teamB.push(draggedPlayer.player);
-                }
-            } else {
-                // From pool to team
-                if (targetTeam === 'A' && teamA.length < 5) {
-                    teamA.push(draggedPlayer);
-                } else if (targetTeam === 'B' && teamB.length < 5) {
-                    teamB.push(draggedPlayer);
-                }
-            }
-            
+            selectedPlayer = null;
             renderPlayersPool();
-            renderTeamPlayers();
+            renderCourts();
             updateGames();
         }
-        
-        function handlePoolDrop(e) {
-            e.preventDefault();
-            if (!draggedPlayer || !draggedPlayer.fromTeam) return;
-            
-            if (draggedPlayer.fromTeam === 'A') {
-                teamA = teamA.filter(p => p.name !== draggedPlayer.player.name);
-            } else {
-                teamB = teamB.filter(p => p.name !== draggedPlayer.player.name);
-            }
-            
-            renderPlayersPool();
-            renderTeamPlayers();
-            updateGames();
+
+        function getAllAssigned() {
+            const assigned = [];
+            Object.values(courts).forEach(c => {
+                Object.values(c).forEach(t => assigned.push(...t));
+            });
+            return assigned;
         }
-        
-        function autoAssign() {
-            const available = players.filter(p => 
-                !teamA.map(t => t.name).includes(p.name) && 
-                !teamB.map(t => t.name).includes(p.name)
-            );
-            
-            // Shuffle
-            const shuffled = [...available].sort(() => Math.random() - 0.5);
-            
-            // Fill team A first, then B
-            teamA = shuffled.slice(0, 5);
-            teamB = shuffled.slice(5, 10);
-            
-            renderPlayersPool();
-            renderTeamPlayers();
-            updateGames();
-        }
-        
-        function clearTeams() {
-            teamA = [];
-            teamB = [];
-            renderPlayersPool();
-            renderTeamPlayers();
-            updateGames();
-        }
-        
-        function selectMatch(num) {
-            selectedMatch = num;
-            document.getElementById('match1Btn').classList.toggle('active', num === 1);
-            document.getElementById('match2Btn').classList.toggle('active', num === 2);
-            document.getElementById('match2Info').style.display = num === 2 ? 'block' : 'none';
-            updateGames();
-        }
-        
-        function updateGames() {
-            const container = document.getElementById('gamesContainer');
-            
-            if (teamA.length < 5 || teamB.length < 5) {
-                container.innerHTML = `
-                    <div class="no-games">
-                        <div class="no-games-icon">🏸</div>
-                        <div>請先分配 10 個球員（每隊各 5 人）</div>
-                        <div style="margin-top:8px;font-size:0.85em;color:#666">
-                            Team A: ${teamA.length}/5 · Team B: ${teamB.length}/5
+
+        function renderCourts() {
+            [1, 2].forEach(courtNum => {
+                ['team1', 'team2'].forEach(teamKey => {
+                    const container = document.getElementById(`court${courtNum}-${teamKey}`);
+                    const team = courts[`court${courtNum}`][teamKey];
+                    container.innerHTML = team.map(p => `
+                        <div class="team-slot filled ${p.gender === 'F' ? 'female' : 'male'}">
+                            ${p.gender === 'F' ? '👩' : '👨'} ${p.name} <span class="dupr">${p.dupr}</span>
                         </div>
-                    </div>
-                `;
+                    `).join('') + (team.length < 2 ? '<div class="team-slot">+ 選擇球員</div>' : '');
+                });
+            });
+        }
+
+        function clearCourt(courtNum) {
+            courts[`court${courtNum}`] = { team1: [], team2: [] };
+            selectedPlayer = null;
+            renderPlayersPool();
+            renderCourts();
+            updateGames();
+        }
+
+        function resetAll() {
+            courts = { court1: { team1: [], team2: [] }, court2: { team1: [], team2: [] } };
+            selectedPlayer = null;
+            renderPlayersPool();
+            renderCourts();
+            updateGames();
+        }
+
+        function updateGames() {
+            const allTeams = [
+                courts.court1.team1, courts.court1.team2,
+                courts.court2.team1, courts.court2.team2
+            ].filter(t => t.length === 2);
+
+            const gamesSection = document.getElementById('gamesSection');
+            const gamesList = document.getElementById('gamesList');
+            
+            if (allTeams.length < 2) {
+                gamesSection.style.display = 'none';
                 return;
             }
             
-            const games = generateRotation(teamA, teamB);
+            gamesSection.style.display = 'block';
+            gamesList.innerHTML = '';
             
-            let html = '';
-            
-            if (selectedMatch === 1) {
-                // Single match - show 5 games
-                html = '<div class="games-grid">';
-                games.forEach((game, i) => {
-                    html += createGameCard(game, i + 1, 1);
-                });
-                html += '</div>';
-            } else {
-                // Two matches - show Court 1 and Court 2
-                html = `
-                    <div style="margin-bottom:20px">
-                        <div style="color:#60a5fa;font-weight:bold;margin-bottom:10px">🔵 比賽 1 (Court 1)</div>
-                        <div class="games-grid">
-                            ${games.map((game, i) => createGameCard(game, i + 1, 1)).join('')}
+            for (let i = 0; i < 5; i++) {
+                const t1 = allTeams[i % allTeams.length];
+                const t2 = allTeams[(i + 1) % allTeams.length];
+                const courtNum = Math.floor(i / 2) + 1;
+                const gameInCourt = (i % 2) + 1;
+                
+                gamesList.innerHTML += `
+                    <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:10px;margin-bottom:8px;">
+                        <div style="font-size:0.8em;color:#888;margin-bottom:5px;">Court ${courtNum} Game ${gameInCourt}</div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <div style="text-align:center;flex:1;">
+                                <div style="font-size:0.85em;color:#667eea">${t1.map(p => `${p.gender === 'F' ? '👩' : '👨'}${p.name}`).join(' + ')}</div>
+                                <div style="font-size:0.75em;color:#888">${t1.map(p => p.dupr).join(' / ')}</div>
+                            </div>
+                            <div style="color:#fbbf24;font-weight:bold;padding:0 10px;">VS</div>
+                            <div style="text-align:center;flex:1;">
+                                <div style="font-size:0.85em;color:#f472b6">${t2.map(p => `${p.gender === 'F' ? '👩' : '👨'}${p.name}`).join(' + ')}</div>
+                                <div style="font-size:0.75em;color:#888">${t2.map(p => p.dupr).join(' / ')}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div style="color:#f87171;font-weight:bold;margin-bottom:10px">🔴 比賽 2 (Court 2)</div>
-                        <div class="games-grid">
-                            ${games.map((game, i) => createGameCard(game, i + 1, 2)).join('')}
-                        </div>
-                    </div>
-                    <div style="margin-top:15px;padding:10px;background:rgba(251,191,36,0.1);border-radius:8px;font-size:0.85em;color:#fbbf24;text-align:center">
-                        ⚠️ 2場比賽需要球員實然走位，確保兩邊人數足夠
                     </div>
                 `;
             }
-            
-            container.innerHTML = html;
         }
-        
-        function generateRotation(teamA, teamB) {
-            // Rotation ensures every pair plays together once, each player rests once
-            // Team A rotation (5 games, 4 playing, 1 resting per game)
-            // Team B rotation
-            const games = [];
-            
-            for (let i = 0; i < 5; i++) {
-                const pattern = rotationPattern[i];
-                
-                // Team A: players at indices pattern[0] and pattern[1] play, pattern[2] rests
-                const aPlaying = [teamA[pattern[0]], teamA[pattern[1]]];
-                const aRest = teamA[pattern[2]];
-                
-                // Team B: same rotation pattern
-                const bPlaying = [teamB[pattern[0]], teamB[pattern[1]]];
-                const bRest = teamB[pattern[2]];
-                
-                games.push({
-                    aPlaying,
-                    aRest,
-                    bPlaying,
-                    bRest
-                });
-            }
-            
-            return games;
-        }
-        
-        function createGameCard(game, gameNum, court) {
-            return `
-                <div class="game-card">
-                    <span class="game-num">Game ${gameNum}</span>
-                    ${court === 2 ? `<span class="court-badge">Court 2</span>` : ''}
-                    <div class="game-side">
-                        <div class="side-label">🔵 ${game.aPlaying.map(p => p.name).join(' + ')}</div>
-                        <div class="side-players team-a-color">
-                            ${game.aPlaying.map(p => `👨${p.dupr}`).join(' / ')}
-                            <span class="rest">💤 ${game.aRest.name}</span>
-                        </div>
-                    </div>
-                    <div class="game-vs">VS</div>
-                    <div class="game-side">
-                        <div class="side-label">🔴 ${game.bPlaying.map(p => p.name).join(' + ')}</div>
-                        <div class="side-players team-b-color">
-                            ${game.bPlaying.map(p => `👨${p.dupr}`).join(' / ')}
-                            <span class="rest">💤 ${game.bRest.name}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-        
-        function resetAll() {
-            teamA = [];
-            teamB = [];
-            selectedMatch = 1;
-            document.getElementById('match1Btn').classList.add('active');
-            document.getElementById('match2Btn').classList.remove('active');
-            document.getElementById('match2Info').style.display = 'none';
-            renderPlayersPool();
-            renderTeamPlayers();
-            updateGames();
-        }
-        
-        // Setup drop zones
-        ['teamA', 'teamB'].forEach(id => {
-            const el = document.getElementById(id);
-            el.addEventListener('dragover', handleTeamDragOver);
-            el.addEventListener('dragleave', handleTeamDragLeave);
-            el.addEventListener('drop', handleTeamDrop);
-        });
-        
-        // Pool drop (to remove from team)
-        const pool = document.getElementById('playersPool');
-        pool.addEventListener('dragover', (e) => { e.preventDefault(); });
-        pool.addEventListener('drop', handlePoolDrop);
-        
-        // Initialize
+
         init();
-        updateGames();
     </script>
 </body>
 </html>
