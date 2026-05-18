@@ -74,8 +74,7 @@ function render(){
   renderGames();
 }
 function sel(n){sel=sel===n?null:n;render();}
-function setMatches(m){matches=m;slots={};sel=null;render();
-  document.querySelectorAll(".match-btn").forEach((b,i)=>b.classList.toggle("active",i===m-1);}
+function setMatches(m){matches=m;slots={};sel=null;render();document.querySelectorAll(".match-btn").forEach((b,i)=>b.classList.toggle("active",i===m-1));}
 function renderGames(){
   const el=document.getElementById("schedule");
   let html="";
